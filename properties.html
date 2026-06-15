@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매물 목록 | 라온 프레스티지</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-properties">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">RAON PRESTIGE</a>
+      <nav class="nav" data-nav>
+        <a href="index.html" data-page="index">홈</a>
+        <a href="properties.html" data-page="properties">매물찾기</a>
+        <a href="premium.html" data-page="premium">프리미엄</a>
+        <a href="about.html" data-page="about">브랜드소개</a>
+        <a href="reservation.html" data-page="reservation">방문예약</a>
+        <a href="contact.html" data-page="contact">상담안내</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" data-menu-button><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">PROPERTY LIST</p>
+        <h1>선별 매물</h1>
+        <p>고급 빌라, 오피스텔, 전원주택, 신규 분양을 조건별로 비교해 보세요.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <form class="filter-bar property-filter" data-filter>
+          <label><span>지역</span><select name="location"><option value="">전체</option><option value="gangnam">강남권</option><option value="hannam">한남·용산</option><option value="seongsu">성수권</option><option value="suburb">근교</option></select></label>
+          <label><span>거래유형</span><select name="deal"><option value="">전체</option><option value="sale">매매</option><option value="lease">전세</option><option value="presale">분양</option></select></label>
+          <label><span>매물유형</span><select name="type"><option value="">전체</option><option value="villa">고급 빌라</option><option value="office">오피스텔</option><option value="house">전원주택</option><option value="sale">신규 분양</option></select></label>
+          <label><span>가격대</span><select name="price"><option value="">전체</option><option value="200000">20억 이하</option><option value="400000">40억 이하</option><option value="800000">80억 이하</option></select></label>
+          <label><span>평형</span><select name="size"><option value="">전체</option><option value="30">30평대</option><option value="40">40평대</option><option value="60">60평 이상</option><option value="land">대지형</option></select></label>
+          <label><span>방 개수</span><select name="room"><option value="">전체</option><option value="1">방 1개</option><option value="2">방 2개</option><option value="3">방 3개</option><option value="4">방 4개 이상</option></select></label>
+          <label><span>옵션</span><select name="option"><option value="">전체</option><option value="station">역세권</option><option value="new">신축</option><option value="parking">주차가능</option><option value="full">풀옵션</option></select></label>
+          <label><span>입주 가능</span><select name="status"><option value="">전체</option><option value="now">즉시 입주</option><option value="soon">3개월 이내</option><option value="plan">협의</option></select></label>
+          <div class="filter-actions"><button class="btn line" type="reset">초기화</button><button class="btn" type="submit">검색</button></div>
+        </form>
+
+        <div class="property-toolbar">
+          <p><strong data-result-count>9</strong>개의 매물</p>
+          <select aria-label="정렬" data-sort>
+            <option value="latest">최신순</option>
+            <option value="price-desc">가격높은순</option>
+            <option value="price-asc">가격낮은순</option>
+          </select>
+        </div>
+
+        <div class="property-map-layout">
+          <div class="property-list-column">
+            <p class="empty-message" data-empty-message hidden>조건에 맞는 매물이 없습니다</p>
+
+            <div class="property-grid">
+          <article class="property-card estate-card" data-property-card data-location="gangnam" data-deal="sale" data-type="villa" data-price="680000" data-size="60" data-status="now" data-room="4" data-option="parking" data-order="1"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-01.jpg" alt="청담 더 테라스"></a><span class="deal-badge">매매</span><div class="property-body"><h3>청담 더 테라스</h3><p class="location">서울 강남구 청담동</p><p class="price">68억</p><div class="spec-row"><span>82평</span><span>방 4 / 욕실 3</span><span>고층</span><span>즉시 입주</span></div><div class="tag-row"><span>역세권</span><span>주차가능</span><span>테라스</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="hannam" data-deal="sale" data-type="villa" data-price="750000" data-size="60" data-status="plan" data-room="4" data-option="new" data-order="2"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-02.jpg" alt="한남 프라이빗 레지던스"></a><span class="deal-badge">매매</span><div class="property-body"><h3>한남 프라이빗 레지던스</h3><p class="location">서울 용산구 한남동</p><p class="price">75억</p><div class="spec-row"><span>74평</span><span>방 4 / 욕실 3</span><span>중층</span><span>협의</span></div><div class="tag-row"><span>한강뷰</span><span>신축</span><span>보안</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="seongsu" data-deal="presale" data-type="office" data-price="240000" data-size="30" data-status="soon" data-room="2" data-option="full" data-order="3"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-03.jpg" alt="성수 리버 스위트"></a><span class="deal-badge presale">분양</span><div class="property-body"><h3>성수 리버 스위트</h3><p class="location">서울 성동구 성수동</p><p class="price">24억</p><div class="spec-row"><span>38평</span><span>방 2 / 욕실 2</span><span>고층</span><span>3개월 이내</span></div><div class="tag-row"><span>역세권</span><span>풀옵션</span><span>컨시어지</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="gangnam" data-deal="sale" data-type="villa" data-price="520000" data-size="60" data-status="now" data-room="3" data-option="new" data-order="4"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-04.jpg" alt="논현 프레스티지 빌라"></a><span class="deal-badge">매매</span><div class="property-body"><h3>논현 프레스티지 빌라</h3><p class="location">서울 강남구 논현동</p><p class="price">52억</p><div class="spec-row"><span>64평</span><span>방 3 / 욕실 3</span><span>저층</span><span>즉시 입주</span></div><div class="tag-row"><span>신축</span><span>주차가능</span><span>저밀도</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="suburb" data-deal="sale" data-type="house" data-price="190000" data-size="land" data-status="plan" data-room="5" data-option="parking" data-order="5"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-05.jpg" alt="양평 포레 하우스"></a><span class="deal-badge">매매</span><div class="property-body"><h3>양평 포레 하우스</h3><p class="location">경기 양평군 서종면</p><p class="price">19억</p><div class="spec-row"><span>대지 240평</span><span>방 5 / 욕실 4</span><span>단독</span><span>협의</span></div><div class="tag-row"><span>정원</span><span>주차가능</span><span>세컨드홈</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="gangnam" data-deal="presale" data-type="sale" data-price="330000" data-size="40" data-status="soon" data-room="2" data-option="full" data-order="6"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-06.jpg" alt="도산 하이엔드 스튜디오"></a><span class="deal-badge presale">분양</span><div class="property-body"><h3>도산 하이엔드 스튜디오</h3><p class="location">서울 강남구 신사동</p><p class="price">33억</p><div class="spec-row"><span>46평</span><span>방 2 / 욕실 2</span><span>고층</span><span>3개월 이내</span></div><div class="tag-row"><span>풀옵션</span><span>신축</span><span>상권</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="hannam" data-deal="presale" data-type="sale" data-price="580000" data-size="60" data-status="plan" data-room="3" data-option="new" data-order="7"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-07.jpg" alt="용산 리미티드 하우스"></a><span class="deal-badge presale">분양</span><div class="property-body"><h3>용산 리미티드 하우스</h3><p class="location">서울 용산구 한남대로</p><p class="price">58억</p><div class="spec-row"><span>61평</span><span>방 3 / 욕실 3</span><span>중층</span><span>협의</span></div><div class="tag-row"><span>신규분양</span><span>보안</span><span>커뮤니티</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="seongsu" data-deal="lease" data-type="office" data-price="180000" data-size="30" data-status="now" data-room="1" data-option="full" data-order="8"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-08.jpg" alt="성수 어반 스튜디오"></a><span class="deal-badge lease">전세</span><div class="property-body"><h3>성수 어반 스튜디오</h3><p class="location">서울 성동구 서울숲길</p><p class="price">18억</p><div class="spec-row"><span>32평</span><span>방 1 / 욕실 1</span><span>고층</span><span>즉시 입주</span></div><div class="tag-row"><span>역세권</span><span>풀옵션</span><span>서울숲</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+          <article class="property-card estate-card" data-property-card data-location="suburb" data-deal="sale" data-type="house" data-price="280000" data-size="land" data-status="soon" data-room="4" data-option="parking" data-order="9"><a class="image-wrap" href="property-detail.html"><img src="img/properties/property-09.jpg" alt="가평 리버 하우스"></a><span class="deal-badge">매매</span><div class="property-body"><h3>가평 리버 하우스</h3><p class="location">경기 가평군 청평면</p><p class="price">28억</p><div class="spec-row"><span>대지 310평</span><span>방 4 / 욕실 3</span><span>단독</span><span>3개월 이내</span></div><div class="tag-row"><span>리버뷰</span><span>주차가능</span><span>정원</span></div><a class="detail-link" href="property-detail.html">자세히 보기 <span>→</span></a></div></article>
+            </div>
+
+            <nav class="pagination" aria-label="페이지 이동">
+              <a href="#" aria-label="이전 페이지">‹</a>
+              <a class="is-active" href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <a href="#" aria-label="다음 페이지">›</a>
+            </nav>
+          </div>
+          <aside class="property-map-column">
+            <div class="map-box map-placeholder">지도형 매물 영역</div>
+            <a class="btn line map-mobile-cta" href="#">지도에서 보기</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reservation-cta">
+      <div class="container cta-box">
+        <div><p class="eyebrow">PRIVATE INQUIRY</p><h2>원하는 조건의 매물을 따로 받아보세요</h2><p>예산, 지역, 입주 시점을 남겨주시면 조건에 맞는 매물을 선별해 안내합니다.</p></div>
+        <a class="btn" href="reservation.html">문의하기</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="floating-actions"><a href="tel:0200000000">전화</a><a href="contact.html">문의</a><a href="reservation.html">예약</a></div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><p class="footer-title">RAON PRESTIGE</p><p>고급 주거와 프리미엄 분양을 위한 선별형 부동산 컨설팅.</p></div>
+      <div><p class="footer-title">상담</p><p>02-0000-0000<br>서울 강남구 도산대로 000</p></div>
+      <div><p class="footer-title">운영</p><p>평일 10:00 - 19:00<br>예약 방문제</p></div>
+    </div>
+  </footer>
+  <script src="js/menu.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

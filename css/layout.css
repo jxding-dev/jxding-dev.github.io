@@ -1,0 +1,130 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  gap: 24px;
+}
+
+.logo {
+  color: var(--color-white);
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.nav a {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.nav a:hover,
+.nav a.is-active,
+.page-index .nav a[data-page="index"],
+.page-properties .nav a[data-page="properties"],
+.page-detail .nav a[data-page="properties"],
+.page-premium .nav a[data-page="premium"],
+.page-about .nav a[data-page="about"],
+.page-reservation .nav a[data-page="reservation"],
+.page-contact .nav a[data-page="contact"] {
+  color: var(--color-accent);
+}
+
+.menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-white);
+}
+
+.menu-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  background: currentColor;
+}
+
+.page-hero {
+  padding: clamp(72px, 8vw, 118px) 0 clamp(52px, 6vw, 86px);
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.page-hero h1 {
+  color: var(--color-white);
+}
+
+.page-hero p {
+  max-width: 680px;
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.site-footer {
+  padding: 56px 0 128px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 36px;
+}
+
+.footer-title {
+  margin-bottom: 12px;
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.footer-grid p,
+.footer-grid a {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.floating-actions {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 45;
+  display: grid;
+  gap: 10px;
+}
+
+.floating-actions a {
+  min-width: 132px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-soft);
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.floating-actions a:first-child {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+}
