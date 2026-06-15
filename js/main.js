@@ -46,6 +46,17 @@
 })();
 
 (() => {
+  document.querySelectorAll(".deal-tabs").forEach((group) => {
+    const buttons = [...group.querySelectorAll("button")];
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+      });
+    });
+  });
+})();
+
+(() => {
   const form = document.querySelector("[data-reservation-form]");
   if (!form) return;
 

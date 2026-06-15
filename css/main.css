@@ -56,11 +56,19 @@
 }
 
 .main-hero .slider-controls {
-  bottom: 156px;
+  bottom: 190px;
 }
 
 .main-hero .slider-dots {
-  bottom: 170px;
+  bottom: 204px;
+}
+
+.search-hero .slider-controls {
+  bottom: 176px;
+}
+
+.search-hero .slider-dots {
+  bottom: 190px;
 }
 
 .numbers-section {
@@ -108,6 +116,24 @@
 
 .contact-preview {
   background: var(--color-white);
+}
+
+.map-list-section,
+.recent-section {
+  background: var(--color-white);
+}
+
+.area-search-section {
+  background: var(--color-bg);
+}
+
+.quick-price-section {
+  background: var(--color-white);
+}
+
+.premium-showcase {
+  background: var(--color-primary-dark);
+  color: var(--color-white);
 }
 
 .estate-platform-band {

@@ -29,6 +29,7 @@
 
   .hero-search-panel,
   .estate-search-panel,
+  .search-console,
   .property-filter,
   .process-list,
   .collection-grid,
@@ -44,9 +45,26 @@
   .office-layout,
   .consultation-time,
   .estate-hero-content,
+  .search-hero-grid,
+  .map-list-layout,
+  .price-search-layout,
+  .premium-showcase-grid,
   .property-map-layout,
   .estate-platform {
     grid-template-columns: 1fr;
+  }
+
+  .search-hero-grid {
+    padding-bottom: 250px;
+  }
+
+  .hero-preview-stack {
+    max-width: 640px;
+  }
+
+  .price-band-list,
+  .collection-grid.compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .property-map-column {
@@ -151,6 +169,20 @@
   .form-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .search-console {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    bottom: 26px;
+  }
+
+  .deal-tabs {
+    grid-column: 1 / -1;
+  }
+
+  .mobile-hero-tools {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 480px) {
@@ -167,6 +199,7 @@
   .hero-actions,
   .hero-search-panel,
   .estate-search-panel,
+  .search-console,
   .property-filter,
   .process-list,
   .collection-grid,
@@ -180,8 +213,13 @@
     grid-template-columns: 1fr;
   }
 
-  .estate-hero-visual {
+  .estate-hero-visual,
+  .hero-preview-stack {
     display: none;
+  }
+
+  .search-hero-grid {
+    padding-bottom: 430px;
   }
 
   .filter-actions,
@@ -196,6 +234,14 @@
 
   .main-hero .slider-dots {
     bottom: 454px;
+  }
+
+  .search-hero .slider-controls {
+    bottom: 448px;
+  }
+
+  .search-hero .slider-dots {
+    bottom: 462px;
   }
 
   .hero-search-panel {
@@ -217,6 +263,10 @@
     min-height: 960px;
   }
 
+  .search-hero {
+    min-height: 1000px;
+  }
+
   .hero-media::after {
     background: rgba(15, 41, 36, 0.76);
   }
@@ -227,6 +277,31 @@
 
   .gallery-thumbs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-section-title,
+  .split-heading,
+  .inline-heading,
+  .preview-actions {
+    display: grid;
+  }
+
+  .map-panel,
+  .map-panel .map-box {
+    min-height: 320px;
+  }
+
+  .price-band-list,
+  .collection-grid.compact {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-property {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .mini-property img {
+    height: 96px;
   }
 
 }

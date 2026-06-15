@@ -125,6 +125,132 @@
   gap: 12px;
 }
 
+.search-hero {
+  min-height: 820px;
+}
+
+.search-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.72fr);
+  gap: 52px;
+  align-items: center;
+  padding-bottom: 154px;
+}
+
+.search-hero-copy h1 {
+  max-width: 760px;
+}
+
+.search-hero-copy p {
+  max-width: 560px;
+}
+
+.mobile-hero-tools {
+  display: none;
+  gap: 10px;
+}
+
+.hero-preview-stack {
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+
+.hero-property-card,
+.mini-map-card,
+.market-chip {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-text);
+  box-shadow: var(--shadow-hover);
+}
+
+.hero-property-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px;
+}
+
+.hero-property-card .image-wrap {
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+}
+
+.hero-property-card strong,
+.hero-property-card b {
+  display: block;
+}
+
+.hero-property-card strong {
+  margin-top: 12px;
+  font-size: 22px;
+}
+
+.hero-property-card p {
+  margin: 6px 0 14px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.hero-property-card b {
+  color: var(--color-primary);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.deal-badge.static {
+  position: static;
+  display: inline-flex;
+}
+
+.mini-map-card {
+  min-height: 180px;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  padding: 24px;
+  background:
+    linear-gradient(90deg, rgba(23, 59, 51, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(23, 59, 51, 0.1) 1px, transparent 1px),
+    var(--color-white);
+  background-size: 34px 34px;
+}
+
+.mini-map-card span,
+.market-chip span {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mini-map-card strong {
+  color: var(--color-primary-dark);
+  font-size: 24px;
+}
+
+.mini-map-card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.market-chip {
+  position: absolute;
+  top: -28px;
+  right: -22px;
+  display: grid;
+  gap: 2px;
+  min-width: 148px;
+  padding: 16px;
+}
+
+.market-chip strong {
+  color: var(--color-accent);
+  font-size: 34px;
+  line-height: 1;
+}
+
 .slider-controls {
   position: absolute;
   right: max(20px, calc((100% - var(--container)) / 2));
@@ -235,6 +361,227 @@
 
 .deal-badge.lease {
   background: #2f554b;
+}
+
+.compact-section-title,
+.split-heading,
+.inline-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.compact-section-title strong,
+.split-heading strong,
+.inline-heading strong {
+  display: block;
+  color: var(--color-text);
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+.compact-section-title a {
+  color: var(--color-primary);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.split-heading p,
+.inline-heading span {
+  max-width: 420px;
+  color: var(--color-muted);
+  font-weight: 700;
+}
+
+.map-list-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.7fr);
+  gap: 34px;
+  align-items: stretch;
+}
+
+.map-panel {
+  position: relative;
+  min-height: 470px;
+}
+
+.map-panel .map-box {
+  height: 100%;
+  min-height: 470px;
+  border-radius: 0;
+}
+
+.map-pins {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.map-pins span {
+  padding: 9px 12px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.list-preview-panel {
+  display: grid;
+  align-content: center;
+  padding: 34px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+
+.compact-property-list,
+.price-band-list {
+  display: grid;
+  gap: 1px;
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+}
+
+.compact-property-list a,
+.price-band-list a {
+  display: grid;
+  gap: 5px;
+  padding: 20px;
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.compact-property-list b,
+.price-band-list strong {
+  font-size: 18px;
+}
+
+.compact-property-list span,
+.price-band-list span {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.compact-property-list em,
+.price-band-list em {
+  color: var(--color-muted);
+  font-style: normal;
+  font-size: 14px;
+}
+
+.preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.price-search-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.48fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.price-search-layout .inline-heading {
+  display: grid;
+  margin-bottom: 0;
+}
+
+.price-band-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.price-band-list a {
+  min-height: 150px;
+  align-content: space-between;
+}
+
+.premium-showcase-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.45fr) minmax(0, 1fr);
+  gap: 44px;
+  align-items: center;
+}
+
+.showcase-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.showcase-copy span {
+  color: var(--color-accent);
+  font-weight: 900;
+}
+
+.showcase-copy strong {
+  color: var(--color-white);
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.showcase-copy p {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.collection-grid.compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.recent-property-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+
+.mini-property {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+
+.mini-property img {
+  width: 100%;
+  height: 112px;
+  object-fit: cover;
+}
+
+.mini-property div {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.mini-property b {
+  color: var(--color-text);
+}
+
+.mini-property span {
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.mini-property em {
+  color: var(--color-muted);
+  font-style: normal;
+  font-size: 13px;
 }
 
 .estate-card .location {
@@ -516,6 +863,35 @@
 .estate-search-panel {
   grid-template-columns: 1.2fr repeat(5, minmax(0, 1fr)) auto;
   align-items: end;
+}
+
+.search-console {
+  grid-template-columns: 1.35fr repeat(4, minmax(0, 1fr)) auto;
+  align-items: end;
+  bottom: 44px;
+  padding: 22px;
+  border-radius: var(--radius-sm);
+}
+
+.deal-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.deal-tabs button {
+  min-height: 48px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-muted);
+  font-weight: 900;
+}
+
+.deal-tabs button.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-white);
 }
 
 .search-panel-head {
