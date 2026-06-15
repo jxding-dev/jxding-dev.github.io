@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReserveFlow 메시지 관리</title>
+    <link rel="stylesheet" href="css/reset.css" /><link rel="stylesheet" href="css/common.css" /><link rel="stylesheet" href="css/layout.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="css/pages.css" /><link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a class="brand" href="index.html"><span class="brand-mark">R</span><div><strong>ReserveFlow</strong><small>예약 운영 콘솔</small></div></a>
+        <nav class="side-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>캘린더</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>메시지</a><a href="settings.html" data-nav>설정</a></nav>
+        <div class="sidebar-footer"><strong>라벤더 스튜디오</strong><small>문의와 알림</small></div>
+      </aside>
+      <main class="main" data-messages>
+        <header class="topbar">
+          <div class="topbar-title"><small>메시지</small><strong>문의/알림</strong></div>
+          <div class="topbar-actions"><button class="button" type="button" data-template="안녕하세요. 문의 주신 내용 확인했습니다. 가능한 시간대를 다시 안내드리겠습니다.">빠른 답장</button></div>
+        </header>
+        <section class="page-header">
+          <div><h1>문의/알림 메시지</h1><p>답장이 필요한 문의와 예약 알림을 확인합니다.</p></div>
+        </section>
+        <section class="message-layout">
+          <div class="panel message-inbox">
+            <div class="panel-header"><div><small>Inbox</small><h2>메시지 목록</h2></div><span class="badge pending" data-unread-count>0 unread</span></div>
+            <div class="message-list" data-message-list></div>
+          </div>
+          <aside class="panel message-detail" data-message-detail>
+            <div class="empty-state show">확인할 메시지를 선택하세요.</div>
+          </aside>
+        </section>
+        <section class="two-column-grid" style="margin-top:16px;">
+          <div class="panel">
+            <div class="panel-header"><div><small>Quick Reply</small><h2>빠른 답장 문구</h2></div></div>
+            <div class="quick-actions">
+              <button class="button secondary" type="button" data-template="가능한 예약 시간을 확인해 다시 안내드리겠습니다.">가능 시간</button>
+              <button class="button secondary" type="button" data-template="예약 변경 요청을 확인했습니다. 원하시는 시간대를 남겨주세요.">변경 요청</button>
+              <button class="button secondary" type="button" data-template="방문 전 안내사항을 확인해 주세요. 일정 변경이 필요하면 미리 알려주세요.">방문 안내</button>
+              <button class="button secondary" type="button" data-template="이용해 주셔서 감사합니다. 짧은 리뷰를 남겨주시면 운영에 큰 도움이 됩니다.">리뷰 요청</button>
+            </div>
+          </div>
+          <aside class="panel">
+            <div class="panel-header"><div><small>Notification</small><h2>알림 설정 미리보기</h2></div></div>
+            <ul class="memo-list">
+              <li class="memo-card">예약 1일 전 리마인드 예약</li>
+              <li class="memo-card">대기 고객 빈 시간 안내 수동 확인</li>
+              <li class="memo-card">노쇼 안내 문구는 설정 페이지에서 관리</li>
+            </ul>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>일정</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>알림</a><a href="settings.html" data-nav>설정</a></nav>
+    <script src="js/toast.js"></script><script src="js/menu.js"></script><script src="js/messages.js"></script>
+  </body>
+</html>
