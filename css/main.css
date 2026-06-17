@@ -64,11 +64,11 @@
 }
 
 .search-hero .slider-controls {
-  bottom: 176px;
+  bottom: 242px;
 }
 
 .search-hero .slider-dots {
-  bottom: 190px;
+  display: none;
 }
 
 .numbers-section {

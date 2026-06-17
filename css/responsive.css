@@ -69,6 +69,10 @@
     max-width: 640px;
   }
 
+  .hero-property-card {
+    grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1fr);
+  }
+
   .price-band-list,
   .featured-properties,
   .collection-grid.compact {
@@ -84,6 +88,14 @@
     min-height: 260px;
   }
 
+  .page-properties .property-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-properties .property-map-column .map-box {
+    min-height: 340px;
+  }
+
   .map-mobile-cta {
     display: inline-flex;
   }
@@ -96,7 +108,7 @@
   }
 
   .detail-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .info-panel,
@@ -173,6 +185,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .page-properties .property-toolbar {
+    align-items: flex-start;
+  }
+
   .filter-bar,
   .form-grid {
     grid-template-columns: 1fr 1fr;
@@ -204,6 +220,19 @@
     grid-template-columns: 1fr;
   }
 
+  .page-properties .property-list-column .property-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-properties .property-map-column .map-box {
+    min-height: 300px;
+    padding: 16px;
+  }
+
+  .page-properties .map-summary-card {
+    padding: 18px;
+  }
+
   .hero-actions,
   .hero-search-panel,
   .estate-search-panel,
@@ -223,6 +252,18 @@
   .spec-card-grid,
   .detail-top-grid {
     grid-template-columns: 1fr;
+  }
+
+  .detail-layout,
+  .detail-layout > *,
+  .detail-gallery,
+  .detail-section,
+  .office-layout,
+  .office-layout > *,
+  .contact-map,
+  .map-actions {
+    min-width: 0;
+    width: 100%;
   }
 
   .estate-hero-visual,
@@ -260,6 +301,10 @@
     bottom: 18px;
     width: calc(100% - 28px);
     padding: 14px;
+  }
+
+  .recent-keywords {
+    display: none;
   }
 
   .hero-market-rail {
@@ -385,6 +430,10 @@
 
   .hero-search-panel {
     width: calc(100% - 24px);
+  }
+
+  .search-hero .recent-keywords {
+    display: none;
   }
 
   .spec-list li {

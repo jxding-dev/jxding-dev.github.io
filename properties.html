@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="강남, 한남·용산, 성수, 근교 프리미엄 매물을 가격, 면적, 입주 시점, 방문 가능 여부 기준으로 탐색하세요.">
   <title>매물 목록 | 라온 프레스티지</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/common.css">
@@ -52,7 +53,10 @@
         </form>
 
         <div class="property-toolbar">
-          <p><strong data-result-count>9</strong>개의 매물</p>
+          <div class="toolbar-copy">
+            <span>SELECTED LISTINGS</span>
+            <p><strong data-result-count>9</strong>개의 매물</p>
+          </div>
           <select aria-label="정렬" data-sort>
             <option value="latest">최신순</option>
             <option value="price-desc">가격높은순</option>
@@ -85,7 +89,16 @@
             </nav>
           </div>
           <aside class="property-map-column">
-            <div class="map-box map-placeholder">지도형 매물 영역</div>
+            <div class="map-box map-placeholder">
+              <span class="map-pin pin-a">청담 3</span>
+              <span class="map-pin pin-b">한남 2</span>
+              <span class="map-pin pin-c">성수 2</span>
+              <div class="map-summary-card">
+                <span>지도형 매물 영역</span>
+                <strong>생활권별 선별 매물</strong>
+                <p>가격, 입주 가능일, 방문 동선을 함께 비교합니다.</p>
+              </div>
+            </div>
             <a class="btn line map-mobile-cta" href="#">지도에서 보기</a>
           </aside>
         </div>
