@@ -19,6 +19,106 @@
 })();
 
 (() => {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  const syncHeader = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    document.documentElement.style.setProperty("--scroll-progress", `${Math.min(progress, 100)}%`);
+  };
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+})();
+
+(() => {
+  document.querySelectorAll(".hero-keyword-search").forEach((search) => {
+    const input = search.querySelector("input");
+    const button = search.querySelector("button");
+    if (!input || !button) return;
+
+    const go = () => {
+      const keyword = input.value.trim();
+      const suffix = keyword ? `?q=${encodeURIComponent(keyword)}` : "";
+      location.href = `properties.html${suffix}`;
+    };
+
+    button.addEventListener("click", go);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        go();
+      }
+    });
+  });
+})();
+
+(() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const counters = [...document.querySelectorAll("[data-count-to]")];
+  if (!counters.length) return;
+
+  const animate = (element) => {
+    const target = Number(element.dataset.countTo);
+    if (!Number.isFinite(target)) return;
+    if (reduceMotion) {
+      element.textContent = String(target);
+      return;
+    }
+
+    const duration = 1100;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = String(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    element.textContent = "0";
+    requestAnimationFrame(tick);
+  };
+
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.5 })
+    : null;
+
+  counters.forEach((counter) => {
+    if (observer) observer.observe(counter);
+    else animate(counter);
+  });
+})();
+
+(() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || matchMedia("(pointer: coarse)").matches) return;
+
+  const cards = [...document.querySelectorAll(".property-card, .category-card, .collection-card, .premium-category")];
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      card.style.setProperty("--tilt-y", `${x * 5}deg`);
+      card.style.setProperty("--tilt-x", `${y * -5}deg`);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+    });
+  });
+})();
+
+(() => {
   const gallery = document.querySelector("[data-gallery]");
   if (!gallery) return;
 

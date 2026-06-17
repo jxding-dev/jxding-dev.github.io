@@ -8,6 +8,7 @@
   const prev = slider.querySelector("[data-prev]");
   const next = slider.querySelector("[data-next]");
   const dotsWrap = slider.querySelector("[data-slider-dots]");
+  const progress = slider.querySelector("[data-slider-progress]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const interval = Number(slider.dataset.interval) || 6000;
   let current = slides.findIndex((slide) => slide.classList.contains("is-active"));
@@ -35,10 +36,20 @@
     current = (index + slides.length) % slides.length;
     slides[current].classList.add("is-active");
     dots[current]?.classList.add("is-active");
+    resetProgress();
+  };
+
+  const resetProgress = () => {
+    if (!progress || reduceMotion || slides.length < 2) return;
+    progress.style.setProperty("--slider-duration", `${interval}ms`);
+    progress.classList.remove("is-running");
+    void progress.offsetWidth;
+    progress.classList.add("is-running");
   };
 
   const start = () => {
     if (reduceMotion || slides.length < 2 || timer) return;
+    resetProgress();
     timer = window.setInterval(() => show(current + 1), interval);
   };
 
@@ -46,6 +57,7 @@
     if (!timer) return;
     window.clearInterval(timer);
     timer = null;
+    progress?.classList.remove("is-running");
   };
 
   const restart = () => {

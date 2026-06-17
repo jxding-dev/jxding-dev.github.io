@@ -1,16 +1,20 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css");
+
 :root {
-  --color-bg: #f8f5ef;
+  --color-bg: #f5f3ee;
   --color-white: #ffffff;
-  --color-text: #1f2328;
-  --color-muted: #6f746f;
-  --color-line: #e4ded4;
-  --color-primary: #173b33;
-  --color-primary-dark: #0f2924;
-  --color-accent: #c6a15b;
-  --color-accent-soft: #efe3c7;
+  --color-text: #171b1f;
+  --color-muted: #70746f;
+  --color-line: #e7dfd2;
+  --color-primary: #123c33;
+  --color-primary-dark: #081f1b;
+  --color-accent: #caa45d;
+  --color-accent-soft: #f2e5c7;
   --color-card: #ffffff;
-  --shadow-soft: 0 12px 32px rgba(31, 35, 40, 0.08);
-  --shadow-hover: 0 18px 44px rgba(23, 59, 51, 0.16);
+  --color-ink-soft: #26352f;
+  --shadow-soft: 0 18px 46px rgba(31, 35, 40, 0.08);
+  --shadow-hover: 0 26px 70px rgba(18, 60, 51, 0.18);
+  --shadow-premium: 0 34px 100px rgba(8, 31, 27, 0.22);
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
@@ -23,11 +27,18 @@ html {
 
 body {
   min-width: 360px;
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at 12% 4%, rgba(202, 164, 93, 0.13), transparent 30vw),
+    radial-gradient(circle at 86% 0%, rgba(18, 60, 51, 0.1), transparent 32vw),
+    var(--color-bg);
   color: var(--color-text);
-  font-family: Pretendard, "Noto Sans KR", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", system-ui, sans-serif;
   font-size: clamp(15px, 1.2vw, 17px);
   line-height: 1.7;
+  font-weight: 520;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.is-menu-open {
@@ -39,7 +50,7 @@ h2,
 h3,
 h4 {
   color: var(--color-text);
-  font-weight: 700;
+  font-weight: 840;
   line-height: 1.18;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -47,7 +58,7 @@ h4 {
 
 h1,
 h2 {
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 h1 {
@@ -99,7 +110,8 @@ p {
   margin-bottom: 10px;
   color: var(--color-accent);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .lead {
@@ -107,6 +119,8 @@ p {
 }
 
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -114,10 +128,24 @@ p {
   padding: 0 22px;
   border: 1px solid var(--color-primary);
   border-radius: var(--radius-sm);
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   color: var(--color-white);
-  font-weight: 700;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  font-weight: 860;
+  box-shadow: 0 12px 26px rgba(8, 31, 27, 0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.24) 45%, transparent 70%);
+  content: "";
+  transform: translateX(-130%);
+  transition: transform 0.55s ease;
+}
+
+.btn:hover::before {
+  transform: translateX(130%);
 }
 
 .btn.line {
@@ -133,6 +161,8 @@ p {
 .btn:hover {
   background: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .image-placeholder {
@@ -147,6 +177,7 @@ p {
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
 .image-wrap img,
@@ -181,6 +212,15 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;
