@@ -143,25 +143,6 @@
   justify-content: flex-end;
 }
 
-/* ── Login Modal ──────────────────────────── */
-.loginModal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  text-align: center;
-}
-
-.lmEmoji { font-size: 44px; }
-
-.loginModal p {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  line-height: var(--leading-loose);
-}
-
-.loginModal strong { color: var(--text-primary); }
-
 /* ── Responsive ───────────────────────────── */
 @media (max-width: 900px) {
   .bar { grid-template-columns: auto 1fr auto; }

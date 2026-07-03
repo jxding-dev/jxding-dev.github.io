@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { canUseFeature, type FeatureKey } from '../../domain/features';
-import { PlanTier, type PlanTier as PlanTierValue } from '../../domain/plans';
+import { type PlanTier as PlanTierValue } from '../../domain/plans';
+import { usePlan } from '../../hooks/usePlan';
 import styles from './FeatureLock.module.css';
 
 interface Props {
   feature: FeatureKey;
+  /** Overrides the live plan; defaults to the current user's entitlement. */
   currentPlan?: PlanTierValue;
   title?: string;
   description?: string;
@@ -14,12 +16,13 @@ interface Props {
 
 export function FeatureLock({
   feature,
-  currentPlan = PlanTier.Free,
+  currentPlan,
   title = 'Pro 기능',
   description = '이 기능은 Pro 플랜에서 사용할 수 있습니다.',
 }: Props) {
   const navigate = useNavigate();
-  const available = canUseFeature(currentPlan, feature);
+  const { plan } = usePlan();
+  const available = canUseFeature(currentPlan ?? plan, feature);
 
   if (available) return null;
 

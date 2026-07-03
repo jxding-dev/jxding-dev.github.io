@@ -115,7 +115,6 @@ export function Pricing() {
       <section className={styles.lockPreview}>
         <FeatureLock
           feature={FeatureKey.CustomPngMockups}
-          currentPlan={PlanTier.Free}
           title="커스텀 PNG 목업은 Pro에서 제공 예정"
           description="상업용 상세페이지, 광고, 디바이스 목업을 더 폭넓게 쓰고 싶을 때 업그레이드할 수 있습니다."
         />

@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { AppMode } from '../../types';
 import { Button } from '../ui/Button';
-import { Modal } from '../ui/Modal';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { LoginModal } from '../auth/LoginModal';
+import { UpgradeModal } from '../saas/UpgradeModal';
 import { useAuth } from '../../hooks/authContext';
+import { usePlan } from '../../hooks/usePlan';
 import styles from './EditorTopBar.module.css';
 
 interface Props {
@@ -41,6 +42,7 @@ export function EditorTopBar({
   const [loginOpen, setLoginOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
   const { user, signOut } = useAuth();
+  const { isPro } = usePlan();
 
   const commitName = () => {
     onProjectNameChange(nameValue.trim() || '내 프로젝트');
@@ -118,23 +120,15 @@ export function EditorTopBar({
           ) : (
             <Button variant="ghost" size="sm" onClick={() => setLoginOpen(true)}>로그인</Button>
           )}
-          <Button variant="primary" size="sm" onClick={() => setShowUpgrade(true)}>
-            업그레이드
-          </Button>
+          {!isPro && (
+            <Button variant="primary" size="sm" onClick={() => setShowUpgrade(true)}>
+              업그레이드
+            </Button>
+          )}
         </div>
       </header>
 
-      <Modal open={showUpgrade} onClose={() => setShowUpgrade(false)} title="Pro는 준비 중이에요">
-        <div className={styles.loginModal}>
-          <div className={styles.lmEmoji} aria-hidden>Pro</div>
-          <p>
-            현재 베타 기간에는 모든 기능을 무료로 사용할 수 있어요.
-            <br />
-            결제가 열리면 저장한 작업과 고해상도 내보내기가 Pro에 연결됩니다.
-          </p>
-          <Button variant="primary" fullWidth onClick={() => setShowUpgrade(false)}>확인</Button>
-        </div>
-      </Modal>
+      <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
 
       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>

@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
+import { UpgradeModal } from './UpgradeModal';
+import { usePlan } from '../../hooks/usePlan';
 import type { Plan } from '../../types';
 import styles from './PlanCard.module.css';
 
@@ -15,7 +18,16 @@ function formatPrice(krw: number): string {
 
 export function PlanCard({ plan, compact = false }: Props) {
   const navigate = useNavigate();
+  const { billingEnabled } = usePlan();
+  const [showUpgrade, setShowUpgrade] = useState(false);
   const isFree = plan.id === 'free';
+
+  // Paid plans start checkout once billing is live; during beta the CTA just
+  // opens the free editor (there is nothing to pay for yet).
+  const handleCta = () => {
+    if (!isFree && billingEnabled) setShowUpgrade(true);
+    else navigate('/editor');
+  };
 
   return (
     <article className={`${styles.card} ${plan.highlighted ? styles.featured : ''} ${compact ? styles.compact : ''}`}>
@@ -47,10 +59,12 @@ export function PlanCard({ plan, compact = false }: Props) {
       <Button
         variant={plan.highlighted ? 'primary' : 'secondary'}
         fullWidth
-        onClick={() => navigate('/editor')}
+        onClick={handleCta}
       >
         {plan.cta}
       </Button>
+
+      {!isFree && <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />}
     </article>
   );
 }
