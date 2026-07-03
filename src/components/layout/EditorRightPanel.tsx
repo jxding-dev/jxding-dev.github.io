@@ -38,6 +38,8 @@ interface Props {
   onDuplicateMockupItem: (id: string) => void;
   onReorderMockupItem: (id: string, direction: 'forward' | 'backward') => void;
   onFitMockupItem: (id: string, mode: 'contain' | 'width' | 'height') => void;
+  /** Receives the DOM node the mockup shortcut/mode dock portals into. */
+  onDockSlotReady: (el: HTMLElement | null) => void;
 }
 
 export function EditorRightPanel(props: Props) {
@@ -135,7 +137,7 @@ function MockupProps({
   settings: s, patch, mockupAssets, mockupsLoading,
   onCompositeReset,
   mockupItems, selectedMockupItemId, onAddMockupImages, onSelectMockupItem, onUpdateMockupItem, onRemoveMockupItem,
-  onDuplicateMockupItem, onReorderMockupItem, onFitMockupItem,
+  onDuplicateMockupItem, onReorderMockupItem, onFitMockupItem, onDockSlotReady,
 }: Props) {
   const addRef = useRef<HTMLInputElement>(null);
   const [mockupQuery, setMockupQuery] = useState('');
@@ -280,12 +282,7 @@ function MockupProps({
           <Slider label="크기" value={Math.round(selected.scale * 100)} min={10} max={300} unit="%" onChange={value => onUpdateMockupItem(selected.id, { scale: value / 100 })} />
           <Slider label="회전" value={selected.rotation} min={-180} max={180} unit="°" onChange={value => onUpdateMockupItem(selected.id, { rotation: value })} />
           <Slider label="투명도" value={Math.round(selected.opacity * 100)} min={0} max={100} unit="%" onChange={value => onUpdateMockupItem(selected.id, { opacity: value / 100 })} />
-          <CollapsibleSection title="고급 변형">
-            <Slider label="가로 늘림" value={Math.round(selected.stretchX * 100)} min={25} max={400} unit="%" onChange={value => onUpdateMockupItem(selected.id, { stretchX: value / 100 })} />
-            <Slider label="세로 늘림" value={Math.round(selected.stretchY * 100)} min={25} max={400} unit="%" onChange={value => onUpdateMockupItem(selected.id, { stretchY: value / 100 })} />
-            <Slider label="X 비틀기" value={selected.skewX} min={-60} max={60} unit="°" onChange={value => onUpdateMockupItem(selected.id, { skewX: value })} />
-            <Slider label="Y 비틀기" value={selected.skewY} min={-60} max={60} unit="°" onChange={value => onUpdateMockupItem(selected.id, { skewY: value })} />
-          </CollapsibleSection>
+          <div className={styles.dockSlot} ref={onDockSlotReady} />
           <Button variant="secondary" size="sm" fullWidth onClick={onCompositeReset}>선택 레이어 초기화</Button>
         </RSection>
       ) : (
@@ -384,19 +381,6 @@ function MockupAssetCard({ asset, active, onSelect }: { asset: MockupAsset; acti
 }
 
 /* ── Collapsible section (secondary content) ── */
-function CollapsibleSection({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className={styles.section}>
-      <button className={styles.collapseHead} onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-        <span>{title}</span>
-        <span className={`${styles.collapseChevron} ${open ? styles.collapseChevronOpen : ''}`}>⌄</span>
-      </button>
-      {open && <div className={styles.sectionBody}>{children}</div>}
-    </div>
-  );
-}
-
 /* ── Compare Props ────────────────────────── */
 function CompareProps({ settings: s, patch, autoSlide, onAutoSlideChange, onGifExport, gifLoading, gifMessage, beforeImage, afterImage }: Props) {
   const readyForGif = Boolean(beforeImage && afterImage);

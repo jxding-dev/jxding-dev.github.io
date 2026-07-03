@@ -322,6 +322,8 @@ function Workspace({ image, onImageRemove, onImageChange, initialInspectSource =
   // ?? Multi-image mockup scene (transient: holds dataUrls) ??
   const [mockupItems, setMockupItems] = useState<MockupItem[]>([]);
   const [selectedMockupItemId, setSelectedMockupItemId] = useState<string | null>(null);
+  // Right-panel slot the mockup shortcut/mode dock is portaled into.
+  const [dockSlot, setDockSlot] = useState<HTMLElement | null>(null);
 
 
   // Natural aspect ratio (height / width) of the selected mockup, used by the
@@ -704,6 +706,7 @@ function Workspace({ image, onImageRemove, onImageChange, initialInspectSource =
           onMockupItemSelect={(id) => setSelectedMockupItemId(id || null)}
           onMockupItemMove={moveMockupItem}
           onMockupItemTransform={updateMockupItem}
+          dockContainer={dockSlot}
         />
 
         <EditorRightPanel
@@ -733,6 +736,7 @@ function Workspace({ image, onImageRemove, onImageChange, initialInspectSource =
           onDuplicateMockupItem={duplicateMockupItem}
           onReorderMockupItem={reorderMockupItem}
           onFitMockupItem={fitMockupItem}
+          onDockSlotReady={setDockSlot}
         />
       </div>
 

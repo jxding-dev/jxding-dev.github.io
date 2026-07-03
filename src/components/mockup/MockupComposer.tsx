@@ -12,6 +12,8 @@ interface Props {
   onSelect: (id: string | null) => void;
   onPositionChange: (id: string, x: number, y: number) => void;
   onTransformChange: (id: string, patch: Partial<MockupItem>) => void;
+  /** Panel slot to render the shortcut/mode dock into. Falls back to nothing. */
+  dockContainer?: HTMLElement | null;
 }
 
 type ResizeHandle = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w';
@@ -157,6 +159,7 @@ export function MockupComposer({
   onSelect,
   onPositionChange,
   onTransformChange,
+  dockContainer,
 }: Props) {
   const stageRef = useRef<HTMLDivElement>(null);
   const [stageSize, setStageSize] = useState({ w: 0, h: 0 });
@@ -561,7 +564,7 @@ export function MockupComposer({
   // ── render ─────────────────────────────────────────────────────────────────
   return (
     <div className={styles.wrap}>
-      {createPortal(shortcutDock, document.body)}
+      {dockContainer && createPortal(shortcutDock, dockContainer)}
 
       <div
         className={styles.stage}
@@ -747,7 +750,7 @@ export function MockupComposer({
       </div>
 
       <p className={styles.hint}>
-        레이어 선택 후 상단에서 모드를 선택하세요. <strong>꼭짓점</strong>: 각 꼭짓점을 독립적으로 늘리기 &nbsp;|&nbsp; <strong>왜곡</strong>: 25개 그리드로 포토샵처럼 자유 변형
+        레이어 선택 후 오른쪽 패널에서 모드를 선택하세요. <strong>꼭짓점</strong>: 각 꼭짓점을 독립적으로 늘리기 &nbsp;|&nbsp; <strong>왜곡</strong>: 25개 그리드로 포토샵처럼 자유 변형
       </p>
     </div>
   );

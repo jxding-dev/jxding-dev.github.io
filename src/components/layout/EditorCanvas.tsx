@@ -30,6 +30,8 @@ interface Props {
   onMockupItemSelect?: (id: string | null) => void;
   onMockupItemMove?: (id: string, x: number, y: number) => void;
   onMockupItemTransform?: (id: string, patch: Partial<MockupItem>) => void;
+  /** Right-panel slot the mockup shortcut/mode dock renders into. */
+  dockContainer?: HTMLElement | null;
 }
 
 const MIN_ZOOM = 0.25;
@@ -50,6 +52,7 @@ export function EditorCanvas({
   onMockupItemSelect,
   onMockupItemMove,
   onMockupItemTransform,
+  dockContainer,
 }: Props) {
   const {
     activeMode, selectedDeviceId, fitMode, inspectOrientation,
@@ -153,6 +156,7 @@ export function EditorCanvas({
               onSelect={(id) => onMockupItemSelect?.(id)}
               onPositionChange={onMockupItemMove ?? (() => {})}
               onTransformChange={onMockupItemTransform ?? (() => {})}
+              dockContainer={dockContainer}
             />
           </div>
         ) : (activeMode === 'mockup' || activeMode === 'export') && !selectedMockup ? (

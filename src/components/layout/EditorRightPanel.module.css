@@ -317,23 +317,8 @@
 
 .hiddenInput { display: none; }
 
-/* ── Collapsible secondary section ────────── */
-.collapseHead {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px var(--space-4) 8px;
-  font-size: 13px;
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  cursor: pointer;
-}
-
-.collapseChevron { transition: transform var(--ease-base); font-size: 14px; }
-.collapseChevronOpen { transform: rotate(180deg); color: var(--accent); }
+/* ── Mockup shortcut/mode dock slot ───────── */
+.dockSlot:empty { display: none; }
 
 .backToFrames {
   font-size: var(--text-xs);
