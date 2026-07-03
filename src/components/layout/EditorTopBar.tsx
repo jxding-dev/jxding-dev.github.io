@@ -66,6 +66,7 @@ export function EditorTopBar({
 
           {editingName ? (
             <input
+              name="projectName"
               className={styles.nameInput}
               value={nameValue}
               aria-label="프로젝트 이름"

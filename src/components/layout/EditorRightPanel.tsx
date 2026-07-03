@@ -194,6 +194,7 @@ function MockupProps({
           <label className={styles.searchLabel}>
             <span>목업 검색</span>
             <input
+              name="mockupSearch"
               value={mockupQuery}
               onChange={(event) => setMockupQuery(event.target.value)}
               placeholder="상세페이지, 앱, 광고..."

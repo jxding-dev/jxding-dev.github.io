@@ -176,8 +176,8 @@ export function EditorLeftPanel({
                   </div>
                 </div>
                 <div className={styles.sizeInputs}>
-                  <label>W<input type="number" min="240" max="1920" value={previewWidth} onChange={(event) => onPreviewSizeChange?.(Number(event.target.value), previewHeight)} /></label>
-                  <label>H<input type="number" min="240" max="1920" value={previewHeight} onChange={(event) => onPreviewSizeChange?.(previewWidth, Number(event.target.value))} /></label>
+                  <label>W<input name="previewWidth" type="number" min="240" max="1920" value={previewWidth} onChange={(event) => onPreviewSizeChange?.(Number(event.target.value), previewHeight)} /></label>
+                  <label>H<input name="previewHeight" type="number" min="240" max="1920" value={previewHeight} onChange={(event) => onPreviewSizeChange?.(previewWidth, Number(event.target.value))} /></label>
                 </div>
                 <div className={styles.presetRow}>
                   {[
@@ -316,6 +316,7 @@ function ImageUrlInput({
   return (
     <div className={`${styles.linkLoader} ${compact ? styles.linkLoaderCompact : ''}`}>
       <input
+        name="imageUrl"
         className={styles.linkInput}
         value={value}
         onChange={(event) => setValue(event.target.value)}
