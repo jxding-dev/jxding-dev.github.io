@@ -114,11 +114,6 @@ export function EditorCanvas({
     transform: `scale(${zoom})`,
     transformOrigin: 'center center',
   };
-  const compositeSceneStyle = {
-    ...zoomedSceneStyle,
-    '--dock-scale': String(1 / zoom),
-    '--dock-offset-y': `${10 / zoom}px`,
-  } as CSSProperties;
 
   // Keep first paint and mode changes framed inside the available canvas.
   useEffect(() => {
@@ -150,7 +145,7 @@ export function EditorCanvas({
             )}
           </div>
         ) : isComposite ? (
-          <div className={styles.sceneOuter} style={compositeSceneStyle}>
+          <div className={styles.sceneOuter} style={zoomedSceneStyle}>
             <MockupComposer
               items={mockupItems}
               selectedId={selectedMockupItemId}

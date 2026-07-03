@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { MockupAsset } from '../../data/mockups';
 import type { MockupItem } from '../../types';
 import { quadToMatrix3d, bilinear, triangleAffine } from '../../utils/homography';
@@ -513,50 +514,54 @@ export function MockupComposer({
   const selectedItem = items.find((item) => item.id === selectedId && item.visible) ?? null;
   const selMode = selectedItem?.transformMode ?? 'scale';
 
+  const shortcutDock = (
+    <div className={styles.shortcutDock} aria-label="Mockup layer controls">
+      <span><kbd>드래그</kbd> 이동</span>
+      <span><kbd>Shift</kbd> 비율 유지</span>
+      <span><kbd>Alt</kbd> 중심 기준</span>
+      {selectedItem && (
+        <span className={styles.modeSwitcher}>
+          {(['scale', 'corners', 'warp'] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              className={`${styles.modeBtn} ${selMode === m ? styles.modeBtnActive : ''}`}
+              onClick={() => switchMode(selectedItem, m)}
+            >
+              {m === 'scale' ? '일반' : m === 'corners' ? '꼭짓점' : '왜곡'}
+            </button>
+          ))}
+        </span>
+      )}
+      {selectedItem && selMode === 'warp' && (() => {
+        const curN = selectedItem.warpGrid ? selectedItem.warpGrid.length - 1 : WARP_N_DEFAULT;
+        return (
+          <>
+            <span className={styles.modeSwitcher}>
+              {WARP_SIZES.map(({ n, label }) => (
+                <button
+                  key={n}
+                  type="button"
+                  className={`${styles.modeBtn} ${curN === n ? styles.modeBtnActive : ''}`}
+                  onClick={() => changeGridSize(selectedItem, n)}
+                >
+                  {label}
+                </button>
+              ))}
+            </span>
+            <button type="button" className={styles.resetBtn} onClick={() => resetWarp(selectedItem)}>
+              초기화
+            </button>
+          </>
+        );
+      })()}
+    </div>
+  );
+
   // ── render ─────────────────────────────────────────────────────────────────
   return (
     <div className={styles.wrap}>
-      <div className={styles.shortcutDock} aria-label="Mockup layer controls">
-        <span><kbd>드래그</kbd> 이동</span>
-        <span><kbd>Shift</kbd> 비율 유지</span>
-        <span><kbd>Alt</kbd> 중심 기준</span>
-{selectedItem && (
-          <span className={styles.modeSwitcher}>
-            {(['scale', 'corners', 'warp'] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                className={`${styles.modeBtn} ${selMode === m ? styles.modeBtnActive : ''}`}
-                onClick={() => switchMode(selectedItem, m)}
-              >
-                {m === 'scale' ? '일반' : m === 'corners' ? '꼭짓점' : '왜곡'}
-              </button>
-            ))}
-          </span>
-        )}
-        {selectedItem && selMode === 'warp' && (() => {
-          const curN = selectedItem.warpGrid ? selectedItem.warpGrid.length - 1 : WARP_N_DEFAULT;
-          return (
-            <>
-              <span className={styles.modeSwitcher}>
-                {WARP_SIZES.map(({ n, label }) => (
-                  <button
-                    key={n}
-                    type="button"
-                    className={`${styles.modeBtn} ${curN === n ? styles.modeBtnActive : ''}`}
-                    onClick={() => changeGridSize(selectedItem, n)}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </span>
-              <button type="button" className={styles.resetBtn} onClick={() => resetWarp(selectedItem)}>
-                초기화
-              </button>
-            </>
-          );
-        })()}
-      </div>
+      {createPortal(shortcutDock, document.body)}
 
       <div
         className={styles.stage}
