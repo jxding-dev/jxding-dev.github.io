@@ -566,10 +566,12 @@ export function Landing() {
             <p className={styles.finalCtaDesc}>설치도 가입도 필요 없습니다. 이미지를 올리는 순간 반응형 검수와 목업 합성을 바로 시작할 수 있습니다.</p>
             <div className={styles.finalCtaActions}>
               <Button variant="primary" size="lg" onClick={() => navigate('/editor')}>
-                무료로 에디터 열기
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <span className={styles.heroCtaInline}>
+                  무료로 에디터 열기
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
               </Button>
               <Button variant="secondary" size="lg" onClick={() => navigate('/pricing')}>요금제 자세히 보기</Button>
             </div>
