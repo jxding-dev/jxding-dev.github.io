@@ -40,7 +40,7 @@
 .label {
   position: absolute;
   top: 12px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   color: #fff;
   background: rgba(0,0,0,0.55);
@@ -101,25 +101,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-10) var(--space-8);
+  gap: var(--space-4);
+  padding: var(--space-12) var(--space-10);
   background: var(--bg-base);
   border: 2px dashed var(--border-strong);
   border-radius: var(--radius-xl);
   text-align: center;
-  max-width: 420px;
+  width: min(480px, 84vw);
 }
 
-.phIcon { font-size: 40px; opacity: 0.7; }
+.phIcon { font-size: 48px; opacity: 0.7; }
 
 .phTitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   color: var(--text-primary);
 }
 
 .phDesc {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--text-secondary);
   line-height: var(--leading-loose);
 }

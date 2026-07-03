@@ -16,7 +16,7 @@
 }
 
 .sectionTitle {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -72,7 +72,7 @@
 }
 
 .imageMeta {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
 }
@@ -170,7 +170,7 @@
   display: block;
   margin-top: 2px;
   color: var(--text-tertiary);
-  font-size: 10px;
+  font-size: 13px;
   line-height: var(--leading-normal);
 }
 
@@ -215,7 +215,7 @@
 }
 
 .deviceGroupLabel {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   color: var(--text-muted, var(--text-tertiary));
   padding: 4px 4px 2px;
@@ -228,7 +228,7 @@
   justify-content: space-between;
   padding: 6px 8px;
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all var(--ease-fast);
@@ -250,7 +250,7 @@
 .deviceLabel { flex: 1; text-align: left; }
 
 .deviceSize {
-  font-size: 10px;
+  font-size: 13px;
   font-family: var(--font-mono);
   color: var(--text-tertiary);
 }
@@ -259,7 +259,7 @@
 
 /* ── Compare Slot ─────────────────────────── */
 .slotLabel {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   color: var(--text-secondary);
   margin-bottom: 6px;
@@ -279,12 +279,12 @@
 }
 
 .useCurrentLabel {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-tertiary);
 }
 
 .useCurrentBtn {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-medium);
   color: var(--accent);
   background: var(--accent-subtle);
@@ -309,7 +309,7 @@
 .privacyNote {
   margin-top: auto;
   padding: var(--space-4);
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-tertiary);
   border-top: 1px solid var(--border-muted);
   line-height: var(--leading-normal);
@@ -346,7 +346,7 @@
   font-size: var(--text-xs);
 }
 
-.sizeInputs label { flex: 1; min-width: 0; color: var(--text-tertiary); font-size: 10px; }
+.sizeInputs label { flex: 1; min-width: 0; color: var(--text-tertiary); font-size: 13px; }
 .sizeInputs input { width: 100%; min-width: 0; margin-top: 3px; padding: 5px; border: 1px solid var(--border-default); border-radius: var(--radius-sm); background: var(--bg-subtle); font-size: var(--text-xs); }
 .presetRow { flex-wrap: wrap; }
 .presetRow button { flex: 1 1 42%; }

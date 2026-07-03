@@ -4,6 +4,7 @@ import type { DevicePreset } from '../../types';
 import { DEVICE_PRESETS } from '../../data/devices';
 import { useImageUpload } from '../../hooks/useImageUpload';
 import { Button } from '../ui/Button';
+import { HelpNote } from '../ui/HelpNote';
 import styles from './EditorLeftPanel.module.css';
 
 interface Props {
@@ -187,6 +188,15 @@ export function EditorLeftPanel({
                   ))}
                 </div>
                 <Button size="sm" variant="ghost" fullWidth onClick={onOpenPreview} disabled={!previewReady}>새 창에서 열기</Button>
+                <HelpNote summary="미리보기가 비어 있거나 안 열리나요?">
+                  많은 사이트는 보안(<code>X-Frame-Options</code> · <code>CSP</code>)상
+                  다른 페이지 안에 삽입되는 것을 막아둡니다. 이 경우 미리보기가 비어 보일 수 있어요.
+                  <ul>
+                    <li><strong>새 창에서 열기</strong>로 실제 사이트를 그대로 확인하세요.</li>
+                    <li>내 사이트라면 임베드 허용 설정 후 다시 시도할 수 있어요.</li>
+                    <li>로그인이 필요한 페이지는 미리보기에 나타나지 않습니다.</li>
+                  </ul>
+                </HelpNote>
               </>
             )}
           </Section>
@@ -330,6 +340,15 @@ function ImageUrlInput({
       <Button size="sm" variant="secondary" onClick={handleLoad} loading={loading} disabled={!value.trim()}>
         이미지 링크 불러오기
       </Button>
+      <HelpNote summary="어떤 이미지 주소를 넣어야 하나요?">
+        이미지 <strong>파일이 직접 열리는 주소</strong>여야 해요.
+        브라우저에서 주소를 열었을 때 이미지 한 장만 보이면 됩니다.
+        <ul>
+          <li>주소가 <code>.png</code> · <code>.jpg</code> · <code>.webp</code>로 끝나는 링크가 가장 안전해요.</li>
+          <li>사이트 페이지 주소가 아니라, 이미지에서 <strong>이미지 주소 복사</strong>로 얻은 링크를 넣어주세요.</li>
+          <li>일부 사이트는 외부 사용을 막아 두어(<code>CORS</code>) 불러오지 못할 수 있어요. 그럴 땐 이미지를 내려받아 직접 업로드하세요.</li>
+        </ul>
+      </HelpNote>
     </div>
   );
 }

@@ -131,7 +131,7 @@ export function EditorCanvas({
         onWheel={handleWheel}
       >
         {isCompare ? (
-          <div className={styles.sceneOuter} style={zoomedSceneStyle}>
+          <div className={styles.sceneOuter} style={hasContent ? zoomedSceneStyle : undefined}>
             <div ref={exportRef as React.RefObject<HTMLDivElement>}>
               <CompareSlider before={beforeImage} after={afterImage} orientation={compareOrientation} autoSlide={autoSlide} />
             </div>

@@ -681,7 +681,7 @@
   height: 18px;
   background: var(--bg-muted);
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-tertiary);
   display: flex;
   align-items: center;
@@ -689,7 +689,7 @@
 }
 
 .ibWidth {
-  font-size: 10px;
+  font-size: 13px;
   font-family: var(--font-mono);
   color: var(--accent);
   flex-shrink: 0;

@@ -89,7 +89,7 @@
 }
 
 .saveState {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-medium);
   white-space: nowrap;
 }
@@ -166,8 +166,8 @@
 @media (max-width: 900px) {
   .bar { grid-template-columns: auto 1fr auto; }
   .tabs { justify-content: center; }
-  .tab { padding: 5px 8px; gap: 3px; font-size: 11px; }
-  .tabIcon { font-size: 12px; }
+  .tab { padding: 5px 8px; gap: 3px; font-size: 13px; }
+  .tabIcon { font-size: 13px; }
   .saveState { display: none; }
 }
 

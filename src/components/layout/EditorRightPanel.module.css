@@ -16,7 +16,7 @@
 }
 
 .sectionTitle {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -118,7 +118,7 @@
 }
 
 .exportNote {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-tertiary);
   text-align: center;
 }
@@ -159,7 +159,7 @@
   cursor: pointer;
   list-style: none;
   padding: 6px 0;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   color: var(--text-tertiary);
   letter-spacing: 0.04em;
@@ -192,14 +192,14 @@
   border-radius: 999px;
   background: var(--bg-muted);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .searchLabel {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   color: var(--text-tertiary);
   letter-spacing: 0.04em;
@@ -263,7 +263,7 @@
   border-radius: 999px;
   background: var(--bg-muted);
   color: var(--text-tertiary);
-  font-size: 9px;
+  font-size: 13px;
   font-family: var(--font-mono);
 }
 
@@ -292,7 +292,7 @@
   padding: 0 5px;
   border-radius: var(--radius-sm);
   color: var(--text-tertiary);
-  font-size: 9px;
+  font-size: 13px;
   cursor: pointer;
   transition: all var(--ease-fast);
 }
@@ -308,7 +308,7 @@
   height: 20px;
   border-radius: var(--radius-sm);
   color: var(--text-tertiary);
-  font-size: 11px;
+  font-size: 13px;
   cursor: pointer;
   transition: all var(--ease-fast);
 }
@@ -324,7 +324,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px var(--space-4) 8px;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -397,7 +397,7 @@
 
 .selectedMockupInfo span {
   color: var(--text-tertiary);
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.35;
 }
 
@@ -477,7 +477,7 @@
 
 .mockupCardDesc {
   color: var(--text-tertiary);
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
@@ -493,7 +493,7 @@
   border-radius: 999px;
   background: var(--bg-muted);
   color: var(--text-tertiary);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 /* ── Export summary + filename ────────────── */
@@ -530,7 +530,7 @@
 .fileNameIcon { flex-shrink: 0; font-size: 14px; }
 
 .fileNameText {
-  font-size: 11px;
+  font-size: 13px;
   font-family: var(--font-mono);
   color: var(--text-secondary);
   overflow: hidden;

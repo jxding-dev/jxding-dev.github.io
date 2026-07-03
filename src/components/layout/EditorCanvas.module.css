@@ -44,7 +44,7 @@
   position: absolute;
   top: -26px;
   left: 0;
-  font-size: 11px;
+  font-size: 13px;
   font-family: var(--font-mono);
   color: var(--text-tertiary);
   white-space: nowrap;
@@ -131,7 +131,7 @@
   position: absolute;
   bottom: 8px;
   right: 8px;
-  font-size: 9px;
+  font-size: 13px;
   font-family: var(--font-mono);
   background: rgba(0,0,0,0.5);
   color: #fff;
@@ -190,7 +190,7 @@
 }
 
 .mockupTag {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-medium);
   padding: 3px 10px;
   border: 1px solid;
@@ -199,7 +199,7 @@
 
 .mockupDate {
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-medium);
   letter-spacing: 0.04em;
 }
@@ -228,7 +228,7 @@
 }
 
 .exportBadge {
-  font-size: 11px;
+  font-size: 13px;
   font-family: var(--font-mono);
   color: var(--text-tertiary);
 }
@@ -318,7 +318,7 @@
 .zoomVal:hover { background: var(--bg-muted); }
 
 .zoomFit {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: var(--weight-medium);
   color: var(--text-secondary);
   padding: 3px 8px;
@@ -337,7 +337,7 @@
 }
 
 .deviceInfo {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-tertiary);
   white-space: nowrap;
   font-family: var(--font-mono);

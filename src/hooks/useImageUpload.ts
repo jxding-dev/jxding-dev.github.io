@@ -181,7 +181,7 @@ export function useImageUpload({ onSuccess, onError }: UseImageUploadOptions) {
         processDataUrl(dataUrl, { name: fileNameFromUrl(url), size: blob.size });
         return true;
       } catch {
-        onError?.('이미지 링크를 불러오지 못했어요. CORS가 허용된 직접 이미지 URL을 사용해 주세요.');
+        onError?.('이미지 주소를 불러오지 못했어요. 이미지 파일이 직접 열리는 주소(.png·.jpg로 끝나는 링크)인지 확인해 주세요. 일부 사이트는 외부 사용을 막아 두기도 합니다 — 이럴 땐 이미지를 내려받아 직접 업로드하세요.');
         return false;
       } finally {
         window.clearTimeout(timeoutId);

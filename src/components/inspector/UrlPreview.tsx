@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { HelpNote } from '../ui/HelpNote';
 import styles from './UrlPreview.module.css';
 
 interface Props {
@@ -78,14 +79,30 @@ export function UrlPreview({ url, width, height, refreshKey }: Props) {
       </div>
 
       {status === 'loaded' && (
-        <p className={styles.noticeInfo}>
-          미리보기를 불러왔습니다. 화면이 비어 보인다면 해당 사이트가 임베드를 제한한 경우이며, 새 창에서 정확히 확인할 수 있습니다.
-        </p>
+        <div className={styles.notice}>
+          <p className={styles.noticeInfo}>미리보기를 불러왔어요. 화면이 비어 보이면 아래 설명을 확인하세요.</p>
+          <HelpNote summary="미리보기가 비어 보이나요?">
+            사이트가 정상이어도 <strong>보안 정책</strong> 때문에 다른 페이지 안에서는
+            내용이 안 보일 수 있어요. 문제는 아니며, 아래 방법으로 확인하면 됩니다.
+            <ul>
+              <li>왼쪽 패널의 <strong>새 창에서 열기</strong>로 실제 화면을 확인하세요.</li>
+              <li>W · H 값이나 프리셋으로 원하는 기기 크기를 맞춰 보세요.</li>
+            </ul>
+          </HelpNote>
+        </div>
       )}
       {status === 'blocked' && (
-        <p className={styles.noticeWarn}>
-          이 사이트는 외부 미리보기를 차단한 것 같습니다. 왼쪽 패널의 <strong>새 창에서 열기</strong>로 반응형을 확인해주세요.
-        </p>
+        <div className={styles.notice}>
+          <p className={styles.noticeWarn}>이 사이트는 외부 미리보기를 막아 둔 것 같아요.</p>
+          <HelpNote summary="왜 안 보이나요? 어떻게 확인하죠?" tone="warn">
+            사이트가 <code>X-Frame-Options</code>·<code>CSP</code>로 임베드를 차단하면
+            여기서는 표시할 수 없어요. 에러가 아니라 사이트의 정책입니다.
+            <ul>
+              <li>왼쪽 패널의 <strong>새 창에서 열기</strong>로 반응형을 확인하세요.</li>
+              <li>내 사이트라면 임베드 허용 설정 후 다시 시도할 수 있어요.</li>
+            </ul>
+          </HelpNote>
+        </div>
       )}
     </div>
   );

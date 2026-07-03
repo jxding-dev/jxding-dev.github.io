@@ -102,7 +102,7 @@
 .showcaseLabel {
   display: block;
   color: var(--text-tertiary);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
