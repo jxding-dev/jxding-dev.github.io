@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝트 — STUDIO MUGE</title>
+<meta name="description" content="스튜디오 무게의 전체 프로젝트. 주거·상업·문화 공간 8건을 그리드와 리스트로 살펴보세요.">
+<meta property="og:title" content="STUDIO MUGE 프로젝트">
+<meta property="og:description" content="주거부터 문화까지, 무게가 설계한 여덟 개의 공간.">
+<meta property="og:type" content="website">
+<!-- 배포 시 절대 URL로 교체 -->
+<meta property="og:image" content="images/muge-hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='84'%3E%F0%9F%93%90%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Gothic+A1:wght@700;900&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="draft-marks" aria-hidden="true">
+  <span class="dm-tl">X0 Y0</span><span class="dm-tr">X∞ Y0</span><span class="dm-bl">37.5895 N</span><span class="dm-br">126.9975 E</span>
+</div>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="index.html">STUDIO MUGE</a>
+    <span class="page-label">Projects — All</span>
+    <nav class="nav" aria-label="주요">
+      <a href="index.html">인덱스</a>
+      <a href="works.html" aria-current="page">프로젝트</a>
+      <a href="about.html">스튜디오</a>
+      <a href="contact.html">문의</a>
+    </nav>
+    <button class="hamb" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-overlay"><span></span></button>
+  </div>
+</header>
+
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <button class="close arch" aria-label="메뉴 닫기">Close ✕</button>
+  <a href="index.html"><span class="n">01</span>인덱스</a>
+  <a href="works.html"><span class="n">02</span>프로젝트</a>
+  <a href="about.html"><span class="n">03</span>스튜디오</a>
+  <a href="contact.html"><span class="n">04</span>문의</a>
+</div>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="k">Projects</p>
+      <h1>전체 프로젝트</h1>
+      <p>2018년 이후 준공·진행한 작업입니다. 용도로 걸러 보거나, 리스트로 전환해 스펙을 비교하세요.</p>
+    </header>
+
+    <div class="works-bar">
+      <div class="filters" aria-label="용도 필터">
+        <button data-cat="all" aria-pressed="true">전체</button>
+        <button data-cat="주거" aria-pressed="false">주거</button>
+        <button data-cat="상업" aria-pressed="false">상업</button>
+        <button data-cat="문화" aria-pressed="false">문화</button>
+      </div>
+      <div class="view-toggle" aria-label="보기 전환">
+        <button data-view="grid" aria-pressed="true">그리드</button>
+        <button data-view="list" aria-pressed="false">리스트</button>
+      </div>
+    </div>
+
+    <!-- 그리드 -->
+    <div class="grid-view">
+      <a class="grid-item" href="work-detail.html" data-catof="주거" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-a-1.jpg" alt="겹집 성북동 주택" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">주거 · 214㎡ · 성북동 · 2024</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—001</span><span class="nm">겹집</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="상업" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-b-1.jpg" alt="사이 연남동 카페" loading="lazy" width="600" height="400"><img class="grid-item__img2" src="images/muge-b-2.jpg" alt="" aria-hidden="true" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">상업 · 96㎡ · 연남동 · 2023</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—002</span><span class="nm">사이</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="상업" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-c-1.jpg" alt="층층 역삼동 오피스" loading="lazy" width="600" height="400"><img class="grid-item__img2" src="images/muge-c-2.jpg" alt="" aria-hidden="true" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">업무 · 430㎡ · 역삼동 · 2023</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—003</span><span class="nm">층층</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="문화" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-d-1.jpg" alt="흰벽 청담 갤러리" loading="lazy" width="600" height="400"><img class="grid-item__img2" src="images/muge-d-2.jpg" alt="" aria-hidden="true" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">문화 · 180㎡ · 청담동 · 2022</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—004</span><span class="nm">흰벽</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="주거" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-e-1.jpg" alt="두께 평창동 주택" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">주거 · 268㎡ · 평창동 · 2022</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—005</span><span class="nm">두께</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="주거" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-f-1.jpg" alt="마당집 판교 주택" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">주거 · 195㎡ · 판교 · 2021</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—006</span><span class="nm">마당집</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="상업" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-g-1.jpg" alt="결 한남동 쇼룸" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">상업 · 120㎡ · 한남동 · 2021</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—007</span><span class="nm">결</span></div>
+      </a>
+      <a class="grid-item" href="work-detail.html" data-catof="문화" data-cursor="view">
+        <div class="grid-item__img"><img src="images/muge-h-1.jpg" alt="빈 서촌 갤러리" loading="lazy" width="600" height="400"><div class="grid-item__ov"><span class="sp">문화 · 88㎡ · 서촌 · 2020</span></div></div>
+        <div class="grid-item__cap"><span class="no">WRK—008</span><span class="nm">빈</span></div>
+      </a>
+    </div>
+
+    <!-- 리스트 -->
+    <div class="list-view">
+      <a class="list-row" href="work-detail.html" data-catof="주거" data-cursor="view" data-thumb="images/muge-a-1.jpg"><span class="no">WRK—001</span><span class="nm">겹집</span><span class="meta use">주거</span><span class="meta">2024</span><span class="meta loc">성북동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="상업" data-cursor="view" data-thumb="images/muge-b-1.jpg"><span class="no">WRK—002</span><span class="nm">사이</span><span class="meta use">상업</span><span class="meta">2023</span><span class="meta loc">연남동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="상업" data-cursor="view" data-thumb="images/muge-c-1.jpg"><span class="no">WRK—003</span><span class="nm">층층</span><span class="meta use">업무</span><span class="meta">2023</span><span class="meta loc">역삼동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="문화" data-cursor="view" data-thumb="images/muge-d-1.jpg"><span class="no">WRK—004</span><span class="nm">흰벽</span><span class="meta use">문화</span><span class="meta">2022</span><span class="meta loc">청담동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="주거" data-cursor="view" data-thumb="images/muge-e-1.jpg"><span class="no">WRK—005</span><span class="nm">두께</span><span class="meta use">주거</span><span class="meta">2022</span><span class="meta loc">평창동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="주거" data-cursor="view" data-thumb="images/muge-f-1.jpg"><span class="no">WRK—006</span><span class="nm">마당집</span><span class="meta use">주거</span><span class="meta">2021</span><span class="meta loc">판교</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="상업" data-cursor="view" data-thumb="images/muge-g-1.jpg"><span class="no">WRK—007</span><span class="nm">결</span><span class="meta use">상업</span><span class="meta">2021</span><span class="meta loc">한남동</span></a>
+      <a class="list-row" href="work-detail.html" data-catof="문화" data-cursor="view" data-thumb="images/muge-h-1.jpg"><span class="no">WRK—008</span><span class="nm">빈</span><span class="meta use">문화</span><span class="meta">2020</span><span class="meta loc">서촌</span></a>
+    </div>
+  </div>
+</main>
+
+<div class="list-thumb" aria-hidden="true"><img src="" alt=""></div>
+
+<footer class="site-footer">
+  <div class="wrap fwrap">
+    <a class="brand" href="index.html">STUDIO MUGE</a>
+    <nav aria-label="푸터">
+      <a href="works.html">프로젝트</a>
+      <a href="about.html">스튜디오</a>
+      <a href="contact.html">문의</a>
+    </nav>
+    <p class="fnote">© 2026 STUDIO MUGE · Seoul · 데모용 포트폴리오</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
