@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>다운로드 &amp; FAQ — 달무렵</title>
+<meta name="description" content="달무렵 다운로드와 자주 묻는 질문. 설치 3스텝과 배터리·무음모드·데이터 백업·해지 안내.">
+<meta property="og:title" content="달무렵 다운로드 &amp; FAQ">
+<meta property="og:description" content="받기, 소리 고르기, 머리맡에 두기. 오늘 밤부터 시작하세요.">
+<meta property="og:type" content="website">
+<!-- 배포 시 절대 URL로 교체 -->
+<meta property="og:image" content="images/dal-mood-night.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='84'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="sky" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="moon-orbit" aria-hidden="true">
+  <svg viewBox="0 0 100 100"><defs><mask id="mo"><rect width="100" height="100" fill="#fff"/><circle cx="63" cy="41" r="33" fill="#000"/></mask></defs><circle cx="50" cy="50" r="35" fill="#F5E9C9" mask="url(#mo)"/></svg>
+</div>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="mh"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="32" fill="#000"/></mask></defs><circle cx="50" cy="50" r="34" fill="#F5E9C9" mask="url(#mh)"/></svg>
+      달무렵
+    </a>
+    <nav class="nav" aria-label="주요">
+      <a href="index.html">홈</a>
+      <a href="features.html">기능</a>
+      <a href="report.html">리포트</a>
+      <a href="pricing.html">요금제</a>
+      <a href="download.html" aria-current="page">다운로드</a>
+    </nav>
+    <a class="pill header-pill" href="download.html">앱 받기</a>
+    <button class="hamb" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="모바일">
+  <a href="index.html">홈</a>
+  <a href="features.html">기능</a>
+  <a href="report.html">리포트</a>
+  <a href="pricing.html">요금제</a>
+  <a href="download.html" aria-current="page">다운로드</a>
+  <a class="pill" href="download.html">앱 받기</a>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Download</p>
+      <h1>오늘 밤부터 시작하세요</h1>
+      <p>지금 받아서, 오늘 밤 머리맡에 두기만 하면 됩니다.</p>
+    </header>
+
+    <section class="section dl-hero">
+      <div class="stores">
+        <a class="store-btn" href="https://apps.apple.com" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M10 5h4" stroke-linecap="round"></path></svg>
+          <span class="st"><small>다운로드</small><b>App Store</b></span>
+        </a>
+        <a class="store-btn" href="https://play.google.com" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 3l14 9L4 21z" stroke-linejoin="round"></path></svg>
+          <span class="st"><small>다운로드</small><b>Google Play</b></span>
+        </a>
+      </div>
+
+      <div class="dl-steps">
+        <div class="dl-step">
+          <span class="n">1</span>
+          <h3>받기</h3>
+          <p>앱스토어에서 ‘달무렵’을 설치합니다. 회원가입 없이 바로 시작할 수 있어요.</p>
+        </div>
+        <div class="dl-step">
+          <span class="n">2</span>
+          <h3>소리 고르기</h3>
+          <p>오늘 밤 어울리는 소리와 타이머를 고릅니다.</p>
+        </div>
+        <div class="dl-step">
+          <span class="n">3</span>
+          <h3>머리맡에 두기</h3>
+          <p>폰을 머리맡에 두고 화면을 끄면, 나머지는 달무렵이 합니다.</p>
+        </div>
+      </div>
+
+      <div class="mood-band r45" style="max-width:420px;margin:0 auto;">
+        <img src="images/dal-mood-morning.jpg" alt="아침 햇살이 드는 침실 창가" loading="lazy" width="640" height="800">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 style="text-align:center;font-size:1.6rem;margin-bottom:2rem;">자주 묻는 질문</h2>
+      <div class="faq">
+        <details>
+          <summary>밤새 켜두면 배터리가 많이 닳나요?</summary>
+          <p class="fa">화면을 끈 절전 기록 모드에서는 하룻밤 약 3~5%만 소모됩니다. 충전기를 꽂아 두시길 권장합니다.</p>
+        </details>
+        <details>
+          <summary>무음(진동) 모드에서도 알람이 울리나요?</summary>
+          <p class="fa">네. 달무렵 알람은 시스템 무음 설정과 별개로 동작합니다. 다만 볼륨은 앱 안에서 따로 조절해 주세요.</p>
+        </details>
+        <details>
+          <summary>애플워치나 스마트밴드가 필요한가요?</summary>
+          <p class="fa">아니요. 폰의 마이크와 움직임 센서만으로 수면을 추정합니다. 손목 기기가 있으면 정확도가 조금 더 올라갑니다.</p>
+        </details>
+        <details>
+          <summary>수면 데이터는 어디에 저장되나요?</summary>
+          <p class="fa">모든 수면 데이터는 기기 안에만 저장되며 서버로 전송되지 않습니다. 기기 변경 시에는 내보내기 기능(플러스)으로 옮길 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>알람이 안 울릴까 봐 걱정돼요.</summary>
+          <p class="fa">스마트 알람은 설정 시각을 넘기지 않도록 보장합니다. 얕은 잠 구간을 못 찾으면 정확히 설정 시각에 일반 알람으로 울립니다.</p>
+        </details>
+        <details>
+          <summary>플러스는 어떻게 해지하나요?</summary>
+          <p class="fa">앱스토어·구글플레이의 구독 관리에서 즉시 해지할 수 있습니다. 결제 후 7일 이내에는 앱 내 문의로 전액 환불됩니다.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap fwrap">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="mf"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="32" fill="#000"/></mask></defs><circle cx="50" cy="50" r="34" fill="#F5E9C9" mask="url(#mf)"/></svg>
+      달무렵
+    </a>
+    <nav aria-label="푸터">
+      <a href="features.html">기능</a>
+      <a href="report.html">리포트</a>
+      <a href="pricing.html">요금제</a>
+      <a href="download.html">다운로드</a>
+    </nav>
+    <p class="fnote">© 2026 달무렵 · 수면 데이터는 기기에만 저장됩니다 · 데모용 포트폴리오</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

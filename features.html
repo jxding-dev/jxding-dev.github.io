@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기능 — 달무렵</title>
+<meta name="description" content="수면 사운드, 수면 기록, 스마트 알람. 달무렵의 세 가지 기능을 화면으로 확인하세요. 수면 데이터는 기기에만 저장됩니다.">
+<meta property="og:title" content="달무렵 기능 상세">
+<meta property="og:description" content="잠들기 전 소리부터 개운한 아침까지. 달무렵의 세 가지 핵심 기능.">
+<meta property="og:type" content="website">
+<!-- 배포 시 절대 URL로 교체 -->
+<meta property="og:image" content="images/dal-mood-night.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='84'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="sky" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="moon-orbit" aria-hidden="true">
+  <svg viewBox="0 0 100 100"><defs><mask id="mo"><rect width="100" height="100" fill="#fff"/><circle cx="63" cy="41" r="33" fill="#000"/></mask></defs><circle cx="50" cy="50" r="35" fill="#F5E9C9" mask="url(#mo)"/></svg>
+</div>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="mh"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="32" fill="#000"/></mask></defs><circle cx="50" cy="50" r="34" fill="#F5E9C9" mask="url(#mh)"/></svg>
+      달무렵
+    </a>
+    <nav class="nav" aria-label="주요">
+      <a href="index.html">홈</a>
+      <a href="features.html" aria-current="page">기능</a>
+      <a href="report.html">리포트</a>
+      <a href="pricing.html">요금제</a>
+      <a href="download.html">다운로드</a>
+    </nav>
+    <a class="pill header-pill" href="download.html">앱 받기</a>
+    <button class="hamb" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="모바일">
+  <a href="index.html">홈</a>
+  <a href="features.html" aria-current="page">기능</a>
+  <a href="report.html">리포트</a>
+  <a href="pricing.html">요금제</a>
+  <a href="download.html">다운로드</a>
+  <a class="pill" href="download.html">앱 받기</a>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Features</p>
+      <h1>세 가지로 충분한 밤</h1>
+      <p>화려한 기능 대신, 잘 자는 데 필요한 것만 담았습니다.</p>
+    </header>
+
+    <!-- 기능 1: 사운드 -->
+    <section class="feat-row">
+      <div class="feat-row__phone">
+        <div class="phone">
+          <span class="phone__notch" aria-hidden="true"></span>
+          <div class="phone__screen">
+            <section class="screen is-active" aria-label="사운드 화면">
+              <div class="scr-status"><span>23:40</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <h2 class="scr-title">오늘 밤,<br>어떤 소리로 잘까요<small>마음에 드는 소리를 골라보세요</small></h2>
+              <div class="snd-card"><span class="snd-play" aria-hidden="true"></span><span class="snd-meta"><span class="snd-name">비 오는 밤</span><span class="snd-sub">창밖의 빗소리 · 45분</span></span><span class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.22s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.12s"></i><i style="animation-delay:.28s"></i></span></div>
+              <div class="snd-card"><span class="snd-play" aria-hidden="true"></span><span class="snd-meta"><span class="snd-name">장작불</span><span class="snd-sub">타닥이는 모닥불 · 60분</span></span><span class="wave" aria-hidden="true"><i style="animation-delay:.2s"></i><i style="animation-delay:0s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.32s"></i><i style="animation-delay:.18s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.14s"></i></span></div>
+              <div class="snd-card"><span class="snd-play" aria-hidden="true"></span><span class="snd-meta"><span class="snd-name">새벽 파도</span><span class="snd-sub">먼바다의 잔물결 · 90분</span></span><span class="wave" aria-hidden="true"><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:0s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.12s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.22s"></i></span></div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>수면 사운드</h2>
+        <p class="lead">비 오는 밤부터 장작불까지, 열두 가지 소리와 페이드아웃 타이머. 소리가 서서히 잦아들며 잠으로 이어집니다.</p>
+        <div class="feat-when">
+          <p class="k">이런 밤에 좋아요</p>
+          <p>· 생각이 많아 쉽게 잠들지 못하는 밤<br>· 층간·바깥 소음을 부드럽게 덮고 싶은 밤</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 기능 2: 기록 -->
+    <section class="feat-row">
+      <div class="feat-row__phone">
+        <div class="phone">
+          <span class="phone__notch" aria-hidden="true"></span>
+          <div class="phone__screen">
+            <section class="screen is-active" aria-label="수면 기록 화면">
+              <div class="scr-status"><span>07:12</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <h2 class="scr-title">지난밤 수면 기록<small>2026년 7월 16일 밤</small></h2>
+              <div class="slp-score"><b>87</b><span>수면 점수<br>지난주보다 +6</span></div>
+              <div class="slp-graph">
+                <svg viewBox="0 0 240 78" role="img" aria-label="지난밤 수면 단계 그래프">
+                  <path d="M8,20 L40,20 L40,58 L78,58 L78,34 L112,34 L112,60 L150,60 L150,32 L188,32 L188,52 L214,52 L214,22 L232,22" fill="none" stroke="#F5E9C9" stroke-width="2" stroke-linejoin="round"></path>
+                  <path d="M8,20 L40,20 L40,58 L78,58 L78,34 L112,34 L112,60 L150,60 L150,32 L188,32 L188,52 L214,52 L214,22 L232,22 L232,74 L8,74 Z" fill="rgba(167,139,250,.18)"></path>
+                </svg>
+                <div class="slp-legend"><span><i style="background:#F5E9C9"></i>얕은 잠</span><span><i style="background:#A78BFA"></i>깊은 잠</span></div>
+              </div>
+              <div class="slp-times"><span>취침 <b>23:40</b></span><span class="arrow">→ 7시간 30분 →</span><span>기상 <b>07:10</b></span></div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>수면 기록</h2>
+        <p class="lead">머리맡에 폰을 두면 미세한 움직임과 소리로 수면 단계를 추정합니다. 손목 기기 없이, 매일 아침 수면 점수로 요약해 드려요.</p>
+        <div class="feat-when">
+          <p class="k">이런 밤에 좋아요</p>
+          <p>· 잘 잤는지 아침마다 궁금한 사람<br>· 스마트워치 없이 수면을 기록하고 싶은 사람</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 기능 3: 알람 -->
+    <section class="feat-row">
+      <div class="feat-row__phone">
+        <div class="phone">
+          <span class="phone__notch" aria-hidden="true"></span>
+          <div class="phone__screen">
+            <section class="screen is-active" aria-label="스마트 알람 화면">
+              <div class="scr-status"><span>00:12</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <h2 class="scr-title">스마트 알람<small>가장 개운한 순간에 깨워드릴게요</small></h2>
+              <div class="alm-clock"><b>07:00</b> <span class="ap">AM</span></div>
+              <div class="alm-note"><p>얕은 잠 구간에<br>깨워드려요</p><span class="toggle" role="img" aria-label="켜짐"></span></div>
+              <div class="chips" aria-label="반복 요일"><span class="chip on">월</span><span class="chip on">화</span><span class="chip on">수</span><span class="chip on">목</span><span class="chip on">금</span><span class="chip">토</span><span class="chip">일</span></div>
+              <p class="snd-sub" style="text-align:center;margin-top:2px;">23:40 취침 예상 · 7시간 20분 수면</p>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>스마트 알람</h2>
+        <p class="lead">설정한 시각 앞뒤 30분 중 가장 얕은 잠 구간을 찾아 깨웁니다. 깊은 잠에서 억지로 끌려 나오지 않으니 아침이 덜 무겁습니다.</p>
+        <div class="feat-when">
+          <p class="k">이런 밤에 좋아요</p>
+          <p>· 알람 소리에 늘 깜짝 놀라 깨는 사람<br>· 같은 시간에 자도 개운함이 다른 사람</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 무드 밴드 -->
+    <section class="section">
+      <div class="mood-band r219"><img src="images/dal-mood-night.jpg" alt="별이 이는 밤하늘 아래 창가의 풍경" loading="lazy" width="1260" height="540"></div>
+    </section>
+
+    <p class="privacy-line">수면 데이터는 당신의 기기에만 저장됩니다. 서버로 전송하지 않습니다.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap fwrap">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="mf"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="32" fill="#000"/></mask></defs><circle cx="50" cy="50" r="34" fill="#F5E9C9" mask="url(#mf)"/></svg>
+      달무렵
+    </a>
+    <nav aria-label="푸터">
+      <a href="features.html">기능</a>
+      <a href="report.html">리포트</a>
+      <a href="pricing.html">요금제</a>
+      <a href="download.html">다운로드</a>
+    </nav>
+    <p class="fnote">© 2026 달무렵 · 수면 데이터는 기기에만 저장됩니다 · 데모용 포트폴리오</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
