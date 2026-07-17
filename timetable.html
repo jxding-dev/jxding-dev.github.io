@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>타임테이블 — SEOUL DEV WAVE 2026</title>
+<meta name="description" content="SEOUL DEV WAVE 2026 이틀간의 세션 타임테이블. 트랙 3개 매트릭스로 한눈에 보고, 관심 세션을 내 시간표에 담아 보세요.">
+<meta property="og:title" content="SEOUL DEV WAVE 2026 타임테이블">
+<meta property="og:description" content="이틀 · 트랙 3개 · 세션 24. 시간 × 트랙 매트릭스 타임테이블.">
+<meta property="og:type" content="website">
+<!-- 배포 시 절대 URL로 교체 -->
+<meta property="og:image" content="images/dw-crowd.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230C0C0C'/%3E%3Ctext y='.92em' x='8' font-size='78' fill='%23D8FF3E'%3E%E2%9C%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Black+Han+Sans&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand hcell" href="index.html">DW<span class="st">✱</span>26</a>
+    <nav class="hcell hnav hnav-cell" aria-label="주요">
+      <a href="index.html">홈</a>
+      <a href="speakers.html">연사</a>
+      <a href="timetable.html" aria-current="page">타임테이블</a>
+      <a href="venue.html">안내</a>
+    </nav>
+    <div class="hcell hdday hdday-cell"><span>D-<b data-dday-days>—</b></span></div>
+    <a class="hcell hticket" href="tickets.html">티켓 →</a>
+    <button class="hamb" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="모바일">
+  <a href="index.html"><span>홈</span><span class="n">01</span></a>
+  <a href="speakers.html"><span>연사</span><span class="n">02</span></a>
+  <a href="timetable.html"><span>타임테이블</span><span class="n">03</span></a>
+  <a href="venue.html"><span>안내</span><span class="n">04</span></a>
+  <a href="tickets.html"><span>티켓</span><span class="n">05</span></a>
+</nav>
+
+<main id="main">
+  <section class="lime-section">
+    <div class="wrap" style="padding:1rem 0;">
+      <p class="arch" style="font-size:clamp(.85rem,.6rem+1vw,1.2rem);">［ DAY 1 · 10.16 FRI ／ DAY 2 · 10.17 SAT · 10:00–18:00 ］</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <header class="page-head">
+      <p class="k">Timetable</p>
+      <h1>이틀의 지도</h1>
+      <p>시간(세로) × 트랙 3개(가로) 매트릭스입니다. 세션을 눌러 상세를 보고 내 시간표에 담아 보세요.</p>
+    </header>
+
+    <section class="section" id="timetable">
+      <div class="tt-tabs" role="tablist" aria-label="행사 일자">
+        <button role="tab" data-day="1" aria-selected="true">DAY 1 · 10.16 FRI</button>
+        <button role="tab" data-day="2" aria-selected="false">DAY 2 · 10.17 SAT</button>
+      </div>
+      <div class="tt-legend">
+        <span><i style="background:#D8FF3E"></i>트랙 A · AI</span>
+        <span><i style="background:#F5F5F2"></i>트랙 B · 웹</span>
+        <span><i style="background:#FF3E6C"></i>트랙 C · 인프라</span>
+        <span>✱ = 내 시간표</span>
+      </div>
+
+      <div class="tt-grid" role="grid" aria-label="타임테이블 매트릭스"></div>
+      <div class="tt-list" aria-label="타임테이블 목록"></div>
+
+      <p class="tt-note">＊ ‘내 시간표에 담기’는 이 브라우저에만 저장됩니다(새로고침 시 유지). 계정 저장 기능이 아닌 데모입니다.</p>
+    </section>
+  </div>
+</main>
+
+<dialog id="tt-dialog" aria-label="세션 상세">
+  <div class="dlg">
+    <div class="dlg__top">
+      <div><p class="dlg__name" data-f="title"></p><p class="dlg__org" data-f="meta"></p></div>
+      <button class="dlg__close" data-close>닫기 ✕</button>
+    </div>
+    <p class="lbl lime-c">Speaker</p>
+    <p class="ses-title" data-f="spk" style="font-size:1rem;"></p>
+    <p style="opacity:.8;">세션 상세와 사전 질문은 행사 앱에서 이어집니다. 자리는 선착순입니다.</p>
+    <p style="margin-top:1rem;"><button class="dlg__close" data-save style="background:var(--lime);color:var(--black);border:0;padding:.6rem 1rem;font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;cursor:pointer;"></button></p>
+  </div>
+</dialog>
+
+<footer class="site-footer">
+  <div class="wrap fwrap">
+    <a class="brand" href="index.html">DW<span class="st lime-c">✱</span>26</a>
+    <nav aria-label="푸터">
+      <a href="speakers.html">연사</a>
+      <a href="timetable.html">타임테이블</a>
+      <a href="venue.html">안내</a>
+      <a href="tickets.html">티켓</a>
+    </nav>
+    <p class="fnote">© 2026 SEOUL DEV WAVE · 성수 에스팩토리 · 데모용 포트폴리오</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
