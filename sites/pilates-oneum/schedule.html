@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시간표 &amp; 가격 | 온음 스튜디오</title>
+  <meta name="description" content="온음 스튜디오 요일별 수업 시간표와 그룹·개인 수강권 가격 안내. 평일 모닝 매트부터 저녁 기구 필라테스까지, 잔여석을 확인하고 예약하세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-dot" aria-hidden="true"></span>온음 스튜디오</a>
+      <nav class="main-nav" id="mainNav" aria-label="주 메뉴">
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="programs.html">프로그램</a></li>
+          <li><a href="schedule.html" aria-current="page">시간표·가격</a></li>
+          <li><a href="coaches.html">강사</a></li>
+          <li><a class="btn btn-sage nav-cta" href="trial.html">체험 수업 신청</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mainNav">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="label">SCHEDULE &amp; PRICE</span>
+        <h1>시간표 &amp; 가격</h1>
+        <p class="page-lead">요일을 눌러 수업을 확인하세요. 예약과 변경은 카카오톡 채널에서 도와드립니다.</p>
+      </div>
+    </section>
+
+    <!-- 시간표 -->
+    <section class="section" style="padding-bottom: clamp(48px,7vw,80px)">
+      <div class="container">
+        <div class="day-tabs" role="tablist" aria-label="요일별 시간표" data-day-tabs>
+          <button class="day-tab" id="tab-mon" role="tab" aria-selected="true" aria-controls="day-mon" tabindex="0" type="button">월</button>
+          <button class="day-tab" id="tab-tue" role="tab" aria-selected="false" aria-controls="day-tue" tabindex="-1" type="button">화</button>
+          <button class="day-tab" id="tab-wed" role="tab" aria-selected="false" aria-controls="day-wed" tabindex="-1" type="button">수</button>
+          <button class="day-tab" id="tab-thu" role="tab" aria-selected="false" aria-controls="day-thu" tabindex="-1" type="button">목</button>
+          <button class="day-tab" id="tab-fri" role="tab" aria-selected="false" aria-controls="day-fri" tabindex="-1" type="button">금</button>
+          <button class="day-tab" id="tab-sat" role="tab" aria-selected="false" aria-controls="day-sat" tabindex="-1" type="button">토</button>
+          <button class="day-tab" id="tab-sun" role="tab" aria-selected="false" aria-controls="day-sun" tabindex="-1" type="button">일</button>
+        </div>
+
+        <!-- 월 -->
+        <div class="day-panel" id="day-mon" role="tabpanel" aria-labelledby="tab-mon">
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">07:00</span><span class="class-info"><span class="cname">모닝 매트</span> <span class="ccoach">· 정마레</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">10:30</span><span class="class-info"><span class="cname">기구 입문</span> <span class="ccoach">· 윤소이</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">14:00</span><span class="class-info"><span class="cname">1:1 개인 레슨</span> <span class="ccoach">· 한이든</span></span><span class="seat open">예약</span></div>
+            <div class="class-row"><span class="class-time">19:00</span><span class="class-info"><span class="cname">저녁 기구</span> <span class="ccoach">· 윤소이</span></span><span class="seat full">마감</span></div>
+            <div class="class-row"><span class="class-time">20:30</span><span class="class-info"><span class="cname">이완 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat few">3석</span></div>
+          </div>
+        </div>
+        <!-- 화 -->
+        <div class="day-panel" id="day-tue" role="tabpanel" aria-labelledby="tab-tue" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">07:00</span><span class="class-info"><span class="cname">모닝 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">11:00</span><span class="class-info"><span class="cname">매트 &amp; 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat few">1석</span></div>
+            <div class="class-row"><span class="class-time">19:00</span><span class="class-info"><span class="cname">저녁 기구</span> <span class="ccoach">· 윤소이</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">20:30</span><span class="class-info"><span class="cname">체형교정 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat open">여유</span></div>
+          </div>
+        </div>
+        <!-- 수 -->
+        <div class="day-panel" id="day-wed" role="tabpanel" aria-labelledby="tab-wed" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">07:00</span><span class="class-info"><span class="cname">모닝 매트</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">10:30</span><span class="class-info"><span class="cname">기구 입문</span> <span class="ccoach">· 윤소이</span></span><span class="seat full">마감</span></div>
+            <div class="class-row"><span class="class-time">19:00</span><span class="class-info"><span class="cname">저녁 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">20:30</span><span class="class-info"><span class="cname">이완 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+          </div>
+        </div>
+        <!-- 목 -->
+        <div class="day-panel" id="day-thu" role="tabpanel" aria-labelledby="tab-thu" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">07:00</span><span class="class-info"><span class="cname">모닝 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat few">1석</span></div>
+            <div class="class-row"><span class="class-time">11:00</span><span class="class-info"><span class="cname">매트 &amp; 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">14:00</span><span class="class-info"><span class="cname">1:1 개인 레슨</span> <span class="ccoach">· 윤소이</span></span><span class="seat open">예약</span></div>
+            <div class="class-row"><span class="class-time">19:00</span><span class="class-info"><span class="cname">저녁 기구</span> <span class="ccoach">· 윤소이</span></span><span class="seat full">마감</span></div>
+            <div class="class-row"><span class="class-time">20:30</span><span class="class-info"><span class="cname">체형교정 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat few">3석</span></div>
+          </div>
+        </div>
+        <!-- 금 -->
+        <div class="day-panel" id="day-fri" role="tabpanel" aria-labelledby="tab-fri" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">07:00</span><span class="class-info"><span class="cname">모닝 매트</span> <span class="ccoach">· 정마레</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">10:30</span><span class="class-info"><span class="cname">기구 입문</span> <span class="ccoach">· 윤소이</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">19:00</span><span class="class-info"><span class="cname">저녁 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat few">1석</span></div>
+          </div>
+        </div>
+        <!-- 토 -->
+        <div class="day-panel" id="day-sat" role="tabpanel" aria-labelledby="tab-sat" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">09:00</span><span class="class-info"><span class="cname">주말 기구</span> <span class="ccoach">· 윤소이</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">11:00</span><span class="class-info"><span class="cname">매트 &amp; 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">14:00</span><span class="class-info"><span class="cname">체형교정 기구</span> <span class="ccoach">· 한이든</span></span><span class="seat full">마감</span></div>
+            <div class="class-row"><span class="class-time">16:00</span><span class="class-info"><span class="cname">이완 요가</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+          </div>
+        </div>
+        <!-- 일 -->
+        <div class="day-panel" id="day-sun" role="tabpanel" aria-labelledby="tab-sun" hidden>
+          <div class="class-list">
+            <div class="class-row"><span class="class-time">10:00</span><span class="class-info"><span class="cname">선데이 매트</span> <span class="ccoach">· 정마레</span></span><span class="seat open">여유</span></div>
+            <div class="class-row"><span class="class-time">13:00</span><span class="class-info"><span class="cname">기구 입문</span> <span class="ccoach">· 한이든</span></span><span class="seat few">2석</span></div>
+            <div class="class-row"><span class="class-time">15:00</span><span class="class-info"><span class="cname">1:1 개인 레슨</span> <span class="ccoach">· 윤소이</span></span><span class="seat open">예약</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 가격 -->
+    <section class="section section-oat">
+      <div class="container">
+        <div class="center">
+          <span class="label reveal">PRICE</span>
+          <h2 class="section-title reveal">수강권 안내</h2>
+        </div>
+
+        <div class="center" style="margin-top: clamp(1.6rem,3vw,2.4rem)">
+          <div class="price-toggle" role="group" aria-label="수강권 종류 선택" data-price-toggle>
+            <button type="button" aria-pressed="true" data-target="group">그룹 수업</button>
+            <button type="button" aria-pressed="false" data-target="individual">1:1 개인</button>
+          </div>
+        </div>
+
+        <!-- 그룹 -->
+        <div class="price-set group" data-set="group">
+          <div class="price-grid">
+            <article class="price-card"><p class="p-name">체험 1회</p><p class="p-amount">15,000<span style="font-size:1rem">원</span></p><p class="p-unit">첫 방문 전용</p></article>
+            <article class="price-card"><p class="p-name">10회권</p><p class="p-amount">550,000<span style="font-size:1rem">원</span></p><p class="p-unit">회당 55,000원 · 2개월</p></article>
+            <article class="price-card best"><span class="best-badge">BEST</span><p class="p-name">20회권</p><p class="p-amount">990,000<span style="font-size:1rem">원</span></p><p class="p-unit">회당 49,500원 · 4개월</p></article>
+            <article class="price-card"><p class="p-name">30회권</p><p class="p-amount">1,350,000<span style="font-size:1rem">원</span></p><p class="p-unit">회당 45,000원 · 6개월</p></article>
+          </div>
+        </div>
+
+        <!-- 개인 -->
+        <div class="price-set individual" data-set="individual" hidden>
+          <div class="price-grid">
+            <article class="price-card"><p class="p-name">체험 1회</p><p class="p-amount">40,000<span style="font-size:1rem">원</span></p><p class="p-unit">체형 상담 포함</p></article>
+            <article class="price-card best"><span class="best-badge">BEST</span><p class="p-name">10회권</p><p class="p-amount">850,000<span style="font-size:1rem">원</span></p><p class="p-unit">회당 85,000원 · 3개월</p></article>
+            <article class="price-card"><p class="p-name">20회권</p><p class="p-amount">1,600,000<span style="font-size:1rem">원</span></p><p class="p-unit">회당 80,000원 · 5개월</p></article>
+          </div>
+        </div>
+
+        <p class="price-note">모든 수강권은 유효기간 내 사용 기준이며, 주 2회 이상 규칙적인 수강을 권장합니다.</p>
+
+        <div class="info-box reveal" style="margin-top: clamp(2rem,4vw,3rem)">
+          <h2>예약 &amp; 취소 안내</h2>
+          <p>수업 예약과 변경은 카카오톡 채널로 받습니다. 당일 취소 및 노쇼는 1회 차감되며, 수업 시작 3시간 전까지 변경하시면 차감되지 않습니다.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="logo"><span class="logo-dot" aria-hidden="true"></span>온음 스튜디오</p>
+        <p>온전한 나의 음(音). 판교의 작은 필라테스·요가 스튜디오입니다.</p>
+      </div>
+      <address class="footer-info">
+        온음 스튜디오 · 대표 윤소이<br>
+        경기 성남시 분당구 판교로 235, 3층 (판교동)<br>
+        전화 <a href="tel:0507-1234-3345">0507-1234-3345</a><br>
+        평일 07:00–22:00 · 주말 09:00–18:00
+      </address>
+      <ul class="footer-sns">
+        <li><a href="https://instagram.com/oneum.studio" target="_blank" rel="noopener">인스타그램</a></li>
+        <li><a href="https://pf.kakao.com/_oneumch" target="_blank" rel="noopener">카카오톡 채널</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 온음 스튜디오. 본 사이트는 포트폴리오용 데모 페이지입니다.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
