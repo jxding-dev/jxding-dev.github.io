@@ -16,7 +16,7 @@ export const OBSERVATION_PHRASES = [
 
 export const FAKE_SYSTEM_LOGS = [
   'RWA-SYS 00:13 reader state synced',
-  'RWA-SYS 00:27 archive index delayed',
+  'RWA-SYS 00:27 forbidden index delayed',
   'RWA-SYS 00:41 hidden route pending',
   'RWA-SYS 00:58 observer note appended',
 ];

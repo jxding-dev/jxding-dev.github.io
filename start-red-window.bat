@@ -3,7 +3,7 @@ setlocal
 
 cd /d "%~dp0"
 
-echo RED WINDOW ARCHIVE
+echo RED WINDOW
 echo.
 
 if not exist "node_modules" (

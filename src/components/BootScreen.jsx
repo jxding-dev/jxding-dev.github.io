@@ -39,7 +39,7 @@ export default function BootScreen() {
         <div className="boot-mark">
           <span />
         </div>
-        <p className="boot-kicker">ARCHIVE BOOT</p>
+        <p className="boot-kicker">FORBIDDEN BOOT</p>
         <h1>RED WINDOW</h1>
         <div className="boot-progress">
           <span />

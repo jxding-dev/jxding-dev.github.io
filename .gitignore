@@ -3,3 +3,6 @@
 .env.*.local
 node_modules/
 dist/
+
+# window 저장소(별도)
+site/

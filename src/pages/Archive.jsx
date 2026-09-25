@@ -58,7 +58,7 @@ export default function Archive() {
   return (
     <section className="page app-page">
       <div className="screen-heading">
-        <p className="page__eyebrow">RWA / ARCHIVE</p>
+        <p className="page__eyebrow">RWA / RECORDS</p>
         <h1 className="page__title">기록보관소</h1>
         <p className="page__text">공개된 사건 파일입니다.</p>
       </div>

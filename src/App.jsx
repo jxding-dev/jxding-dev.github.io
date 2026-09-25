@@ -9,10 +9,12 @@ import Submit from './pages/Submit.jsx';
 import Lost from './pages/Lost.jsx';
 import HiddenRecord from './pages/HiddenRecord.jsx';
 import Admin from './pages/Admin.jsx';
+import StandaloneSite from './pages/StandaloneSite.jsx';
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/site" element={<StandaloneSite />} />
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/archive" element={<Archive />} />
