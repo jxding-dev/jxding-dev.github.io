@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Dental Clinic | 프라임치과</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='8' fill='%232f7775'/%3E%3Ctext x='8' y='11' font-size='9' text-anchor='middle' fill='white' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo" aria-label="Prime Dental Clinic 홈">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">Prime Dental</span>
+      </a>
+      <nav class="header-nav" aria-label="주요 메뉴">
+        <a href="about.html">병원소개</a>
+        <a href="doctors.html">의료진</a>
+        <a href="treatments.html">진료과목</a>
+        <a href="reservation.html">예약/상담</a>
+        <a href="location.html">오시는 길</a>
+      </nav>
+      <div class="header-actions">
+        <a href="reservation.html" class="header-button">예약상담</a>
+        <button class="hamburger-button" type="button" aria-label="메뉴 열기" aria-controls="mobileMenu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴">
+      <div class="container mobile-menu-container">
+        <a href="about.html">병원소개</a>
+        <a href="doctors.html">의료진</a>
+        <a href="treatments.html">진료과목</a>
+        <a href="reservation.html">예약/상담</a>
+        <a href="location.html">오시는 길</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section" aria-label="프리미엄 치과 메인 비주얼">
+      <div class="container hero-container">
+        <div class="hero-content reveal">
+          <p class="hero-badge">PREMIUM DENTAL CLINIC</p>
+          <h1 class="hero-title"><span>편안한 진료,</span> <span>오래가는 미소</span></h1>
+          <p class="hero-description">
+            정밀한 진단과 섬세한 치료로 환자에게 가장 알맞은 진료 경험을 제공합니다.
+          </p>
+          <div class="hero-actions">
+            <a href="reservation.html" class="primary-button hero-primary-button">진료 예약하기</a>
+            <a href="treatments.html" class="secondary-button hero-secondary-button">진료과목 보기</a>
+          </div>
+        </div>
+        <div class="hero-quick-cards" aria-label="빠른 안내">
+          <article class="hero-quick-card reveal delay-1">
+            <span>진료시간</span>
+            <strong>평일 10:00 - 19:00</strong>
+            <p>토요일 10:00 - 14:00</p>
+          </article>
+          <article class="hero-quick-card reveal delay-2">
+            <span>예약상담</span>
+            <strong>빠른 상담 접수</strong>
+            <p>전담 코디네이터 안내</p>
+          </article>
+          <article class="hero-quick-card reveal delay-3">
+            <span>대표전화</span>
+            <strong>02-0000-0000</strong>
+            <p>진료 문의 및 예약</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-reservation-section" id="reservation">
+      <div class="container">
+        <div class="reservation-box">
+          <div class="reservation-title">
+            <p class="section-eyebrow">Quick Reservation</p>
+            <h2>빠른 예약 상담</h2>
+          </div>
+          <form class="reservation-form" data-reservation-form>
+            <label>
+              <span>이름</span>
+              <input type="text" name="name" placeholder="이름 입력" autocomplete="name" required>
+            </label>
+            <label>
+              <span>연락처</span>
+              <input type="tel" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" required>
+            </label>
+            <label>
+              <span>관심 진료</span>
+              <select name="treatment" required>
+                <option>임플란트</option>
+                <option>심미보철</option>
+                <option>교정치료</option>
+                <option>일반진료</option>
+              </select>
+            </label>
+            <button type="submit">상담 신청</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="clinic-section" id="clinic">
+      <div class="container section-grid">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Clinic Intro</p>
+          <h2>치료의 기준을 높이는 프리미엄 진료 시스템</h2>
+        </div>
+        <div class="clinic-content reveal delay-1">
+          <p>
+            충분한 상담, 정밀 검사, 투명한 치료 계획을 통해 환자가 납득할 수 있는 치과 진료를 제공합니다.
+          </p>
+          <ul class="feature-list">
+            <li>1:1 맞춤 진료 계획</li>
+            <li>과잉진료 없는 설명 중심 상담</li>
+            <li>멸균 관리와 독립 진료 공간</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="clinic-gallery-section" aria-label="병원 공간 둘러보기">
+      <div class="container">
+        <div class="clinic-gallery reveal delay-1">
+          <div class="gallery-header">
+            <div class="section-heading">
+              <p class="section-eyebrow">Clinic Space</p>
+              <h2>사진으로 확인하는 진료 공간</h2>
+              <p>대기부터 상담, 진료까지 이어지는 동선을 실제 공간 사진으로 확인하세요.</p>
+            </div>
+          </div>
+          <div class="gallery-grid">
+            <figure class="gallery-card">
+              <img src="images/clinic-lobby.png" alt="프라임치과 로비" loading="lazy">
+              <figcaption><span>Lobby</span><strong>차분한 대기 공간</strong></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="images/consultation-room.png" alt="프라임치과 상담실" loading="lazy">
+              <figcaption><span>Consultation</span><strong>프라이빗 상담실</strong></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="images/treatment-room.png" alt="프라임치과 진료실" loading="lazy">
+              <figcaption><span>Treatment</span><strong>독립 진료 공간</strong></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="images/clinic-exterior.png" alt="프라임치과 외관" loading="lazy">
+              <figcaption><span>Exterior</span><strong>방문 동선 안내</strong></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="treatment-section" id="treatments">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Treatments</p>
+          <h2>진료 과목</h2>
+        </div>
+        <div class="card-grid treatment-grid">
+          <article class="treatment-card reveal">
+            <div class="treatment-image image-implant" role="img" aria-label="임플란트 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">01 Implant</span>
+              <h3>임플란트</h3>
+              <p>정밀 진단 기반의 안정적인 식립 계획으로 자연치아에 가까운 기능을 회복합니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="treatment-card reveal delay-1">
+            <div class="treatment-image image-orthodontics" role="img" aria-label="치아교정 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">02 Orthodontics</span>
+              <h3>치아교정</h3>
+              <p>기능과 심미를 함께 고려해 얼굴형과 치열에 알맞은 교정 계획을 세웁니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="treatment-card reveal delay-2">
+            <div class="treatment-image image-aesthetic" role="img" aria-label="심미치료 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">03 Aesthetic</span>
+              <h3>심미치료</h3>
+              <p>치아 색과 형태, 잇몸 라인의 조화를 고려해 자연스러운 미소를 완성합니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="treatment-card reveal">
+            <div class="treatment-image image-cavity" role="img" aria-label="충치치료 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">04 Cavity</span>
+              <h3>충치치료</h3>
+              <p>손상 범위를 정확히 확인하고 필요한 만큼만 치료해 치아 보존을 우선합니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="treatment-card reveal delay-1">
+            <div class="treatment-image image-gum-care" role="img" aria-label="잇몸치료 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">05 Gum Care</span>
+              <h3>잇몸치료</h3>
+              <p>잇몸 염증과 치주 상태를 세밀하게 관리해 오래가는 구강 건강을 돕습니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="treatment-card reveal delay-2">
+            <div class="treatment-image image-scaling" role="img" aria-label="스케일링 진료 이미지 영역"></div>
+            <div class="treatment-content">
+              <span class="treatment-badge">06 Scaling</span>
+              <h3>스케일링</h3>
+              <p>정기적인 치석 관리와 예방 중심 케어로 맑고 건강한 구강 환경을 유지합니다.</p>
+              <a href="treatments.html" class="treatment-link">자세히 보기 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="doctors-section" id="doctors">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Doctors</p>
+          <h2>의료진 소개</h2>
+        </div>
+        <div class="card-grid doctor-grid">
+          <article class="doctor-card reveal">
+            <div class="doctor-photo image-doctor-kim" role="img" aria-label="김도윤 대표원장 프로필 이미지 영역"></div>
+            <p>대표원장</p>
+            <h3>김도윤</h3>
+            <span>임플란트 · 보철</span>
+          </article>
+          <article class="doctor-card reveal delay-1">
+            <div class="doctor-photo image-doctor-lee" role="img" aria-label="이서연 전문의 프로필 이미지 영역"></div>
+            <p>전문의</p>
+            <h3>이서연</h3>
+            <span>교정 · 심미치료</span>
+          </article>
+          <article class="doctor-card reveal delay-2">
+            <div class="doctor-photo image-doctor-park" role="img" aria-label="박지훈 원장 프로필 이미지 영역"></div>
+            <p>원장</p>
+            <h3>박지훈</h3>
+            <span>보존 · 일반진료</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="before-after-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Before / After</p>
+          <h2>치료 사례</h2>
+        </div>
+        <div class="before-after-grid">
+          <article class="case-card reveal">
+            <div class="case-images">
+              <div class="case-image before" role="img" aria-label="심미 보철 치료 전 이미지 영역">
+                <span>BEFORE</span>
+              </div>
+              <div class="case-image after" role="img" aria-label="심미 보철 치료 후 이미지 영역">
+                <span>AFTER</span>
+              </div>
+            </div>
+            <div class="case-content">
+              <div>
+                <h3>심미 보철</h3>
+                <p>치아 형태와 색 조화를 고려한 보철 치료 사례입니다.</p>
+              </div>
+              <span class="case-period">2주</span>
+            </div>
+          </article>
+          <article class="case-card reveal delay-1">
+            <div class="case-images">
+              <div class="case-image before" role="img" aria-label="치아 미백 치료 전 이미지 영역">
+                <span>BEFORE</span>
+              </div>
+              <div class="case-image after" role="img" aria-label="치아 미백 치료 후 이미지 영역">
+                <span>AFTER</span>
+              </div>
+            </div>
+            <div class="case-content">
+              <div>
+                <h3>치아 미백</h3>
+                <p>치아 색상 개선을 목표로 진행한 미백 관리 사례입니다.</p>
+              </div>
+              <span class="case-period">1회</span>
+            </div>
+          </article>
+          <article class="case-card reveal delay-2">
+            <div class="case-images">
+              <div class="case-image before" role="img" aria-label="앞니 레진 치료 전 이미지 영역">
+                <span>BEFORE</span>
+              </div>
+              <div class="case-image after" role="img" aria-label="앞니 레진 치료 후 이미지 영역">
+                <span>AFTER</span>
+              </div>
+            </div>
+            <div class="case-content">
+              <div>
+                <h3>앞니 레진</h3>
+                <p>앞니 일부 손상 부위를 자연스럽게 보완한 치료 사례입니다.</p>
+              </div>
+              <span class="case-period">당일</span>
+            </div>
+          </article>
+        </div>
+        <p class="case-notice reveal delay-3">개인에 따라 결과가 다를 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section class="equipment-section home-equipment">
+      <div class="container equipment-showcase">
+        <div class="equipment-copy reveal">
+          <p class="section-eyebrow">Equipment</p>
+          <h2>진단부터 위생까지 한 번에 확인되는 정밀 장비</h2>
+          <p>눈에 보이지 않는 구조까지 확인하고, 필요한 치료만 선명하게 설명하기 위해 디지털 진단 장비와 표준 멸균 시스템을 함께 운영합니다.</p>
+          <div class="equipment-metrics" aria-label="장비 운영 기준">
+            <span><strong>3D</strong>입체 진단</span>
+            <span><strong>Digital</strong>구강 스캔</span>
+            <span><strong>Sterile</strong>멸균 관리</span>
+          </div>
+        </div>
+        <div class="equipment-panel reveal delay-1">
+          <article class="equipment-feature">
+            <div class="equipment-feature-image image-ct" role="img" aria-label="3D CT 장비"></div>
+            <div>
+              <span>01 Diagnostic</span>
+              <h3>3D CT</h3>
+              <p>구강 구조를 입체적으로 분석해 치료 계획의 정확도를 높입니다.</p>
+            </div>
+          </article>
+          <article class="equipment-feature">
+            <div class="equipment-feature-image image-scanner" role="img" aria-label="구강 스캐너 장비"></div>
+            <div>
+              <span>02 Digital Scan</span>
+              <h3>구강 스캐너</h3>
+              <p>편안하고 빠른 디지털 인상 채득을 지원합니다.</p>
+            </div>
+          </article>
+          <article class="equipment-feature">
+            <div class="equipment-feature-image image-sterilization" role="img" aria-label="멸균 관리 시스템"></div>
+            <div>
+              <span>03 Sterilization</span>
+              <h3>멸균 시스템</h3>
+              <p>진료 기구별 표준화된 멸균 프로세스를 운영합니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="review-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Review</p>
+          <h2>환자 후기</h2>
+        </div>
+        <div class="review-marquee reveal delay-1" aria-label="환자 후기 자동 슬라이더">
+          <div class="review-track">
+            <article class="review-slide">
+              <p>상담부터 치료 과정까지 자세히 설명해 주셔서 안심하고 치료받았습니다.</p>
+              <span>임플란트 치료 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>병원이 조용하고 쾌적해서 치과에 대한 부담이 줄었습니다.</p>
+              <span>심미보철 치료 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>예약과 진료 동선이 체계적이라 대기 시간이 짧았습니다.</p>
+              <span>일반진료 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>CT 촬영 후 설명을 화면으로 같이 보니 치료가 왜 필요한지 이해하기 쉬웠습니다.</p>
+              <span>신경치료 상담 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>스케일링도 꼼꼼하게 해주시고 관리 방법까지 알려주셔서 만족스러웠습니다.</p>
+              <span>스케일링 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>아이 진료 때문에 걱정했는데 차분하게 진행해 주셔서 다음 예약도 편하게 잡았습니다.</p>
+              <span>소아 동반 보호자</span>
+            </article>
+            <article class="review-slide">
+              <p>교정 상담에서 기간과 장단점을 명확히 비교해 주셔서 결정하는 데 도움이 됐습니다.</p>
+              <span>교정 상담 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>통증에 민감한 편인데 중간중간 상태를 확인해 주셔서 부담이 줄었습니다.</p>
+              <span>충치치료 환자</span>
+            </article>
+            <article class="review-slide">
+              <p>접수부터 진료 후 안내까지 깔끔해서 처음 방문인데도 동선이 어렵지 않았습니다.</p>
+              <span>첫 방문 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>상담부터 치료 과정까지 자세히 설명해 주셔서 안심하고 치료받았습니다.</p>
+              <span>임플란트 치료 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>병원이 조용하고 쾌적해서 치과에 대한 부담이 줄었습니다.</p>
+              <span>심미보철 치료 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>예약과 진료 동선이 체계적이라 대기 시간이 짧았습니다.</p>
+              <span>일반진료 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>CT 촬영 후 설명을 화면으로 같이 보니 치료가 왜 필요한지 이해하기 쉬웠습니다.</p>
+              <span>신경치료 상담 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>스케일링도 꼼꼼하게 해주시고 관리 방법까지 알려주셔서 만족스러웠습니다.</p>
+              <span>스케일링 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>아이 진료 때문에 걱정했는데 차분하게 진행해 주셔서 다음 예약도 편하게 잡았습니다.</p>
+              <span>소아 동반 보호자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>교정 상담에서 기간과 장단점을 명확히 비교해 주셔서 결정하는 데 도움이 됐습니다.</p>
+              <span>교정 상담 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>통증에 민감한 편인데 중간중간 상태를 확인해 주셔서 부담이 줄었습니다.</p>
+              <span>충치치료 환자</span>
+            </article>
+            <article class="review-slide" aria-hidden="true">
+              <p>접수부터 진료 후 안내까지 깔끔해서 처음 방문인데도 동선이 어렵지 않았습니다.</p>
+              <span>첫 방문 환자</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">FAQ</p>
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq-list reveal delay-1">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1">
+              <span>첫 방문 시 어떤 절차로 진료가 진행되나요?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer1" role="region" hidden>
+              <p>문진표 작성 후 구강 상태 확인, 필요한 촬영, 의료진 상담 순서로 진행됩니다.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2">
+              <span>임플란트 상담은 얼마나 걸리나요?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer2" role="region" hidden>
+              <p>검사 범위에 따라 다르지만 보통 진단과 상담을 포함해 30분에서 1시간 정도 소요됩니다.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3">
+              <span>야간 진료가 가능한가요?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer3" role="region" hidden>
+              <p>요일별 진료 시간이 다를 수 있어 방문 전 전화 또는 예약 상담으로 확인해 주세요.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4">
+              <span>예약 없이 방문해도 되나요?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer4" role="region" hidden>
+              <p>방문은 가능하지만 대기 시간이 생길 수 있어 사전 예약을 권장합니다.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer5">
+              <span>치료 비용은 어떻게 안내되나요?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer5" role="region" hidden>
+              <p>검진 후 필요한 치료 범위와 항목별 비용을 설명드린 뒤 계획을 안내합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="cta-content">
+            <p class="section-eyebrow">Reservation</p>
+            <h2>상담부터 치료 계획까지 차분하게 안내드립니다</h2>
+            <p>진료가 필요한 부분을 먼저 확인하고, 환자에게 맞는 치료 방법과 일정을 설명드립니다.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="tel:0200000000" class="cta-button cta-button-outline">
+              <span aria-hidden="true">TEL</span>
+              전화 상담
+            </a>
+            <a href="reservation.html" class="cta-button cta-button-kakao">
+              <span aria-hidden="true">K</span>
+              카카오 문의
+            </a>
+            <a href="reservation.html" class="cta-button cta-button-primary">
+              <span aria-hidden="true">R</span>
+              예약하기
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="location-section" id="location">
+      <div class="container section-grid">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Location</p>
+          <h2>오시는 길</h2>
+        </div>
+        <div class="location-content reveal delay-1">
+          <div class="location-panel">
+            <ul class="location-info">
+              <li>
+                <strong>진료시간</strong>
+                <span>평일 10:00 - 19:00 · 토요일 10:00 - 14:00</span>
+              </li>
+              <li>
+                <strong>주소</strong>
+                <span>서울특별시 강남구 테헤란로 100 프라임메디컬 5층</span>
+              </li>
+              <li>
+                <strong>전화번호</strong>
+                <span>02-0000-0000</span>
+              </li>
+              <li>
+                <strong>주차 안내</strong>
+                <span>건물 지하 주차장 이용 가능 · 진료 시 주차 등록을 도와드립니다.</span>
+              </li>
+            </ul>
+            <div class="location-buttons">
+              <a href="https://map.naver.com/" class="location-button" target="_blank" rel="noopener">네이버 지도</a>
+              <a href="https://map.kakao.com/" class="location-button" target="_blank" rel="noopener">카카오맵</a>
+              <a href="tel:0200000000" class="location-button primary">전화하기</a>
+            </div>
+          </div>
+          <div class="map-placeholder" role="img" aria-label="지도 위치 표시 영역">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div>
+        <strong>Prime Dental Clinic</strong>
+        <p>프라임치과의원 · 대표 김도윤 · 사업자등록번호 000-00-00000</p>
+      </div>
+      <p class="copyright">Copyright 2026 Prime Dental Clinic. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="fixed-cta" aria-label="빠른 상담 메뉴">
+    <a href="tel:0200000000" class="fixed-cta-button">
+      <span aria-hidden="true">TEL</span>
+      <strong>전화</strong>
+    </a>
+    <a href="reservation.html" class="fixed-cta-button">
+      <span aria-hidden="true">K</span>
+      <strong>카카오</strong>
+    </a>
+    <a href="reservation.html" class="fixed-cta-button primary">
+      <span aria-hidden="true">R</span>
+      <strong>예약</strong>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/slider.js"></script>
+</body>
+</html>

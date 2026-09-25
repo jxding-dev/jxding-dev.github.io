@@ -1,0 +1,282 @@
+﻿@media (min-width: 640px) {
+  :root {
+    --container-padding: 28px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  h2 {
+    font-size: 34px;
+  }
+
+  .reservation-form,
+  .treatment-grid,
+  .before-after-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reservation-page-card .reservation-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reservation-form button {
+    align-self: end;
+  }
+
+  .doctor-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .value-grid,
+  .process-grid,
+  .doctor-detail-grid,
+  .treatment-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-actions .primary-button,
+  .hero-actions .secondary-button {
+    width: auto;
+  }
+
+  .hero-quick-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --header-height: 82px;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+    color: var(--subtext);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  .header-button {
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .hamburger-button,
+  .mobile-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-button {
+    display: none;
+  }
+
+  .hero-section {
+    min-height: 700px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  .hero-title span {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+
+  .hero-section {
+    min-height: 720px;
+    padding: 96px 0 44px;
+  }
+
+  .hero-container {
+    min-height: 580px;
+    align-content: end;
+  }
+
+  .reservation-box {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 28px;
+    align-items: end;
+  }
+
+  .reservation-title {
+    margin-bottom: 0;
+  }
+
+  .reservation-form {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .reservation-page-card .reservation-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: start;
+  }
+
+  .location-section .section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clinic-section,
+  .clinic-gallery-section,
+  .treatment-section,
+  .doctors-section,
+  .before-after-section,
+  .equipment-section,
+  .review-section,
+  .faq-section,
+  .cta-section,
+  .location-section,
+  .subpage-section,
+  .value-section,
+  .process-section,
+  .reservation-page-section {
+    padding: 120px 0;
+  }
+
+  .subpage-hero {
+    padding: 132px 0 92px;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  .cta-box {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    padding: 42px;
+  }
+
+  .cta-actions {
+    grid-template-columns: repeat(3, max-content);
+    align-items: center;
+  }
+
+  .treatment-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .review-track {
+    grid-auto-columns: calc((100% - 32px) / 3);
+  }
+
+  .equipment-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .equipment-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: -12px;
+  }
+
+  .equipment-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .value-grid,
+  .process-grid,
+  .treatment-detail-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .doctor-detail-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .split-content,
+  .reservation-page-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .before-after-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .location-content {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: stretch;
+  }
+
+  .location-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+
+  .fixed-cta {
+    left: auto;
+    right: 28px;
+    bottom: 28px;
+    width: auto;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .fixed-cta-button {
+    width: 64px;
+    min-height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 12px 26px rgba(23, 47, 71, 0.12);
+  }
+
+  .fixed-cta-button.primary {
+    border-color: var(--primary-dark);
+  }
+}
+
+@media (min-width: 1180px) {
+  h1 {
+    font-size: 56px;
+  }
+
+  .header-nav {
+    gap: 28px;
+    font-size: 15px;
+  }
+
+  .header-button {
+    padding: 0 20px;
+    font-size: 15px;
+  }
+}

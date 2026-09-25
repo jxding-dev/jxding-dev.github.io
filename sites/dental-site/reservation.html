@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예약/상담 | Prime Dental Clinic</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='8' fill='%232f7775'/%3E%3Ctext x='8' y='11' font-size='9' text-anchor='middle' fill='white' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo" aria-label="Prime Dental Clinic 홈"><span class="logo-mark">P</span><span class="logo-text">Prime Dental</span></a>
+      <nav class="header-nav" aria-label="주요 메뉴"><a href="about.html">병원소개</a><a href="doctors.html">의료진</a><a href="treatments.html">진료과목</a><a href="reservation.html">예약/상담</a><a href="location.html">오시는 길</a></nav>
+      <div class="header-actions"><a href="reservation.html" class="header-button">예약상담</a><button class="hamburger-button" type="button" aria-label="메뉴 열기" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴"><div class="container mobile-menu-container"><a href="about.html">병원소개</a><a href="doctors.html">의료진</a><a href="treatments.html">진료과목</a><a href="reservation.html">예약/상담</a><a href="location.html">오시는 길</a></div></nav>
+  </header>
+
+  <main>
+    <section class="subpage-hero reservation-hero">
+      <div class="container reveal">
+        <p class="section-eyebrow">Reservation</p>
+        <h1>상담부터 예약까지 편안하게 도와드립니다</h1>
+        <p>원하는 진료 과목과 연락처를 남겨주시면 확인 후 가능한 일정과 준비 사항을 안내드립니다.</p>
+      </div>
+    </section>
+
+    <section class="reservation-page-section">
+      <div class="container reservation-page-grid">
+        <div class="reservation-page-card reveal">
+          <div class="section-heading">
+            <p class="section-eyebrow">Quick Form</p>
+            <h2>빠른 예약 상담</h2>
+          </div>
+          <form class="reservation-form" data-reservation-form>
+            <label><span>이름</span><input type="text" name="name" placeholder="이름 입력" autocomplete="name" required></label>
+            <label><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" required></label>
+            <label><span>진료과목</span><select name="treatment" required><option>임플란트</option><option>치아교정</option><option>심미치료</option><option>충치치료</option><option>신경치료</option><option>잇몸치료</option><option>스케일링</option><option>사랑니 발치</option></select></label>
+            <label><span>희망 날짜</span><input type="date" name="date"></label>
+            <label><span>희망 시간</span><select name="time"><option>오전 10:00 - 12:00</option><option>오후 12:00 - 15:00</option><option>오후 15:00 - 17:00</option><option>오후 17:00 - 19:00</option></select></label>
+            <label class="form-wide"><span>문의 내용</span><textarea name="message" placeholder="불편한 증상이나 상담받고 싶은 내용을 남겨주세요."></textarea></label>
+            <label class="form-checkbox"><input type="checkbox" name="privacy" required><span>개인정보 수집 및 이용에 동의합니다. 입력한 정보는 예약 상담 안내 목적으로만 사용됩니다.</span></label>
+            <button type="submit" class="form-wide">상담 요청</button>
+            <p class="form-message form-wide" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="reservation-guide-card reveal delay-1">
+          <p class="section-eyebrow">Contact</p>
+          <h2>진료시간 및 상담 안내</h2>
+          <ul class="contact-list">
+            <li><strong>진료시간</strong><span>평일 10:00 - 19:00 · 토요일 10:00 - 14:00</span></li>
+            <li><strong>전화 상담</strong><span>02-0000-0000 · 예약 변경과 당일 문의는 전화가 가장 빠릅니다.</span></li>
+            <li><strong>카카오 문의</strong><span>진료 과목과 희망 시간을 남겨주시면 순차적으로 답변드립니다.</span></li>
+            <li><strong>초진 안내</strong><span>문진, 구강 검사, 필요 촬영, 의료진 상담 순서로 진행됩니다.</span></li>
+          </ul>
+          <div class="location-buttons">
+            <a href="tel:0200000000" class="location-button primary">전화 상담</a>
+            <a href="reservation.html" class="location-button">카카오 문의</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="container">
+        <div class="section-heading reveal"><p class="section-eyebrow">Reservation Flow</p><h2>예약 진행 절차</h2></div>
+        <div class="card-grid process-grid">
+          <article class="process-card reveal"><span class="number-badge">01</span><h3>상담 요청</h3><p>온라인 폼, 전화, 카카오 중 편한 방법으로 문의합니다.</p></article>
+          <article class="process-card reveal delay-1"><span class="number-badge">02</span><h3>일정 확인</h3><p>상담 코디네이터가 진료 가능 시간과 준비 사항을 안내합니다.</p></article>
+          <article class="process-card reveal delay-2"><span class="number-badge">03</span><h3>방문 상담</h3><p>진단 후 필요한 치료 계획과 비용을 투명하게 설명드립니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="cta-content">
+            <p class="section-eyebrow">Need Help?</p>
+            <h2>예약 전 궁금한 점이 있다면 먼저 상담해보세요</h2>
+            <p>진료 가능 시간, 초진 준비 사항, 비용 상담 방식까지 차분하게 안내드립니다.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="tel:0200000000" class="cta-button cta-button-outline"><span aria-hidden="true">TEL</span>전화 상담</a>
+            <a href="reservation.html" class="cta-button cta-button-kakao"><span aria-hidden="true">K</span>카카오 문의</a>
+            <a href="location.html" class="cta-button cta-button-primary"><span aria-hidden="true">L</span>오시는 길</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-container"><div><strong>Prime Dental Clinic</strong><p>프라임치과의원 · 대표 김도윤 · 사업자등록번호 000-00-00000</p></div><p class="copyright">Copyright 2026 Prime Dental Clinic. All rights reserved.</p></div></footer>
+  <div class="fixed-cta" aria-label="빠른 상담 메뉴"><a href="tel:0200000000" class="fixed-cta-button"><span aria-hidden="true">TEL</span><strong>전화</strong></a><a href="reservation.html" class="fixed-cta-button"><span aria-hidden="true">K</span><strong>카카오</strong></a><a href="reservation.html" class="fixed-cta-button primary"><span aria-hidden="true">R</span><strong>예약</strong></a></div>
+  <script src="js/main.js"></script>
+  <script src="js/slider.js"></script>
+</body>
+</html>
