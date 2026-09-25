@@ -1,0 +1,284 @@
+.wrap {
+  width: min(100%, 760px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.shortcutDock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.shortcutDock span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.shortcutDock kbd {
+  min-width: 28px;
+  min-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
+  text-align: center;
+}
+
+.stage {
+  position: relative;
+  overflow: visible;
+  border-radius: var(--radius-xl);
+  background: var(--bg-muted);
+  box-shadow: var(--shadow-lg);
+  line-height: 0;
+  user-select: none;
+}
+
+.imageLayer {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  cursor: grab;
+  touch-action: none;
+  transform-origin: center;
+  line-height: 0;
+}
+
+.imageLayerLocked {
+  cursor: not-allowed;
+}
+
+.userImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mockupImage {
+  position: relative;
+  z-index: 1000;
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.transformBox {
+  position: absolute;
+  z-index: 1100;
+  max-width: none;
+  cursor: move;
+  touch-action: none;
+  transform-origin: center;
+  line-height: 0;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow:
+    0 0 0 4px var(--accent-subtle),
+    0 0 0 1px rgba(255, 255, 255, 0.75) inset;
+}
+
+.transformBox::before,
+.transformBox::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.transformBox::before {
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg-base);
+  transform: translate(-50%, -50%);
+}
+
+.transformBox::after {
+  left: 50%;
+  top: -36px;
+  height: 34px;
+  border-left: 1px dashed var(--accent);
+  transform: translateX(-50%);
+}
+
+.resizeHandle,
+.rotateHandle {
+  position: absolute;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.24);
+  cursor: pointer;
+  touch-action: none;
+}
+
+/* Corners are the primary "stretch one vertex" grips: larger, square. */
+.handleCorner {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+}
+
+/* Edge grips are smaller bars so corners read as the main affordance. */
+.handleEdge {
+  width: 14px;
+  height: 14px;
+  background: var(--bg-base);
+  border-color: var(--accent);
+}
+
+.resizeHandle::after,
+.rotateHandle::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+}
+
+.resizeHandle:hover,
+.resizeHandle:focus-visible,
+.rotateHandle:hover,
+.rotateHandle:focus-visible {
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.14);
+}
+
+.handle_nw { left: 0; top: 0; cursor: nwse-resize; transform: translate(-50%, -50%); }
+.handle_n { left: 50%; top: 0; cursor: ns-resize; transform: translate(-50%, -50%); }
+.handle_ne { left: 100%; top: 0; cursor: nesw-resize; transform: translate(-50%, -50%); }
+.handle_e { left: 100%; top: 50%; cursor: ew-resize; transform: translate(-50%, -50%); }
+.handle_se { left: 100%; top: 100%; cursor: nwse-resize; transform: translate(-50%, -50%); }
+.handle_s { left: 50%; top: 100%; cursor: ns-resize; transform: translate(-50%, -50%); }
+.handle_sw { left: 0; top: 100%; cursor: nesw-resize; transform: translate(-50%, -50%); }
+.handle_w { left: 0; top: 50%; cursor: ew-resize; transform: translate(-50%, -50%); }
+
+.rotateHandle {
+  left: 50%;
+  top: -46px;
+  background: var(--bg-base);
+  color: var(--accent);
+  transform: translate(-50%, -50%);
+}
+
+.rotateHandle::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 2px solid currentColor;
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.warpCanvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  touch-action: none;
+  cursor: grab;
+}
+
+.modeSwitcher {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  min-height: 26px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: 2px;
+  background: var(--bg-subtle);
+}
+
+.modeBtn {
+  min-width: 44px;
+  height: 22px;
+  padding: 0 12px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.modeBtn:hover {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.modeBtnActive {
+  background: var(--accent);
+  color: #fff;
+}
+
+.modeBtnActive:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Corner/warp vertex handle: positioned from stage top-left using left%/top% */
+.cornerVertex {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.resetBtn {
+  height: 22px;
+  padding: 0 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.resetBtn:hover {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+.hint {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .resizeHandle,
+  .rotateHandle {
+    width: 22px;
+    height: 22px;
+  }
+}

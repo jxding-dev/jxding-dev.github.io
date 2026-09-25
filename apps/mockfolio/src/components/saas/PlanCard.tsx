@@ -1,0 +1,71 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Badge } from '../ui/Badge';
+import { Button } from '../ui/Button';
+import { UpgradeModal } from './UpgradeModal';
+import { usePlan } from '../../hooks/usePlan';
+import type { Plan } from '../../types';
+import styles from './PlanCard.module.css';
+
+interface Props {
+  plan: Plan;
+  compact?: boolean;
+}
+
+function formatPrice(krw: number): string {
+  return `₩${krw.toLocaleString('ko-KR')}`;
+}
+
+export function PlanCard({ plan, compact = false }: Props) {
+  const navigate = useNavigate();
+  const { billingEnabled } = usePlan();
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const isFree = plan.id === 'free';
+
+  // Paid plans start checkout once billing is live; during beta the CTA just
+  // opens the free editor (there is nothing to pay for yet).
+  const handleCta = () => {
+    if (!isFree && billingEnabled) setShowUpgrade(true);
+    else navigate('/editor');
+  };
+
+  return (
+    <article className={`${styles.card} ${plan.highlighted ? styles.featured : ''} ${compact ? styles.compact : ''}`}>
+      {plan.highlighted && <div className={styles.featuredTag}>Recommended</div>}
+      <div className={styles.head}>
+        <div>
+          <h3 className={styles.name}>{plan.name}</h3>
+          <p className={styles.desc}>{plan.description}</p>
+        </div>
+        {plan.badge && <Badge variant={isFree ? 'success' : 'outline'}>{plan.badge}</Badge>}
+      </div>
+
+      <div className={styles.price}>
+        {plan.price === 0 ? '₩0' : formatPrice(plan.price)}
+        <span> / {plan.period}</span>
+      </div>
+
+      {plan.note && <p className={styles.note}>{plan.note}</p>}
+
+      <ul className={styles.features}>
+        {plan.features.map((feature) => (
+          <li key={feature}>
+            <span>✓</span>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <Button
+        variant={plan.highlighted ? 'primary' : 'secondary'}
+        fullWidth
+        onClick={handleCta}
+      >
+        {plan.cta}
+      </Button>
+
+      {!isFree && <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />}
+    </article>
+  );
+}
+

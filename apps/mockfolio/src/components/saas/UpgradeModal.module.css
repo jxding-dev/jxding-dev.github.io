@@ -1,0 +1,28 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.emoji {
+  font-size: 44px;
+  font-weight: var(--weight-bold);
+  color: var(--accent);
+}
+
+.body p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-loose);
+}
+
+.notice {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-muted);
+  color: var(--text-secondary) !important;
+}
