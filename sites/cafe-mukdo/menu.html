@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메뉴 | 묵도 커피</title>
+  <meta name="description" content="묵도 커피 메뉴. 당일 로스팅 원두로 내리는 커피, 갓 구운 디저트, 여름 시즌 한정 메뉴까지. 에스프레소부터 우드 바스크 치즈케이크까지 안내합니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="masthead">
+      <div class="minibar">
+        <span>연남동 로스터리 — 매일 09:00–21:00 · 수 휴무</span>
+        <a href="https://instagram.com/mukdo.coffee" target="_blank" rel="noopener">@mukdo.coffee</a>
+      </div>
+      <a href="index.html" class="masthead-logo">묵도<span class="dot">.</span>커피</a>
+    </div>
+    <div class="navbar">
+    <div class="header-inner">
+      <a href="index.html" class="logo navbar-logo">묵도<span class="dot">.</span>커피</a>
+      <nav class="main-nav" id="mainNav" aria-label="주 메뉴">
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="menu.html" aria-current="page">메뉴</a></li>
+          <li><a href="space.html">공간·스토리</a></li>
+          <li><a href="news.html">소식</a></li>
+          <li><a href="visit.html">오시는길</a></li>
+          <li><a class="nav-cta" href="https://instagram.com/mukdo.coffee" target="_blank" rel="noopener">인스타그램</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mainNav">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="overline">MENU</span>
+        <h1>메뉴</h1>
+        <p class="page-lead">모든 커피는 당일 로스팅 원두만 사용합니다.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="menu-banner reveal">
+          <img src="images/cafe-menu-coffee.jpg" alt="핸드드립 커피를 내리는 묵도 커피 바" loading="lazy">
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="메뉴 카테고리">
+          <button class="tab-btn" id="tab-coffee" type="button" role="tab" aria-selected="true" aria-controls="panel-coffee" tabindex="0"
+                  data-banner="images/cafe-menu-coffee.jpg" data-banner-alt="핸드드립 커피를 내리는 묵도 커피 바">커피</button>
+          <button class="tab-btn" id="tab-dessert" type="button" role="tab" aria-selected="false" aria-controls="panel-dessert" tabindex="-1"
+                  data-banner="images/cafe-menu-dessert.jpg" data-banner-alt="쇼케이스에 진열된 묵도 커피의 디저트">디저트</button>
+          <button class="tab-btn" id="tab-season" type="button" role="tab" aria-selected="false" aria-controls="panel-season" tabindex="-1"
+                  data-banner="images/cafe-menu-season.jpg" data-banner-alt="여름 시즌 한정 청귤 에이드와 복숭아 케이크">시즌 한정</button>
+        </div>
+
+        <!-- 커피 -->
+        <div class="tab-panel" id="panel-coffee" role="tabpanel" aria-labelledby="tab-coffee">
+          <ul class="price-list">
+            <li><span class="menu-name">에스프레소</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">4,500원</span></li>
+            <li><span class="menu-name">아메리카노</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">5,000원</span></li>
+            <li><span class="menu-name">카페 라떼</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">5,800원</span></li>
+            <li><span class="menu-name">묵도 시그니처 라떼</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">6,800원</span></li>
+            <li><span class="menu-name">흑임자 크림 커피</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">7,000원</span></li>
+            <li><span class="menu-name">플랫 화이트</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">6,000원</span></li>
+            <li><span class="menu-name">핸드드립 (싱글 오리진)</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">7,500원</span></li>
+            <li><span class="menu-name">콜드브루</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">6,000원</span></li>
+            <li><span class="menu-name">아인슈페너</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">6,500원</span></li>
+          </ul>
+        </div>
+
+        <!-- 디저트 -->
+        <div class="tab-panel" id="panel-dessert" role="tabpanel" aria-labelledby="tab-dessert" hidden>
+          <ul class="price-list">
+            <li><span class="menu-name">우드 바스크 치즈케이크</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">8,500원</span></li>
+            <li><span class="menu-name">소금빵</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">3,800원</span></li>
+            <li><span class="menu-name">말차 파운드</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">6,000원</span></li>
+            <li><span class="menu-name">크루아상</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">4,500원</span></li>
+            <li><span class="menu-name">얼그레이 스콘</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">4,800원</span></li>
+            <li><span class="menu-name">티라미수</span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">7,500원</span></li>
+          </ul>
+        </div>
+
+        <!-- 시즌 한정 -->
+        <div class="tab-panel" id="panel-season" role="tabpanel" aria-labelledby="tab-season" hidden>
+          <p class="season-note">여름 시즌 한정 · 8월 31일까지</p>
+          <ul class="price-list">
+            <li><span class="menu-name">청귤 에이드 <span class="badge-season">SEASON</span></span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">7,000원</span></li>
+            <li><span class="menu-name">미숫가루 크림 라떼 <span class="badge-season">SEASON</span></span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">7,200원</span></li>
+            <li><span class="menu-name">복숭아 크럼블 케이크 <span class="badge-season">SEASON</span></span><span class="price-leader" aria-hidden="true"></span><span class="menu-price">8,800원</span></li>
+          </ul>
+        </div>
+
+        <div class="menu-foot">
+          <p>일부 메뉴에는 우유, 계란, 견과류(헤이즐넛·흑임자)가 포함되어 있습니다. 알레르기가 있으신 경우 주문 전 직원에게 문의해 주세요.</p>
+          <p>원두 구매 및 대량 주문 문의는 <a href="https://pf.kakao.com/_mukdoch" target="_blank" rel="noopener">카카오톡 채널</a>로 남겨 주세요.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="colophon">묵도커피 — 발행: 연남동 · VOL.03 2026 SUMMER</p>
+      <div class="footer-brand">
+        <p class="logo">묵도<span class="dot">.</span>커피</p>
+        <p class="footer-tag">조용한 도시, 묵도(默都)</p>
+      </div>
+      <address class="footer-info">
+        묵도 커피 · 대표 정하윤<br>
+        서울특별시 마포구 성미산로29길 12, 1층 (연남동)<br>
+        전화 <a href="tel:0507-1234-8890">0507-1234-8890</a><br>
+        매일 09:00–21:00 · 수요일 휴무
+      </address>
+      <ul class="footer-sns">
+        <li><a href="https://instagram.com/mukdo.coffee" target="_blank" rel="noopener">인스타그램</a></li>
+        <li><a href="https://pf.kakao.com/_mukdoch" target="_blank" rel="noopener">카카오톡 채널</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 묵도 커피. 본 사이트는 포트폴리오용 데모 페이지입니다.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
