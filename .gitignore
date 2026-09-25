@@ -19,3 +19,6 @@ Thumbs.db
 # window: 비밀번호가 들어 있는 로컬 관리자 파일
 sites/window/js/admin.js
 sites/window/lee-jihyun-admin-page.html
+
+# 로컬 목업 렌더링 결과
+sites/dental-site/output/

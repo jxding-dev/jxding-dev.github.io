@@ -1,0 +1,77 @@
+# 포트폴리오 전체를 한 번에 빌드해서 https://jxding-dev.github.io/ 로 배포한다.
+# 공개 주소는 기존 개별 저장소 시절과 똑같이 유지한다 (/mockfolio/, /dental-site/ ...).
+name: Deploy portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/*/package-lock.json
+
+      # 빌드가 필요한 앱: "소스 폴더:공개 경로"
+      - name: Build apps
+        env:
+          QP_BASE: /queuepilot/
+        run: |
+          set -e
+          for app in mockfolio queuepilot deadline-drawer deja-vu-museum; do
+            echo "::group::build $app"
+            (cd "apps/$app" && npm ci --no-audit --no-fund && npm run build)
+            echo "::endgroup::"
+          done
+
+      - name: Assemble site
+        run: |
+          set -e
+          mkdir -p _site
+          cp index.html _site/
+          touch _site/.nojekyll
+
+          # 정적 사이트: sites/<이름> → /<이름>/
+          for dir in sites/*/; do
+            cp -r "$dir" "_site/$(basename "$dir")"
+          done
+          cp -r templates _site/templates
+
+          # 빌드된 앱 → 기존 공개 경로
+          cp -r apps/mockfolio/dist       _site/mockfolio
+          cp -r apps/queuepilot/dist      _site/queuepilot
+          cp -r apps/deadline-drawer/dist _site/deadline-drawer
+          cp -r apps/deja-vu-museum/dist  _site/D-J-VU-MUSEUM
+
+          # 작업용 문서는 공개하지 않는다
+          find _site \( -name 'AGENTS.md' -o -name 'CLAUDE.md' -o -name '.claude' -o -name '.github' \) -prune -exec rm -rf {} +
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
