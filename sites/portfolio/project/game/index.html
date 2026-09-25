@@ -274,7 +274,8 @@ a { text-decoration:none; color:inherit; }
 
 /* ── RESPONSIVE ── */
 @media (max-width:700px) {
-    body { overflow:auto; }
+    html, body { height:auto; }
+    body { overflow:visible; min-height:100%; }
     .arcade-body { flex-direction:column; }
     .sidebar { width:100%; border-right:none; border-bottom:1px solid var(--bd); }
     .sidebar-head { display:none; }
@@ -285,8 +286,20 @@ a { text-decoration:none; color:inherit; }
     .g-name { font-size:.65rem; white-space:normal; }
     .g-meta, .g-arrow { display:none; }
     .sidebar-foot { display:none; }
-    .game-screen { min-height:60vh; }
+    .game-screen { flex:none; min-height:0; }
+    .arcade-body { overflow:visible; }
+    .screen-frame { flex:none; }
+    #game-frame { height:700px; }
+    .screen-bar { padding:0 16px; }
+    .now-label { display:none; }
     .top-right .game-count { display:none; }
+    .top-bar { padding:0 16px; }
+    .top-sub { display:none; }
+    .top-title { font-size:.8rem; letter-spacing:3px; }
+    .g-card { min-height:72px; }
+}
+@media (max-width:380px) {
+    .live-badge { display:none; }
 }
     </style>
 </head>
@@ -453,7 +466,7 @@ a { text-decoration:none; color:inherit; }
                     <div class="intro-game-dot" onclick="document.querySelectorAll('.g-card')[6].click()">💥</div>
                 </div>
                 <p class="intro-title">Game Room</p>
-                <p class="intro-sub">왼쪽에서 게임을 선택하거나, 아이콘을 클릭하세요</p>
+                <p class="intro-sub">게임을 선택하거나, 아이콘을 눌러 보세요</p>
                 <p class="insert-coin">▶ INSERT COIN</p>
             </div>
         </div>
@@ -499,6 +512,29 @@ function loadGame(btn) {
     intro.classList.add('hidden');
     frame.src = src;
 }
+
+/* 모바일: 게임 화면 높이를 게임 내용에 맞춰 늘려서, 아래쪽 버튼까지 페이지 스크롤로 닿게 한다 */
+const mobileMq = matchMedia('(max-width:700px)');
+function fitFrame() {
+    if (!mobileMq.matches) { frame.style.height = ''; return; }
+    try {
+        const doc = frame.contentDocument;
+        if (!doc || !doc.body) return;
+        frame.style.height = '1px';            // 게임의 min-height:100vh 영향을 빼고 실제 높이를 잰다
+        frame.style.height = doc.documentElement.scrollHeight + 'px';
+    } catch (e) { /* 다른 출처면 무시 */ }
+}
+frame.addEventListener('load', () => {
+    fitFrame();
+    try {
+        const doc = frame.contentDocument;
+        ['click', 'touchend', 'change', 'input'].forEach(type =>
+            doc.addEventListener(type, () => { setTimeout(fitFrame, 60); setTimeout(fitFrame, 600); }, { passive: true })
+        );
+    } catch (e) {}
+});
+mobileMq.addEventListener('change', fitFrame);
+window.addEventListener('resize', fitFrame);
 
 window.addEventListener('load', () => {
     const first = document.querySelector('.g-card');
