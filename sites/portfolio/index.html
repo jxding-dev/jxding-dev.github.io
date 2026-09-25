@@ -6,7 +6,7 @@
     <title>이지현 · 코드로 감각을 짓는 사람</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css?v=3">
 </head>
 <body>
 
@@ -383,7 +383,10 @@
     const body = document.querySelector('.hero-body');
     const card = document.querySelector('.hero-code-card');
     const hint = document.querySelector('.scroll-hint');
+    const mobile = matchMedia('(max-width: 768px)');
     window.addEventListener('scroll', () => {
+        // 모바일은 히어로 내용이 길어서, 스크롤 중 흐려지면 읽기 전에 사라진다
+        if (mobile.matches) return;
         const s = window.scrollY;
         const h = window.innerHeight;
         if (s < h) {

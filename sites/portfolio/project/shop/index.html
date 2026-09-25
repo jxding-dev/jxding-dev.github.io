@@ -285,6 +285,32 @@ a { text-decoration:none; color:inherit; }
     .phone-frame:hover { box-shadow:0 0 0 9px rgba(255,255,255,.035), 0 30px 60px rgba(0,0,0,.6); }
     .live-badge { display:none; }
 }
+/* ── 모바일: 페이지 선택 탭을 작은 칩으로 줄여 한 화면에 들어오게 ── */
+@media (max-width:820px) {
+    .top-bar { height:52px; }
+    .page-list { padding:8px 12px; gap:6px; }
+    .p-card {
+        flex-direction:row; align-items:center; width:auto; gap:7px;
+        padding:6px 12px 6px 6px; border-radius:999px; border:1px solid var(--bd);
+    }
+    .p-card::before { display:none; }
+    .p-card.active { border-color:rgba(244,114,182,.55); }
+    .p-icon { width:26px; height:26px; font-size:.9rem; border-radius:50%; }
+    .p-card:hover .p-icon, .p-card.active .p-icon { transform:none; }
+    .p-body { flex:none; }
+    .p-num { display:none; }
+    .p-name { font-size:.82rem; white-space:nowrap; }
+}
+@media (max-width:480px) {
+    .p-icon { display:none; }
+    .p-card { padding:8px 12px; }
+    .page-list { justify-content:space-between; }
+}
+@media (max-width:360px) {
+    .page-list { padding:8px 10px; gap:4px; }
+    .p-card { padding:7px 9px; }
+    .p-name { font-size:.74rem; }
+}
     </style>
 </head>
 <body>
@@ -432,6 +458,7 @@ function loadPage(btn) {
     btn.classList.add('active');
 
     document.getElementById('shop-frame').src = src;
+    btn.parentElement.scrollTo({ left: btn.offsetLeft - 12, behavior: 'smooth' });
     document.getElementById('infoName').textContent = name;
 
     const chips = chipMap[src] || [];

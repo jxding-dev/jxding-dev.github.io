@@ -928,3 +928,34 @@ section { scroll-margin-top: var(--hd-h); }
     .dl-row { flex-direction: column; gap: 6px; }
     .dl-row dt { width: auto; }
 }
+
+/* ══════════════════════════════════════════════
+   MOBILE HERO — 첫 화면이 잘리지 않게
+   (100vh 고정 + 세로 가운데 정렬이면 내용이 길 때 위아래가 잘린다)
+══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .s-hero {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        align-items: flex-start;
+        padding: calc(var(--hd-h) + 28px) 6% 56px;
+    }
+    .hero-eyebrow { font-size: .64rem; letter-spacing: 1.6px; gap: 10px; margin-bottom: 18px; }
+    .eyebrow-line { width: 22px; }
+    .hero-h1 { word-break: keep-all; letter-spacing: -1px; }
+    /* 타이핑 효과로 글이 늘어나도 레이아웃이 밀리지 않게 3줄 높이를 미리 확보 */
+    .hero-desc { margin-top: 20px; font-size: .97rem; line-height: 1.75; min-height: 5.25em; word-break: keep-all; }
+    .scroll-hint { display: none; }
+}
+@media (max-width: 540px) {
+    .hero-h1 { font-size: clamp(1.85rem, 9.2vw, 2.6rem); }
+}
+@media (max-width: 540px) {
+    /* 통계 4개를 한 줄에 나란히 */
+    .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); flex-wrap: nowrap; row-gap: 0; }
+    .hs, .hs:first-child { padding: 0; }
+    .hs-div { display: none; }
+    .hs strong { font-size: 1.45rem; }
+    .hs span { font-size: .6rem; letter-spacing: 1px; }
+}
