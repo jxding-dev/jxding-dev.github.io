@@ -1,0 +1,207 @@
+// Stepper shell. Three steps: Upload / Build / Run (which also shows results).
+// Navigation gating lives in the store.
+
+import { useEffect, useState } from 'react';
+import { useStore, useCopy, isRunActive } from './state/store';
+import type { Locale } from './constants/copy';
+import { StepNav } from './components/StepNav';
+import { CsvDropzone } from './components/CsvDropzone';
+import { CsvPreviewTable } from './components/CsvPreviewTable';
+import { RequestBuilder } from './components/RequestBuilder';
+import { RunControls } from './components/RunControls';
+import { WarningBanner } from './components/WarningBanner';
+
+const PRIVACY_KEY = 'qp_privacy_dismissed';
+
+// First-visit privacy notice. localStorage is used ONLY for this dismissal flag.
+function PrivacyBanner() {
+  const copy = useCopy();
+  const [dismissed, setDismissed] = useState(() => {
+    try {
+      return localStorage.getItem(PRIVACY_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+  if (dismissed) return null;
+  return (
+    <WarningBanner
+      tone="info"
+      onDismiss={() => {
+        try {
+          localStorage.setItem(PRIVACY_KEY, '1');
+        } catch {
+          /* private mode / storage disabled — just hide it for the session */
+        }
+        setDismissed(true);
+      }}
+      dismissLabel={copy.privacy.dismiss}
+    >
+      {copy.privacy.message}
+    </WarningBanner>
+  );
+}
+
+// Isolated so the frequent run-progress title updates don't re-render the shell.
+function DocumentTitle() {
+  const copy = useCopy();
+  const step = useStore((s) => s.step);
+  const phase = useStore((s) => s.run.phase);
+  const results = useStore((s) => s.run.results);
+  useEffect(() => {
+    if (phase === 'running' || phase === 'pausing' || phase === 'paused' || phase === 'stopping') {
+      let done = 0;
+      for (const r of results.values()) {
+        if (r.status === 'success' || r.status === 'failed') done++;
+      }
+      const label =
+        phase === 'stopping'
+          ? copy.docTitle.stopping
+          : phase === 'running'
+            ? copy.docTitle.running
+            : copy.docTitle.paused;
+      document.title = `QueuePilot — ${label} ${done.toLocaleString()}/${results.size.toLocaleString()}`;
+    } else {
+      document.title = `QueuePilot — ${copy.stepLabels[step]}`;
+    }
+  }, [copy, step, phase, results]);
+  return null;
+}
+
+// Persistent banner while the demo is active, so the visitor always knows no real
+// requests are being sent and can exit back to the empty upload screen.
+function DemoBanner() {
+  const copy = useCopy();
+  const demoMode = useStore((s) => s.demoMode);
+  const clearCsv = useStore((s) => s.clearCsv);
+  if (!demoMode) return null;
+  return (
+    <WarningBanner tone="info" onDismiss={clearCsv} dismissLabel={copy.demo.exit}>
+      {copy.demo.banner}
+    </WarningBanner>
+  );
+}
+
+function UploadStep() {
+  const copy = useCopy();
+  const csv = useStore((s) => s.csv);
+  const clearCsv = useStore((s) => s.clearCsv);
+  const setStep = useStore((s) => s.setStep);
+  const startDemo = useStore((s) => s.startDemo);
+
+  if (!csv) {
+    return (
+      <section className="panel">
+        <h2 className="panel__title">{copy.upload.title}</h2>
+        <CsvDropzone />
+        <div className="demo-cta">
+          <button type="button" className="btn btn--ghost" onClick={startDemo}>
+            {copy.demo.startButton}
+          </button>
+          <p className="demo-cta__subtext">{copy.demo.startSubtext}</p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="panel">
+      <div className="summary">
+        <div>
+          <h2 className="panel__title">{csv.fileName}</h2>
+          <p className="summary__stats">
+            {copy.upload.stats(csv.rows.length, csv.columns.length, csv.warnings.length)}
+          </p>
+        </div>
+        <div className="summary__actions">
+          <button type="button" className="btn btn--ghost" onClick={clearCsv}>
+            {copy.upload.uploadDifferent}
+          </button>
+          <button type="button" className="btn btn--primary" onClick={() => setStep(1)}>
+            {copy.upload.continue}
+          </button>
+        </div>
+      </div>
+
+      {csv.warnings.length > 0 && (
+        <div className="warnings" role="status">
+          <p className="warnings__title">{copy.upload.warningsTitle(csv.warnings.length)}</p>
+          <ul className="warnings__list">
+            {csv.warnings.map((w, i) => (
+              <li key={i}>{w}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <CsvPreviewTable csv={csv} />
+    </section>
+  );
+}
+
+// Korean/English toggle. Shows each language in its own name; the active one is
+// highlighted. Switching updates the whole UI instantly (persisted in the store).
+function LocaleToggle() {
+  const copy = useCopy();
+  const locale = useStore((s) => s.locale);
+  const setLocale = useStore((s) => s.setLocale);
+  const options: Locale[] = ['ko', 'en'];
+  return (
+    <div className="locale-toggle" role="group" aria-label="Language">
+      {options.map((id) => (
+        <button
+          key={id}
+          type="button"
+          className={'locale-toggle__btn' + (locale === id ? ' locale-toggle__btn--active' : '')}
+          aria-pressed={locale === id}
+          onClick={() => setLocale(id)}
+        >
+          {copy.lang[id]}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function App() {
+  const copy = useCopy();
+  const step = useStore((s) => s.step);
+  const runActive = useStore((s) => isRunActive(s.run.phase));
+
+  // Warn before leaving/refreshing while a run is in progress.
+  useEffect(() => {
+    if (!runActive) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = ''; // required for the browser to show its prompt
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [runActive]);
+
+  return (
+    <div className="app">
+      <DocumentTitle />
+      <PrivacyBanner />
+      <DemoBanner />
+      <header className="app__header">
+        <div className="app__brand">
+          <span className="app__logo" aria-hidden="true">
+            ▸
+          </span>
+          <span className="app__name">QueuePilot</span>
+        </div>
+        <p className="app__tagline">{copy.app.tagline}</p>
+        <LocaleToggle />
+      </header>
+
+      <StepNav />
+
+      <main className="app__main">
+        {step === 0 && <UploadStep />}
+        {step === 1 && <RequestBuilder />}
+        {step === 2 && <RunControls />}
+      </main>
+    </div>
+  );
+}

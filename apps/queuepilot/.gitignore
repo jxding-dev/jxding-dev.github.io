@@ -1,0 +1,22 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+
+# Local tooling / editor config
+.claude/
+*.log
+
+# Local test-only helpers (not part of the app)
+scratch/
+
+# Docs: README is public; the handoff, V2 phase plan, and Claude rules are also
+# published so the work can be continued on another machine. Internal templates
+# and the v1 product blueprint stay local.
+*.md
+!README.md
+!HANDOFF.md
+!V2-PROMPTS.md
+!CLAUDE.md
