@@ -70,13 +70,16 @@
 
         /* ── 좁은 화면: 태블릿 틀 대신 주문 화면을 꽉 채워 보여준다 ── */
         @media (max-width: 1100px) {
+            /* 페이지는 고정하고 주문 화면 안에서만 스크롤 → 이중 스크롤 방지 */
             body {
                 width: 100%;
-                height: auto;
-                min-height: 100vh;
+                height: 100vh;
+                height: 100dvh;
                 justify-content: flex-start;
-                overflow: auto;
+                align-items: stretch;
+                overflow: hidden;
             }
+            .demo-info { flex-shrink: 0; }
             .demo-info { margin: 0; padding: 16px 16px 12px; }
             .demo-info h1 { font-size: 20px; }
             .demo-info p { font-size: 13px; word-break: keep-all; }
@@ -89,6 +92,9 @@
                 text-decoration: none;
             }
             .tablet-mockup {
+                flex: 1;
+                min-height: 0;
+                display: flex;
                 width: 100%;
                 height: auto;
                 padding: 0;
@@ -98,10 +104,10 @@
             }
             .iframe-wrapper {
                 position: static;
+                flex: 1;
+                min-height: 0;
                 width: 100%;
-                height: calc(100vh - 110px);
-                height: calc(100dvh - 110px);
-                min-height: 520px;
+                height: auto;
                 border-radius: 0;
                 border-top: 1px solid #d8c9b5;
             }

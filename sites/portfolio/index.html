@@ -294,9 +294,11 @@
     const ctx    = canvas.getContext('2d');
     let W, H, particles = [];
     const mouse = { x: -999, y: -999 };
-    const N = 75, LINK = 110;
+    const N = window.innerWidth < 768 ? 40 : 75, LINK = 110;
+    let lastW = 0, running = true;
 
     function resize() {
+        lastW = window.innerWidth;
         W = canvas.width  = window.innerWidth;
         H = canvas.height = window.innerHeight;
     }
@@ -329,6 +331,7 @@
     function init() { particles = []; for (let i = 0; i < N; i++) particles.push(new P()); }
 
     function frame() {
+        if (!running) return;
         ctx.clearRect(0, 0, W, H);
         for (let i = 0; i < N; i++) {
             particles[i].tick();
@@ -350,8 +353,17 @@
         requestAnimationFrame(frame);
     }
 
-    window.addEventListener('resize', () => { resize(); init(); });
+    // 모바일은 스크롤할 때 주소창이 접히며 resize가 계속 발생하므로, 폭이 바뀔 때만 다시 그린다
+    window.addEventListener('resize', () => { if (window.innerWidth !== lastW) { resize(); init(); } });
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+    // 히어로가 화면 밖이면 애니메이션을 멈춰 스크롤 성능을 지킨다
+    new IntersectionObserver(([entry]) => {
+        const wasRunning = running;
+        running = entry.isIntersecting;
+        if (running && !wasRunning) requestAnimationFrame(frame);
+    }).observe(canvas);
+
     resize(); init(); frame();
 })();
 

@@ -4,7 +4,8 @@
    1100px 이하에서만 유동 레이아웃으로 덮어쓴다.
 ========================================= */
 @media (max-width: 1100px) {
-    html, body { width: 100%; overflow-x: hidden; }
+    /* overflow:hidden 을 쓰면 sticky 가 풀리므로 clip 사용 */
+    html, body { width: 100%; overflow-x: clip; }
     body { -webkit-tap-highlight-color: transparent; }
 
     /* ---------- 헤더 바 ---------- */
@@ -252,4 +253,16 @@
 }
 @media (min-width: 860px) and (max-width: 1100px) {
     .product-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* 모달·장바구니가 열려 있을 때 뒤 페이지가 같이 스크롤되지 않게 한다 */
+@media (max-width: 1100px) {
+    html:has(#optionSec.show, #orderSec.show, #confirmSec.show, #cartSec.show) {
+        overflow: hidden;
+    }
+    .inbox .box-top,
+    .cart-body,
+    #order-list {
+        overscroll-behavior: contain;
+    }
 }

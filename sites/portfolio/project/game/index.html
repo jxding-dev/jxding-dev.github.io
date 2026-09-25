@@ -513,28 +513,41 @@ function loadGame(btn) {
     frame.src = src;
 }
 
-/* 모바일: 게임 화면 높이를 게임 내용에 맞춰 늘려서, 아래쪽 버튼까지 페이지 스크롤로 닿게 한다 */
+/* 모바일: 게임 화면 높이를 게임 내용에 맞춰 늘려서, 아래쪽 버튼까지 페이지 스크롤로 닿게 한다.
+   틀을 줄였다 늘리며 재면 스크롤 위치가 튀므로, 게임 body의 min-height:100vh만 풀고
+   body 실제 높이를 ResizeObserver로 따라간다. */
 const mobileMq = matchMedia('(max-width:700px)');
+let bodyObserver = null;
+
 function fitFrame() {
-    if (!mobileMq.matches) { frame.style.height = ''; return; }
+    let doc;
+    try { doc = frame.contentDocument; } catch (e) { return; }
+    if (!doc || !doc.body) return;
+
+    const fit = mobileMq.matches;
+    doc.documentElement.classList.toggle('fit-height', fit);
+    if (!fit) { frame.style.height = ''; return; }
+
+    const cs = doc.defaultView.getComputedStyle(doc.body);
+    const h = Math.ceil(doc.body.getBoundingClientRect().height
+        + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom));
+    if (h > 0 && Math.abs(frame.offsetHeight - h) > 1) frame.style.height = h + 'px';
+}
+
+frame.addEventListener('load', () => {
+    if (bodyObserver) bodyObserver.disconnect();
     try {
         const doc = frame.contentDocument;
         if (!doc || !doc.body) return;
-        frame.style.height = '1px';            // 게임의 min-height:100vh 영향을 빼고 실제 높이를 잰다
-        frame.style.height = doc.documentElement.scrollHeight + 'px';
-    } catch (e) { /* 다른 출처면 무시 */ }
-}
-frame.addEventListener('load', () => {
-    fitFrame();
-    try {
-        const doc = frame.contentDocument;
-        ['click', 'touchend', 'change', 'input'].forEach(type =>
-            doc.addEventListener(type, () => { setTimeout(fitFrame, 60); setTimeout(fitFrame, 600); }, { passive: true })
-        );
+        const style = doc.createElement('style');
+        style.textContent = 'html.fit-height body{min-height:0 !important}';
+        doc.head.appendChild(style);
+        bodyObserver = new ResizeObserver(fitFrame);
+        bodyObserver.observe(doc.body);
     } catch (e) {}
+    fitFrame();
 });
 mobileMq.addEventListener('change', fitFrame);
-window.addEventListener('resize', fitFrame);
 
 window.addEventListener('load', () => {
     const first = document.querySelector('.g-card');

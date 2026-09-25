@@ -279,7 +279,8 @@ a { text-decoration:none; color:inherit; }
     @supports (height:100dvh) {
         :root { --phone-h:max(520px, calc(100dvh - 200px)); }
     }
-    .phone-stage { padding:16px 16px 28px; }
+    .phone-stage { padding:12px 16px 16px; }
+    .phone-info { display:none; }
     .phone-frame { border-radius:32px; }
     .phone-frame:hover { box-shadow:0 0 0 9px rgba(255,255,255,.035), 0 30px 60px rgba(0,0,0,.6); }
     .live-badge { display:none; }
@@ -451,7 +452,24 @@ function tick() {
 }
 tick(); setInterval(tick, 10000);
 
+// 모바일: 휴대폰 틀이 남은 화면 높이를 딱 채우게 해서 페이지·틀 이중 스크롤을 없앤다.
+// 주소창이 접히며 생기는 높이 변화에는 반응하지 않도록 폭이 바뀔 때만 다시 잰다.
+const phoneMq = matchMedia('(max-width:480px)');
+let phoneW = 0;
+function fitPhone(force) {
+    const root = document.documentElement;
+    if (!phoneMq.matches) { root.style.removeProperty('--phone-h'); return; }
+    if (!force && window.innerWidth === phoneW) return;
+    phoneW = window.innerWidth;
+    const top = document.querySelector('.phone-frame').getBoundingClientRect().top + window.scrollY;
+    root.style.setProperty('--phone-h', Math.max(460, window.innerHeight - top - 16) + 'px');
+}
+window.addEventListener('resize', () => fitPhone(false));
+phoneMq.addEventListener('change', () => fitPhone(true));
+fitPhone(true);
+
 window.addEventListener('load', () => {
+    fitPhone(true);
     const first = document.querySelector('.p-card');
     if (first) loadPage(first);
 });

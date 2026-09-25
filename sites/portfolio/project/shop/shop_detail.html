@@ -470,14 +470,20 @@
         relatedPaused = true;
     });
 
+    // 손을 뗀 직후의 관성 스크롤과 자동 스크롤이 겹치지 않도록 잠깐 기다렸다가 재개
+    let relatedResume;
+    relatedWrap.on("touchstart mouseenter", function(){
+        clearTimeout(relatedResume);
+    });
     relatedWrap.on("touchend mouseleave", function(){
-        relatedPaused = false;
+        clearTimeout(relatedResume);
+        relatedResume = setTimeout(function(){ relatedPaused = false; }, 1500);
     });
 
     const BANNER_NUM = $(".product-image-wrap .banner li").length;
     let prevIndex = 0;
     let isAnimating = false;
-    let startX, endX;
+    let startX, startY, endX;
 
     function nextSlide() {
         if (isAnimating) return;
@@ -515,14 +521,17 @@
 
     $(".product-image-wrap").on("touchstart", function(e){
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
         clearInterval(imageAutoSlide);
     });
 
     $(".product-image-wrap").on("touchend", function(e){
         endX = e.changedTouches[0].clientX;
         let diffX = startX - endX;
+        let diffY = startY - e.changedTouches[0].clientY;
 
-        if (Math.abs(diffX) > 50) {
+        // 세로 스크롤 중에 손가락이 옆으로 조금 흔들린 경우는 넘기지 않는다
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
             if (diffX > 0) {
                 nextSlide();
             } else {
