@@ -1,0 +1,462 @@
+@media (min-width: 1280px) {
+  :root {
+    --container: 1220px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --container: 1280px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .detail-summary {
+    position: sticky;
+    top: 104px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    gap: 18px;
+    font-size: 14px;
+  }
+
+  .feature-grid.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-search-panel,
+  .estate-search-panel,
+  .search-console,
+  .property-filter,
+  .process-list,
+  .collection-grid,
+  .premium-category-grid,
+  .amenity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-property,
+  .premium-editorial,
+  .investment-layout,
+  .team-preview,
+  .office-layout,
+  .consultation-time,
+  .estate-hero-content,
+  .search-hero-grid,
+  .category-dashboard,
+  .map-list-layout,
+  .price-search-layout,
+  .premium-showcase-grid,
+  .property-map-layout,
+  .recommendation-market-grid,
+  .estate-platform {
+    grid-template-columns: 1fr;
+  }
+
+  .search-hero-grid {
+    padding-bottom: 250px;
+  }
+
+  .hero-market-rail {
+    bottom: 146px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-preview-stack {
+    max-width: 640px;
+  }
+
+  .hero-property-card {
+    grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1fr);
+  }
+
+  .price-band-list,
+  .featured-properties,
+  .collection-grid.compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .property-map-column {
+    position: static;
+  }
+
+  .property-map-column .map-box {
+    aspect-ratio: 16 / 9;
+    min-height: 260px;
+  }
+
+  .page-properties .property-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-properties .property-map-column .map-box {
+    min-height: 340px;
+  }
+
+  .map-mobile-cta {
+    display: inline-flex;
+  }
+
+  .contact-card-grid,
+  .contact-guide-grid,
+  .area-card-grid,
+  .spec-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .info-panel,
+  .detail-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 78px;
+  }
+
+  .container,
+  .hero-content {
+    width: min(calc(100% - 32px), var(--container));
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    z-index: 49;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--color-primary-dark);
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .floating-actions {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 10px 12px;
+    border-top: 1px solid var(--color-line);
+    background: var(--color-white);
+  }
+
+  .floating-actions a {
+    min-width: 0;
+    border-radius: var(--radius-sm);
+    box-shadow: none;
+  }
+
+  .section-head,
+  .split {
+    display: block;
+  }
+
+  .split .image-wrap {
+    margin-top: 28px;
+  }
+
+  .property-grid,
+  .feature-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-properties .property-toolbar {
+    align-items: flex-start;
+  }
+
+  .filter-bar,
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-console {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    bottom: 26px;
+  }
+
+  .deal-tabs {
+    grid-column: 1 / -1;
+  }
+
+  .mobile-hero-tools {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .property-grid,
+  .feature-grid,
+  .feature-grid.four,
+  .footer-grid,
+  .filter-bar,
+  .form-grid,
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-properties .property-list-column .property-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-properties .property-map-column .map-box {
+    min-height: 300px;
+    padding: 16px;
+  }
+
+  .page-properties .map-summary-card {
+    padding: 18px;
+  }
+
+  .hero-actions,
+  .hero-search-panel,
+  .estate-search-panel,
+  .search-console,
+  .property-filter,
+  .process-list,
+  .collection-grid,
+  .premium-category-grid,
+  .amenity-grid,
+  .category-card-grid,
+  .featured-properties,
+  .contact-card-grid,
+  .contact-guide-grid,
+  .area-card-grid,
+  .market-snapshot,
+  .trend-metrics,
+  .spec-card-grid,
+  .detail-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-layout,
+  .detail-layout > *,
+  .detail-gallery,
+  .detail-section,
+  .office-layout,
+  .office-layout > *,
+  .contact-map,
+  .map-actions {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .estate-hero-visual,
+  .hero-preview-stack {
+    display: none;
+  }
+
+  .search-hero-grid {
+    padding-bottom: 430px;
+  }
+
+  .filter-actions,
+  .hero-actions,
+  .map-actions {
+    display: grid;
+  }
+
+  .main-hero .slider-controls {
+    bottom: 440px;
+  }
+
+  .main-hero .slider-dots {
+    bottom: 454px;
+  }
+
+  .search-hero .slider-controls {
+    bottom: 448px;
+  }
+
+  .search-hero .slider-dots {
+    bottom: 462px;
+  }
+
+  .hero-search-panel {
+    bottom: 18px;
+    width: calc(100% - 28px);
+    padding: 14px;
+  }
+
+  .recent-keywords {
+    display: none;
+  }
+
+  .hero-market-rail {
+    display: none;
+  }
+
+  .slider-progress {
+    bottom: 6px;
+    width: calc(100% - 28px);
+  }
+
+  .ticker-track span {
+    min-height: 48px;
+    padding-inline: 22px;
+    font-size: 13px;
+  }
+
+  .hero-keyword-search {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    min-height: 58px;
+  }
+
+  .hero-keyword-search input {
+    padding-inline: 14px;
+    font-size: 15px;
+  }
+
+  .hero-keyword-search button {
+    width: 46px;
+    height: 46px;
+  }
+
+  .category-feature {
+    min-height: 260px;
+    padding: 26px;
+  }
+
+  .ai-match-card {
+    display: grid;
+    padding: 24px;
+  }
+
+  .search-panel-head {
+    padding-bottom: 4px;
+  }
+
+  .map-list-card {
+    position: static;
+    margin-top: 12px;
+  }
+
+  .hero-slider {
+    min-height: 960px;
+  }
+
+  .search-hero {
+    min-height: 1000px;
+  }
+
+  .hero-media::after {
+    background: rgba(15, 41, 36, 0.76);
+  }
+
+  .cta-box {
+    display: grid;
+  }
+
+  .gallery-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-section-title,
+  .split-heading,
+  .inline-heading,
+  .preview-actions {
+    display: grid;
+  }
+
+  .map-panel,
+  .map-panel .map-box {
+    min-height: 320px;
+  }
+
+  .price-band-list,
+  .collection-grid.compact {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-property {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .mini-property img {
+    height: 96px;
+  }
+
+}
+
+@media (max-width: 390px) {
+  .container,
+  .hero-content {
+    width: calc(100% - 28px);
+  }
+
+  .property-body,
+  .feature,
+  .info-panel,
+  .stat {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .hero-content {
+    padding-top: 48px;
+  }
+
+  .hero-search-panel {
+    width: calc(100% - 24px);
+  }
+
+  .search-hero .recent-keywords {
+    display: none;
+  }
+
+  .spec-list li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-media img {
+    transition: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn {
+    width: 100%;
+  }
+
+  .floating-actions a {
+    padding-inline: 8px;
+    font-size: 13px;
+  }
+}

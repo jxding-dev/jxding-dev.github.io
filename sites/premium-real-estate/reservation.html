@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="관심 지역, 예산대, 입주 시점을 남기고 라온 프레스티지의 프리미엄 매물 방문 상담을 예약하세요.">
+  <title>방문예약 | 라온 프레스티지</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-reservation">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">RAON PRESTIGE</a>
+      <nav class="nav" data-nav>
+        <a href="index.html" data-page="index">홈</a>
+        <a href="properties.html" data-page="properties">매물찾기</a>
+        <a href="index.html#ai-match">AI매칭</a>
+        <a href="premium.html" data-page="premium">프리미엄</a>
+        <a href="about.html" data-page="about">브랜드소개</a>
+        <a href="reservation.html" data-page="reservation">방문예약</a>
+        <a href="contact.html" data-page="contact">상담안내</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" data-menu-button><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">RESERVATION</p>
+        <h1>방문예약 및 문의</h1>
+        <p>희망 조건을 남겨주시면 담당 컨설턴트가 매물 확인과 방문 가능 일정을 안내합니다.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container detail-layout">
+        <form class="form-grid reservation-form" data-reservation-form novalidate>
+          <label class="field" for="user-name"><span>이름</span><input id="user-name" name="name" type="text" placeholder="성함" required></label>
+          <label class="field" for="user-phone"><span>연락처</span><input id="user-phone" name="phone" type="tel" placeholder="010-0000-0000" required></label>
+          <label class="field" for="property-type"><span>관심 매물 유형</span><select id="property-type" name="type" required><option value="">선택</option><option>고급 빌라</option><option>신규 분양</option><option>오피스텔</option><option>전원주택</option><option>펜트하우스</option></select></label>
+          <label class="field" for="preferred-area"><span>희망 지역</span><select id="preferred-area" name="area" required><option value="">선택</option><option>강남권</option><option>한남·용산</option><option>성수권</option><option>근교</option><option>기타</option></select></label>
+          <label class="field" for="budget-range"><span>예산대</span><select id="budget-range" name="budget" required><option value="">선택</option><option>20억 이하</option><option>20억 - 40억</option><option>40억 - 70억</option><option>70억 이상</option></select></label>
+          <label class="field" for="visit-date"><span>희망 방문일</span><input id="visit-date" name="date" type="date" required></label>
+          <label class="field full" for="message"><span>문의 내용</span><textarea id="message" name="message" placeholder="관심 매물, 방문 인원, 상담 목적을 입력해 주세요."></textarea></label>
+          <label class="privacy-check field full" for="privacy-agree"><input id="privacy-agree" name="privacy" type="checkbox" required><span>개인정보 수집 및 상담 목적 이용에 동의합니다.</span></label>
+          <p class="form-message" data-form-message role="status" aria-live="polite"></p>
+          <div class="field full"><button class="btn" type="submit">예약 문의 남기기</button></div>
+        </form>
+
+        <aside class="info-panel contact-card">
+          <p class="eyebrow">CONTACT</p>
+          <h3>상담 안내</h3>
+          <ul class="spec-list">
+            <li><span>대표 전화</span><strong>02-0000-0000</strong></li>
+            <li><span>운영 시간</span><strong>10:00 - 19:00</strong></li>
+            <li><span>상담 방식</span><strong>예약제</strong></li>
+            <li><span>상담 위치</span><strong>강남 라운지</strong></li>
+          </ul>
+          <p>정확한 상담을 위해 예산대와 희망 지역을 함께 남겨주세요.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section intro-band">
+      <div class="container">
+        <div class="section-head"><div><p class="eyebrow">CONSULTATION STEPS</p><h2>상담 진행 단계</h2></div></div>
+        <ol class="process-list">
+          <li><span>01</span><strong>문의 접수</strong><p>남겨주신 조건과 연락처를 확인합니다.</p></li>
+          <li><span>02</span><strong>조건 정리</strong><p>지역, 예산, 방문 목적을 기준으로 우선순위를 맞춥니다.</p></li>
+          <li><span>03</span><strong>매물 제안</strong><p>확인 가능한 매물과 방문 가능 일정을 안내합니다.</p></li>
+          <li><span>04</span><strong>현장 상담</strong><p>방문 동선과 핵심 확인 사항을 함께 점검합니다.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><div><p class="eyebrow">FAQ</p><h2>예약 전 확인 사항</h2></div></div>
+        <div class="accordion" data-accordion>
+          <div class="accordion-item is-open" data-accordion-item><button class="accordion-button" type="button" aria-expanded="true" data-accordion-button>당일 방문도 가능한가요?<span>+</span></button><div class="accordion-panel"><p>매물 공개 가능 여부와 담당자 일정에 따라 달라 사전 예약을 권장합니다.</p></div></div>
+          <div class="accordion-item" data-accordion-item><button class="accordion-button" type="button" aria-expanded="false" data-accordion-button>비공개 매물 상담이 가능한가요?<span>+</span></button><div class="accordion-panel"><p>희망 조건 확인 후 공개 가능한 범위 안에서 선별 안내합니다.</p></div></div>
+          <div class="accordion-item" data-accordion-item><button class="accordion-button" type="button" aria-expanded="false" data-accordion-button>상담 비용이 있나요?<span>+</span></button><div class="accordion-panel"><p>기본 매물 상담과 방문 일정 안내는 별도 비용 없이 진행됩니다.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reservation-cta">
+      <div class="container cta-box">
+        <div><p class="eyebrow">PRIVATE CONSULTING</p><h2>조건에 맞는 매물을 빠르게 확인하세요</h2><p>방문 전 매물 상태와 상담 가능 시간을 먼저 안내합니다.</p></div>
+        <a class="btn" href="contact.html">상담 안내 보기</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="floating-actions"><a href="tel:0200000000">전화</a><a href="contact.html">문의</a><a href="reservation.html">예약</a></div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><p class="footer-title">RAON PRESTIGE</p><p>고급 주거와 프리미엄 분양을 위한 선별형 부동산 컨설팅.</p></div>
+      <div><p class="footer-title">상담</p><p>02-0000-0000<br>서울 강남구 도산대로 000</p></div>
+      <div><p class="footer-title">운영</p><p>평일 10:00 - 19:00<br>예약 방문제</p></div>
+    </div>
+  </footer>
+  <script src="js/menu.js"></script>
+  <script src="js/accordion.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
