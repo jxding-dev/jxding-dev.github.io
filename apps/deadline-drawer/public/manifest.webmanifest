@@ -1,0 +1,32 @@
+{
+  "name": "까먹지말자",
+  "short_name": "까먹지말자",
+  "description": "공과금·구독·예약 같은 기한을 까먹지말자에서 챙기는 앱",
+  "lang": "ko",
+  "start_url": "/deadline-drawer/",
+  "scope": "/deadline-drawer/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/deadline-drawer/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/deadline-drawer/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/deadline-drawer/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

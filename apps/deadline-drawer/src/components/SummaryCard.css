@@ -1,0 +1,87 @@
+.summary-card {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-rows: auto auto 4px;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 3px;
+  min-width: 0;
+  min-height: 74px;
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  /* 톤별 옅은 배경 */
+  background: var(--card-bg, var(--surface-2));
+}
+
+.summary-card__icon {
+  grid-row: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  color: var(--tone-color, var(--text-dim));
+  background: var(--tone-soft, var(--surface-3));
+}
+
+.summary-card__count {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--tone-color, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-card__label {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.summary-card__bar {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 4px;
+  margin-top: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--tone-soft, var(--surface-3));
+  overflow: hidden;
+}
+
+.summary-card__bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--tone-color, var(--text-faint));
+  transition: width 0.25s ease;
+}
+
+.summary-card[data-tone='today'] {
+  --tone-color: var(--accent);
+  --tone-soft: var(--accent-soft);
+  --card-bg: color-mix(in srgb, var(--accent) 9%, #fff);
+}
+.summary-card[data-tone='overdue'] {
+  --tone-color: var(--danger);
+  --tone-soft: var(--danger-soft);
+  --card-bg: color-mix(in srgb, var(--danger) 7%, #fff);
+}
+.summary-card[data-tone='neutral'] {
+  --tone-color: var(--text-dim);
+  --tone-soft: var(--surface-3);
+  --card-bg: var(--surface-2);
+}
+
+/* 0건이면 숫자만 살짝 죽인다 (아이콘 톤은 유지) */
+.summary-card[data-tone='neutral'][data-empty='true'] .summary-card__count {
+  color: var(--text-faint);
+}

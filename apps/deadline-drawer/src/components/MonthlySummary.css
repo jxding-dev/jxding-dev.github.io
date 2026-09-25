@@ -1,0 +1,56 @@
+.monthly-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* 2열 — 360px 에서도 안정적 */
+.monthly-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+.completion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 14px var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.completion__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.completion__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.completion__value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ok);
+  font-variant-numeric: tabular-nums;
+}
+
+.completion__track {
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.completion__fill {
+  height: 100%;
+  min-width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--ok);
+  transition: width 0.25s ease;
+}

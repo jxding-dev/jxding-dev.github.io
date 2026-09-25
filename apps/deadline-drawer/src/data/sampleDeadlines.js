@@ -1,0 +1,163 @@
+// 개발/초기 화면용 더미 마감 데이터.
+// dueDate 는 "오늘 기준 상대 오프셋"으로 생성해, 언제 실행해도
+// 기한 지남 / 오늘 / 이번 주 / 다음 주가 골고루 섞여 보이게 한다.
+
+import { addDays, toISODateString } from '../utils/dateUtils'
+
+// 오늘로부터 offset 일 뒤의 "YYYY-MM-DD"
+const due = (offsetDays) => toISODateString(addDays(new Date(), offsetDays))
+
+// 오늘로부터 offset 일 뒤(원하는 시각)의 ISO 타임스탬프
+const ts = (offsetDays, hour = 9) => {
+  const d = addDays(new Date(), offsetDays)
+  d.setHours(hour, 0, 0, 0)
+  return d.toISOString()
+}
+
+export const SAMPLE_DEADLINES = [
+  {
+    id: 'smpl-electric',
+    title: '전기요금 납부',
+    category: 'utility',
+    dueDate: due(-2),
+    importance: 'high',
+    status: 'pending',
+    memo: '한전 자동이체 실패, 직접 납부할 것',
+    createdAt: ts(-9),
+    updatedAt: ts(-9),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-car-tax',
+    title: '자동차세 납부',
+    category: 'utility',
+    dueDate: due(-5),
+    importance: 'high',
+    status: 'postponed',
+    memo: '위택스에서 분할납부 가능 여부 확인',
+    createdAt: ts(-20),
+    updatedAt: ts(-3),
+    postponedCount: 2,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-netflix',
+    title: '넷플릭스 무료체험 해지',
+    category: 'subscription',
+    dueDate: due(0),
+    importance: 'high',
+    status: 'pending',
+    memo: '오늘 안 끊으면 17,000원 자동결제',
+    createdAt: ts(-7),
+    updatedAt: ts(-7),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-coupang-return',
+    title: '쿠팡 반품 마감',
+    category: 'delivery',
+    dueDate: due(1),
+    importance: 'medium',
+    status: 'pending',
+    memo: '사이즈 안 맞는 운동화, 문 앞 수거 신청',
+    createdAt: ts(-2),
+    updatedAt: ts(-2),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-dental',
+    title: '치과 정기검진 예약',
+    category: 'hospital',
+    dueDate: due(2),
+    importance: 'medium',
+    status: 'pending',
+    memo: '오후 2시, 스케일링 같이 문의',
+    createdAt: ts(-5),
+    updatedAt: ts(-5),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-melon',
+    title: '멜론 구독 해지',
+    category: 'subscription',
+    dueDate: due(3),
+    importance: 'medium',
+    status: 'pending',
+    memo: '안 듣는데 매달 빠져나감',
+    createdAt: ts(-4),
+    updatedAt: ts(-4),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-resident',
+    title: '전입신고 서류 제출',
+    category: 'document',
+    dueDate: due(4),
+    importance: 'high',
+    status: 'pending',
+    memo: '정부24 또는 주민센터, 14일 이내 의무',
+    createdAt: ts(-1),
+    updatedAt: ts(-1),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-birthday',
+    title: '친구 생일 모임',
+    category: 'appointment',
+    dueDate: due(5),
+    importance: 'low',
+    status: 'pending',
+    memo: '7시 강남, 선물 미리 사두기',
+    createdAt: ts(-6),
+    updatedAt: ts(-6),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-toeic',
+    title: '토익 시험 접수 마감',
+    category: 'exam',
+    dueDate: due(6),
+    importance: 'high',
+    status: 'pending',
+    memo: '7월 정기시험, 신분증 사진 준비',
+    createdAt: ts(-3),
+    updatedAt: ts(-3),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-gym-refund',
+    title: '헬스장 환불 문의',
+    category: 'etc',
+    dueDate: due(9),
+    importance: 'low',
+    status: 'onHold',
+    memo: '잔여 3개월, 위약금 규정 확인 필요',
+    createdAt: ts(-10),
+    updatedAt: ts(-8),
+    postponedCount: 0,
+    completedAt: null,
+  },
+  {
+    id: 'smpl-checkup',
+    title: '건강검진 예약',
+    category: 'hospital',
+    dueDate: due(-1),
+    importance: 'medium',
+    status: 'completed',
+    memo: '국가검진 대상, 예약 완료',
+    createdAt: ts(-12),
+    updatedAt: ts(-1),
+    postponedCount: 1,
+    completedAt: ts(-1, 11),
+  },
+]
+
+export default SAMPLE_DEADLINES

@@ -1,0 +1,309 @@
+.detail-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--header-h);
+  padding: 9px var(--space-4) 8px;
+  padding-top: max(9px, env(safe-area-inset-top));
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-header__back {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+.detail-header__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+/* 섹션별 간격 */
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-6);
+}
+
+.detail-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-bottom: var(--space-2);
+}
+
+/* 핵심 요약 */
+.detail-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--tone-color, var(--border));
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.detail-hero__dday {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--tone-color, var(--text));
+  background: var(--tone-soft, var(--surface-3));
+  padding: 5px 11px;
+  border-radius: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-hero__title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+.detail-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.detail-badge--high {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-color: transparent;
+}
+
+/* 톤 매핑 */
+.detail-hero[data-tone='overdue'] {
+  --tone-color: var(--danger);
+  --tone-soft: var(--danger-soft);
+}
+.detail-hero[data-tone='today'] {
+  --tone-color: var(--accent);
+  --tone-soft: var(--accent-soft);
+}
+.detail-hero[data-tone='normal'] {
+  --tone-color: var(--text-dim);
+  --tone-soft: var(--surface-3);
+}
+.detail-hero[data-tone='done'],
+.detail-hero[data-tone='hold'] {
+  --tone-color: var(--border);
+  --tone-soft: var(--surface-3);
+}
+
+/* 기본 정보 목록 */
+.detail-meta {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: visible;
+}
+
+.detail-meta__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 54px;
+  padding: 13px var(--space-4);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.35;
+}
+.detail-meta__row:last-child {
+  border-bottom: none;
+}
+
+.detail-meta__row dt {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+.detail-meta__row dd {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* 메모 */
+.detail-memo__text {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 액션 버튼 공통 */
+.act {
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+}
+
+.act--primary {
+  color: var(--on-ink);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* 위험 액션 — 일반 버튼과 명확히 구분 */
+.act--danger {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-color: transparent;
+}
+.act--danger-solid {
+  color: #fff;
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* 상태 변경 — 2열 그리드, 360px 에서 자연스럽게 줄바꿈 */
+.detail-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+/* 미루기 패널 */
+.postpone-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: 12px;
+  background: var(--surface-3);
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+}
+
+.postpone-opt {
+  flex: 1 1 30%;
+  min-height: 38px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+.postpone-custom {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.postpone-custom input[type='date'] {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  appearance: none;
+}
+.postpone-custom input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* 관리: 수정 / 삭제 */
+.detail-manage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+/* 삭제 확인 박스 */
+.confirm-box {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  background: var(--danger-soft);
+  border: 1px solid var(--danger);
+  border-radius: 14px;
+}
+
+.confirm-box__text {
+  font-size: 13.5px;
+  color: var(--text);
+  margin-bottom: var(--space-3);
+}
+.confirm-box__text strong {
+  color: var(--danger);
+}
+
+.confirm-box__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+/* 기록 */
+.detail-stamps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: var(--space-2);
+}
+.detail-stamps div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.detail-stamps dd {
+  font-variant-numeric: tabular-nums;
+}

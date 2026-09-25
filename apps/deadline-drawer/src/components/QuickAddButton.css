@@ -1,0 +1,29 @@
+/* 빠른 추가 버튼 — 프레임 오른쪽 아래에 고정, 탭바 위에 띄움.
+   좁은 화면은 뷰포트 기준, 480px↑ 는 중앙 프레임 오른쪽에 정렬된다. */
+.quick-add {
+  position: fixed;
+  bottom: calc(var(--tabbar-h) + 14px + env(safe-area-inset-bottom));
+  right: max(var(--space-4), env(safe-area-inset-right));
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 46px;
+  padding: 0 17px 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  box-shadow: 0 10px 24px rgba(20, 23, 33, 0.22);
+}
+
+.quick-add__icon {
+  display: inline-flex;
+  line-height: 1;
+}
+
+.quick-add__icon svg {
+  stroke-width: 2.4;
+}

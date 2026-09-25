@@ -1,0 +1,195 @@
+.deadline-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* 필드 영역만 스크롤, 저장/취소는 아래 고정 */
+.deadline-form__fields {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: var(--space-4);
+}
+
+/* 공통 필드 */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.field__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text-dim);
+}
+
+.field__optional {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-faint);
+  margin-left: 2px;
+}
+
+.field__input {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  appearance: none;
+}
+
+.field__input::placeholder {
+  color: var(--text-faint);
+}
+
+.field__input:focus {
+  border-color: var(--accent);
+}
+
+.field__textarea {
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field__input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.field__error {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+/* 카테고리 선택 그리드 — 360px 에서 넘치지 않게 자동 줄바꿈 */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 50px;
+  padding: 7px 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.choice[data-active='true'] {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* 마감일 빠른 선택 */
+.date-presets {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.date-preset {
+  flex: 1 1 0;
+  min-height: 36px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.date-preset:active {
+  border-color: var(--accent);
+}
+
+/* 중요도 — 세그먼트 */
+.segmented {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.segmented__item {
+  flex: 1 1 0;
+  min-height: 42px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.segmented__item[data-active='true'][data-color='ok'] {
+  color: var(--ok);
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+.segmented__item[data-active='true'][data-color='accent'] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.segmented__item[data-active='true'][data-color='danger'] {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* 하단 액션 바 */
+.deadline-form__actions {
+  flex: none;
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+  background: var(--header-bg);
+  border-top: 1px solid var(--border);
+}
+
+.form-btn {
+  min-height: 48px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.form-btn--ghost {
+  flex: 0 0 96px;
+  color: var(--text-dim);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+}
+
+.form-btn--primary {
+  flex: 1 1 auto;
+  color: var(--on-ink);
+  background: var(--ink);
+}

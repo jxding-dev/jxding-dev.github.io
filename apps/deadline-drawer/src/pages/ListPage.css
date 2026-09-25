@@ -1,0 +1,34 @@
+.list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* 하단 탭바와 겹치지 않게 */
+  padding-bottom: calc(var(--tabbar-h) + var(--space-5));
+}
+
+.list-page__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.list-page__title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.list-page__count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.list-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: var(--space-1);
+}
