@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERRA — 지구를 입다</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sand: #f5f0e8;
+    --clay: #c4a882;
+    --earth: #8b6f47;
+    --moss: #5c6b3a;
+    --bark: #3d2b1f;
+    --cream: #faf7f2;
+    --stone: #9e9589;
+    --sage: #8fa67a;
+  }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--cream);
+    color: var(--bark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,168,130,0.2);
+  }
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--bark);
+  }
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-links a {
+    color: var(--stone);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', sans-serif;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--bark); }
+  .nav-cta {
+    padding: 10px 24px;
+    border: 1px solid var(--bark);
+    color: var(--bark);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', sans-serif;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { background: var(--bark); color: var(--cream); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+  }
+  .hero-eyebrow {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  h1 {
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: var(--bark);
+    margin-bottom: 28px;
+  }
+  h1 em { font-style: italic; color: var(--earth); }
+  .hero-sub {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    color: var(--stone);
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-dark {
+    padding: 16px 36px;
+    background: var(--bark);
+    color: var(--cream);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .btn-dark:hover { background: var(--earth); }
+  .btn-outline {
+    padding: 16px 36px;
+    border: 1px solid var(--clay);
+    color: var(--bark);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .btn-outline:hover { background: rgba(196,168,130,0.1); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-block {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #d4c4a8 0%, #b8956a 40%, #8b6f47 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+  .cloth-visual {
+    position: relative;
+    width: 260px;
+    height: 320px;
+  }
+  .cloth-layer {
+    position: absolute;
+    border-radius: 4px;
+  }
+  .cloth-layer:nth-child(1) {
+    width: 200px; height: 280px;
+    background: linear-gradient(135deg, #f5f0e8, #e8dcc8);
+    top: 20px; left: 0;
+    transform: rotate(-4deg);
+    box-shadow: 0 8px 40px rgba(61,43,31,0.2);
+  }
+  .cloth-layer:nth-child(2) {
+    width: 190px; height: 270px;
+    background: linear-gradient(135deg, #8b6f47, #6b5235);
+    top: 30px; left: 55px;
+    transform: rotate(3deg);
+    box-shadow: 0 8px 40px rgba(61,43,31,0.3);
+  }
+  .cloth-layer:nth-child(3) {
+    width: 170px; height: 240px;
+    background: linear-gradient(135deg, #5c6b3a, #3d4d25);
+    top: 50px; left: 28px;
+    box-shadow: 0 8px 40px rgba(61,43,31,0.4);
+  }
+  .cloth-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: var(--cream);
+    padding: 12px 16px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: var(--bark);
+    box-shadow: 0 4px 20px rgba(61,43,31,0.15);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .hero-tag {
+    position: absolute;
+    top: 40px; right: 40px;
+    background: rgba(250,247,242,0.9);
+    padding: 16px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    color: var(--stone);
+    letter-spacing: 1px;
+  }
+  .hero-tag strong { display: block; font-size: 1.2rem; color: var(--bark); margin-top: 4px; }
+
+  /* VALUES */
+  .values {
+    padding: 100px 80px;
+    background: var(--sand);
+  }
+  .values-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .section-eyebrow {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--bark);
+    max-width: 400px;
+  }
+  h2 em { font-style: italic; color: var(--earth); }
+  .values-desc {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    color: var(--stone);
+    line-height: 1.8;
+    max-width: 360px;
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .value-card {
+    background: var(--cream);
+    padding: 48px 36px;
+    transition: background 0.3s;
+  }
+  .value-card:hover { background: white; }
+  .value-num {
+    font-size: 0.75rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--clay);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .value-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .value-desc {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.7;
+  }
+
+  /* COLLECTION */
+  .collection {
+    padding: 100px 80px;
+    background: var(--cream);
+  }
+  .collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .view-all {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--earth);
+    text-decoration: none;
+    border-bottom: 1px solid var(--earth);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .view-all:hover { color: var(--bark); border-color: var(--bark); }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .product-card { cursor: pointer; }
+  .product-img {
+    width: 100%;
+    padding-bottom: 130%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .product-img-inner {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.5s ease;
+  }
+  .product-card:hover .product-img-inner { transform: scale(1.04); }
+  .pi-1 { background: linear-gradient(160deg, #d4c4a8, #b8956a); }
+  .pi-2 { background: linear-gradient(160deg, #8fa67a, #5c6b3a); }
+  .pi-3 { background: linear-gradient(160deg, #c4a882, #8b6f47); }
+  .pi-4 { background: linear-gradient(160deg, #b8b0a0, #8a8070); }
+  .product-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 6px;
+  }
+  .product-name { font-size: 1rem; color: var(--bark); margin-bottom: 6px; }
+  .product-price {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+    color: var(--earth);
+  }
+  .eco-tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--moss);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  /* MISSION */
+  .mission {
+    padding: 120px 80px;
+    background: var(--bark);
+    color: var(--cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mission::before {
+    content: 'TERRA';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(8rem, 20vw, 18rem);
+    font-weight: 400;
+    letter-spacing: 20px;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .mission-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .mission-eyebrow {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 28px;
+  }
+  .mission h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--cream);
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+  .mission p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    color: var(--clay);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .btn-cream {
+    padding: 16px 40px;
+    background: var(--cream);
+    color: var(--bark);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+  }
+  .btn-cream:hover { background: var(--sand); }
+  .mission-stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 80px;
+    flex-wrap: wrap;
+  }
+  .m-stat { text-align: center; }
+  .m-stat-num {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--clay);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .m-stat-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    color: var(--stone);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--sand);
+    padding: 60px 80px 40px;
+    border-top: 1px solid rgba(196,168,130,0.3);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-logo {
+    font-size: 1.4rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 12px;
+  }
+  .footer-tagline {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: var(--stone);
+  }
+  .footer-links { display: flex; gap: 60px; flex-wrap: wrap; }
+  .footer-col h4 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .footer-col a {
+    display: block;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    color: var(--bark);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--earth); }
+  .footer-bottom {
+    border-top: 1px solid rgba(196,168,130,0.3);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    color: var(--stone);
+  }
+  .footer-cert {
+    display: flex;
+    gap: 16px;
+  }
+  .cert {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: var(--stone);
+    border: 1px solid var(--clay);
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vw; min-height: 300px; }
+    .hero-left { padding: 60px 24px; }
+    .values { padding: 60px 24px; }
+    .values-grid { grid-template-columns: 1fr; gap: 2px; }
+    .collection { padding: 60px 24px; }
+    .products { grid-template-columns: repeat(2, 1fr); }
+    .mission { padding: 80px 24px; }
+    footer { padding: 40px 24px; }
+    .footer-links { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Terra</div>
+  <div class="nav-links">
+    <a href="#">컬렉션</a>
+    <a href="#">소재</a>
+    <a href="#">우리의 약속</a>
+    <a href="#">스토어</a>
+    <a href="#" class="nav-cta">쇼핑하기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">2026 SS Collection — 자연에서 온 것들</div>
+    <h1>지구를<br><em>입다</em></h1>
+    <p class="hero-sub">TERRA는 100% 재생 원단과 탄소 중립 제조 공정으로 만들어집니다. 아름다움과 책임감이 함께하는 패션.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-dark">컬렉션 보기</a>
+      <a href="#" class="btn-outline">우리의 이야기</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-block">
+      <div class="cloth-visual">
+        <div class="cloth-layer"></div>
+        <div class="cloth-layer"></div>
+        <div class="cloth-layer">
+          <div class="cloth-badge">100% 유기농 면</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-tag">
+      탄소 배출량<strong>-78%</strong>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-header">
+    <div>
+      <div class="section-eyebrow">우리의 가치</div>
+      <h2>패션이<br><em>달라져야</em><br>합니다</h2>
+    </div>
+    <p class="values-desc">패스트 패션이 지구에 남기는 상처를 우리는 외면하지 않습니다. TERRA는 다른 방식으로 만들고, 다른 방식으로 입습니다.</p>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-num">01</div>
+      <div class="value-title">재생 소재만 사용</div>
+      <p class="value-desc">버려진 페트병, 유기농 면화, FSC 인증 텐셀. 모든 원단의 출처를 투명하게 공개합니다.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-num">02</div>
+      <div class="value-title">공정한 임금</div>
+      <p class="value-desc">협력 공장의 모든 노동자는 생활 임금을 보장받습니다. 우리는 공급망 전체를 직접 감사합니다.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-num">03</div>
+      <div class="value-title">수선 & 재순환</div>
+      <p class="value-desc">모든 TERRA 제품은 평생 무료 수선 서비스를 제공합니다. 수명이 다한 옷은 우리가 다시 거둬갑니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection">
+  <div class="collection-header">
+    <div>
+      <div class="section-eyebrow">신상품</div>
+      <h2>SS 2026 컬렉션</h2>
+    </div>
+    <a href="#" class="view-all">전체 보기</a>
+  </div>
+  <div class="products">
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner pi-1">
+          <div class="eco-tag">유기농 면</div>
+        </div>
+      </div>
+      <div class="product-label">Tops</div>
+      <div class="product-name">오버핏 캔버스 셔츠</div>
+      <div class="product-price">₩89,000</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner pi-2">
+          <div class="eco-tag">재생 소재</div>
+        </div>
+      </div>
+      <div class="product-label">Bottoms</div>
+      <div class="product-name">와이드 테일러드 팬츠</div>
+      <div class="product-price">₩129,000</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner pi-3">
+          <div class="eco-tag">텐셀™</div>
+        </div>
+      </div>
+      <div class="product-label">Outer</div>
+      <div class="product-name">드레이프 트렌치코트</div>
+      <div class="product-price">₩298,000</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner pi-4">
+          <div class="eco-tag">울 혼방</div>
+        </div>
+      </div>
+      <div class="product-label">Knitwear</div>
+      <div class="product-name">메리노 크루넥 니트</div>
+      <div class="product-price">₩158,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-content">
+    <div class="mission-eyebrow">우리의 약속</div>
+    <h2>2030년까지<br>탄소 네거티브</h2>
+    <p>우리는 탄소를 줄이는 것을 넘어, 배출한 것보다 더 많은 탄소를 흡수하는 브랜드가 될 것입니다. 매출의 3%는 해양 정화와 산림 복원 프로젝트에 사용됩니다.</p>
+    <a href="#" class="btn-cream">임팩트 리포트 보기</a>
+    <div class="mission-stats">
+      <div class="m-stat">
+        <span class="m-stat-num">1.2M</span>
+        <div class="m-stat-label">재활용 페트병</div>
+      </div>
+      <div class="m-stat">
+        <span class="m-stat-num">340톤</span>
+        <div class="m-stat-label">절감된 탄소</div>
+      </div>
+      <div class="m-stat">
+        <span class="m-stat-num">28개</span>
+        <div class="m-stat-label">파트너 공장</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Terra</div>
+      <div class="footer-tagline">지속가능한 패션의 새로운 기준</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>쇼핑</h4>
+        <a href="#">신상품</a>
+        <a href="#">여성</a>
+        <a href="#">남성</a>
+        <a href="#">액세서리</a>
+      </div>
+      <div class="footer-col">
+        <h4>브랜드</h4>
+        <a href="#">우리의 이야기</a>
+        <a href="#">소재 라이브러리</a>
+        <a href="#">임팩트 리포트</a>
+        <a href="#">협력사</a>
+      </div>
+      <div class="footer-col">
+        <h4>고객지원</h4>
+        <a href="#">배송 안내</a>
+        <a href="#">수선 서비스</a>
+        <a href="#">재순환 프로그램</a>
+        <a href="#">문의하기</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 TERRA Inc. All rights reserved.</div>
+    <div class="footer-cert">
+      <div class="cert">B Corp</div>
+      <div class="cert">GOTS</div>
+      <div class="cert">Fair Trade</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

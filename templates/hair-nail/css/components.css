@@ -1,0 +1,43 @@
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.8rem 1.15rem;border:1px solid transparent;font-weight:700;line-height:1.2;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}
+.button:hover{transform:translateY(-2px)}
+.button-primary{background:var(--color-primary);color:#fff}
+.button-secondary{background:var(--color-surface);color:var(--color-primary);border-color:var(--color-border)}
+.button-outline{background:transparent;color:var(--color-primary);border-color:var(--color-primary)}
+.button-small{min-height:40px;padding:.6rem .9rem;font-size:var(--font-sm)}
+.button-row{display:flex;flex-wrap:wrap;gap:.75rem}
+.button-row-center{justify-content:center}
+.modal-actions{margin-top:1rem}
+.card{background:color-mix(in srgb,var(--color-bg),white 58%);border:1px solid var(--color-border);border-radius:var(--radius);padding:var(--space-md);box-shadow:var(--shadow-sm)}
+.card h3{font-size:var(--font-md);line-height:1.35;margin-bottom:.45rem}
+.card p{color:var(--color-muted)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}
+.badge-list{display:flex;flex-wrap:wrap;gap:.55rem}
+.badge{display:inline-flex;align-items:center;min-height:32px;padding:.35rem .75rem;border:1px solid var(--color-border);border-radius:999px;background:color-mix(in srgb,var(--color-surface),white 30%);font-size:var(--font-xs);font-weight:700;color:var(--color-primary)}
+.visual-card,.placeholder{position:relative;overflow:hidden;min-height:260px;background:linear-gradient(135deg,color-mix(in srgb,var(--color-accent),white 62%),color-mix(in srgb,var(--color-primary),white 78%));border:1px solid var(--color-border)}
+.visual-card::before,.placeholder::before{content:"";position:absolute;inset:12%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.62),transparent 34%),linear-gradient(135deg,transparent 45%,rgba(255,255,255,.28) 45% 55%,transparent 55%);border-radius:inherit}
+.visual-label{position:absolute;left:18px;bottom:18px;right:18px;padding:.85rem 1rem;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border-radius:calc(var(--radius-sm) + 4px);font-weight:700}
+.faq-list{display:grid;gap:.75rem;max-width:820px;margin-inline:auto}
+.faq-item{border:1px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-bg);overflow:hidden}
+.faq-question{width:100%;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1rem 1.1rem;text-align:left;font-weight:700;color:var(--color-text)}
+.faq-question::after{content:"+";font-size:1.25rem;color:var(--color-accent)}
+.faq-question[aria-expanded="true"]::after{content:"-"}
+.faq-answer{display:none;padding:0 1.1rem 1.1rem;color:var(--color-muted)}
+.faq-item.is-open .faq-answer{display:block}
+.modal-overlay{position:fixed;inset:0;z-index:30;display:none;place-items:center;background:rgba(0,0,0,.44);padding:20px}
+.modal-overlay.is-open{display:grid}
+.modal{width:min(460px,100%);background:var(--color-bg);border-radius:var(--radius);padding:var(--space-md);box-shadow:var(--shadow-md)}
+.modal-header{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}
+.modal-close{width:40px;height:40px;border-radius:50%;border:1px solid var(--color-border)}
+.slider{position:relative;overflow:hidden}
+.slide{display:none}
+.slide.is-active{display:block}
+.slider-controls{display:flex;gap:.5rem;margin-top:1rem}
+.slider-controls button{width:40px;height:40px;border-radius:50%;border:1px solid var(--color-border);background:var(--color-bg)}
+.field{display:grid;gap:.35rem}
+.field label{font-size:var(--font-sm);font-weight:700}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--color-border);background:#fff;padding:.85rem 1rem;border-radius:var(--radius-sm);color:var(--color-text)}
+.contact-form{display:grid;gap:1rem}
+.button,.card{border-radius:10px}.button-primary{background:linear-gradient(135deg,var(--color-primary),var(--color-accent))}.portfolio-tile{border-radius:0}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+@media (max-width:560px){.grid-3{grid-template-columns:1fr}.button-row{display:grid}.button{width:100%}.visual-card,.placeholder{min-height:220px}}

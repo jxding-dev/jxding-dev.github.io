@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="시술 결과, 가격, 디자이너, 예약 CTA가 빠르게 이어지는 트렌디 살롱 템플릿입니다.">
+  <title>문의 | 모브살롱</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head><body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">모브살롱<small>헤어와 네일 결과물을 먼저 보여주는 살롱</small></a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a><a href="../pages/about.html">소개</a><a href="../pages/service.html">서비스</a><a href="../pages/review.html">후기</a><a href="../pages/contact.html" aria-current="page">문의</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="button button-primary button-small" data-modal-open="#consult-modal">예약 문의</button>
+      <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <section class="page-hero"><div class="container page-title"><span class="eyebrow">문의</span><h1>예약 문의</h1><p>희망 날짜와 시술 항목을 빠르게 남길 수 있는 문의 페이지입니다.</p></div></section>
+  <section class="section"><div class="container contact-panel"><div><div class="section-heading"><span class="eyebrow">CONTACT</span><h2>문의와 오시는 길</h2><p>정적 페이지 기준의 문의 화면입니다. 실제 운영 시 전송 API나 외부 폼으로 연결할 수 있습니다.</p></div><ul class="info-list"><li><strong>전화</strong><span>010-1234-5678</span></li><li><strong>주소</strong><span>서울시 샘플구 템플릿로 12</span></li><li><strong>운영</strong><span>11:00-20:00</span></li></ul><div class="map-box" aria-label="지도 대체 영역">지도 또는 매장 위치 이미지 대체 영역</div></div><form class="contact-form card"><div class="field"><label for="name">이름</label><input id="name" name="name" autocomplete="name"></div><div class="field"><label for="phone">연락처</label><input id="phone" name="phone" autocomplete="tel"></div><div class="field"><label for="message">문의 내용</label><textarea id="message" name="message" rows="5"></textarea></div><button class="button button-primary" type="button" data-modal-open="#consult-modal">문의 안내 보기</button></form></div></section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><div class="footer-title">모브살롱</div><p>헤어와 네일 결과물을 먼저 보여주는 살롱</p></div>
+    <div><div class="footer-title">Menu</div><p><a href="../pages/service.html">서비스</a></p><p><a href="../pages/review.html">후기</a></p></div>
+    <div><div class="footer-title">Contact</div><p>010-1234-5678</p><p>hello@example.com</p></div>
+    <div><div class="footer-title">Hours</div><p>Tue-Sun 11:00-20:00</p><p>월요일 휴무</p></div>
+  </div>
+</footer>
+<div class="modal-overlay" id="consult-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-header"><h2 id="modal-title">상담 안내</h2><button class="modal-close" data-modal-close aria-label="상담 안내 닫기">×</button></div>
+    <p class="muted">정적 목업 템플릿입니다. 실제 예약 기능은 없으며, 운영 시 카카오채널이나 예약 링크로 연결할 수 있습니다.</p>
+    <div class="button-row modal-actions"><a class="button button-primary" href="../pages/contact.html">문의 페이지 보기</a></div>
+  </div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/slider.js"></script>
+<script src="../js/modal.js"></script>
+</body>
+</html>

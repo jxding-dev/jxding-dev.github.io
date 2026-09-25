@@ -1,0 +1,1 @@
+/* modal behavior is initialized in common.js to avoid duplicate listeners. */

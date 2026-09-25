@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="NUVO — 2026 SS 컬렉션">
+<title>NUVO — 2026 SS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────
+   TOKENS
+───────────────────────────────────── */
+:root{
+  --black:#0d0d0d;
+  --white:#fff;
+  --gray-1:#f8f8f8;
+  --gray-2:#f0f0f0;
+  --gray-3:#e2e2e2;
+  --gray-5:#999;
+  --gray-7:#555;
+  --red:#e8342a;
+  --gold:#c9a96e;
+  --sans:'Inter',system-ui,sans-serif;
+  --serif:'Playfair Display',Georgia,serif;
+  --hh:56px;          /* header height */
+  --ann:32px;         /* announcement height */
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in-out:cubic-bezier(.45,0,.55,1);
+  --dur-fast:.18s;
+  --dur-base:.32s;
+  --dur-slow:.55s;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+/* ─────────────────────────────────────
+   RESET
+───────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+body{font-family:var(--sans);background:#fff;color:var(--black);overflow-x:hidden;line-height:1.5;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--sans);cursor:pointer;border:none;background:none;padding:0;-webkit-tap-highlight-color:transparent;}
+ul{list-style:none;}
+input{font-family:var(--sans);}
+
+/* ─────────────────────────────────────
+   LAYOUT
+───────────────────────────────────── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px;}
+@media(min-width:768px){.wrap{padding:0 32px;}}
+
+/* ─────────────────────────────────────
+   ANNOUNCEMENT
+───────────────────────────────────── */
+.ann{
+  height:var(--ann);background:var(--black);
+  display:flex;align-items:center;overflow:hidden;
+}
+.ann-belt{
+  display:flex;gap:72px;white-space:nowrap;
+  animation:belt 22s linear infinite;
+}
+.ann:hover .ann-belt{animation-play-state:paused;}
+@keyframes belt{to{transform:translateX(-50%);}}
+.ann-item{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.5px;}
+.ann-item strong{color:#fff;font-weight:600;}
+
+/* ─────────────────────────────────────
+   HEADER
+───────────────────────────────────── */
+.site-header{
+  position:sticky;top:0;z-index:500;
+  height:var(--hh);
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--gray-3);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transition:box-shadow var(--dur-base);
+}
+.site-header.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.07);}
+.hd{
+  height:100%;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+}
+/* hamburger left on mobile */
+.hbg{
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;align-items:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.hbg span{
+  display:block;width:22px;height:1.5px;background:var(--black);
+  transition:transform var(--dur-base) var(--ease-out), opacity var(--dur-fast);
+  border-radius:1px;
+}
+.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+.hd-logo{
+  font-family:var(--serif);font-size:20px;font-weight:700;
+  letter-spacing:6px;text-transform:uppercase;color:var(--black);
+  justify-self:center;
+  transition:letter-spacing var(--dur-base);
+}
+@media(min-width:768px){.hd-logo{font-size:22px;}}
+.hd-logo:hover{letter-spacing:8px;}
+
+/* desktop nav */
+.hd-nav{display:none;}
+@media(min-width:960px){
+  .hd-nav{
+    display:flex;align-items:center;gap:2px;
+    position:absolute;left:50%;transform:translateX(-50%);
+    height:var(--hh);
+  }
+  .hd-logo{position:absolute;left:50%;transform:translateX(-50%);}
+  .hd{grid-template-columns:1fr auto 1fr;}
+}
+.hd-nav a{
+  height:var(--hh);display:flex;align-items:center;
+  padding:0 14px;font-size:13px;font-weight:500;color:var(--gray-7);
+  position:relative;transition:color var(--dur-fast);
+}
+.hd-nav a::after{
+  content:'';position:absolute;bottom:0;left:14px;right:14px;
+  height:2px;background:var(--black);
+  transform:scaleX(0);transition:transform var(--dur-base) var(--ease-out);
+  transform-origin:left;
+}
+.hd-nav a:hover,
+.hd-nav a.active{color:var(--black);}
+.hd-nav a:hover::after,
+.hd-nav a.active::after{transform:scaleX(1);}
+
+.hd-actions{display:flex;align-items:center;gap:2px;justify-content:flex-end;}
+.hd-btn{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--black);
+  transition:background var(--dur-fast),transform var(--dur-fast);
+  position:relative;
+}
+.hd-btn:active{transform:scale(.92);}
+.hd-btn:hover{background:var(--gray-2);}
+.hd-btn svg{width:18px;height:18px;stroke-width:1.7;}
+.cart-pip{
+  position:absolute;top:8px;right:8px;
+  width:15px;height:15px;border-radius:50%;
+  background:var(--black);color:#fff;
+  font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0);
+  transition:opacity var(--dur-fast),transform .2s var(--ease-out);
+  pointer-events:none;
+}
+.cart-pip.show{opacity:1;transform:scale(1);}
+
+/* Mobile nav drawer */
+.mob-nav{
+  position:fixed;top:calc(var(--ann) + var(--hh));left:0;right:0;bottom:0;
+  background:#fff;z-index:490;
+  transform:translateX(-100%);
+  transition:transform var(--dur-base) var(--ease-out);
+  padding:8px 0 32px;
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.mob-nav.open{transform:translateX(0);}
+.mob-nav a{
+  padding:16px 24px;font-size:17px;font-weight:600;
+  color:var(--black);border-bottom:1px solid var(--gray-2);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background var(--dur-fast),color var(--dur-fast);
+}
+.mob-nav a:active{background:var(--gray-1);}
+.mob-nav a::after{content:'→';font-size:14px;color:var(--gray-5);}
+.mob-nav-cats{padding:20px 24px;}
+.mob-nav-cats-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray-5);margin-bottom:12px;}
+.mob-nav-cats-list{display:flex;flex-wrap:wrap;gap:8px;}
+.mob-cat-chip{
+  padding:8px 16px;border:1px solid var(--gray-3);border-radius:100px;
+  font-size:13px;font-weight:500;color:var(--gray-7);
+  transition:all var(--dur-fast);
+}
+.mob-cat-chip:active{background:var(--black);color:#fff;border-color:var(--black);}
+
+/* ─────────────────────────────────────
+   CATEGORY TAB BAR
+───────────────────────────────────── */
+.cat-bar{
+  position:sticky;top:var(--hh);z-index:400;
+  background:#fff;border-bottom:1px solid var(--gray-3);
+  overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.cat-bar::-webkit-scrollbar{display:none;}
+.cat-bar-inner{
+  display:flex;padding:0 20px;
+  width:max-content;min-width:100%;
+}
+@media(min-width:768px){.cat-bar-inner{padding:0 32px;}}
+.cat-tab{
+  height:44px;padding:0 16px;
+  font-size:13px;font-weight:500;color:var(--gray-5);
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+  transition:color var(--dur-fast),border-color var(--dur-fast);
+  font-family:var(--sans);
+}
+@media(min-width:768px){.cat-tab{padding:0 20px;}}
+.cat-tab:hover{color:var(--black);}
+.cat-tab.active{color:var(--black);border-bottom-color:var(--black);font-weight:700;}
+
+/* ─────────────────────────────────────
+   HERO SLIDER
+───────────────────────────────────── */
+.hero{
+  position:relative;overflow:hidden;
+  background:#111;
+  height:calc(100svh - var(--ann) - var(--hh) - 44px);
+  min-height:420px;max-height:860px;
+}
+.slide{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity .9s ease;
+}
+.slide.active{opacity:1;z-index:1;}
+.slide-img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:brightness(.72);
+  transform:scale(1.06);
+  transition:transform 6s ease;
+}
+.slide.active .slide-img{transform:scale(1);}
+.slide-content{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:0 24px 80px;
+}
+@media(min-width:768px){.slide-content{padding:0 64px 96px;}}
+.slide-label{
+  display:block;font-size:10px;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:14px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .6s .15s,transform .6s .15s var(--ease-out);
+}
+.slide-title{
+  font-family:var(--serif);
+  font-size:clamp(36px,8vw,80px);
+  font-weight:400;line-height:1.08;
+  letter-spacing:-1.5px;color:#fff;margin-bottom:28px;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s .28s,transform .6s .28s var(--ease-out);
+}
+.slide-title em{font-style:italic;color:rgba(255,255,255,.75);}
+.slide-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  height:48px;padding:0 28px;
+  background:#fff;color:var(--black);
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .6s .4s,transform .6s .4s var(--ease-out),background var(--dur-fast),gap var(--dur-fast);
+}
+.slide-cta:hover{background:var(--gray-2);gap:14px;}
+.slide-cta:active{background:var(--gray-3);}
+.slide.active .slide-label,
+.slide.active .slide-title,
+.slide.active .slide-cta{opacity:1;transform:none;}
+
+/* Slider controls */
+.slider-dots{
+  position:absolute;bottom:24px;right:20px;z-index:5;
+  display:flex;gap:6px;align-items:center;
+}
+@media(min-width:768px){.slider-dots{right:32px;}}
+.slider-dot{
+  width:6px;height:6px;border-radius:3px;
+  background:rgba(255,255,255,.35);cursor:pointer;
+  transition:background .2s,width .3s var(--ease-out);
+}
+.slider-dot.active{background:#fff;width:24px;}
+.slider-arrows{
+  position:absolute;bottom:20px;left:24px;z-index:5;
+  display:flex;gap:6px;
+}
+@media(min-width:768px){.slider-arrows{left:64px;}}
+.slider-arrow{
+  width:38px;height:38px;
+  border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.75);
+  font-size:18px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:border-color var(--dur-fast),color var(--dur-fast),background var(--dur-fast);
+}
+.slider-arrow:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.1);}
+.slider-arrow:active{background:rgba(255,255,255,.2);}
+.slider-prog{position:absolute;bottom:0;left:0;height:3px;background:rgba(255,255,255,.6);z-index:6;}
+
+/* ─────────────────────────────────────
+   CATEGORY VISUAL GRID
+───────────────────────────────────── */
+.cat-section{padding:32px 0 0;}
+@media(min-width:768px){.cat-section{padding:48px 0 0;}}
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+@media(min-width:480px){.cat-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:768px){.cat-grid{grid-template-columns:repeat(5,1fr);gap:10px;}}
+.cat-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  border-radius:2px;
+  transform:translateY(0);
+  transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base);
+}
+.cat-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.15);}
+.cat-card:active{transform:translateY(-1px);}
+.cat-card-img{aspect-ratio:2/3;overflow:hidden;position:relative;}
+.cat-card-img img{
+  transition:transform .6s var(--ease-out),filter .4s;
+}
+.cat-card:hover .cat-card-img img{transform:scale(1.07);filter:brightness(.85);}
+.cat-card-dim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.05) 55%,transparent 100%);}
+.cat-card-body{position:absolute;bottom:0;left:0;right:0;padding:14px 12px;}
+.cat-card-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;}
+.cat-card-count{font-size:11px;color:rgba(255,255,255,.55);}
+/* last card spans if odd number on 3-col */
+@media(min-width:480px) and (max-width:767px){.cat-card:last-child:nth-child(3n+1){grid-column:span 3;}.cat-card:last-child:nth-child(3n+1) .cat-card-img{aspect-ratio:3/1;}}
+
+/* ─────────────────────────────────────
+   SECTION COMMON
+───────────────────────────────────── */
+.section{padding:48px 0;}
+@media(min-width:768px){.section{padding:72px 0;}}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;}
+@media(min-width:768px){.sec-head{margin-bottom:32px;}}
+.sec-title{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.3px;}
+@media(min-width:768px){.sec-title{font-size:28px;}}
+.sec-title small{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--gray-5);margin-left:8px;vertical-align:middle;}
+.sec-more{
+  font-size:12px;font-weight:600;color:var(--gray-7);
+  display:flex;align-items:center;gap:4px;white-space:nowrap;
+  transition:color var(--dur-fast),gap var(--dur-fast);
+}
+.sec-more:hover{color:var(--black);gap:8px;}
+
+/* Filter tabs */
+.ftabs{display:flex;gap:6px;margin-bottom:24px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.ftabs::-webkit-scrollbar{display:none;}
+.ftab{
+  flex-shrink:0;
+  height:34px;padding:0 14px;
+  border:1px solid var(--gray-3);border-radius:100px;
+  font-size:12px;font-weight:500;color:var(--gray-7);
+  transition:all var(--dur-fast);font-family:var(--sans);
+  white-space:nowrap;
+}
+.ftab:active{transform:scale(.96);}
+.ftab.active{background:var(--black);color:#fff;border-color:var(--black);}
+
+/* ─────────────────────────────────────
+   PRODUCT GRID
+───────────────────────────────────── */
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 10px;}
+@media(min-width:600px){.prod-grid{grid-template-columns:repeat(3,1fr);gap:28px 12px;}}
+@media(min-width:960px){.prod-grid{grid-template-columns:repeat(4,1fr);gap:36px 16px;}}
+
+/* Product card */
+.prod-card{cursor:pointer;}
+.prod-img-wrap{
+  position:relative;overflow:hidden;
+  aspect-ratio:3/4;background:var(--gray-1);
+  margin-bottom:10px;border-radius:2px;
+}
+.prod-img-wrap img.img-a,
+.prod-img-wrap img.img-b{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.prod-img-wrap img.img-a{
+  z-index:1;
+  transition:transform .6s var(--ease-out);
+}
+.prod-img-wrap img.img-b{
+  z-index:2;opacity:0;
+  transition:opacity .4s ease;
+}
+.prod-card:hover .prod-img-wrap img.img-a{transform:scale(1.05);}
+.prod-card:hover .prod-img-wrap img.img-b{opacity:1;}
+
+/* badges */
+.prod-badges{position:absolute;top:10px;left:10px;z-index:3;display:flex;flex-direction:column;gap:4px;}
+.prod-badge{
+  display:inline-flex;align-items:center;
+  padding:0 7px;height:18px;
+  font-size:10px;font-weight:700;letter-spacing:.5px;
+}
+.pb-new{background:var(--black);color:#fff;}
+.pb-sale{background:var(--red);color:#fff;}
+.pb-best{background:#fff;color:var(--black);border:1px solid var(--gray-3);}
+.pb-hot{background:var(--gold);color:#fff;}
+
+/* wish */
+.prod-wish{
+  position:absolute;top:10px;right:10px;z-index:3;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  opacity:0;transform:translateY(-4px);
+  transition:opacity var(--dur-fast),transform var(--dur-fast),color var(--dur-fast);
+}
+.prod-card:hover .prod-wish,
+.prod-wish.wishlisted{opacity:1;transform:none;}
+.prod-wish.wishlisted{color:var(--red);}
+@media(hover:none){.prod-wish{opacity:1;transform:none;}}
+
+/* quick add strip */
+.prod-strip{
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  background:rgba(13,13,13,.88);
+  backdrop-filter:blur(4px);
+  transform:translateY(101%);
+  transition:transform .28s var(--ease-out);
+}
+.prod-card:hover .prod-strip{transform:none;}
+@media(hover:none){.prod-strip{display:none;}}
+.prod-sizes{display:flex;border-bottom:1px solid rgba(255,255,255,.1);}
+.prod-sz{
+  flex:1;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.5);
+  border-right:1px solid rgba(255,255,255,.08);
+  transition:background var(--dur-fast),color var(--dur-fast);font-family:var(--sans);
+}
+.prod-sz:last-child{border-right:none;}
+.prod-sz:hover{background:rgba(255,255,255,.12);color:#fff;}
+.prod-sz:active{background:rgba(255,255,255,.2);}
+.prod-add{
+  width:100%;height:42px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px;
+  transition:background var(--dur-fast);font-family:var(--sans);
+}
+.prod-add:hover{background:rgba(255,255,255,.08);}
+.prod-add svg{width:14px;height:14px;}
+
+/* mobile quick add button (replaces hover strip) */
+.prod-mob-add{
+  display:none;
+  width:100%;height:40px;margin-top:6px;
+  background:var(--black);color:#fff;
+  font-size:12px;font-weight:700;letter-spacing:.3px;
+  transition:background var(--dur-fast);font-family:var(--sans);
+  border-radius:2px;
+}
+.prod-mob-add:active{background:#333;}
+@media(hover:none){.prod-mob-add{display:flex;align-items:center;justify-content:center;}}
+
+/* product info */
+.prod-brand{font-size:10px;color:var(--gray-5);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.prod-name{font-size:13px;color:var(--black);line-height:1.4;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media(min-width:768px){.prod-name{font-size:14px;}}
+.prod-colors{display:flex;gap:4px;margin-bottom:6px;}
+.prod-color{width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);}
+.prod-price-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.prod-price{font-size:14px;font-weight:700;}
+.prod-price-orig{font-size:12px;color:var(--gray-5);text-decoration:line-through;}
+.prod-price-disc{font-size:12px;font-weight:700;color:var(--red);}
+
+/* ─────────────────────────────────────
+   HORIZONTAL SCROLL (mobile products)
+───────────────────────────────────── */
+.hscroll{
+  overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  margin:0 -20px;padding:0 20px 16px;
+  scroll-snap-type:x mandatory;
+}
+.hscroll::-webkit-scrollbar{display:none;}
+.hscroll-inner{display:flex;gap:10px;width:max-content;}
+.hscroll-inner .prod-card{width:160px;flex-shrink:0;scroll-snap-align:start;}
+@media(min-width:420px){.hscroll-inner .prod-card{width:185px;}}
+@media(min-width:600px){.hscroll-inner .prod-card{width:210px;}}
+
+/* ─────────────────────────────────────
+   DIVIDER BANNER
+───────────────────────────────────── */
+.div-banner{display:grid;grid-template-columns:1fr;}
+@media(min-width:600px){.div-banner{grid-template-columns:1fr 1fr;}}
+.db-cell{position:relative;overflow:hidden;cursor:pointer;}
+.db-cell-img{
+  aspect-ratio:4/3;overflow:hidden;
+  position:relative;
+}
+@media(min-width:600px){.db-cell-img{aspect-ratio:16/11;}}
+.db-cell-img img{transition:transform .6s var(--ease-out),filter .4s;}
+.db-cell:hover .db-cell-img img{transform:scale(1.05);filter:brightness(.8);}
+.db-cell:active .db-cell-img img{transform:scale(1.02);}
+.db-dim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 55%,transparent 100%);}
+.db-body{position:absolute;bottom:0;left:0;right:0;padding:24px 28px;}
+@media(min-width:768px){.db-body{padding:32px 36px;}}
+.db-tag{display:block;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;}
+.db-title{font-family:var(--serif);font-size:clamp(20px,4vw,30px);color:#fff;margin-bottom:14px;line-height:1.2;}
+.db-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:#fff;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px;
+  transition:gap var(--dur-fast),border-color var(--dur-fast);
+}
+.db-cell:hover .db-link{gap:10px;border-color:#fff;}
+
+/* ─────────────────────────────────────
+   EDITORIAL 3-UP (Shop the Look)
+───────────────────────────────────── */
+.look-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+@media(min-width:600px){.look-grid{grid-template-columns:repeat(3,1fr);}}
+.look-cell{position:relative;overflow:hidden;cursor:pointer;}
+.look-cell:last-child{display:none;}
+@media(min-width:600px){.look-cell:last-child{display:block;}}
+.look-img{aspect-ratio:2/3;overflow:hidden;}
+.look-img img{transition:transform .6s var(--ease-out);}
+.look-cell:hover .look-img img{transform:scale(1.06);}
+.look-dim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);}
+.look-body{position:absolute;bottom:0;left:0;right:0;padding:18px 18px 20px;}
+.look-tag{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px;}
+.look-name{font-size:15px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:8px;}
+.look-price{font-size:12px;color:rgba(255,255,255,.7);}
+
+/* ─────────────────────────────────────
+   BRAND STORY (Editorial strip)
+───────────────────────────────────── */
+.brand-strip{display:grid;grid-template-columns:1fr;}
+@media(min-width:768px){.brand-strip{grid-template-columns:1fr 1fr;min-height:480px;}}
+.bs-img{overflow:hidden;}
+.bs-img img{height:100%;min-height:280px;transition:transform .7s var(--ease-out);}
+@media(min-width:768px){.bs-img img{min-height:unset;}}
+.brand-strip:hover .bs-img img{transform:scale(1.03);}
+.bs-body{
+  background:var(--gray-1);
+  padding:48px 24px;
+  display:flex;flex-direction:column;justify-content:center;gap:18px;
+}
+@media(min-width:768px){.bs-body{padding:64px 56px;}}
+.bs-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gray-5);}
+.bs-title{font-family:var(--serif);font-size:clamp(24px,3.5vw,40px);font-weight:400;line-height:1.25;letter-spacing:-.5px;}
+.bs-desc{font-size:14px;line-height:1.75;color:var(--gray-7);max-width:400px;}
+.bs-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  height:46px;padding:0 24px;
+  background:var(--black);color:#fff;
+  font-size:13px;font-weight:600;width:fit-content;
+  transition:background var(--dur-fast),gap var(--dur-fast);
+}
+.bs-btn:hover{background:#333;gap:12px;}
+.bs-btn:active{background:#222;}
+
+/* ─────────────────────────────────────
+   SALE BAND
+───────────────────────────────────── */
+.sale-band{
+  background:var(--black);
+  padding:52px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.sale-band::before{
+  content:'SALE';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--serif);font-size:clamp(80px,18vw,220px);
+  color:rgba(255,255,255,.03);letter-spacing:20px;
+  pointer-events:none;white-space:nowrap;
+}
+.sale-label{display:block;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gray-5);margin-bottom:10px;}
+.sale-title{font-family:var(--serif);font-size:clamp(26px,5vw,52px);color:#fff;margin-bottom:28px;letter-spacing:-1px;line-height:1.2;}
+.sale-title em{color:var(--gold);font-style:italic;}
+.countdown{display:flex;justify-content:center;margin-bottom:32px;}
+.cd-blk{text-align:center;padding:0 14px;border-right:1px solid #2a2a2a;}
+@media(min-width:480px){.cd-blk{padding:0 22px;}}
+.cd-blk:last-child{border-right:none;}
+.cd-num{
+  display:block;font-size:clamp(32px,6vw,56px);
+  font-weight:800;color:#fff;line-height:1;
+  letter-spacing:-2px;margin-bottom:6px;
+  font-variant-numeric:tabular-nums;
+  transition:transform .15s;
+}
+.cd-num.tick{animation:cdtick .15s var(--ease-out);}
+@keyframes cdtick{0%{transform:translateY(-6px);opacity:.4;}100%{transform:none;opacity:1;}}
+.cd-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;font-weight:600;}
+.sale-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  height:48px;padding:0 32px;
+  background:#fff;color:var(--black);
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+  transition:background var(--dur-fast),gap var(--dur-fast);
+}
+.sale-cta:hover{background:var(--gray-2);gap:12px;}
+.sale-cta:active{background:var(--gray-3);}
+
+/* ─────────────────────────────────────
+   BRANDS SCROLL
+───────────────────────────────────── */
+.brands-row{
+  border-top:1px solid var(--gray-3);border-bottom:1px solid var(--gray-3);
+  overflow:hidden;padding:16px 0;
+}
+.brands-belt{
+  display:flex;align-items:center;gap:0;
+  animation:belt 18s linear infinite;
+  width:max-content;
+}
+.brands-row:hover .brands-belt{animation-play-state:paused;}
+.brand-item{
+  padding:0 40px;border-right:1px solid var(--gray-3);
+  font-family:var(--serif);font-size:16px;
+  color:var(--gray-5);letter-spacing:2px;white-space:nowrap;
+  transition:color var(--dur-fast);cursor:pointer;
+}
+.brand-item:hover{color:var(--black);}
+
+/* ─────────────────────────────────────
+   REVIEWS
+───────────────────────────────────── */
+.reviews-bg{background:var(--gray-1);}
+.rev-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+@media(min-width:600px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:16px;}}
+.rev-card{
+  background:#fff;padding:22px;
+  border:1px solid var(--gray-3);border-radius:2px;
+  transition:box-shadow var(--dur-base),transform var(--dur-base);
+}
+.rev-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.08);transform:translateY(-3px);}
+.rev-stars{font-size:12px;color:#f59e0b;letter-spacing:2px;margin-bottom:10px;}
+.rev-text{font-size:14px;line-height:1.7;color:#444;margin-bottom:14px;}
+.rev-foot{display:flex;align-items:center;gap:10px;}
+.rev-av{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--gray-2);}
+.rev-av img{width:100%;height:100%;object-fit:cover;}
+.rev-name{font-size:13px;font-weight:700;margin-bottom:1px;}
+.rev-info{font-size:11px;color:var(--gray-5);}
+.rev-tag{display:inline-block;margin-top:10px;font-size:11px;padding:3px 10px;background:var(--gray-1);color:var(--gray-7);border-radius:100px;}
+
+/* ─────────────────────────────────────
+   INSTAGRAM GRID
+───────────────────────────────────── */
+.ig-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.ig-handle{font-size:12px;color:var(--gray-5);margin-top:3px;}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+@media(min-width:600px){.ig-grid{grid-template-columns:repeat(6,1fr);}}
+.ig-item{aspect-ratio:1;overflow:hidden;position:relative;cursor:pointer;}
+.ig-item img{transition:transform .5s var(--ease-out);}
+.ig-item:hover img{transform:scale(1.08);}
+.ig-item:active img{transform:scale(1.04);}
+.ig-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;transition:opacity var(--dur-fast);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:24px;
+}
+.ig-item:hover .ig-overlay{opacity:1;}
+
+/* ─────────────────────────────────────
+   NEWSLETTER
+───────────────────────────────────── */
+.nl-section{background:var(--black);padding:52px 20px;text-align:center;}
+.nl-title{font-family:var(--serif);font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:8px;font-weight:400;}
+.nl-sub{font-size:13px;color:#666;margin-bottom:24px;}
+.nl-form{display:flex;max-width:400px;margin:0 auto 10px;}
+.nl-input{
+  flex:1;height:46px;padding:0 16px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-right:none;
+  color:#fff;font-size:14px;outline:none;
+  transition:border-color var(--dur-fast);
+}
+.nl-input::placeholder{color:rgba(255,255,255,.28);}
+.nl-input:focus{border-color:rgba(255,255,255,.32);}
+.nl-btn{
+  height:46px;padding:0 20px;
+  background:#fff;color:var(--black);
+  font-size:13px;font-weight:700;
+  transition:background var(--dur-fast);font-family:var(--sans);white-space:nowrap;
+}
+.nl-btn:hover{background:var(--gray-2);}
+.nl-btn:active{background:var(--gray-3);}
+.nl-note{font-size:11px;color:#444;}
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+.footer{background:var(--black);padding:52px 0 0;}
+.footer-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px 20px;padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}}
+.ft-logo{font-family:var(--serif);font-size:18px;letter-spacing:5px;text-transform:uppercase;color:#fff;margin-bottom:12px;}
+.ft-desc{font-size:13px;line-height:1.7;color:rgba(255,255,255,.3);max-width:220px;}
+.ft-col-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:16px;}
+.ft-links{display:flex;flex-direction:column;gap:10px;}
+.ft-links a{font-size:13px;color:rgba(255,255,255,.38);transition:color var(--dur-fast);}
+.ft-links a:hover{color:#fff;}
+.footer-bottom{
+  padding:18px 0;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;
+  padding-bottom:calc(18px + var(--safe-bottom));
+}
+.ft-copy{font-size:11px;color:rgba(255,255,255,.2);}
+.ft-pays{display:flex;gap:6px;}
+.pay-chip{
+  height:20px;padding:0 6px;border-radius:2px;
+  background:rgba(255,255,255,.07);
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.3);
+  display:flex;align-items:center;
+}
+
+/* ─────────────────────────────────────
+   CART DRAWER
+───────────────────────────────────── */
+.cart-scrim{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:700;
+  opacity:0;pointer-events:none;
+  transition:opacity var(--dur-base);
+}
+.cart-scrim.open{opacity:1;pointer-events:all;}
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(420px,100vw);
+  background:#fff;z-index:701;
+  transform:translateX(100%);
+  transition:transform var(--dur-base) var(--ease-out);
+  display:flex;flex-direction:column;
+  box-shadow:-4px 0 32px rgba(0,0,0,.12);
+}
+.cart-drawer.open{transform:none;}
+.cart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;border-bottom:1px solid var(--gray-3);flex-shrink:0;
+}
+.cart-head-title{font-size:16px;font-weight:700;}
+.cart-head-cnt{font-size:14px;color:var(--gray-5);font-weight:400;margin-left:6px;}
+.cart-x{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--gray-5);
+  transition:background var(--dur-fast),color var(--dur-fast);
+}
+.cart-x:hover{background:var(--gray-2);color:var(--black);}
+
+/* free ship bar */
+.ship-bar-wrap{padding:12px 22px;background:var(--gray-1);border-bottom:1px solid var(--gray-3);flex-shrink:0;}
+.ship-bar-msg{font-size:12px;color:var(--gray-7);margin-bottom:7px;}
+.ship-bar-msg strong{color:var(--black);}
+.ship-bar-track{height:3px;background:var(--gray-3);border-radius:2px;overflow:hidden;}
+.ship-bar-fill{height:100%;background:var(--black);border-radius:2px;transition:width .4s var(--ease-out);}
+
+.cart-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 22px;}
+.cart-empty-state{
+  height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;color:var(--gray-5);text-align:center;padding:40px 0;
+}
+.cart-empty-state svg{opacity:.2;}
+.cart-empty-state p{font-size:14px;}
+
+.cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--gray-2);}
+.cart-item-img{width:76px;height:96px;flex-shrink:0;overflow:hidden;background:var(--gray-1);border-radius:2px;}
+.cart-item-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+.cart-item:hover .cart-item-img img{transform:scale(1.04);}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-size:13px;font-weight:600;margin-bottom:3px;line-height:1.4;}
+.ci-opt{font-size:12px;color:var(--gray-5);margin-bottom:10px;}
+.ci-qty{display:flex;align-items:center;border:1px solid var(--gray-3);width:fit-content;}
+.ci-qty button{width:30px;height:28px;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background var(--dur-fast);}
+.ci-qty button:active{background:var(--gray-2);}
+.ci-qty span{min-width:28px;text-align:center;font-size:13px;font-weight:600;}
+.ci-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex-shrink:0;}
+.ci-price{font-size:14px;font-weight:700;}
+.ci-del{font-size:11px;color:var(--gray-5);cursor:pointer;transition:color var(--dur-fast);padding:4px 0;}
+.ci-del:hover{color:var(--red);}
+
+.cart-foot{padding:16px 22px calc(20px + var(--safe-bottom));border-top:1px solid var(--gray-3);flex-shrink:0;}
+.cart-foot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.cart-foot-lbl{font-size:14px;color:var(--gray-7);}
+.cart-foot-total{font-size:20px;font-weight:800;}
+.checkout-btn{
+  width:100%;height:50px;
+  background:var(--black);color:#fff;
+  font-size:14px;font-weight:700;letter-spacing:.5px;
+  transition:background var(--dur-fast);font-family:var(--sans);border-radius:2px;
+}
+.checkout-btn:hover{background:#333;}
+.checkout-btn:active{background:#222;}
+.keep-btn{
+  display:block;text-align:center;
+  font-size:13px;color:var(--gray-5);margin-top:10px;
+  transition:color var(--dur-fast);cursor:pointer;
+}
+.keep-btn:hover{color:var(--black);}
+
+/* ─────────────────────────────────────
+   MOBILE FLOATING CART BUTTON
+───────────────────────────────────── */
+.mob-cart-fab{
+  display:none;
+  position:fixed;bottom:calc(24px + var(--safe-bottom));right:20px;z-index:300;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--black);color:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,.28);
+  align-items:center;justify-content:center;
+  transition:transform var(--dur-fast),box-shadow var(--dur-fast);
+}
+.mob-cart-fab:active{transform:scale(.94);box-shadow:0 2px 10px rgba(0,0,0,.2);}
+.mob-cart-fab svg{width:22px;height:22px;}
+.mob-fab-badge{
+  position:absolute;top:10px;right:10px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--red);color:#fff;
+  font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0);
+  transition:opacity var(--dur-fast),transform .2s var(--ease-out);
+}
+.mob-fab-badge.show{opacity:1;transform:scale(1);}
+@media(hover:none){.mob-cart-fab{display:flex;}}
+@media(min-width:768px){.mob-cart-fab{display:none!important;}}
+
+/* ─────────────────────────────────────
+   SEARCH OVERLAY
+───────────────────────────────────── */
+.search-overlay{
+  position:fixed;inset:0;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(8px);
+  z-index:800;
+  opacity:0;pointer-events:none;
+  transition:opacity var(--dur-base);
+  display:flex;flex-direction:column;align-items:center;
+  padding:100px 20px 0;
+}
+@media(min-width:768px){.search-overlay{padding-top:130px;}}
+.search-overlay.open{opacity:1;pointer-events:all;}
+.search-inner{width:100%;max-width:580px;position:relative;}
+.search-input{
+  width:100%;height:56px;
+  border:none;border-bottom:2px solid var(--black);
+  font-size:20px;font-weight:500;color:var(--black);
+  background:transparent;outline:none;padding:0 48px 0 0;
+}
+.search-input::placeholder{color:#ccc;}
+.search-x{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--gray-5);
+  transition:background var(--dur-fast),color var(--dur-fast);
+}
+.search-x:hover{background:var(--gray-2);color:var(--black);}
+.search-hint{margin-top:20px;font-size:12px;color:#bbb;text-align:center;width:100%;max-width:580px;}
+
+/* ─────────────────────────────────────
+   TOAST
+───────────────────────────────────── */
+.toast-shelf{
+  position:fixed;bottom:calc(28px + var(--safe-bottom));left:50%;
+  transform:translateX(-50%);z-index:900;
+  display:flex;flex-direction:column;gap:6px;align-items:center;
+  pointer-events:none;width:90vw;max-width:340px;
+}
+.toast{
+  background:var(--black);color:#fff;
+  padding:12px 18px;
+  font-size:13px;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 24px rgba(0,0,0,.22);
+  width:100%;border-radius:2px;
+  animation:t-in .25s var(--ease-out), t-out .25s ease 2.4s forwards;
+}
+.t-icon{flex-shrink:0;font-size:16px;}
+@keyframes t-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@keyframes t-out{to{opacity:0;transform:translateY(8px);}}
+
+/* ─────────────────────────────────────
+   BACK TO TOP
+───────────────────────────────────── */
+.btt{
+  position:fixed;bottom:calc(92px + var(--safe-bottom));right:20px;z-index:200;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--black);color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 14px rgba(0,0,0,.18);
+  opacity:0;transform:translateY(12px);
+  transition:opacity var(--dur-base),transform var(--dur-base),background var(--dur-fast);
+}
+.btt.show{opacity:1;transform:none;}
+.btt:hover{background:#333;}
+.btt:active{background:#222;}
+@media(min-width:768px){.btt{bottom:calc(28px + var(--safe-bottom));right:28px;}}
+
+/* ─────────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────────── */
+[data-anim]{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);}
+[data-anim="left"]{transform:translateX(-28px);}
+[data-anim="right"]{transform:translateX(28px);}
+[data-anim="scale"]{transform:scale(.96);opacity:0;}
+[data-anim].in{opacity:1;transform:none;}
+[data-delay="1"]{transition-delay:.08s;}
+[data-delay="2"]{transition-delay:.16s;}
+[data-delay="3"]{transition-delay:.24s;}
+[data-delay="4"]{transition-delay:.32s;}
+[data-delay="5"]{transition-delay:.40s;}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="ann" aria-label="공지사항">
+  <div class="ann-belt">
+    <span class="ann-item">무료배송 <strong>5만원 이상</strong></span>
+    <span class="ann-item">회원가입 즉시 <strong>10% 쿠폰</strong></span>
+    <span class="ann-item">SS 2026 신상품 <strong>매주 업데이트</strong></span>
+    <span class="ann-item">오후 2시 이전 주문 <strong>당일 출고</strong></span>
+    <span class="ann-item">30일 무료 교환·반품</span>
+    <span class="ann-item">무료배송 <strong>5만원 이상</strong></span>
+    <span class="ann-item">회원가입 즉시 <strong>10% 쿠폰</strong></span>
+    <span class="ann-item">SS 2026 신상품 <strong>매주 업데이트</strong></span>
+    <span class="ann-item">오후 2시 이전 주문 <strong>당일 출고</strong></span>
+    <span class="ann-item">30일 무료 교환·반품</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header" id="site-header">
+  <div class="wrap">
+    <div class="hd">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="hbg" id="hbg" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <!-- desktop nav -->
+        <nav class="hd-nav" aria-label="주 메뉴">
+          <a href="#new" class="active">신상품</a>
+          <a href="#women">여성</a>
+          <a href="#men">남성</a>
+          <a href="#sale">세일</a>
+          <a href="#">브랜드</a>
+        </nav>
+      </div>
+      <a href="#" class="hd-logo" aria-label="NUVO 홈">NUVO</a>
+      <div class="hd-actions">
+        <button class="hd-btn" id="search-open" aria-label="검색">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <button class="hd-btn" aria-label="위시리스트">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="hd-btn" id="cart-open" aria-label="장바구니">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-pip" id="cart-pip">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mob-nav" id="mob-nav" aria-hidden="true">
+  <a href="#new" onclick="closeMob()">신상품</a>
+  <a href="#women" onclick="closeMob()">여성</a>
+  <a href="#men" onclick="closeMob()">남성</a>
+  <a href="#sale" onclick="closeMob()">세일</a>
+  <a href="#" onclick="closeMob()">브랜드</a>
+  <div class="mob-nav-cats">
+    <div class="mob-nav-cats-title">카테고리</div>
+    <div class="mob-nav-cats-list">
+      <button class="mob-cat-chip" onclick="filterCat('tops');closeMob()">상의</button>
+      <button class="mob-cat-chip" onclick="filterCat('bottoms');closeMob()">하의</button>
+      <button class="mob-cat-chip" onclick="filterCat('outer');closeMob()">아우터</button>
+      <button class="mob-cat-chip" onclick="filterCat('dress');closeMob()">원피스</button>
+      <button class="mob-cat-chip" onclick="filterCat('acc');closeMob()">액세서리</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Category Tab Bar -->
+<div class="cat-bar" aria-label="카테고리">
+  <div class="cat-bar-inner">
+    <button class="cat-tab active" data-cat="all">전체</button>
+    <button class="cat-tab" data-cat="tops">상의</button>
+    <button class="cat-tab" data-cat="bottoms">하의</button>
+    <button class="cat-tab" data-cat="outer">아우터</button>
+    <button class="cat-tab" data-cat="dress">원피스</button>
+    <button class="cat-tab" data-cat="acc">액세서리</button>
+    <button class="cat-tab" data-cat="shoes">슈즈</button>
+  </div>
+</div>
+
+<!-- Hero Slider -->
+<section class="hero" id="hero" aria-label="메인 슬라이더">
+  <div class="slide active">
+    <img class="slide-img" src="https://picsum.photos/seed/nuvo-h1/1600/900" alt="2026 SS 컬렉션" loading="eager" fetchpriority="high">
+    <div class="slide-content">
+      <span class="slide-label">2026 SS Collection</span>
+      <h1 class="slide-title">새로운 계절의<br><em>무드를 담다</em></h1>
+      <a href="#new" class="slide-cta">신상품 보기 →</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-img" src="https://picsum.photos/seed/nuvo-h2/1600/900" alt="Summer Essentials" loading="lazy">
+    <div class="slide-content">
+      <span class="slide-label">Summer Essentials</span>
+      <h1 class="slide-title">여름을 위한<br><em>가장 가벼운 선택</em></h1>
+      <a href="#women" class="slide-cta">컬렉션 보기 →</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-img" src="https://picsum.photos/seed/nuvo-h3/1600/900" alt="시즌 세일" loading="lazy">
+    <div class="slide-content">
+      <span class="slide-label">Season Sale — Up to 50%</span>
+      <h1 class="slide-title">놓치면 안 되는<br><em>시즌 오프</em></h1>
+      <a href="#sale" class="slide-cta">세일 보기 →</a>
+    </div>
+  </div>
+  <div class="slider-arrows">
+    <button class="slider-arrow" id="s-prev" aria-label="이전">‹</button>
+    <button class="slider-arrow" id="s-next" aria-label="다음">›</button>
+  </div>
+  <div class="slider-dots" id="s-dots" role="tablist">
+    <div class="slider-dot active" role="tab"></div>
+    <div class="slider-dot" role="tab"></div>
+    <div class="slider-dot" role="tab"></div>
+  </div>
+  <div class="slider-prog" id="s-prog"></div>
+</section>
+
+<!-- Category Visual Grid -->
+<section class="cat-section" aria-label="카테고리">
+  <div class="wrap">
+    <div class="cat-grid">
+      <div class="cat-card" data-anim data-delay="1"><div class="cat-card-img"><img src="https://picsum.photos/seed/ct-tops/400/600" alt="상의" loading="lazy"><div class="cat-card-dim"></div></div><div class="cat-card-body"><div class="cat-card-name">상의</div><div class="cat-card-count">248개</div></div></div>
+      <div class="cat-card" data-anim data-delay="2"><div class="cat-card-img"><img src="https://picsum.photos/seed/ct-btm/400/600" alt="하의" loading="lazy"><div class="cat-card-dim"></div></div><div class="cat-card-body"><div class="cat-card-name">하의</div><div class="cat-card-count">182개</div></div></div>
+      <div class="cat-card" data-anim data-delay="3"><div class="cat-card-img"><img src="https://picsum.photos/seed/ct-out/400/600" alt="아우터" loading="lazy"><div class="cat-card-dim"></div></div><div class="cat-card-body"><div class="cat-card-name">아우터</div><div class="cat-card-count">96개</div></div></div>
+      <div class="cat-card" data-anim data-delay="4"><div class="cat-card-img"><img src="https://picsum.photos/seed/ct-drs/400/600" alt="원피스" loading="lazy"><div class="cat-card-dim"></div></div><div class="cat-card-body"><div class="cat-card-name">원피스</div><div class="cat-card-count">74개</div></div></div>
+      <div class="cat-card" data-anim data-delay="5"><div class="cat-card-img"><img src="https://picsum.photos/seed/ct-acc/400/600" alt="액세서리" loading="lazy"><div class="cat-card-dim"></div></div><div class="cat-card-body"><div class="cat-card-name">액세서리</div><div class="cat-card-count">133개</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- New Arrivals -->
+<section class="section" id="new" aria-labelledby="new-ttl">
+  <div class="wrap">
+    <div class="sec-head" data-anim>
+      <h2 class="sec-title" id="new-ttl">신상품 <small>매주 업데이트</small></h2>
+      <a href="#" class="sec-more">전체 보기 →</a>
+    </div>
+    <div class="ftabs" role="group" aria-label="필터">
+      <button class="ftab active" data-f="all">전체</button>
+      <button class="ftab" data-f="women">여성</button>
+      <button class="ftab" data-f="men">남성</button>
+      <button class="ftab" data-f="unisex">유니섹스</button>
+    </div>
+    <!-- desktop grid -->
+    <div class="prod-grid" id="new-grid"></div>
+    <!-- mobile horizontal scroll (shown by JS when narrow) -->
+  </div>
+</section>
+
+<!-- Divider Banner -->
+<div class="div-banner" id="women" aria-label="컬렉션 배너">
+  <div class="db-cell" data-anim="left"><div class="db-cell-img"><img src="https://picsum.photos/seed/women-ban/900/600" alt="여성 컬렉션" loading="lazy"><div class="db-dim"></div></div><div class="db-body"><span class="db-tag">Women's</span><h3 class="db-title">우아함을<br>입다</h3><span class="db-link">컬렉션 보기 →</span></div></div>
+  <div class="db-cell" data-anim="right" id="men"><div class="db-cell-img"><img src="https://picsum.photos/seed/men-ban/900/600" alt="남성 컬렉션" loading="lazy"><div class="db-dim"></div></div><div class="db-body"><span class="db-tag">Men's</span><h3 class="db-title">단단한<br>스타일</h3><span class="db-link">컬렉션 보기 →</span></div></div>
+</div>
+
+<!-- Best Sellers -->
+<section class="section" style="background:#fff" aria-labelledby="best-ttl">
+  <div class="wrap">
+    <div class="sec-head" data-anim>
+      <h2 class="sec-title" id="best-ttl">베스트셀러</h2>
+      <a href="#" class="sec-more">전체 보기 →</a>
+    </div>
+    <div class="prod-grid" id="best-grid"></div>
+  </div>
+</section>
+
+<!-- Shop the Look -->
+<section class="section" style="background:var(--gray-1);padding-top:0;" aria-labelledby="look-ttl">
+  <div class="wrap" style="padding-top:48px;padding-bottom:20px;">
+    <div class="sec-head" data-anim>
+      <h2 class="sec-title" id="look-ttl">Shop the Look</h2>
+      <a href="#" class="sec-more">전체 보기 →</a>
+    </div>
+  </div>
+  <div class="look-grid" aria-label="룩 추천">
+    <div class="look-cell" data-anim="left"><div class="look-img"><img src="https://picsum.photos/seed/look1/600/900" alt="룩 01" loading="lazy"></div><div class="look-dim"></div><div class="look-body"><span class="look-tag">Look 01 · Minimal</span><div class="look-name">화이트 린넨<br>서머 룩</div><div class="look-price">₩157,000 (2pcs)</div></div></div>
+    <div class="look-cell" data-anim><div class="look-img"><img src="https://picsum.photos/seed/look2/600/900" alt="룩 02" loading="lazy"></div><div class="look-dim"></div><div class="look-body"><span class="look-tag">Look 02 · Casual</span><div class="look-name">데님 스트리트<br>캐주얼 룩</div><div class="look-price">₩140,000 (2pcs)</div></div></div>
+    <div class="look-cell" data-anim="right"><div class="look-img"><img src="https://picsum.photos/seed/look3/600/900" alt="룩 03" loading="lazy"></div><div class="look-dim"></div><div class="look-body"><span class="look-tag">Look 03 · Office</span><div class="look-name">모노톤 오피스<br>시크 룩</div><div class="look-price">₩246,000 (3pcs)</div></div></div>
+  </div>
+</section>
+
+<!-- Brand Story -->
+<div class="brand-strip" data-anim="scale" aria-label="브랜드 소개">
+  <div class="bs-img"><img src="https://picsum.photos/seed/brand-st/900/520" alt="NUVO 스토리" loading="lazy"></div>
+  <div class="bs-body">
+    <span class="bs-eyebrow">Our Story · Seoul 2016</span>
+    <h2 class="bs-title">패션은 당신이<br>세상에 보내는<br>첫 번째 메시지</h2>
+    <p class="bs-desc">NUVO는 서울에서 시작됐습니다. 매 시즌 소량만 만들고, 오래 입을 수 있는 옷만 만듭니다. 빠른 패션이 아닌, 진짜 패션을 믿습니다.</p>
+    <a href="#" class="bs-btn">브랜드 스토리 →</a>
+  </div>
+</div>
+
+<!-- Sale Band -->
+<div class="sale-band" id="sale" aria-labelledby="sale-ttl">
+  <span class="sale-label">Limited Time Offer</span>
+  <h2 class="sale-band-title sale-title" id="sale-ttl">여름 세일 최대 <em>50% OFF</em></h2>
+  <div class="countdown" role="timer" aria-label="종료까지">
+    <div class="cd-blk"><span class="cd-num" id="cd-d">00</span><span class="cd-label">Days</span></div>
+    <div class="cd-blk"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Hours</span></div>
+    <div class="cd-blk"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Mins</span></div>
+    <div class="cd-blk"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Secs</span></div>
+  </div>
+  <a href="#sale-prods" class="sale-cta">세일 상품 보기 →</a>
+</div>
+
+<!-- Sale Products -->
+<section class="section" id="sale-prods" style="background:#fff" aria-labelledby="sale-prods-ttl">
+  <div class="wrap">
+    <div class="sec-head" data-anim>
+      <h2 class="sec-title" id="sale-prods-ttl">할인 중</h2>
+    </div>
+    <div class="prod-grid" id="sale-grid"></div>
+  </div>
+</section>
+
+<!-- Brands -->
+<div class="brands-row" aria-label="입점 브랜드">
+  <div class="brands-belt">
+    <span class="brand-item">Acne Studios</span><span class="brand-item">Toteme</span><span class="brand-item">Lemaire</span><span class="brand-item">A.P.C.</span><span class="brand-item">Carhartt WIP</span><span class="brand-item">Our Legacy</span><span class="brand-item">Nanushka</span><span class="brand-item">Samsøe Samsøe</span>
+    <span class="brand-item">Acne Studios</span><span class="brand-item">Toteme</span><span class="brand-item">Lemaire</span><span class="brand-item">A.P.C.</span><span class="brand-item">Carhartt WIP</span><span class="brand-item">Our Legacy</span><span class="brand-item">Nanushka</span><span class="brand-item">Samsøe Samsøe</span>
+  </div>
+</div>
+
+<!-- Reviews -->
+<section class="section reviews-bg" aria-labelledby="rev-ttl">
+  <div class="wrap">
+    <div class="sec-head" data-anim>
+      <h2 class="sec-title" id="rev-ttl">고객 후기 <small>★★★★★ 4.9 · 12,400건</small></h2>
+      <a href="#" class="sec-more">전체 후기 →</a>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card" data-anim data-delay="1"><div class="rev-stars">★★★★★</div><p class="rev-text">소재가 사진이랑 정말 비슷하고 핏이 너무 좋아요. 통기성도 좋아서 매일 입게 됩니다. 재구매 의사 100%!</p><div class="rev-foot"><div class="rev-av"><img src="https://picsum.photos/seed/av1/80/80" alt="" loading="lazy"></div><div><div class="rev-name">이지수</div><div class="rev-info">린넨 와이드 팬츠 · 2개월 전</div></div></div><span class="rev-tag">린넨 와이드 팬츠</span></div>
+      <div class="rev-card" data-anim data-delay="2"><div class="rev-stars">★★★★★</div><p class="rev-text">사이즈 가이드가 정확해서 온라인이지만 완벽하게 맞았어요. 배송 빠르고 포장도 꼼꼼했습니다.</p><div class="rev-foot"><div class="rev-av"><img src="https://picsum.photos/seed/av2/80/80" alt="" loading="lazy"></div><div><div class="rev-name">박준혁</div><div class="rev-info">오버핏 코튼 셔츠 · 3주 전</div></div></div><span class="rev-tag">오버핏 코튼 셔츠</span></div>
+      <div class="rev-card" data-anim data-delay="3"><div class="rev-stars">★★★★☆</div><p class="rev-text">드레스 색감이 화면이랑 동일해서 좋았어요. 세탁 후에도 형태가 잘 유지되고 앞으로 NUVO에서만 쇼핑할 것 같아요.</p><div class="rev-foot"><div class="rev-av"><img src="https://picsum.photos/seed/av3/80/80" alt="" loading="lazy"></div><div><div class="rev-name">최민서</div><div class="rev-info">슬립 드레스 · 1개월 전</div></div></div><span class="rev-tag">슬립 드레스</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="section" style="padding-bottom:0;" aria-labelledby="ig-ttl">
+  <div class="wrap">
+    <div class="ig-head" data-anim>
+      <div><h2 class="sec-title" id="ig-ttl">#NUVO 태그하고 공유하세요</h2><p class="ig-handle">@nuvo_official</p></div>
+      <a href="#" class="sec-more">팔로우 →</a>
+    </div>
+  </div>
+  <div class="ig-grid" aria-label="인스타그램 피드">
+    <div class="ig-item" data-anim data-delay="1"><img src="https://picsum.photos/seed/ig1/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+    <div class="ig-item" data-anim data-delay="2"><img src="https://picsum.photos/seed/ig2/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+    <div class="ig-item" data-anim data-delay="3"><img src="https://picsum.photos/seed/ig3/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+    <div class="ig-item" data-anim data-delay="4"><img src="https://picsum.photos/seed/ig4/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+    <div class="ig-item" data-anim data-delay="5"><img src="https://picsum.photos/seed/ig5/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+    <div class="ig-item" data-anim><img src="https://picsum.photos/seed/ig6/400/400" alt="" loading="lazy"><div class="ig-overlay">♡</div></div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="nl-section" aria-labelledby="nl-ttl">
+  <h2 class="nl-title" id="nl-ttl">뉴스레터 구독</h2>
+  <p class="nl-sub">신상품 소식과 회원 전용 혜택을 가장 먼저 받아보세요</p>
+  <form class="nl-form" onsubmit="nlSubmit(event)" novalidate>
+    <input type="email" class="nl-input" placeholder="이메일 주소 입력" autocomplete="email" required>
+    <button type="submit" class="nl-btn">구독하기</button>
+  </form>
+  <p class="nl-note">언제든지 수신 거부 가능 · 스팸 없음</p>
+</section>
+
+<!-- Footer -->
+<footer class="footer" aria-label="푸터">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="ft-logo">NUVO</div>
+        <p class="ft-desc">매 시즌 소량만 만들고 오래 입을 수 있는 옷만 만듭니다. 서울 · 2016</p>
+      </div>
+      <div><div class="ft-col-title">쇼핑</div><ul class="ft-links"><li><a href="#">신상품</a></li><li><a href="#">여성</a></li><li><a href="#">남성</a></li><li><a href="#">세일</a></li><li><a href="#">룩북</a></li></ul></div>
+      <div><div class="ft-col-title">브랜드</div><ul class="ft-links"><li><a href="#">NUVO 소개</a></li><li><a href="#">지속가능성</a></li><li><a href="#">오프라인 스토어</a></li></ul></div>
+      <div><div class="ft-col-title">고객지원</div><ul class="ft-links"><li><a href="#">주문 조회</a></li><li><a href="#">교환·반품</a></li><li><a href="#">사이즈 가이드</a></li><li><a href="#">FAQ</a></li><li><a href="#">카카오 문의</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="ft-copy">© 2026 NUVO Inc. 사업자등록번호 123-45-67890 · 통신판매업신고 2026-서울-0000</span>
+      <div class="ft-pays"><span class="pay-chip">VISA</span><span class="pay-chip">MC</span><span class="pay-chip">KAKAO</span><span class="pay-chip">NAVER</span><span class="pay-chip">TOSS</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile Floating Cart Button -->
+<button class="mob-cart-fab" id="mob-cart-fab" aria-label="장바구니">
+  <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  <span class="mob-fab-badge" id="mob-fab-badge">0</span>
+</button>
+
+<!-- Cart Scrim + Drawer -->
+<div class="cart-scrim" id="cart-scrim"></div>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="장바구니">
+  <div class="cart-head">
+    <div><span class="cart-head-title">장바구니</span><span class="cart-head-cnt" id="cart-hd-cnt"></span></div>
+    <button class="cart-x" id="cart-close" aria-label="닫기">✕</button>
+  </div>
+  <div class="ship-bar-wrap">
+    <div class="ship-bar-msg" id="ship-msg"><strong>₩50,000</strong> 이상 구매 시 무료배송</div>
+    <div class="ship-bar-track"><div class="ship-bar-fill" id="ship-fill" style="width:0%"></div></div>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty-state" id="cart-empty">
+      <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>장바구니가 비어 있습니다</p>
+    </div>
+  </div>
+  <div class="cart-foot" id="cart-foot" style="display:none">
+    <div class="cart-foot-row"><span class="cart-foot-lbl">합계</span><span class="cart-foot-total" id="cart-total">₩0</span></div>
+    <button class="checkout-btn" onclick="toast('결제 페이지로 이동합니다 🔒')">구매하기</button>
+    <button class="keep-btn" onclick="closeCart()">쇼핑 계속하기</button>
+  </div>
+</aside>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="검색">
+  <div class="search-inner">
+    <input type="text" class="search-input" id="search-input" placeholder="검색어를 입력하세요" autocomplete="off">
+    <button class="search-x" id="search-close" aria-label="닫기">✕</button>
+  </div>
+  <p class="search-hint">인기: 린넨 · 오버핏 · 슬랙스 · 크롭</p>
+</div>
+
+<!-- Toast -->
+<div class="toast-shelf" id="toast-shelf" aria-live="polite"></div>
+
+<!-- Back to top -->
+<button class="btt" id="btt" aria-label="맨 위로">↑</button>
+
+<script>
+/* ═══════════════════════════
+   DATA
+═══════════════════════════ */
+const P='https://picsum.photos/seed/';
+const PRODS={
+  new:[
+    {id:1,name:'린넨 와이드 팬츠',price:89000,badge:'new',gender:'women',cat:'bottoms',colors:['#f5f0e8','#111','#8b6f47'],sizes:['XS','S','M','L'],i1:P+'np1a/600/800',i2:P+'np1b/600/800'},
+    {id:2,name:'오버핏 코튼 셔츠',price:68000,badge:'best',gender:'men',cat:'tops',colors:['#fff','#4a5568'],sizes:['S','M','L','XL'],i1:P+'np2a/600/800',i2:P+'np2b/600/800'},
+    {id:3,name:'슬립 드레스',price:112000,badge:'new',gender:'women',cat:'dress',colors:['#c8793a','#111'],sizes:['S','M','L'],i1:P+'np3a/600/800',i2:P+'np3b/600/800'},
+    {id:4,name:'울 크롭 자켓',price:248000,badge:null,gender:'unisex',cat:'outer',colors:['#6e7a8a','#111'],sizes:['S','M','L'],i1:P+'np4a/600/800',i2:P+'np4b/600/800'},
+    {id:5,name:'테일러드 슬랙스',price:98000,badge:'new',gender:'men',cat:'bottoms',colors:['#111','#8a9aaa'],sizes:['28','30','32','34'],i1:P+'np5a/600/800',i2:P+'np5b/600/800'},
+    {id:6,name:'리넨 블라우스',price:78000,badge:null,gender:'women',cat:'tops',colors:['#f5f0e8','#8b9e7a'],sizes:['S','M','L'],i1:P+'np6a/600/800',i2:P+'np6b/600/800'},
+    {id:7,name:'데님 쇼츠',price:72000,badge:'best',gender:'unisex',cat:'bottoms',colors:['#4a5568','#111'],sizes:['XS','S','M','L'],i1:P+'np7a/600/800',i2:P+'np7b/600/800'},
+    {id:8,name:'레더 크로스백',price:168000,badge:'new',gender:'women',cat:'acc',colors:['#8a7060','#111'],sizes:['FREE'],i1:P+'np8a/600/800',i2:P+'np8b/600/800'},
+  ],
+  best:[
+    {id:9,name:'캐시미어 니트',price:198000,badge:'best',gender:'women',cat:'tops',colors:['#c4b49e','#111'],sizes:['S','M','L'],i1:P+'np9a/600/800',i2:P+'np9b/600/800'},
+    {id:10,name:'와이드 코듀로이',price:118000,badge:'hot',gender:'men',cat:'bottoms',colors:['#8a7060','#111'],sizes:['28','30','32'],i1:P+'np10a/600/800',i2:P+'np10b/600/800'},
+    {id:11,name:'스트라이프 티셔츠',price:48000,badge:'best',gender:'unisex',cat:'tops',colors:['#f5f0e8','#4a5568'],sizes:['XS','S','M','L','XL'],i1:P+'np11a/600/800',i2:P+'np11b/600/800'},
+    {id:12,name:'우븐 레인코트',price:288000,badge:null,gender:'unisex',cat:'outer',colors:['#6e7a8a','#c4b49e'],sizes:['S','M','L'],i1:P+'np12a/600/800',i2:P+'np12b/600/800'},
+  ],
+  sale:[
+    {id:13,name:'플로럴 미디 스커트',price:58000,orig:98000,disc:41,badge:'sale',gender:'women',cat:'bottoms',colors:['#c8793a','#111'],sizes:['S','M','L'],i1:P+'np13a/600/800',i2:P+'np13b/600/800'},
+    {id:14,name:'체크 오버코트',price:168000,orig:298000,disc:44,badge:'sale',gender:'men',cat:'outer',colors:['#8a9aaa','#111'],sizes:['S','M','L'],i1:P+'np14a/600/800',i2:P+'np14b/600/800'},
+    {id:15,name:'실크 블라우스',price:62000,orig:108000,disc:43,badge:'sale',gender:'women',cat:'tops',colors:['#f5f0e8','#c4b49e'],sizes:['S','M','L'],i1:P+'np15a/600/800',i2:P+'np15b/600/800'},
+    {id:16,name:'더블 브리스티드 수트',price:228000,orig:428000,disc:47,badge:'sale',gender:'men',cat:'outer',colors:['#111','#4a5568'],sizes:['S','M','L'],i1:P+'np16a/600/800',i2:P+'np16b/600/800'},
+  ]
+};
+
+/* ═══════════════════════════
+   CART
+═══════════════════════════ */
+let cart=[];
+const FREE=50000;
+const qty=()=>cart.reduce((s,i)=>s+i.qty,0);
+const total=()=>cart.reduce((s,i)=>s+i.price*i.qty,0);
+const all=()=>[...PRODS.new,...PRODS.best,...PRODS.sale];
+
+function addCart(id,sz){
+  const p=all().find(x=>x.id===id);if(!p)return;
+  const k=`${id}::${sz}`;
+  const ex=cart.find(i=>i.k===k);
+  ex?ex.qty++:cart.push({...p,sz,k,qty:1});
+  renderCart();
+  toast(`✓ ${p.name} (${sz}) 담았습니다`);
+}
+function delCart(k){cart=cart.filter(i=>i.k!==k);renderCart();}
+function changeQty(k,d){const i=cart.find(x=>x.k===k);if(!i)return;i.qty+=d;if(i.qty<1)delCart(k);else renderCart();}
+
+function renderCart(){
+  const n=qty(),t=total();
+  /* badges */
+  const pip=document.getElementById('cart-pip');
+  const fab=document.getElementById('mob-fab-badge');
+  pip.textContent=n;pip.classList.toggle('show',n>0);
+  fab.textContent=n;fab.classList.toggle('show',n>0);
+  document.getElementById('cart-hd-cnt').textContent=n?`(${n})`:'';
+  /* ship */
+  const rem=FREE-t;
+  const pct=Math.min(100,Math.round(t/FREE*100));
+  document.getElementById('ship-fill').style.width=pct+'%';
+  document.getElementById('ship-msg').innerHTML=rem>0
+    ?`<strong>₩${rem.toLocaleString()}</strong> 더 담으면 무료배송!`
+    :'✓ 무료배송 적용됩니다';
+  /* body */
+  const body=document.getElementById('cart-body');
+  const empty=document.getElementById('cart-empty');
+  const foot=document.getElementById('cart-foot');
+  if(!cart.length){body.innerHTML='';body.appendChild(empty);empty.style.display='flex';foot.style.display='none';return;}
+  empty.style.display='none';foot.style.display='block';
+  document.getElementById('cart-total').textContent=`₩${t.toLocaleString()}`;
+  body.innerHTML=cart.map(it=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><img src="${it.i1}" alt="${it.name}" loading="lazy"></div>
+      <div class="ci-info">
+        <div class="ci-name">${it.name}</div>
+        <div class="ci-opt">${it.sz} · 기본</div>
+        <div class="ci-qty">
+          <button onclick="changeQty('${it.k}',-1)" aria-label="감소">−</button>
+          <span>${it.qty}</span>
+          <button onclick="changeQty('${it.k}',1)" aria-label="증가">+</button>
+        </div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-price">₩${(it.price*it.qty).toLocaleString()}</div>
+        <div class="ci-del" onclick="delCart('${it.k}')">삭제</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════
+   RENDER PRODUCTS
+═══════════════════════════ */
+const bMap={new:'pb-new',sale:'pb-sale',best:'pb-best',hot:'pb-hot'};
+const bLabel={new:'NEW',sale:'SALE',best:'BEST',hot:'HOT'};
+function card(p){
+  const badge=p.badge?`<div class="prod-badges"><span class="prod-badge ${bMap[p.badge]}">${bLabel[p.badge]}</span></div>`:'';
+  const colors=p.colors.map(c=>`<div class="prod-color" style="background:${c}" aria-hidden="true"></div>`).join('');
+  const szBtns=p.sizes.map(s=>`<button class="prod-sz" onclick="event.stopPropagation();addCart(${p.id},'${s}')">${s}</button>`).join('');
+  const priceHTML=p.orig
+    ?`<span class="prod-price">₩${p.price.toLocaleString()}</span><span class="prod-price-orig">₩${p.orig.toLocaleString()}</span><span class="prod-price-disc">-${p.disc}%</span>`
+    :`<span class="prod-price">₩${p.price.toLocaleString()}</span>`;
+  return `
+    <article class="prod-card" data-gender="${p.gender}" data-cat="${p.cat}" data-anim>
+      <div class="prod-img-wrap">
+        ${badge}
+        <button class="prod-wish" onclick="event.stopPropagation();toggleWish(this)" aria-label="위시리스트">♡</button>
+        <img class="img-a" src="${p.i1}" alt="${p.name}" loading="lazy">
+        <img class="img-b" src="${p.i2}" alt="" aria-hidden="true" loading="lazy">
+        <div class="prod-strip">
+          <div class="prod-sizes">${szBtns}</div>
+          <button class="prod-add" onclick="event.stopPropagation();addCart(${p.id},'${p.sizes[Math.min(1,p.sizes.length-1)]}')">
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            빠른 담기
+          </button>
+        </div>
+      </div>
+      <div class="prod-brand">NUVO</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-colors">${colors}</div>
+      <div class="prod-price-row">${priceHTML}</div>
+      <button class="prod-mob-add" onclick="addCart(${p.id},'${p.sizes[Math.min(1,p.sizes.length-1)]}')">담기</button>
+    </article>`;
+}
+function renderAll(){
+  document.getElementById('new-grid').innerHTML=PRODS.new.map(card).join('');
+  document.getElementById('best-grid').innerHTML=PRODS.best.map(card).join('');
+  document.getElementById('sale-grid').innerHTML=PRODS.sale.map(card).join('');
+  initAnim();
+}
+function toggleWish(btn){
+  const on=btn.classList.toggle('wishlisted');
+  btn.textContent=on?'♥':'♡';
+  if(on)toast('♥ 위시리스트에 추가했습니다');
+}
+
+/* ═══════════════════════════
+   FILTER
+═══════════════════════════ */
+function filterGender(f){
+  document.querySelectorAll('#new-grid .prod-card').forEach(c=>{
+    c.style.display=(f==='all'||c.dataset.gender===f)?'':'none';
+  });
+}
+function filterCat(f){
+  document.querySelectorAll('.cat-tab').forEach(t=>{t.classList.toggle('active',t.dataset.cat===f);});
+  document.querySelectorAll('.prod-card').forEach(c=>{
+    c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
+  });
+}
+function initFilters(){
+  document.querySelectorAll('.ftab').forEach(t=>t.addEventListener('click',function(){
+    this.closest('.ftabs').querySelectorAll('.ftab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');filterGender(this.dataset.f);
+  }));
+  document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',function(){
+    document.querySelectorAll('.cat-tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');filterCat(this.dataset.cat);
+  }));
+}
+
+/* ═══════════════════════════
+   HERO SLIDER
+═══════════════════════════ */
+let cur=0,sliderT;
+const SLIDES=document.querySelectorAll('.slide');
+const DOTS=document.querySelectorAll('.slider-dot');
+const PROG=document.getElementById('s-prog');
+const DUR=5500;
+
+function goTo(n){
+  SLIDES[cur].classList.remove('active');DOTS[cur].classList.remove('active');
+  cur=(n+SLIDES.length)%SLIDES.length;
+  SLIDES[cur].classList.add('active');DOTS[cur].classList.add('active');
+  animateProg();
+}
+function animateProg(){
+  clearTimeout(sliderT);
+  PROG.style.transition='none';PROG.style.width='0';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    PROG.style.transition=`width ${DUR}ms linear`;PROG.style.width='100%';
+  }));
+  sliderT=setTimeout(()=>goTo(cur+1),DUR);
+}
+document.getElementById('s-next').addEventListener('click',()=>goTo(cur+1));
+document.getElementById('s-prev').addEventListener('click',()=>goTo(cur-1));
+DOTS.forEach((d,i)=>d.addEventListener('click',()=>goTo(i)));
+animateProg();
+/* touch swipe */
+let tx=0;
+const heroEl=document.getElementById('hero');
+heroEl.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+heroEl.addEventListener('touchend',e=>{const dx=tx-e.changedTouches[0].clientX;if(Math.abs(dx)>44){dx>0?goTo(cur+1):goTo(cur-1);}});
+
+/* ═══════════════════════════
+   COUNTDOWN
+═══════════════════════════ */
+const END=(()=>{const d=new Date();d.setDate(d.getDate()+32);d.setHours(23,59,59);return d;})();
+let prevS=-1;
+function tick(){
+  const diff=Math.max(0,END-Date.now());
+  const z=n=>String(Math.floor(n)).padStart(2,'0');
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent=z(diff/86400000);
+  document.getElementById('cd-h').textContent=z((diff%86400000)/3600000);
+  document.getElementById('cd-m').textContent=z((diff%3600000)/60000);
+  const sEl=document.getElementById('cd-s');
+  sEl.textContent=z(s);
+  if(s!==prevS){sEl.classList.remove('tick');void sEl.offsetWidth;sEl.classList.add('tick');prevS=s;}
+}
+tick();setInterval(tick,1000);
+
+/* ═══════════════════════════
+   CART OPEN / CLOSE
+═══════════════════════════ */
+function openCart(){document.getElementById('cart-drawer').classList.add('open');document.getElementById('cart-scrim').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('cart-scrim').classList.remove('open');document.body.style.overflow='';}
+['cart-open','mob-cart-fab'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',openCart);});
+document.getElementById('cart-close').addEventListener('click',closeCart);
+document.getElementById('cart-scrim').addEventListener('click',closeCart);
+
+/* ═══════════════════════════
+   SEARCH
+═══════════════════════════ */
+function openSearch(){document.getElementById('search-overlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('search-input').focus(),80);}
+function closeSearch(){document.getElementById('search-overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('search-open').addEventListener('click',openSearch);
+document.getElementById('search-close').addEventListener('click',closeSearch);
+document.getElementById('search-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSearch();});
+
+/* ═══════════════════════════
+   MOBILE NAV
+═══════════════════════════ */
+let mobOpen=false;
+function closeMob(){
+  mobOpen=false;
+  document.getElementById('hbg').classList.remove('open');
+  document.getElementById('mob-nav').classList.remove('open');
+  document.getElementById('hbg').setAttribute('aria-expanded','false');
+  document.getElementById('mob-nav').setAttribute('aria-hidden','true');
+}
+document.getElementById('hbg').addEventListener('click',function(){
+  mobOpen=!mobOpen;
+  this.classList.toggle('open',mobOpen);
+  document.getElementById('mob-nav').classList.toggle('open',mobOpen);
+  this.setAttribute('aria-expanded',String(mobOpen));
+  document.getElementById('mob-nav').setAttribute('aria-hidden',String(!mobOpen));
+});
+
+/* ═══════════════════════════
+   HEADER SCROLL
+═══════════════════════════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('site-header').classList.toggle('scrolled',scrollY>40);
+  document.getElementById('btt').classList.toggle('show',scrollY>600);
+},{passive:true});
+document.getElementById('btt').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ═══════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════ */
+function initAnim(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('[data-anim]:not(.in)').forEach(el=>io.observe(el));
+}
+
+/* ═══════════════════════════
+   KEYBOARD
+═══════════════════════════ */
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeCart();closeMob();}});
+
+/* ═══════════════════════════
+   TOAST
+═══════════════════════════ */
+function toast(msg){
+  const shelf=document.getElementById('toast-shelf');
+  const el=document.createElement('div');
+  el.className='toast';
+  el.innerHTML=`<span class="t-icon">✓</span>${msg}`;
+  shelf.appendChild(el);
+  setTimeout(()=>el.remove(),2800);
+}
+
+/* ═══════════════════════════
+   NEWSLETTER
+═══════════════════════════ */
+function nlSubmit(e){e.preventDefault();toast('구독 완료! 감사합니다 ✉');e.target.reset();}
+
+/* ═══════════════════════════
+   INIT
+═══════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAll();
+  renderCart();
+  initFilters();
+  initAnim();
+});
+</script>
+</body>
+</html>

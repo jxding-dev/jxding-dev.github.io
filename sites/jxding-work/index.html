@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JXDING Project Index</title>
+  <meta name="description" content="JXDING의 웹 퍼블리싱, 프론트엔드, UI 디자인 프로젝트를 한눈에 볼 수 있는 홍보용 포트폴리오 인덱스" />
+  <meta property="og:title" content="JXDING Project Index" />
+  <meta property="og:description" content="10개의 웹 프로젝트를 한 화면에서 빠르게 둘러보는 포트폴리오 링크 인덱스" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <a class="brand" href="https://jxding-dev.github.io/portfolio/" target="_blank" rel="noopener noreferrer" aria-label="메인 포트폴리오 열기">
+        <span class="brand__mark">JX</span>
+        <span>
+          <b>JXDING</b>
+          <small>Project Index</small>
+        </span>
+      </a>
+
+      <nav class="quick-nav" aria-label="빠른 이동">
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/jxding-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://jxding-dev.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__copy">
+        <p class="eyebrow">Frontend · Web Publishing · UI Design</p>
+        <h1 id="hero-title">한눈에 보는 웹 프로젝트 모음</h1>
+        <p>
+          랜딩페이지, 대시보드, QR 메뉴판, 아카이브, 인터랙티브 웹까지.
+          아래 카드에서 각 프로젝트를 바로 열어볼 수 있습니다.
+        </p>
+      </div>
+
+      <div class="hero__summary" aria-label="프로젝트 요약">
+        <div>
+          <strong>10</strong>
+          <span>Live Projects</span>
+        </div>
+        <div>
+          <strong>360+</strong>
+          <span>Responsive</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="프로젝트 필터">
+      <div class="toolbar__title">
+        <b>Projects</b>
+        <span>원하는 유형만 골라서 볼 수 있습니다.</span>
+      </div>
+
+      <div class="filters">
+        <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">전체</button>
+        <button class="filter" type="button" data-filter="landing" aria-pressed="false">랜딩</button>
+        <button class="filter" type="button" data-filter="dashboard" aria-pressed="false">대시보드</button>
+        <button class="filter" type="button" data-filter="archive" aria-pressed="false">아카이브</button>
+        <button class="filter" type="button" data-filter="interactive" aria-pressed="false">인터랙티브</button>
+      </div>
+    </section>
+
+    <section class="projects" id="projects" aria-label="프로젝트 목록">
+      <article class="card card--main" data-category="landing archive interactive">
+        <a href="https://jxding-dev.github.io/portfolio/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">01</span>
+            <span class="type">Main</span>
+          </div>
+          <h2>Portfolio</h2>
+          <p>전체 작업물과 작업 방향을 보여주는 메인 포트폴리오.</p>
+          <div class="card__foot">
+            <span>Portfolio</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="dashboard">
+        <a href="https://jxding-dev.github.io/reserveflow-dashboard/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">02</span>
+            <span class="type">Dashboard</span>
+          </div>
+          <h2>ReserveFlow</h2>
+          <p>예약과 운영 흐름을 한 화면에서 확인하는 관리형 UI.</p>
+          <div class="card__foot">
+            <span>Reservation</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="landing">
+        <a href="https://jxding-dev.github.io/dental-site/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">03</span>
+            <span class="type">Clinic</span>
+          </div>
+          <h2>Dental Site</h2>
+          <p>진료 정보와 의료진 소개를 정리한 병원형 랜딩 사이트.</p>
+          <div class="card__foot">
+            <span>Medical</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="landing">
+        <a href="https://jxding-dev.github.io/premium-real-estate/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">04</span>
+            <span class="type">Premium</span>
+          </div>
+          <h2>Real Estate</h2>
+          <p>고급 부동산 분위기에 맞춘 이미지 중심 랜딩페이지.</p>
+          <div class="card__foot">
+            <span>Luxury</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="interactive">
+        <a href="https://jxding-dev.github.io/qr-menu-standard/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">05</span>
+            <span class="type">QR Menu</span>
+          </div>
+          <h2>QR Menu</h2>
+          <p>검색, 옵션 선택, 장바구니 흐름을 담은 모바일 메뉴판.</p>
+          <div class="card__foot">
+            <span>Mobile UI</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="dashboard">
+        <a href="https://jxding-dev.github.io/dashboard/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">06</span>
+            <span class="type">Admin</span>
+          </div>
+          <h2>Dashboard</h2>
+          <p>정보 카드와 데이터 영역을 중심으로 구성한 관리자 화면.</p>
+          <div class="card__foot">
+            <span>Admin</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card card--red" data-category="archive interactive">
+        <a href="https://jxding-dev.github.io/window/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">07</span>
+            <span class="type">Archive</span>
+          </div>
+          <h2>Red Window</h2>
+          <p>괴담과 기록 콘셉트를 살린 분위기형 아카이브.</p>
+          <div class="card__foot">
+            <span>Concept</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="interactive">
+        <a href="https://holdem-server.onrender.com" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">08</span>
+            <span class="type">Game</span>
+          </div>
+          <h2>Hold’em</h2>
+          <p>카드 게임 흐름을 웹에서 확인할 수 있는 서버 기반 프로젝트.</p>
+          <div class="card__foot">
+            <span>Server</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="archive interactive landing">
+        <a href="https://jxding-dev.github.io/run-away-and-learn-to-live/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">09</span>
+            <span class="type">Story</span>
+          </div>
+          <h2>Run Away</h2>
+          <p>문장과 분위기, 화면 전환을 중심으로 만든 감성형 웹.</p>
+          <div class="card__foot">
+            <span>Story Web</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-category="archive interactive">
+        <a href="https://jxding-dev.github.io/life-archive/" target="_blank" rel="noopener noreferrer">
+          <div class="card__head">
+            <span class="num">10</span>
+            <span class="type">Archive</span>
+          </div>
+          <h2>Life Archive</h2>
+          <p>기록, 필터, 백업 흐름을 담은 개인 아카이브형 프로젝트.</p>
+          <div class="card__foot">
+            <span>Record</span>
+            <b>Open ↗</b>
+          </div>
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> JXDING Project Index</span>
+    <span>Simple project gateway</span>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

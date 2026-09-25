@@ -1,0 +1,65 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "salon-noir",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8940", "--directory", "sites/salon-noir"],
+      "port": 8940
+    },
+    {
+      "name": "cafe-mukdo",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8941", "--directory", "sites/cafe-mukdo"],
+      "port": 8941
+    },
+    {
+      "name": "class-notion",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8942", "--directory", "sites/class-notion"],
+      "port": 8942
+    },
+    {
+      "name": "pilates-oneum",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8943", "--directory", "sites/pilates-oneum"],
+      "port": 8943
+    },
+    {
+      "name": "stay-monthlysea",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8944", "--directory", "sites/stay-monthlysea"],
+      "port": 8944
+    },
+    {
+      "name": "report-saebyeok",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8945", "--directory", "sites/report-saebyeok"],
+      "port": 8945
+    },
+    {
+      "name": "perfume-ondo",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8946", "--directory", "sites/perfume-ondo"],
+      "port": 8946
+    },
+    {
+      "name": "app-dalmuryup",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8947", "--directory", "sites/app-dalmuryup"],
+      "port": 8947
+    },
+    {
+      "name": "studio-muge",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8948", "--directory", "sites/studio-muge"],
+      "port": 8948
+    },
+    {
+      "name": "conf-devwave",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8949", "--directory", "sites/conf-devwave"],
+      "port": 8949
+    }
+  ]
+}

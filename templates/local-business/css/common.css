@@ -1,0 +1,40 @@
+:root{
+  --font-xs:clamp(.75rem,.7rem + .2vw,.875rem);
+  --font-sm:clamp(.875rem,.82rem + .25vw,1rem);
+  --font-base:clamp(1rem,.95rem + .3vw,1.125rem);
+  --font-md:clamp(1.125rem,1rem + .6vw,1.5rem);
+  --font-lg:clamp(1.5rem,1.25rem + 1.2vw,2.25rem);
+  --font-xl:clamp(2.2rem,1.45rem + 3vw,4.8rem);
+  --space-xs:clamp(.5rem,.4rem + .5vw,.75rem);
+  --space-sm:clamp(.75rem,.6rem + .8vw,1.25rem);
+  --space-md:clamp(1.25rem,1rem + 1.2vw,2rem);
+  --space-lg:clamp(2rem,1.5rem + 2vw,4rem);
+  --space-xl:clamp(3rem,2rem + 4vw,7rem);
+  --container:min(1120px,calc(100% - 32px));
+  --color-primary:#234056;
+  --color-secondary:#687987;
+  --color-accent:#e06f3c;
+  --color-bg:#f6f8f9;
+  --color-surface:#e8edf0;
+  --color-text:#15222b;
+  --color-muted:#5d6972;
+  --color-border:rgba(35,64,86,.18);
+  --radius:8px;
+  --radius-sm:6px;
+  --shadow-sm:0 8px 24px rgba(0,0,0,.06);
+  --shadow-md:0 18px 48px rgba(0,0,0,.11);
+}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard", "Noto Sans KR", "Segoe UI", sans-serif;font-size:var(--font-base);line-height:1.65;color:var(--color-text);background:var(--color-bg);overflow-x:hidden}
+.container{width:var(--container);margin-inline:auto}
+.section{padding-block:var(--space-xl)}
+.section-soft{background:var(--color-surface)}
+.eyebrow{display:inline-flex;align-items:center;gap:.45rem;font-size:var(--font-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent)}
+.section-heading{display:grid;gap:var(--space-xs);max-width:720px;margin-bottom:var(--space-lg)}
+.section-heading.center{text-align:center;margin-inline:auto}
+.section-heading h2,.page-title h1{font-size:var(--font-lg);line-height:1.25;font-weight:700}
+.section-heading p,.page-title p,.muted{color:var(--color-muted)}
+.skip-link{position:absolute;left:16px;top:-80px;background:var(--color-primary);color:#fff;padding:10px 14px;border-radius:8px;z-index:20}
+.skip-link:focus{top:16px}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--color-accent),white 20%);outline-offset:3px}
+@media (max-width:767px){.container{width:min(100% - 24px,1120px)}.section{padding-block:clamp(2.5rem,14vw,4.5rem)}}

@@ -1,0 +1,21 @@
+# 의존성 / 빌드 결과
+node_modules/
+dist/
+_site/
+
+# 환경 변수 (비밀값)
+.env
+.env.*
+!.env.example
+
+# 로컬 전용
+_작업원본/
+.claude/settings.local.json
+*.log
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# window: 비밀번호가 들어 있는 로컬 관리자 파일
+sites/window/js/admin.js
+sites/window/lee-jihyun-admin-page.html

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jxding-dev — Work</title>
+<meta name="description" content="jx3ing — 프론트엔드 개발 / UI 디자인 작업 모음">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+<style>
+  :root{
+    --bg:#F5F1E6;
+    --ink:#15140F;
+    --blue:#3D5AFE;
+    --coral:#FF5A3C;
+    --yellow:#FFD43B;
+    --green:#1F9D63;
+    --purple:#8C6BFF;
+    --cream:#F5F1E6;
+    --pad: clamp(16px, 3.5vw, 40px);
+    --bw: 3px;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+
+  body{
+    background:var(--ink);
+    color:var(--ink);
+    font-family:'Pretendard', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-width:360px;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  :focus-visible{ outline:3px solid var(--blue); outline-offset:3px; }
+
+  .frame{
+    border: var(--bw) solid var(--ink);
+    margin: clamp(8px,1.5vw,18px);
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle, rgba(21,20,15,0.07) 1.5px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+
+  .wrap{
+    max-width:1320px;
+    margin:0 auto;
+    padding: var(--pad);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    padding-bottom: clamp(20px,3vw,32px);
+  }
+  .logo{
+    font-family:'Archivo Black', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    letter-spacing:-0.01em;
+  }
+  .logo .dot{
+    width:0.45em; height:0.45em;
+    background:var(--coral);
+    border:var(--bw) solid var(--ink);
+    border-radius:50%;
+    display:inline-block;
+  }
+  .navbtns{ display:flex; gap:10px; flex-wrap:wrap; }
+  .stickerbtn{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    background:var(--bg);
+    border:var(--bw) solid var(--ink);
+    border-radius:999px;
+    padding:10px 18px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-2deg);
+    transition: transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .stickerbtn:nth-child(2){ transform: rotate(2deg); background:var(--yellow); }
+  .stickerbtn:hover{
+    transform: translate(-2px,-2px) rotate(0deg);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding: clamp(24px,5vw,56px) 0 clamp(40px,7vw,72px);
+    border-bottom: var(--bw) solid var(--ink);
+    overflow:hidden;
+  }
+  .hero h1{
+    font-family:'Archivo Black', sans-serif;
+    font-size: clamp(2.4rem, 9vw, 6.5rem);
+    line-height:1.05;
+    margin:0 0 18px;
+    letter-spacing:-0.02em;
+  }
+  .hero h1 .hl{
+    background:var(--yellow);
+    border:var(--bw) solid var(--ink);
+    padding: 0 0.18em;
+    display:inline-block;
+    transform: rotate(-2deg);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .hero h1 .hl2{
+    background:var(--coral);
+    color:var(--bg);
+    border:var(--bw) solid var(--ink);
+    padding: 0 0.18em;
+    display:inline-block;
+    transform: rotate(1.5deg);
+    box-shadow: 6px 6px 0 var(--ink);
+    margin-top: 20px;
+  }
+  .hero p{
+    max-width:560px;
+    font-size:clamp(0.95rem,1.4vw,1.1rem);
+    line-height:1.85;
+    color:#403D35;
+  }
+  .hero .shape{
+    position:absolute;
+    border: var(--bw) solid var(--ink);
+  }
+  .hero .star{
+    top: 6%;
+    right: 8%;
+    width: 70px; height:70px;
+    background: var(--green);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transform: rotate(8deg);
+    font-family:'Archivo Black', sans-serif;
+    color:var(--bg);
+    font-size:0.85rem;
+    text-align:center;
+    line-height:1.1;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .hero .ring{
+    bottom: 8%;
+    right: 22%;
+    width: 46px; height:46px;
+    border-radius:50%;
+    background:var(--purple);
+    box-shadow: 5px 5px 0 var(--ink);
+    transform: rotate(-8deg);
+  }
+  @media (max-width: 760px){
+    .hero .shape{ display:none; }
+  }
+
+  /* ---------- Ribbon ---------- */
+  .ribbon{
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:var(--bg);
+    border:var(--bw) solid var(--ink);
+    padding:8px 18px;
+    margin: 40px 0 22px;
+    transform: rotate(-1.5deg);
+    box-shadow: 5px 5px 0 var(--coral);
+  }
+  .group:first-of-type .ribbon{ margin-top:36px; }
+
+  /* ---------- Grid & cards ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: clamp(16px,2vw,28px);
+  }
+
+  .card{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    border: var(--bw) solid var(--ink);
+    border-radius:10px;
+    padding: 20px;
+    min-height:170px;
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:nth-child(3n+1){ --rot:-1.4deg; }
+  .card:nth-child(3n+2){ --rot:1.2deg; }
+  .card:nth-child(3n+3){ --rot:-0.6deg; }
+  .card:hover, .card:focus-visible{
+    transform: translate(-3px,-3px) rotate(0deg);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card, .stickerbtn{ transition:none; }
+    .card:hover{ transform:rotate(var(--rot,0deg)); }
+  }
+
+  .card .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .card .tag{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border:2px solid currentColor;
+    border-radius:999px;
+  }
+  .card .go{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:1.05rem;
+    transition: transform .2s ease;
+  }
+  .card:hover .go{ transform: translate(3px,-3px); }
+
+  .card h3{
+    font-size:1.15rem;
+    font-weight:800;
+    margin:4px 0 0;
+    line-height:1.3;
+  }
+  .card p{
+    font-size:0.86rem;
+    line-height:1.6;
+    margin:0;
+    opacity:0.88;
+  }
+
+  /* color variants */
+  .card--ink   { background:var(--ink);    color:var(--bg); }
+  .card--cream { background:var(--cream);  color:var(--ink); }
+  .card--blue  { background:var(--blue);   color:var(--bg); }
+  .card--purple{ background:var(--purple); color:var(--bg); }
+  .card--coral { background:var(--coral);  color:var(--ink); }
+  .card--green { background:var(--green);  color:var(--bg); }
+  .card--yellow{ background:var(--yellow); color:var(--ink); }
+
+  .card--ink .go      { color: var(--yellow); }
+  .card--cream .go    { color: var(--coral); }
+  .card--blue .go     { color: var(--yellow); }
+  .card--purple .go   { color: var(--yellow); }
+  .card--coral .go    { color: var(--ink); }
+  .card--green .go    { color: var(--yellow); }
+  .card--yellow .go   { color: var(--blue); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: var(--bw) solid var(--ink);
+    margin-top: clamp(40px,6vw,64px);
+    padding-top: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:12px;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+  }
+  footer a{ border-bottom:2px solid var(--coral); }
+  footer a:hover{ color:var(--blue); border-color:var(--blue); }
+</style>
+</head>
+<body>
+<div class="frame">
+<div class="wrap">
+
+  <header>
+    <div class="logo">jx3ing<span class="dot"></span></div>
+    <div class="navbtns">
+      <a class="stickerbtn" href="mailto:dlwlgus2209@gmail.com">Email</a>
+      <a class="stickerbtn" href="https://github.com/jxding-dev" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="shape star">10<br>WORKS</span>
+    <span class="shape ring"></span>
+    <h1>화면을 만드는<br>사람, <span class="hl">JXDING-DEV</span><span class="hl2">입니다.</span></h1>
+    <p>
+      기획부터 화면 디자인, 개발까지 직접 만든 사이트와 앱 10개를 모아뒀습니다.
+      카페·병원·부동산 같은 업종별 웹사이트부터 게임, 개인 아카이브 앱까지 —
+      카드를 눌러 바로 둘러보세요.
+    </p>
+  </section>
+
+  <div class="group">
+    <span class="ribbon">Featured</span>
+    <div class="grid">
+
+      <a class="card card--ink" href="https://jxding-dev.github.io/portfolio/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">PF · PORTFOLIO</span><span class="go">↗</span></div>
+        <h3>메인 포트폴리오</h3>
+        <p>게임·카페 주문 시스템·쇼핑몰·콘텐츠 디자인을 모은 작업 모음</p>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="group">
+    <span class="ribbon">Client Sites</span>
+    <div class="grid">
+
+      <a class="card card--cream" href="https://jxding-dev.github.io/dental-site/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">DT · CLINIC</span><span class="go">↗</span></div>
+        <h3>Prime Dental Clinic</h3>
+        <p>예약·진료과목·의료진 정보를 갖춘 치과 병원 홈페이지</p>
+      </a>
+
+      <a class="card card--blue" href="https://jxding-dev.github.io/premium-real-estate/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">RE · REAL ESTATE</span><span class="go">↗</span></div>
+        <h3>라온 프레스티지 부동산</h3>
+        <p>지역·가격·평형으로 매물을 좁혀가는 부동산 플랫폼</p>
+      </a>
+
+      <a class="card card--purple" href="https://jxding-dev.github.io/reserveflow-dashboard/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">RF · DASHBOARD</span><span class="go">↗</span></div>
+        <h3>ReserveFlow</h3>
+        <p>예약·매출·고객 메모를 한 화면에서 관리하는 운영 대시보드</p>
+      </a>
+
+      <a class="card card--yellow" href="https://jxding-dev.github.io/qr-menu-standard/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">QR · MENU</span><span class="go">↗</span></div>
+        <h3>On The Table</h3>
+        <p>QR로 메뉴를 보고 카카오톡으로 주문하는 모바일 메뉴판</p>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="group">
+    <span class="ribbon">Interactive &amp; Games</span>
+    <div class="grid">
+
+      <a class="card card--green" href="https://holdem-server.onrender.com" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">HD · GAME</span><span class="go">↗</span></div>
+        <h3>텍사스 홀덤 포커</h3>
+        <p>실시간 멀티플레이어로 즐기는 텍사스 홀덤 포커</p>
+      </a>
+
+      <a class="card card--yellow" href="https://jxding-dev.github.io/run-away-and-learn-to-live/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">RA · STORY</span><span class="go">↗</span></div>
+        <h3>도망쳐, 그리고 살아가다</h3>
+        <p>선택에 따라 18가지 엔딩으로 이어지는 인생 여정 게임</p>
+      </a>
+
+      <a class="card card--ink" href="https://jxding-dev.github.io/window/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">RW · HORROR</span><span class="go">↗</span></div>
+        <h3>RED WINDOW</h3>
+        <p>괴담·일화·복원 이미지로 구성한 읽기 전용 공포 아카이브</p>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="group">
+    <span class="ribbon">Personal Tools</span>
+    <div class="grid">
+
+      <a class="card card--coral" href="https://jxding-dev.github.io/dashboard/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">MM · TOOL</span><span class="go">↗</span></div>
+        <h3>MY MANAGER</h3>
+        <p>체크리스트·로드맵·수익 계산기를 담은 프리랜서 관리 앱</p>
+      </a>
+
+      <a class="card card--cream" href="https://jxding-dev.github.io/life-archive/" target="_blank" rel="noopener">
+        <div class="row"><span class="tag">LA · ARCHIVE</span><span class="go">↗</span></div>
+        <h3>Life Archive</h3>
+        <p>기억을 기록하고 타임라인으로 모아보는 개인 아카이브 앱</p>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 jx3ing</span>
+    <span>
+      <a href="mailto:dlwlgus2209@gmail.com">dlwlgus2209@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/jxding-dev" target="_blank" rel="noopener">github.com/jxding-dev</a>
+    </span>
+  </footer>
+
+</div>
+</div>
+</body>
+</html>

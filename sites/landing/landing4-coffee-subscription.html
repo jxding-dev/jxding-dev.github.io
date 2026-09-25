@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BREW — 매달 엄선한 스페셜티 원두를 문 앞까지. 커피 구독 서비스">
+<title>BREW — 커피 구독 서비스</title>
+<style>
+  /* ===== Variables ===== */
+  :root {
+    --color-bg: #faf8f5;
+    --color-surface: #ffffff;
+    --color-primary: #2c1810;
+    --color-secondary: #6b4226;
+    --color-accent: #c8793a;
+    --color-muted: #8c7b6e;
+    --color-border: #e8e0d6;
+    --color-tag-bg: #f2ede7;
+
+    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+
+    --shadow-sm: 0 1px 4px rgba(44, 24, 16, 0.08);
+    --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.1);
+    --shadow-lg: 0 8px 40px rgba(44, 24, 16, 0.12);
+
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 40px;
+    --space-xl: 64px;
+    --space-2xl: 100px;
+  }
+
+  /* ===== Reset ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-base);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: var(--font-base); cursor: pointer; border: none; background: none; }
+  ul, ol { list-style: none; }
+
+  /* ===== Layout ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  /* ===== Typography ===== */
+  .section-eyebrow {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+  .section-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+    max-width: 520px;
+  }
+
+  /* ===== Header / Nav ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 248, 245, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+  .main-nav a {
+    font-size: 15px;
+    color: var(--color-muted);
+    transition: color 0.2s;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .main-nav a:hover { color: var(--color-primary); }
+  .primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 var(--space-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .primary-button:hover { background: var(--color-secondary); }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .hero-content { }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-muted);
+    margin-bottom: var(--space-lg);
+    max-width: 420px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+  .secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 var(--space-md);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    font-size: 15px;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .secondary-button:hover {
+    border-color: var(--color-accent);
+    background: var(--color-tag-bg);
+  }
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .trust-icon { color: var(--color-accent); font-size: 16px; }
+
+  /* Coffee box illustration */
+  .hero-visual {
+    position: relative;
+  }
+  .coffee-box {
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .coffee-box::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(200, 121, 58, 0.12);
+  }
+  .coffee-box::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(200, 121, 58, 0.08);
+  }
+  .box-label {
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .box-month {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .box-month-name {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .box-origin {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .box-region {
+    font-size: 14px;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+  .box-tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .box-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+  }
+  .visual-badge {
+    position: absolute;
+    top: var(--space-md);
+    right: calc(-1 * var(--space-sm));
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px var(--space-sm);
+    box-shadow: var(--shadow-md);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .badge-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-accent);
+    display: block;
+  }
+  .badge-label { color: var(--color-muted); font-size: 13px; }
+
+  /* ===== How It Works ===== */
+  .process {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .process-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+  .process-card {
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .process-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--color-tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .process-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: var(--space-xs);
+    color: var(--color-primary);
+  }
+  .process-card-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  /* ===== This Month ===== */
+  .this-month {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .this-month-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .origin-visual {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(145deg, #4a3020, #2c1810);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--space-sm);
+    box-shadow: var(--shadow-lg);
+  }
+  .origin-flag {
+    font-size: 56px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  }
+  .origin-name {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+  }
+  .origin-region-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+  }
+  .origin-altitude {
+    margin-top: var(--space-xs);
+    font-size: 14px;
+    color: var(--color-accent);
+    font-weight: 600;
+    background: rgba(200, 121, 58, 0.15);
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+  .month-content { }
+  .month-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+  .info-item { }
+  .info-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 4px;
+  }
+  .info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .taste-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--space-lg);
+  }
+  .taste-tag {
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: var(--color-tag-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-secondary);
+    font-weight: 500;
+  }
+
+  /* ===== Pricing ===== */
+  .pricing {
+    padding: var(--space-2xl) 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .pricing-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+  .plan-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    background: var(--color-bg);
+    transition: box-shadow 0.2s;
+  }
+  .plan-card:hover { box-shadow: var(--shadow-md); }
+  .plan-card.featured {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+  .plan-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .plan-label.featured-label { color: var(--color-accent); }
+  .plan-price {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+  .plan-price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  .plan-weight {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: var(--space-md);
+  }
+  .plan-features li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-primary);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .plan-cta {
+    display: block;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    background: transparent;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .plan-cta:hover { background: var(--color-tag-bg); border-color: var(--color-accent); }
+  .plan-cta.featured-cta {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+  .plan-cta.featured-cta:hover { background: var(--color-secondary); border-color: var(--color-secondary); }
+
+  /* ===== Reviews ===== */
+  .reviews {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .reviews-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+  .review-card {
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .review-stars {
+    font-size: 14px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 2px;
+  }
+  .review-body {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    font-style: italic;
+  }
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .reviewer-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .av-a { background: #c8793a; }
+  .av-b { background: #6b4226; }
+  .av-c { background: #4a6741; }
+
+  /* ===== FAQ ===== */
+  .faq {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-primary);
+    padding: var(--space-sm) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-base);
+  }
+  .faq-question:hover { color: var(--color-accent); }
+  .faq-icon {
+    font-size: 20px;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-answer {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
+    padding-bottom: var(--space-sm);
+    display: none;
+  }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ===== Contact / CTA ===== */
+  .cta-section {
+    padding: var(--space-2xl) 0;
+    background: var(--color-primary);
+    text-align: center;
+  }
+  .cta-section .section-eyebrow { color: var(--color-accent); }
+  .cta-section .section-title { color: #fff; font-size: 36px; }
+  .cta-section .section-desc { color: rgba(255,255,255,0.55); margin: var(--space-sm) auto var(--space-lg); }
+  .cta-form {
+    display: flex;
+    gap: var(--space-xs);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .cta-input {
+    flex: 1;
+    height: 48px;
+    padding: 0 var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 15px;
+    font-family: var(--font-base);
+    transition: border-color 0.2s;
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.35); }
+  .cta-input:focus { outline: none; border-color: var(--color-accent); }
+  .cta-submit {
+    height: 48px;
+    padding: 0 var(--space-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    font-family: var(--font-base);
+  }
+  .cta-submit:hover { opacity: 0.88; }
+  .cta-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: var(--space-sm);
+    line-height: 1.5;
+  }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    padding: var(--space-xl) 0 var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  .footer-brand { }
+  .footer-brand-name {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+    color: var(--color-primary);
+  }
+  .footer-brand-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
+    max-width: 240px;
+  }
+  .footer-col-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: var(--color-muted);
+    transition: color 0.2s;
+    line-height: 1.5;
+  }
+  .footer-links a:hover { color: var(--color-primary); }
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .container { padding: 0 var(--space-md); }
+    .main-nav a { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .visual-badge { display: none; }
+    .process-grid { grid-template-columns: 1fr; }
+    .this-month-inner { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+    .faq-inner { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 36px; }
+    .section-title { font-size: 26px; }
+    .footer-top { grid-template-columns: 1fr; }
+    .cta-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">Brew</div>
+      <nav class="main-nav" aria-label="주 메뉴">
+        <a href="#how">이용 방법</a>
+        <a href="#this-month">이달의 원두</a>
+        <a href="#pricing">요금제</a>
+        <a href="#faq">자주 묻는 질문</a>
+        <a href="#cta" class="primary-button">구독 시작</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="section-eyebrow">스페셜티 커피 구독</span>
+        <h1 class="hero-title">매달 새로운<br>산지의 커피를<br><em>문 앞으로</em></h1>
+        <p class="hero-desc">전 세계 30개 이상의 농장에서 직접 소싱한 스페셜티 원두를 로스팅 직후 배송합니다. 매달 큐그레이더가 엄선한 단일 원산지 원두만.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="primary-button">지금 구독하기</a>
+          <a href="#this-month" class="secondary-button">이달의 원두 보기</a>
+        </div>
+        <div class="hero-trust">
+          <span class="trust-icon">✓</span>
+          <span>언제든지 해지 가능 &nbsp;·&nbsp; 로스팅 후 48시간 이내 발송 &nbsp;·&nbsp; 첫 달 무료 체험</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="coffee-box" role="img" aria-label="이달의 커피 박스 — 에티오피아 예가체프">
+          <span class="box-label">May 2026</span>
+          <div class="box-month">
+            <span class="box-month-name">이달의 원두</span>
+            <span class="box-origin">에티오피아</span>
+            <span class="box-region">예가체프 G1 · 워시드</span>
+          </div>
+          <div class="box-tags">
+            <span class="box-tag">재스민</span>
+            <span class="box-tag">복숭아</span>
+            <span class="box-tag">레몬 버베나</span>
+            <span class="box-tag">밝은 산미</span>
+          </div>
+        </div>
+        <div class="visual-badge" aria-hidden="true">
+          <span class="badge-value">93pts</span>
+          <span class="badge-label">큐그레이더 점수</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="process" id="how">
+  <div class="container">
+    <div class="process-header">
+      <span class="section-eyebrow">이용 방법</span>
+      <h2 class="section-title">3단계로 시작합니다</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">1</div>
+        <h3 class="process-card-title">플랜 선택</h3>
+        <p class="process-card-desc">원두 용량과 배송 주기를 선택합니다. 그라인드 여부, 선호 로스팅 레벨도 설정할 수 있습니다.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">2</div>
+        <h3 class="process-card-title">매달 큐레이션</h3>
+        <p class="process-card-desc">큐그레이더가 전 세계 농장 중 최고 점수 원두를 선정합니다. 선택의 피로 없이 좋은 커피만 만납니다.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">3</div>
+        <h3 class="process-card-title">로스팅 후 48h 발송</h3>
+        <p class="process-card-desc">주문 확정 후 바로 로스팅을 시작합니다. 가장 신선한 상태로, 진공 밸브 봉투에 담아 보냅니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- This Month -->
+<section class="this-month" id="this-month">
+  <div class="container">
+    <div class="this-month-inner">
+      <div class="origin-visual" role="img" aria-label="에티오피아 예가체프 원두 산지">
+        <span class="origin-flag" aria-hidden="true">🇪🇹</span>
+        <span class="origin-name">에티오피아</span>
+        <span class="origin-region-label">Yirgacheffe · Gedeo Zone</span>
+        <span class="origin-altitude">해발 1,900m</span>
+      </div>
+      <div class="month-content">
+        <span class="section-eyebrow">5월 큐레이션</span>
+        <h2 class="section-title">예가체프 G1<br>자연이 담은 꽃향기</h2>
+        <p class="section-desc">에티오피아 커피의 성지, 예가체프. 워시드 공정을 거친 이 원두는 재스민과 복숭아의 향이 선명하게 피어납니다. 큐그레이더 평점 93점.</p>
+        <div class="month-info">
+          <div class="info-item">
+            <div class="info-label">품종</div>
+            <div class="info-value">Ethiopia Heirloom</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">가공 방식</div>
+            <div class="info-value">Fully Washed</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">고도</div>
+            <div class="info-value">1,800 – 1,960m</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">수확 시기</div>
+            <div class="info-value">2025년 11월</div>
+          </div>
+        </div>
+        <div class="taste-tags" aria-label="테이스팅 노트">
+          <span class="taste-tag">☀ 재스민</span>
+          <span class="taste-tag">🍑 복숭아</span>
+          <span class="taste-tag">🍋 레몬 버베나</span>
+          <span class="taste-tag">밝은 산미</span>
+          <span class="taste-tag">크린 피니시</span>
+        </div>
+        <a href="#pricing" class="primary-button" style="display:inline-flex;">이 원두 구독하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="section-eyebrow">요금제</span>
+      <h2 class="section-title">나에게 맞는 플랜</h2>
+      <p class="section-desc" style="margin:12px auto 0;">첫 달은 무료. 언제든지 변경하거나 해지할 수 있습니다.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div class="plan-label">솔로</div>
+        <div class="plan-price">₩18,900<span>/월</span></div>
+        <div class="plan-weight">원두 200g · 월 1회 배송</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>단일 원산지 원두</li>
+          <li><span class="check">✓</span>큐레이션 노트 동봉</li>
+          <li><span class="check">✓</span>홀빈 또는 그라인드 선택</li>
+          <li><span class="check">✓</span>무료 배송</li>
+        </ul>
+        <a href="#cta" class="plan-cta">시작하기</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-label featured-label">인기 · 듀오</div>
+        <div class="plan-price">₩32,900<span>/월</span></div>
+        <div class="plan-weight">원두 400g · 월 1회 배송</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>단일 원산지 원두 2종</li>
+          <li><span class="check">✓</span>큐레이션 노트 동봉</li>
+          <li><span class="check">✓</span>홀빈 또는 그라인드 선택</li>
+          <li><span class="check">✓</span>무료 배송</li>
+          <li><span class="check">✓</span>추출 가이드 포함</li>
+        </ul>
+        <a href="#cta" class="plan-cta featured-cta">지금 구독하기</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-label">하우스</div>
+        <div class="plan-price">₩58,000<span>/월</span></div>
+        <div class="plan-weight">원두 800g · 격주 또는 월 2회</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>단일 원산지 원두 4종</li>
+          <li><span class="check">✓</span>큐레이션 노트 동봉</li>
+          <li><span class="check">✓</span>홀빈 또는 그라인드 선택</li>
+          <li><span class="check">✓</span>무료 배송</li>
+          <li><span class="check">✓</span>격월 농장 화상 투어</li>
+        </ul>
+        <a href="#cta" class="plan-cta">시작하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <span class="section-eyebrow">구독자 후기</span>
+        <h2 class="section-title">직접 마셔본 분들의 이야기</h2>
+      </div>
+      <div style="font-size:14px;color:var(--color-muted);">★★★★★ 4.9 / 5.0 · 리뷰 1,840건</div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars" aria-label="별점 5점">★★★★★</div>
+        <p class="review-body">"처음엔 반신반의했는데, 첫 박스 열었을 때 커피 향에 감탄했어요. 이제 마트 원두로는 못 돌아가겠습니다."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar av-a" aria-hidden="true">이</div>
+          <div>
+            <strong style="display:block;color:var(--color-primary);">이준서</strong>
+            <span>솔로 플랜 · 8개월째</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars" aria-label="별점 5점">★★★★★</div>
+        <p class="review-body">"산지 정보랑 추출 가이드가 함께 와서 커피 공부도 되더라고요. 매달 어떤 원두가 올지 기다려져요."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar av-b" aria-hidden="true">박</div>
+          <div>
+            <strong style="display:block;color:var(--color-primary);">박소연</strong>
+            <span>듀오 플랜 · 1년째</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars" aria-label="별점 4점">★★★★☆</div>
+        <p class="review-body">"회사에서 팀원들이랑 하우스 플랜 쓰고 있는데 사무실 분위기가 확 달라졌어요. 커피 타임이 진짜 쉬는 시간이 됐습니다."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar av-c" aria-hidden="true">김</div>
+          <div>
+            <strong style="display:block;color:var(--color-primary);">김민재</strong>
+            <span>하우스 플랜 · 4개월째</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div>
+        <span class="section-eyebrow">FAQ</span>
+        <h2 class="section-title">자주 묻는<br>질문</h2>
+        <p class="section-desc">더 궁금한 점은 카카오톡 채널로 문의 주세요. 평일 오전 10시 – 오후 6시 운영합니다.</p>
+      </div>
+      <div class="faq-list" role="list">
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            첫 달 무료 체험은 어떻게 진행되나요?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">결제 정보를 등록하면 첫 달 원두를 무료로 받아보실 수 있습니다. 체험 기간 내 해지하시면 요금이 청구되지 않습니다. 이후 매달 같은 날짜에 자동 결제됩니다.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            원두 종류를 선택할 수 있나요?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">매달 큐레이터가 선정한 원두로 발송됩니다. 단, 선호 로스팅 레벨(라이트 / 미디엄 / 다크)과 홀빈/그라인드 여부는 설정 페이지에서 언제든지 변경하실 수 있습니다.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            배송은 언제, 어떻게 오나요?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">구독 확정일로부터 48시간 이내에 로스팅 후 발송합니다. 전국 무료 배송이며, 보통 발송 후 1~2일 내 도착합니다. 배송 추적 문자가 발송됩니다.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            해지나 일시정지가 가능한가요?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">네, 마이페이지에서 언제든지 일시정지(최대 3개월) 또는 해지하실 수 있습니다. 다음 결제일 2일 전까지 요청하시면 해당 월은 청구되지 않습니다.</div>
+        </div>
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            선물용 구독도 가능한가요?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">가능합니다. 결제 시 '선물하기' 옵션을 선택하면 수신자 이름과 손편지 메시지를 포함해 보낼 수 있습니다. 1개월, 3개월, 6개월 단위로 선택 가능합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <span class="section-eyebrow">지금 시작하기</span>
+    <h2 class="section-title">첫 달은 무료입니다</h2>
+    <p class="section-desc">이메일을 남겨주시면 구독 시작 방법을 안내드립니다.</p>
+    <form class="cta-form" onsubmit="handleSubmit(event)" novalidate>
+      <label for="email" class="visually-hidden">이메일 주소</label>
+      <input
+        type="email"
+        id="email"
+        class="cta-input"
+        placeholder="이메일 주소 입력"
+        autocomplete="email"
+        required
+      >
+      <button type="submit" class="cta-submit">무료 체험 시작</button>
+    </form>
+    <p class="cta-note">스팸 없음 · 언제든 해지 가능 · 첫 달 무료</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Brew</div>
+        <p class="footer-brand-desc">전 세계 최고의 스페셜티 원두를 가장 신선하게. 큐그레이더가 직접 선정합니다.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">구독</div>
+        <ul class="footer-links">
+          <li><a href="#">요금제</a></li>
+          <li><a href="#">이달의 원두</a></li>
+          <li><a href="#">선물 구독</a></li>
+          <li><a href="#">마이페이지</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">브랜드</div>
+        <ul class="footer-links">
+          <li><a href="#">브루 소개</a></li>
+          <li><a href="#">농장 파트너</a></li>
+          <li><a href="#">커피 노트</a></li>
+          <li><a href="#">블로그</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">고객지원</div>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">카카오톡 문의</a></li>
+          <li><a href="#">배송 안내</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brew Inc. 사업자등록번호 123-45-67890</span>
+      <span>이용약관 · 개인정보처리방침</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+</style>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+    btn.setAttribute('aria-expanded', !isOpen);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('.cta-input');
+    if (!input.value) return;
+    alert('감사합니다! 안내 메일을 발송했습니다.');
+    input.value = '';
+  }
+</script>
+</body>
+</html>

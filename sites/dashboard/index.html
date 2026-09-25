@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY MANAGER — 나만의 관리 앱</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="font-normal">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">MY<br>MANAGER</div>
+    <div class="logo-sub">나만의 관리 앱</div>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="메인 메뉴" role="navigation">
+    <div class="nav-section-label">메인</div>
+    <button type="button" class="nav-item active" data-page="dashboard" aria-current="page">
+      <span class="nav-icon">⚡</span><span>대시보드</span>
+    </button>
+    <button type="button" class="nav-item" data-page="checklist" aria-current="false">
+      <span class="nav-icon">✅</span><span>체크리스트</span>
+    </button>
+    <button type="button" class="nav-item" data-page="roadmap" aria-current="false">
+      <span class="nav-icon">🗺</span><span>로드맵</span>
+    </button>
+
+    <div class="nav-section-label">제작 도구</div>
+    <button type="button" class="nav-item" data-page="layout" aria-current="false">
+      <span class="nav-icon">📐</span><span>레이아웃</span>
+    </button>
+    <button type="button" class="nav-item" data-page="prompts" aria-current="false">
+      <span class="nav-icon">💬</span><span>프롬프트</span>
+    </button>
+    <button type="button" class="nav-item" data-page="workflow" aria-current="false">
+      <span class="nav-icon">🔄</span><span>워크플로우</span>
+    </button>
+
+    <div class="nav-section-label">수익</div>
+    <button type="button" class="nav-item" data-page="platforms" aria-current="false">
+      <span class="nav-icon">🏪</span><span>플랫폼</span>
+    </button>
+    <button type="button" class="nav-item" data-page="calculator" aria-current="false">
+      <span class="nav-icon">💰</span><span>수익 계산기</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="revenue-badge">
+      <div class="label">예상 월 순수익</div>
+      <div class="amount" id="sidebar-goal">0만</div>
+      <div class="sub">원</div>
+    </div>
+    <div class="sidebar-controls">
+      <button type="button" id="theme-toggle" data-action="toggle-theme" title="다크/라이트 모드 전환" aria-label="다크/라이트 모드 전환">☀️</button>
+      <div class="btn-row sidebar-reset-row">
+        <button type="button" class="btn-icon btn-danger sidebar-reset-btn" data-action="reset" title="전체 초기화" aria-label="전체 초기화">🗑 초기화</button>
+      </div>
+    </div>
+    <div class="sidebar-data-row">
+      <button type="button" class="btn-sm btn-accent sidebar-data-btn" data-action="export" title="JSON 파일로 백업">⬆ 내보내기</button>
+      <label class="btn-sm btn-secondary sidebar-data-label" title="JSON 파일에서 복원" aria-label="데이터 가져오기">
+        ⬇ 가져오기
+        <input type="file" accept=".json" data-action="import" class="visually-hidden-file" aria-label="JSON 백업 파일 선택">
+      </label>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="topbar">
+    <div class="page-title" id="page-title">⚡ 대시보드</div>
+    <div class="topbar-right">
+      <div class="date-badge" id="current-date"></div>
+      <div class="status-dot"></div>
+    </div>
+  </div>
+
+  <section class="page-section active" id="page-dashboard">
+    <div class="grid-4" id="dashboard-stat-grid">
+      <div class="stat-card" id="dash-card-checklist">
+        <span class="drag-handle">⠿</span>
+        <div class="stat-label">완료 체크리스트</div>
+        <div class="stat-value" id="dash-check-count">0</div>
+        <div class="stat-sub">/ <span id="dash-check-total">0</span> 항목</div>
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="dash-check-progress"></div></div>
+        </div>
+      </div>
+      <div class="stat-card green" id="dash-card-revenue">
+        <span class="drag-handle">⠿</span>
+        <div class="stat-label">예상 월 순수익</div>
+        <div class="stat-value green" id="dash-revenue">0</div>
+        <div class="stat-sub">만원 (계산기 기준)</div>
+      </div>
+      <div class="stat-card yellow" id="dash-card-roadmap">
+        <span class="drag-handle">⠿</span>
+        <div class="stat-label">로드맵 진행</div>
+        <div class="stat-value yellow" id="dash-roadmap-months">0</div>
+        <div class="stat-sub">개월 계획 수립됨</div>
+      </div>
+      <div class="stat-card blue" id="dash-card-prompts">
+        <span class="drag-handle">⠿</span>
+        <div class="stat-label">저장된 프롬프트</div>
+        <div class="stat-value blue" id="dash-prompt-count">0</div>
+        <div class="stat-sub">개 프롬프트 뱅크</div>
+      </div>
+    </div>
+
+    <p class="dashboard-help-text">
+      ⠿ 카드를 드래그해서 순서를 바꿀 수 있습니다
+    </p>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title"><span class="section-accent"></span>대시보드 메모</div>
+        <button type="button" class="btn-sm btn-accent" data-action="save-dashboard-note">저장</button>
+      </div>
+      <textarea class="textarea-field" id="dashboard-note" rows="4"
+        placeholder="오늘의 할 일, 중요 사항, 메모를 자유롭게 기록하세요..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title"><span class="section-accent"></span>나의 프로세스</div>
+        <button type="button" class="btn-sm btn-accent" data-action="add-process">+ 프로세스 추가</button>
+      </div>
+      <div class="process-grid" id="dashboard-process-container"></div>
+      <div class="process-note">
+        💡 버튼을 눌러 단계를 추가하고, 카드를 클릭해 내용을 수정하거나 삭제할 수 있습니다.
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="page-checklist">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>체크리스트</div>
+      <button type="button" class="btn-primary" data-action="add-group">+ 그룹 추가</button>
+    </div>
+
+    <div class="card progress-card">
+      <div class="progress-card-header">
+        <div class="progress-card-label">전체 진행률</div>
+        <div id="cl-progress-text" class="progress-card-value">0 / 0 완료 (0%)</div>
+      </div>
+      <div class="progress-bar progress-bar-lg">
+        <div class="progress-fill" id="cl-progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="checklist-container"></div>
+  </section>
+
+  <section class="page-section" id="page-roadmap">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>장기 로드맵</div>
+      <button type="button" class="btn-primary" data-action="add-month">+ 월 추가</button>
+    </div>
+    <div class="info-box yellow roadmap-info-box">
+      💡 월 단위로 목표와 할 일을 기록하세요. 월을 추가하거나 삭제할 수 있습니다.
+    </div>
+    <div id="roadmap-container"></div>
+  </section>
+
+  <section class="page-section" id="page-layout">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>레이아웃 가이드</div>
+      <button type="button" class="btn-sm btn-accent" data-action="save-layout-note">메모 저장</button>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-header section-header-tight">
+          <div class="section-title section-title-sm">📐 구성 가이드</div>
+          <button type="button" class="btn-sm btn-accent" id="layout-guide-save-btn">저장</button>
+        </div>
+        <div class="layout-visual" id="layout-guide-container">
+          <div class="layout-section-item" data-layout-idx="0">
+            <div class="layout-item-left">
+              <span class="layout-num">01</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+          <div class="layout-section-item" data-layout-idx="1">
+            <div class="layout-item-left">
+              <span class="layout-num">02</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+          <div class="layout-section-item" data-layout-idx="2">
+            <div class="layout-item-left">
+              <span class="layout-num">03</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+          <div class="layout-section-item" data-layout-idx="3">
+            <div class="layout-item-left">
+              <span class="layout-num">04</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+          <div class="layout-section-item" data-layout-idx="4">
+            <div class="layout-item-left">
+              <span class="layout-num">05</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+          <div class="layout-section-item" data-layout-idx="5">
+            <div class="layout-item-left">
+              <span class="layout-num">06</span>
+              <input class="layout-name-input" data-field="name" placeholder="섹션 제목" maxlength="50">
+            </div>
+            <div class="layout-item-meta">
+              <input class="layout-tip-input" data-field="tip" placeholder="팁을 입력하세요" maxlength="80">
+              <input class="layout-size-input" data-field="size" placeholder="—" maxlength="20">
+            </div>
+          </div>
+        </div>
+        <div class="layout-note-text">
+          💡 각 행을 직접 입력하고 저장할 수 있습니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header section-header-tight">
+          <div class="section-title section-title-sm">📝 원칙 / 노트</div>
+        </div>
+        <div class="info-box">
+          여기에 원칙이나 규칙을 직접 입력하세요.<br>
+          HTML 파일에서 이 부분을 수정하면 됩니다.
+        </div>
+        <div class="info-box green">
+          <strong>✅ 좋은 예시:</strong><br>
+          • 여기에 내용을 입력하세요<br>
+          • 원하는 항목을 자유롭게 추가하세요
+        </div>
+        <div class="info-box yellow">
+          <strong>⚠️ 주의사항:</strong><br>
+          • 여기에 주의사항을 입력하세요<br>
+          • 원하는 항목을 자유롭게 추가하세요
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title section-title-sm">📝 레이아웃 메모</div>
+      </div>
+      <textarea class="textarea-field" id="layout-note" rows="6"
+        placeholder="레이아웃 관련 메모, 참고 링크, 아이디어 등을 자유롭게 기록하세요..."></textarea>
+    </div>
+  </section>
+
+  <section class="page-section" id="page-prompts">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>프롬프트 뱅크 <span class="badge" id="prompt-count-badge">0개</span></div>
+      <button type="button" class="btn-primary" data-action="add-prompt">+ 새 프롬프트</button>
+    </div>
+
+    <div class="search-row">
+      <input type="text" class="input-inline prompt-search-input" id="prompt-search" placeholder="프롬프트 검색...">
+    </div>
+
+    <div class="prompt-filters">
+      <span class="prompt-filter-label">필터:</span>
+      <button type="button" class="filter-btn" data-filter="claude" aria-pressed="false">Claude</button>
+      <button type="button" class="filter-btn" data-filter="chatgpt" aria-pressed="false">ChatGPT</button>
+      <button type="button" class="filter-btn" data-filter="gemini" aria-pressed="false">Gemini</button>
+      <button type="button" class="filter-btn" data-filter="ps" aria-pressed="false">Photoshop</button>
+      <button type="button" class="filter-btn" data-filter="other" aria-pressed="false">기타</button>
+    </div>
+
+    <div id="prompts-container"></div>
+  </section>
+
+  <section class="page-section" id="page-workflow">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>툴 워크플로우</div>
+      <button type="button" class="btn-primary" data-action="add-step">+ 스텝 추가</button>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div id="workflow-steps-container"></div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="section-header section-header-compact">
+            <div class="section-title section-title-sm">📝 워크플로우 메모</div>
+            <button type="button" class="btn-sm btn-accent" data-action="save-workflow-note">저장</button>
+          </div>
+          <textarea class="textarea-field" id="workflow-note" rows="8"
+            placeholder="워크플로우 관련 메모, 팁, 주의사항 등을 기록하세요..."></textarea>
+        </div>
+
+        <div class="card">
+          <div class="section-header section-header-compact">
+            <div class="section-title section-title-sm guide-card-title" style="margin-bottom: 0;">🔧 항목별 역할</div>
+            <button type="button" class="btn-sm btn-accent" data-action="add-role">+ 항목 추가</button>
+          </div>
+          <div class="guide-card-list" id="workflow-roles-container"></div>
+          <div class="guide-card-note">
+            💡 항목을 클릭하여 테마 색상과 내용을 수정하거나 삭제할 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="page-platforms">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>플랫폼 전략</div>
+      <button type="button" class="btn-primary" data-action="add-platform">+ 플랫폼 추가</button>
+    </div>
+
+    <div class="card table-card">
+      <table class="platform-table">
+        <thead>
+          <tr>
+            <th>플랫폼</th>
+            <th>유형</th>
+            <th>단가</th>
+            <th>전략</th>
+            <th>상태</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="platforms-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title section-title-sm">📝 플랫폼 메모</div>
+        <button type="button" class="btn-sm btn-accent" data-action="save-platforms-note">저장</button>
+      </div>
+      <textarea class="textarea-field" id="platforms-note" rows="5"
+        placeholder="플랫폼별 전략, 주의사항, 아이디어를 기록하세요..."></textarea>
+    </div>
+  </section>
+
+  <section class="page-section" id="page-calculator">
+    <div class="section-header">
+      <div class="section-title"><span class="section-accent"></span>수익 계산기</div>
+      <button type="button" class="btn-primary" data-action="open-invoice">🧾 청구서 자동완성</button>
+    </div>
+
+    <div class="calc-grid">
+      <div class="card">
+        <div class="calc-block-title">입력값</div>
+        <div class="calc-row">
+          <label class="calc-label">프로젝트 단가</label>
+          <div class="input-with-unit">
+            <input type="number" class="calc-input" id="calc-unit-price" value="0" min="0">
+            <span class="input-unit">원</span>
+          </div>
+        </div>
+        <div class="calc-row">
+          <label class="calc-label">월 수주 건수</label>
+          <div class="input-with-unit">
+            <input type="number" class="calc-input" id="calc-projects" value="0" min="0">
+            <span class="input-unit">건</span>
+          </div>
+        </div>
+        <div class="calc-row">
+          <label class="calc-label">월 고정 지출</label>
+          <div class="input-with-unit">
+            <input type="number" class="calc-input" id="calc-expenses" value="0" min="0">
+            <span class="input-unit">원</span>
+          </div>
+        </div>
+        <div class="calc-row">
+          <label class="calc-label">세금·수수료율</label>
+          <div class="input-with-unit">
+            <input type="number" class="calc-input" id="calc-tax-rate" value="0" min="0" max="100" step="0.1">
+            <span class="input-unit">%</span>
+          </div>
+        </div>
+
+        <div class="calc-save-box">
+          <input type="text" class="input-field calc-memo-input" id="calc-memo" placeholder="메모 (선택)">
+          <button type="button" class="btn-primary btn-full" data-action="save-calc">이 결과 저장</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="card calc-summary-card">
+          <div class="calc-summary-label">예상 월 순수익</div>
+          <div class="calc-total" id="calc-total-display">0</div>
+          <div class="calc-total-label">만원</div>
+        </div>
+
+        <div class="card">
+          <div class="calc-detail-label">계산 내역</div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">총 매출</span>
+            <span class="calc-result-value highlight3" id="calc-gross">0만원</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">세금·수수료 (−)</span>
+            <span class="calc-result-value highlight" id="calc-tax">0만원</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">고정 지출 (−)</span>
+            <span class="calc-result-value highlight" id="calc-expenses-out">0만원</span>
+          </div>
+          <div class="calc-result-row calc-result-row-total">
+            <span class="calc-total-key">순수익</span>
+            <span class="calc-total-value" id="calc-net">0만원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title section-title-sm">📊 저장된 계산 결과</div>
+      </div>
+      <div id="calc-saved-results"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="utils.js"></script>
+<script src="store.js"></script>
+<script src="ui.js"></script>
+<script src="feature-planning.js"></script>
+<script src="feature-tools.js"></script>
+<script src="feature-finance.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

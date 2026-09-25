@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="대표 메뉴, 매장 분위기, 위치 정보를 한 화면에서 자연스럽게 확인하도록 구성한 감성 카페 랜딩 템플릿입니다.">
+  <title>문의 | 오븐사이 카페</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head><body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">오븐사이 카페<small>매일 굽는 디저트와 작은 쉼</small></a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="../index.html">홈</a><a href="../pages/about.html">소개</a><a href="../pages/service.html">서비스</a><a href="../pages/review.html">후기</a><a href="../pages/contact.html" aria-current="page">문의</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="button button-primary button-small" data-modal-open="#consult-modal">인스타그램 보기</button>
+      <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <section class="page-hero"><div class="container page-title"><span class="eyebrow">문의</span><h1>찾아오는 길</h1><p>영업시간, 주소, SNS 문의 버튼을 모바일에서도 바로 확인할 수 있습니다.</p></div></section>
+  <section class="section"><div class="container contact-panel"><div><div class="section-heading"><span class="eyebrow">CONTACT</span><h2>문의와 오시는 길</h2><p>정적 페이지 기준의 문의 화면입니다. 실제 운영 시 전송 API나 외부 폼으로 연결할 수 있습니다.</p></div><ul class="info-list"><li><strong>전화</strong><span>010-1234-5678</span></li><li><strong>주소</strong><span>서울시 샘플구 템플릿로 12</span></li><li><strong>운영</strong><span>11:00-20:00</span></li></ul><div class="map-box" aria-label="지도 대체 영역">지도 또는 매장 위치 이미지 대체 영역</div></div><form class="contact-form card"><div class="field"><label for="name">이름</label><input id="name" name="name" autocomplete="name"></div><div class="field"><label for="phone">연락처</label><input id="phone" name="phone" autocomplete="tel"></div><div class="field"><label for="message">문의 내용</label><textarea id="message" name="message" rows="5"></textarea></div><button class="button button-primary" type="button" data-modal-open="#consult-modal">문의 안내 보기</button></form></div></section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><div class="footer-title">오븐사이 카페</div><p>매일 굽는 디저트와 작은 쉼</p></div>
+    <div><div class="footer-title">Menu</div><p><a href="../pages/service.html">서비스</a></p><p><a href="../pages/review.html">후기</a></p></div>
+    <div><div class="footer-title">Contact</div><p>010-1234-5678</p><p>hello@example.com</p></div>
+    <div><div class="footer-title">Hours</div><p>Tue-Sun 11:00-20:00</p><p>월요일 휴무</p></div>
+  </div>
+</footer>
+<div class="modal-overlay" id="consult-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-header"><h2 id="modal-title">상담 안내</h2><button class="modal-close" data-modal-close aria-label="상담 안내 닫기">×</button></div>
+    <p class="muted">정적 목업 템플릿입니다. 실제 예약 기능은 없으며, 운영 시 카카오채널이나 예약 링크로 연결할 수 있습니다.</p>
+    <div class="button-row modal-actions"><a class="button button-primary" href="../pages/contact.html">문의 페이지 보기</a></div>
+  </div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/slider.js"></script>
+<script src="../js/modal.js"></script>
+</body>
+</html>

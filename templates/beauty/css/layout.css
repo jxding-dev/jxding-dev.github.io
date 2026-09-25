@@ -1,0 +1,56 @@
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:15;
+  background:color-mix(in srgb,var(--color-bg),white 76%);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(53,43,45,.09);
+}
+.nav{
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-md);
+}
+.brand{
+  display:grid;
+  grid-template-columns:auto;
+  gap:.1rem;
+  line-height:1.25;
+  font-weight:700;
+  color:var(--color-primary);
+  letter-spacing:0;
+  min-width:0;
+}
+.brand img{display:block;width:clamp(118px,12vw,180px);height:clamp(32px,3.4vw,42px);object-fit:contain;object-position:left center}
+.brand small{font-size:.72rem;font-weight:500;color:var(--color-muted);margin-left: 36px;}
+.nav-links{display:flex;align-items:center;gap:1.12rem;font-size:var(--font-sm)}
+.nav-links a{padding:.45rem .1rem;border-bottom:2px solid transparent;font-weight:700}
+.nav-links a[aria-current="page"],.nav-links a:hover{border-color:var(--color-accent)}
+.nav-actions{display:flex;align-items:center;gap:.75rem}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-primary)}
+.menu-toggle span{display:block;width:20px;height:2px;background:currentColor;margin:5px auto}
+.site-footer{padding:var(--space-lg) 0;background:linear-gradient(135deg,var(--color-primary),#463839);color:#fff}
+.footer-grid{display:grid;grid-template-columns:1.2fr repeat(3,auto);gap:var(--space-md);align-items:start}
+.footer-grid a,.footer-grid p{color:rgba(255,255,255,.76);font-size:var(--font-sm);line-height:1.65}
+.footer-title{font-weight:700;margin-bottom:.5rem}
+@media (max-width:860px){
+  .menu-toggle{display:inline-grid;place-items:center}
+  .nav-links{
+    position:absolute;
+    inset:74px 12px auto 12px;
+    display:none;
+    grid-template-columns:1fr;
+    background:var(--color-bg);
+    border:1px solid var(--color-border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    padding:var(--space-sm);
+  }
+  .nav-links.is-open{display:grid}
+  .nav-links a{padding:.75rem}
+  .nav-actions .button-small{display:none}
+  .brand small{max-width:180px}
+  .footer-grid{grid-template-columns:1fr}
+}

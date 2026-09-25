@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="COMMA — 하루 5분, 마음을 쉬게 합니다. 멘탈 웰빙 앱">
+<title>COMMA — 하루 5분 마음 케어</title>
+<style>
+  /* ===== Variables ===== */
+  :root {
+    --color-bg: #f7f5f2;
+    --color-surface: #ffffff;
+    --color-primary: #1c1917;
+    --color-accent: #7c6ff7;
+    --color-accent-light: #f0effe;
+    --color-teal: #0d9488;
+    --color-teal-light: #f0fdfa;
+    --color-warm: #ea580c;
+    --color-muted: #78716c;
+    --color-border: #e7e5e4;
+    --color-subtle: #f5f5f4;
+
+    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --shadow-sm: 0 1px 4px rgba(28, 25, 23, 0.06);
+    --shadow-md: 0 4px 20px rgba(28, 25, 23, 0.08);
+    --shadow-lg: 0 12px 40px rgba(28, 25, 23, 0.1);
+  }
+
+  /* ===== Reset ===== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-base);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: var(--font-base); cursor: pointer; border: none; background: none; }
+  ul, ol { list-style: none; }
+
+  /* ===== Layout ===== */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ===== Typography ===== */
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-primary);
+    letter-spacing: -0.5px;
+  }
+  .section-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin-top: 12px;
+    max-width: 520px;
+  }
+
+  /* ===== Buttons ===== */
+  .primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 28px;
+    border-radius: 100px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .primary-button:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 28px;
+    border-radius: 100px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 500;
+    transition: border-color 0.2s;
+  }
+  .secondary-button:hover { border-color: var(--color-accent); }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247, 245, 242, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-accent);
+    letter-spacing: -1px;
+  }
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .main-nav a {
+    font-size: 15px;
+    color: var(--color-muted);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .main-nav a:hover { color: var(--color-primary); }
+  .header-cta {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 100px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.2s;
+  }
+  .header-cta:hover { opacity: 0.88; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 88px 0 80px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 100px;
+    background: var(--color-teal-light);
+    border: 1px solid #99f6e4;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-teal);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -2px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+  }
+  .hero-desc {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 36px;
+    max-width: 440px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .store-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 20px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .store-btn:hover { opacity: 0.85; }
+  .store-btn-icon { font-size: 22px; line-height: 1; }
+  .store-btn-text { }
+  .store-btn-sub { font-size: 10px; color: rgba(255,255,255,0.6); display: block; }
+  .store-btn-name { font-size: 15px; font-weight: 700; display: block; }
+  .hero-note {
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* App mockup */
+  .app-mockup {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .phone-frame {
+    width: 270px;
+    border-radius: 36px;
+    background: var(--color-primary);
+    padding: 14px;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.06) inset;
+    position: relative;
+  }
+  .phone-screen {
+    border-radius: 26px;
+    background: #faf8ff;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-notch {
+    height: 28px;
+    background: var(--color-primary);
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0;
+    width: 80px;
+    position: relative;
+    top: 0;
+  }
+  .screen-content {
+    flex: 1;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .screen-greeting {
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+  .screen-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: -6px;
+  }
+  .mood-row {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .mood-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--color-surface);
+  }
+  .mood-item.selected {
+    border-color: var(--color-accent);
+    background: var(--color-accent-light);
+  }
+  .mood-emoji { font-size: 20px; }
+  .mood-label { font-size: 10px; color: var(--color-muted); font-weight: 500; }
+  .today-card {
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .today-card.purple { background: linear-gradient(135deg, #7c6ff7, #a78bfa); }
+  .today-card.teal { background: linear-gradient(135deg, #0d9488, #2dd4bf); }
+  .today-card-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .today-card-title { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.4; }
+  .today-card-meta { font-size: 11px; color: rgba(255,255,255,0.65); }
+  .today-card-play {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+  .streak-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--color-border);
+  }
+  .streak-left { }
+  .streak-num { font-size: 22px; font-weight: 800; color: var(--color-warm); }
+  .streak-label { font-size: 11px; color: var(--color-muted); }
+  .streak-dots { display: flex; gap: 4px; }
+  .streak-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+  }
+  .streak-dot.done { background: var(--color-warm); color: white; }
+  .phone-shadow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    background: rgba(28,25,23,0.12);
+    border-radius: 50%;
+    filter: blur(16px);
+  }
+  .mockup-float-card {
+    position: absolute;
+    right: -20px;
+    top: 60px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-md);
+    width: 160px;
+  }
+  .float-card-label { font-size: 11px; color: var(--color-muted); margin-bottom: 6px; }
+  .float-card-value { font-size: 18px; font-weight: 800; color: var(--color-primary); }
+  .float-card-sub { font-size: 11px; color: var(--color-teal); font-weight: 600; margin-top: 2px; }
+
+  /* ===== Stats Bar ===== */
+  .stats-bar {
+    padding: 40px 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .stats-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -1px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--color-border);
+  }
+
+  /* ===== Features ===== */
+  .features {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .features-header { text-align: center; margin-bottom: 56px; }
+  .features-header .section-desc { margin: 12px auto 0; }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .feature-icon-wrap {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .icon-purple { background: var(--color-accent-light); }
+  .icon-teal { background: var(--color-teal-light); }
+  .icon-warm { background: #fff7ed; }
+  .feature-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .feature-card-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  /* ===== Program (Content section) ===== */
+  .program {
+    padding: 88px 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .program-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .program-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .program-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .program-item:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+  .program-item.active { border-color: var(--color-accent); background: var(--color-accent-light); }
+  .program-thumb {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .thumb-purple { background: var(--color-accent-light); }
+  .thumb-teal { background: var(--color-teal-light); }
+  .thumb-warm { background: #fff7ed; }
+  .thumb-green { background: #f0fdf4; }
+  .program-info { flex: 1; }
+  .program-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 2px;
+  }
+  .program-meta { font-size: 13px; color: var(--color-muted); }
+  .program-duration {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  .program-detail {
+    position: sticky;
+    top: 80px;
+  }
+  .detail-card {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .detail-header {
+    padding: 36px 32px 28px;
+    background: linear-gradient(145deg, #7c6ff7, #a78bfa);
+    color: #fff;
+  }
+  .detail-category {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+  }
+  .detail-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .detail-meta {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+  }
+  .detail-body {
+    padding: 28px 32px;
+    background: var(--color-surface);
+  }
+  .detail-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 24px;
+  }
+  .detail-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .topic-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+  .topic-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--color-accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .detail-start {
+    width: 100%;
+    height: 48px;
+    border-radius: 100px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: var(--font-base);
+  }
+  .detail-start:hover { opacity: 0.88; }
+
+  /* ===== Reviews ===== */
+  .reviews {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .review-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .score-num {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -2px;
+  }
+  .score-right { }
+  .score-stars { font-size: 18px; color: #f59e0b; letter-spacing: 2px; }
+  .score-count { font-size: 13px; color: var(--color-muted); line-height: 1.5; }
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .review-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+  }
+  .review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .reviewer-info { }
+  .reviewer-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 2px;
+  }
+  .reviewer-sub { font-size: 13px; color: var(--color-muted); line-height: 1.5; }
+  .review-stars { font-size: 13px; color: #f59e0b; letter-spacing: 1px; }
+  .review-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 14px;
+  }
+  .review-program-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  /* ===== Pricing ===== */
+  .pricing {
+    padding: 88px 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .pricing-header { text-align: center; margin-bottom: 48px; }
+  .pricing-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 4px;
+    margin-top: 20px;
+  }
+  .toggle-btn {
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    background: none;
+    font-family: var(--font-base);
+  }
+  .toggle-btn.active { background: var(--color-surface); color: var(--color-primary); font-weight: 600; box-shadow: var(--shadow-sm); }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .plan-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    background: var(--color-bg);
+    transition: box-shadow 0.2s;
+  }
+  .plan-card:hover { box-shadow: var(--shadow-md); }
+  .plan-card.featured {
+    background: var(--color-primary);
+    border-color: transparent;
+    box-shadow: var(--shadow-lg);
+  }
+  .plan-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .plan-card.featured .plan-name { color: rgba(255,255,255,0.5); }
+  .plan-price {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+  .plan-card.featured .plan-price { color: #fff; }
+  .plan-period {
+    font-size: 14px;
+    color: var(--color-muted);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.5;
+  }
+  .plan-card.featured .plan-period { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.1); }
+  .plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .plan-feature {
+    font-size: 14px;
+    color: var(--color-primary);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .plan-card.featured .plan-feature { color: rgba(255,255,255,0.8); }
+  .feature-check { color: var(--color-teal); font-weight: 700; flex-shrink: 0; }
+  .plan-card.featured .feature-check { color: #2dd4bf; }
+  .plan-btn {
+    display: block;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-family: var(--font-base);
+    width: 100%;
+  }
+  .plan-btn:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+  .plan-btn.featured-btn {
+    background: var(--color-accent);
+    color: #fff;
+    border-color: transparent;
+  }
+  .plan-btn.featured-btn:hover { opacity: 0.88; }
+
+  /* ===== FAQ ===== */
+  .faq {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-inner {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .faq-list { display: flex; flex-direction: column; margin-top: 4px; }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-base);
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--color-accent); }
+  .faq-chevron {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--color-subtle);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--color-accent-light); color: var(--color-accent); }
+  .faq-answer {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    padding-bottom: 20px;
+    display: none;
+  }
+  .faq-item.open .faq-answer { display: block; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 100px 0;
+    text-align: center;
+    background: var(--color-surface);
+  }
+  .cta-icon { font-size: 48px; margin-bottom: 20px; display: block; }
+  .cta-section .section-title { font-size: 40px; letter-spacing: -1px; }
+  .cta-section .section-desc { margin: 16px auto 36px; }
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .cta-note { font-size: 14px; color: var(--color-muted); }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    padding: 64px 0 32px;
+    border-top: 1px solid var(--color-border);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 48px;
+  }
+  .footer-brand-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-accent);
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+  }
+  .footer-brand-desc {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+    max-width: 220px;
+    margin-bottom: 16px;
+  }
+  .footer-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .footer-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--color-subtle);
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    font-weight: 500;
+  }
+  .footer-col-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: var(--color-muted);
+    transition: color 0.2s;
+    line-height: 1.5;
+  }
+  .footer-links a:hover { color: var(--color-primary); }
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    .main-nav a { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .mockup-float-card { display: none; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+    .program-inner { grid-template-columns: 1fr; }
+    .program-detail { position: static; }
+    .review-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .faq-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .stats-inner { gap: 16px; }
+    .stat-divider { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 36px; }
+    .section-title { font-size: 26px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .store-buttons { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">comma</div>
+      <nav class="main-nav" aria-label="주 메뉴">
+        <a href="#features">기능</a>
+        <a href="#program">프로그램</a>
+        <a href="#reviews">후기</a>
+        <a href="#pricing">요금제</a>
+      </nav>
+      <a href="#cta" class="header-cta">무료 시작</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">
+          🌿 마음 챙김 앱 1위 · 앱스토어 선정
+        </div>
+        <h1 class="hero-title">하루 5분,<br>마음을 쉬게<br>합니다</h1>
+        <p class="hero-desc">불안, 스트레스, 수면 문제. 작은 습관 하나가 달라지게 합니다. 심리 전문가가 설계한 마음 케어 프로그램을 앱에서 바로.</p>
+        <div class="hero-actions">
+          <div class="store-buttons">
+            <button class="store-btn" onclick="alert('App Store로 이동')">
+              <span class="store-btn-icon" aria-hidden="true">🍎</span>
+              <span class="store-btn-text">
+                <span class="store-btn-sub">Download on the</span>
+                <span class="store-btn-name">App Store</span>
+              </span>
+            </button>
+            <button class="store-btn" onclick="alert('Google Play로 이동')">
+              <span class="store-btn-icon" aria-hidden="true">▶</span>
+              <span class="store-btn-text">
+                <span class="store-btn-sub">Get it on</span>
+                <span class="store-btn-name">Google Play</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <p class="hero-note">무료로 시작 · 7일 프리미엄 체험 포함 · 신용카드 불필요</p>
+      </div>
+      <div class="app-mockup">
+        <div class="phone-frame" role="img" aria-label="COMMA 앱 화면 미리보기">
+          <div class="phone-screen">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="screen-content">
+              <div class="screen-greeting">안녕하세요, 지수님 👋</div>
+              <div class="screen-title">오늘 기분이 어때요?</div>
+              <div class="mood-row" role="group" aria-label="오늘의 기분 선택">
+                <div class="mood-item selected" tabindex="0" aria-selected="true">
+                  <span class="mood-emoji" aria-hidden="true">😌</span>
+                  <span class="mood-label">차분해요</span>
+                </div>
+                <div class="mood-item" tabindex="0">
+                  <span class="mood-emoji" aria-hidden="true">😔</span>
+                  <span class="mood-label">우울해요</span>
+                </div>
+                <div class="mood-item" tabindex="0">
+                  <span class="mood-emoji" aria-hidden="true">😰</span>
+                  <span class="mood-label">불안해요</span>
+                </div>
+                <div class="mood-item" tabindex="0">
+                  <span class="mood-emoji" aria-hidden="true">😊</span>
+                  <span class="mood-label">좋아요</span>
+                </div>
+              </div>
+              <div class="today-card purple">
+                <span class="today-card-label">오늘의 명상</span>
+                <div class="today-card-title">마음 속 걱정을<br>내려놓는 연습</div>
+                <div class="today-card-meta">10분 · 수면 전 추천</div>
+                <div class="today-card-play" aria-label="재생">▶</div>
+              </div>
+              <div class="today-card teal">
+                <span class="today-card-label">오늘의 호흡</span>
+                <div class="today-card-title">4-7-8 호흡법으로<br>긴장 풀기</div>
+                <div class="today-card-meta">5분 · 지금 바로 가능</div>
+                <div class="today-card-play" aria-label="재생">▶</div>
+              </div>
+              <div class="streak-card">
+                <div class="streak-left">
+                  <div class="streak-num">14</div>
+                  <div class="streak-label">일 연속 기록 🔥</div>
+                </div>
+                <div class="streak-dots" aria-label="이번 주 완료 현황">
+                  <div class="streak-dot done" aria-label="완료">✓</div>
+                  <div class="streak-dot done" aria-label="완료">✓</div>
+                  <div class="streak-dot done" aria-label="완료">✓</div>
+                  <div class="streak-dot done" aria-label="완료">✓</div>
+                  <div class="streak-dot done" aria-label="완료">✓</div>
+                  <div class="streak-dot" aria-label="오늘"></div>
+                  <div class="streak-dot" aria-label="예정"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-shadow" aria-hidden="true"></div>
+        <div class="mockup-float-card" aria-hidden="true">
+          <div class="float-card-label">스트레스 지수</div>
+          <div class="float-card-value">32점</div>
+          <div class="float-card-sub">↓ 18점 감소 (2주)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-bar" aria-label="서비스 지표">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">920만+</span>
+        <span class="stat-label">앱 다운로드</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">4.8</span>
+        <span class="stat-label">앱스토어 평점</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">87%</span>
+        <span class="stat-label">수면 개선 경험</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">340+</span>
+        <span class="stat-label">심리 전문가 콘텐츠</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">21일</span>
+        <span class="stat-label">평균 습관 형성 기간</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header">
+      <span class="section-eyebrow">핵심 기능</span>
+      <h2 class="section-title">마음 건강을 위한<br>모든 것이 한 곳에</h2>
+      <p class="section-desc">명상, 호흡, 수면, 감정일기까지. 심리 전문가가 설계한 과학 기반 프로그램.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-purple" aria-hidden="true">🧘</div>
+        <h3 class="feature-card-title">가이드 명상</h3>
+        <p class="feature-card-desc">5분부터 30분까지, 임상 심리사가 직접 녹음한 200개 이상의 명상 오디오. 초보자도 쉽게 따라할 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-teal" aria-hidden="true">💨</div>
+        <h3 class="feature-card-title">과학적 호흡법</h3>
+        <p class="feature-card-desc">불안을 가라앉히는 4-7-8 호흡, 집중력을 높이는 박스 호흡. 시각적 가이드와 함께 1분 만에 효과를 느낍니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-warm" aria-hidden="true">🌙</div>
+        <h3 class="feature-card-title">수면 개선 프로그램</h3>
+        <p class="feature-card-desc">수면 전 이완 명상, ASMR 사운드, 수면 패턴 기록. 21일 수면 개선 챌린지로 깊은 잠을 되찾으세요.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-teal" aria-hidden="true">📓</div>
+        <h3 class="feature-card-title">감정 일기</h3>
+        <p class="feature-card-desc">매일 기분을 기록하고 패턴을 파악합니다. AI가 감정 변화를 분석해 맞춤 콘텐츠를 추천합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-purple" aria-hidden="true">🎯</div>
+        <h3 class="feature-card-title">맞춤 프로그램</h3>
+        <p class="feature-card-desc">불안, 번아웃, 자존감, 관계 스트레스 등 고민별 전문 프로그램. 심리 전문가가 직접 설계했습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap icon-warm" aria-hidden="true">🔥</div>
+        <h3 class="feature-card-title">습관 트래커</h3>
+        <p class="feature-card-desc">연속 달성 기록과 알림으로 꾸준한 루틴을 만듭니다. 작은 습관이 큰 변화를 만듭니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Program -->
+<section class="program" id="program">
+  <div class="container">
+    <div class="program-inner">
+      <div>
+        <span class="section-eyebrow">추천 프로그램</span>
+        <h2 class="section-title">내 고민에 맞는<br>프로그램을 골라요</h2>
+        <div class="program-list" role="list">
+          <div class="program-item active" role="listitem">
+            <div class="program-thumb thumb-purple" aria-hidden="true">😰</div>
+            <div class="program-info">
+              <div class="program-name">불안 다스리기 21일 챌린지</div>
+              <div class="program-meta">임상 심리사 이수진 · 21일 과정</div>
+            </div>
+            <div class="program-duration">5–10분/일</div>
+          </div>
+          <div class="program-item" role="listitem">
+            <div class="program-thumb thumb-teal" aria-hidden="true">🌙</div>
+            <div class="program-info">
+              <div class="program-name">깊은 수면 회복 프로그램</div>
+              <div class="program-meta">수면 전문가 박준혁 · 14일 과정</div>
+            </div>
+            <div class="program-duration">10분/일</div>
+          </div>
+          <div class="program-item" role="listitem">
+            <div class="program-thumb thumb-warm" aria-hidden="true">🔋</div>
+            <div class="program-info">
+              <div class="program-name">번아웃에서 회복하기</div>
+              <div class="program-meta">정신건강의학과 전문의 · 28일 과정</div>
+            </div>
+            <div class="program-duration">7–15분/일</div>
+          </div>
+          <div class="program-item" role="listitem">
+            <div class="program-thumb thumb-green" aria-hidden="true">🌱</div>
+            <div class="program-info">
+              <div class="program-name">자존감 회복 프로젝트</div>
+              <div class="program-meta">심리상담사 최미래 · 21일 과정</div>
+            </div>
+            <div class="program-duration">5–8분/일</div>
+          </div>
+        </div>
+      </div>
+      <div class="program-detail">
+        <div class="detail-card">
+          <div class="detail-header">
+            <div class="detail-category">불안 · 스트레스</div>
+            <div class="detail-title">불안 다스리기<br>21일 챌린지</div>
+            <div class="detail-meta">임상 심리사 이수진 · 21일 · 5–10분/일</div>
+          </div>
+          <div class="detail-body">
+            <p class="detail-desc">인지행동치료(CBT) 기반의 과학적 방법으로 불안의 뿌리를 찾고, 생각 패턴을 바꾸는 21일 프로그램입니다. 매일 5분으로 시작합니다.</p>
+            <div class="detail-topics">
+              <div class="topic-item">
+                <div class="topic-icon" aria-hidden="true">1</div>
+                불안의 원인 파악하기
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon" aria-hidden="true">2</div>
+                생각 재구성 훈련
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon" aria-hidden="true">3</div>
+                즉시 사용하는 진정 기법
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon" aria-hidden="true">4</div>
+                불안 없는 일상 만들기
+              </div>
+            </div>
+            <button class="detail-start">프로그램 시작하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <span class="section-eyebrow">사용자 후기</span>
+        <h2 class="section-title">달라진 사람들의 이야기</h2>
+      </div>
+      <div class="review-score">
+        <div class="score-num">4.8</div>
+        <div class="score-right">
+          <div class="score-stars" aria-label="별점 4.8점">★★★★★</div>
+          <div class="score-count">리뷰 41,200건</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-info">
+            <div class="reviewer-name">강지현</div>
+            <div class="reviewer-sub">직장인 · 서울 · 3개월 사용</div>
+          </div>
+          <div class="review-stars" aria-label="별점 5점">★★★★★</div>
+        </div>
+        <p class="review-body">야근이 많아 번아웃이 심했는데, 자기 전 10분 명상을 2주 하고 나니 잠드는 시간이 반으로 줄었어요. 이제 퇴근 후 comma 켜는 게 루틴이 됐어요.</p>
+        <span class="review-program-tag">번아웃에서 회복하기</span>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-info">
+            <div class="reviewer-name">박민준</div>
+            <div class="reviewer-sub">대학원생 · 부산 · 6개월 사용</div>
+          </div>
+          <div class="review-stars" aria-label="별점 5점">★★★★★</div>
+        </div>
+        <p class="review-body">논문 마감 때마다 공황 증상이 있었는데, 4-7-8 호흡법을 배운 뒤로 거의 안 일어나요. 불안 챌린지 21일 마치고 진짜 달라진 걸 느꼈습니다.</p>
+        <span class="review-program-tag">불안 다스리기</span>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-info">
+            <div class="reviewer-name">이소영</div>
+            <div class="reviewer-sub">주부 · 인천 · 4개월 사용</div>
+          </div>
+          <div class="review-stars" aria-label="별점 4점">★★★★☆</div>
+        </div>
+        <p class="review-body">감정 일기 기능이 생각보다 훨씬 좋아요. 내 감정 패턴을 보니 언제 스트레스를 받는지 알게 됐고, 그걸 아는 것만으로도 많이 편안해졌어요.</p>
+        <span class="review-program-tag">감정 일기</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="section-eyebrow">요금제</span>
+      <h2 class="section-title">내 마음에 투자하세요</h2>
+      <div class="pricing-toggle" role="group" aria-label="결제 주기 선택">
+        <button class="toggle-btn active" onclick="setToggle(this)">월간</button>
+        <button class="toggle-btn" onclick="setToggle(this)">연간 (2개월 무료)</button>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div class="plan-name">무료</div>
+        <div class="plan-price">₩0</div>
+        <div class="plan-period">영원히 무료 · 기본 기능 제공</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feature-check">✓</span>기본 명상 10개</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>감정 일기 (7일 보관)</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>기초 호흡법 3가지</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>습관 트래커</li>
+        </ul>
+        <button class="plan-btn" onclick="alert('앱 다운로드 페이지')">무료로 시작</button>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">프리미엄</div>
+        <div class="plan-price">₩9,900</div>
+        <div class="plan-period">/월 · 언제든지 해지 가능 · 7일 무료 체험</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feature-check">✓</span>명상 200개+ 전체 접근</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>전문가 프로그램 전체</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>감정 일기 무제한 보관</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>AI 맞춤 추천</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>오프라인 저장</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>수면 사운드 라이브러리</li>
+        </ul>
+        <button class="plan-btn featured-btn">7일 무료 체험</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">패밀리</div>
+        <div class="plan-price">₩15,900</div>
+        <div class="plan-period">/월 · 최대 5명 공유 가능</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feature-check">✓</span>프리미엄 전체 기능</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>최대 5개 계정 공유</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>가족 챌린지 기능</li>
+          <li class="plan-feature"><span class="feature-check">✓</span>어린이·청소년 전용 콘텐츠</li>
+        </ul>
+        <button class="plan-btn" onclick="alert('패밀리 플랜 시작')">시작하기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div>
+        <span class="section-eyebrow">FAQ</span>
+        <h2 class="section-title">자주 묻는<br>질문</h2>
+        <p class="section-desc" style="margin-top:12px;">더 궁금한 점은 앱 내 채팅으로 문의해 주세요. 평일 오전 9시–오후 9시에 답변드립니다.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            명상을 처음 해보는데 따라할 수 있을까요?
+            <span class="faq-chevron" aria-hidden="true">∨</span>
+          </button>
+          <div class="faq-answer">네, 모든 프로그램은 완전 초보자를 기준으로 설계되어 있습니다. "명상이 처음인 분들을 위한 7일 입문" 코스부터 시작하시면 자연스럽게 습관이 만들어집니다.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            콘텐츠는 누가 만드나요?
+            <span class="faq-chevron" aria-hidden="true">∨</span>
+          </button>
+          <div class="faq-answer">임상 심리사, 정신건강의학과 전문의, 마음챙김 명상 전문가가 과학적 근거를 바탕으로 제작합니다. 모든 콘텐츠는 전문가 검토를 거쳐 앱에 등록됩니다.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            7일 무료 체험 후 자동 결제되나요?
+            <span class="faq-chevron" aria-hidden="true">∨</span>
+          </button>
+          <div class="faq-answer">네, 체험 기간 종료 후 자동으로 결제가 시작됩니다. 체험 기간 내 언제든지 설정에서 해지하시면 결제가 이루어지지 않습니다. 해지는 단 두 번의 탭으로 완료됩니다.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            이 앱이 전문 심리 치료를 대체할 수 있나요?
+            <span class="faq-chevron" aria-hidden="true">∨</span>
+          </button>
+          <div class="faq-answer">comma는 일상적인 스트레스 관리와 마음 건강 습관 형성을 돕습니다. 전문적인 심리 치료나 상담을 대체하지는 않습니다. 심각한 증상이 있으시면 전문가 상담을 권장드립니다.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            오프라인에서도 사용 가능한가요?
+            <span class="faq-chevron" aria-hidden="true">∨</span>
+          </button>
+          <div class="faq-answer">프리미엄 이상 구독자는 콘텐츠를 미리 다운로드해 오프라인에서도 사용할 수 있습니다. 지하철, 비행기 등 인터넷이 없는 환경에서도 명상을 즐기세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <span class="cta-icon" aria-hidden="true">🌿</span>
+    <h2 class="section-title">오늘, 딱 5분만 나에게 주세요</h2>
+    <p class="section-desc">첫 7일은 무료입니다. 신용카드 없이 지금 시작하세요.</p>
+    <div class="cta-buttons">
+      <button class="primary-button" onclick="alert('App Store로 이동')">
+        🍎 App Store
+      </button>
+      <button class="primary-button" style="background:var(--color-primary);" onclick="alert('Google Play로 이동')">
+        ▶ Google Play
+      </button>
+    </div>
+    <p class="cta-note">무료 시작 · 7일 프리미엄 체험 · 언제든 해지 가능</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">comma</div>
+        <p class="footer-brand-desc">하루 5분, 마음을 쉬게 합니다. 심리 전문가가 설계한 마음 케어 앱.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">앱스토어 편집자 선택</span>
+          <span class="footer-badge">구글플레이 추천 앱</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">앱</div>
+        <ul class="footer-links">
+          <li><a href="#">기능 소개</a></li>
+          <li><a href="#">프로그램</a></li>
+          <li><a href="#">요금제</a></li>
+          <li><a href="#">앱 다운로드</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">회사</div>
+        <ul class="footer-links">
+          <li><a href="#">소개</a></li>
+          <li><a href="#">전문가 팀</a></li>
+          <li><a href="#">채용</a></li>
+          <li><a href="#">블로그</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">고객지원</div>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+          <li><a href="#">고객센터</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Comma Inc. 사업자등록번호 345-67-89012</span>
+      <span>이 앱은 의료기기가 아니며 전문 심리 치료를 대체하지 않습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function setToggle(btn) {
+    btn.closest('.pricing-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  document.querySelectorAll('.program-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.program-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.mood-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.mood-item').forEach(i => {
+        i.classList.remove('selected');
+        i.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('selected');
+      this.setAttribute('aria-selected', 'true');
+    });
+  });
+</script>
+</body>
+</html>
