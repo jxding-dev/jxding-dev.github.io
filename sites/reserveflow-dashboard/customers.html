@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReserveFlow 고객 관리</title>
+    <link rel="stylesheet" href="css/reset.css" /><link rel="stylesheet" href="css/common.css" /><link rel="stylesheet" href="css/layout.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="css/pages.css" /><link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark">R</span><div><strong>ReserveFlow</strong><small>예약 운영 콘솔</small></div></a><nav class="side-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>캘린더</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>메시지</a><a href="settings.html" data-nav>설정</a></nav><div class="sidebar-footer"><strong>라벤더 스튜디오</strong><small>고객 메모 관리</small></div></aside>
+      <main class="main" data-customers>
+        <header class="topbar"><div class="topbar-title"><small>CRM</small><strong>고객 관리</strong></div><div class="topbar-actions"><input class="search" id="customerSearch" name="customerSearch" data-customer-search type="search" placeholder="고객명, 연락처, 태그 검색" /></div></header>
+        <section class="page-header"><div><h1>고객 목록/메모</h1><p>재방문 응대에 필요한 메모를 확인합니다.</p></div><button class="button" type="button">등록</button></section>
+        <section class="customer-layout"><div class="panel"><div class="panel-header"><div><small>고객 리스트</small><h2>최근 방문 고객</h2></div></div><div class="customer-list" data-customer-list></div></div><aside class="panel profile-panel" data-customer-profile></aside></section>
+      </main>
+    </div>
+    <nav class="bottom-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>일정</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>알림</a><a href="settings.html" data-nav>설정</a></nav>
+    <script src="js/toast.js"></script><script src="js/menu.js"></script><script src="js/customers.js"></script>
+  </body>
+</html>

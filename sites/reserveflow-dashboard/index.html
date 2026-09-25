@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReserveFlow 홈 대시보드</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a class="brand" href="index.html"><span class="brand-mark">R</span><div><strong>ReserveFlow</strong><small>예약 운영 콘솔</small></div></a>
+        <nav class="side-nav" aria-label="주요 메뉴">
+          <a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>캘린더</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>메시지</a><a href="settings.html" data-nav>설정</a>
+        </nav>
+        <div class="sidebar-footer"><strong>라벤더 스튜디오</strong><small>오늘 18:00까지 운영</small></div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-title"><small>2026년 6월 16일</small><strong>운영 대시보드</strong></div>
+          <div class="topbar-actions"><input class="search" id="dashboardSearch" name="dashboardSearch" type="search" placeholder="고객명, 예약, 메모 검색" /><button class="button" type="button" data-modal-open="#quickModal">예약 추가</button></div>
+        </header>
+        <section class="page-header">
+          <div><h1>오늘의 예약 흐름</h1><p>오늘 확인할 예약과 운영 메모를 정리했습니다.</p></div>
+          <button class="button secondary" type="button" data-quick-action="운영 리포트">리포트</button>
+        </section>
+        <section class="ops-mode-panel" data-ops-mode>
+          <div class="ops-mode-main">
+            <span class="badge completed" data-ops-status>정상 운영</span>
+            <h2>오늘 운영 모드</h2>
+            <p data-ops-task>대기 예약 3건을 확인하세요.</p>
+          </div>
+          <div class="ops-insight-grid">
+            <article><small>집중 시간</small><strong data-ops-peak>14:00 ~ 17:00</strong><span class="badge confirmed">정상 운영</span></article>
+            <article><small>노쇼 주의</small><strong data-ops-noshow>2명</strong><span class="badge warning">확인 필요</span></article>
+            <article><small>빈 시간 추천</small><strong data-ops-open>11:30, 16:00</strong><span class="badge new">빈 시간 있음</span></article>
+            <article><small>예상 매출</small><strong data-ops-revenue>428,000원</strong><span class="badge completed">정산 가능</span></article>
+          </div>
+        </section>
+        <section class="summary-grid">
+          <article class="card stat-card"><span>오늘 예약</span><strong>18건</strong><small>확정 14 · 대기 4</small><b class="badge confirmed">정상 운영</b></article>
+          <article class="card stat-card warning"><span>대기 중 문의</span><strong>6건</strong><small>평균 응답 12분</small><b class="badge warning">응답 필요</b></article>
+          <article class="card stat-card mint"><span>이번 달 매출</span><strong>12,480,000원</strong><small>전월 대비 12% 증가</small><b class="badge completed">목표 78%</b></article>
+          <article class="card stat-card danger"><span>재방문 고객</span><strong>64%</strong><small>노쇼 위험 3명</small><b class="badge pending">관리 필요</b></article>
+        </section>
+        <section class="two-column-grid" style="margin-top:16px;">
+          <div class="panel">
+            <div class="panel-header"><div><small>오늘 타임라인</small><h2>진행 중인 예약</h2></div></div>
+            <ol class="timeline-list">
+              <li class="timeline-item status-confirmed"><time class="timeline-time">10:30</time><div class="timeline-main"><strong>김하린</strong><span>젤 네일 케어 · 원장 · 재방문 고객</span></div><div class="row-actions"><span class="badge confirmed">예약확정</span><span class="badge new">방문 예정</span><button class="status-button" type="button" data-status-cycle data-status="confirmed">상태 변경</button></div></li>
+              <li class="timeline-item status-payment"><time class="timeline-time">12:00</time><div class="timeline-main"><strong>오민재</strong><span>PT 체험 세션 · 민서 · 결제 대기</span></div><div class="row-actions"><span class="badge payment">결제대기</span><span class="badge warning">확인 필요</span><button class="status-button" type="button" data-status-cycle data-status="payment">상태 변경</button></div></li>
+              <li class="timeline-item status-warning"><time class="timeline-time">14:20</time><div class="timeline-main"><strong>박소율</strong><span>두피 케어 · 지후 · 메모 있음</span></div><div class="row-actions"><span class="badge noshow">노쇼주의</span><span class="badge completed">메모 있음</span><button class="status-button" type="button" data-status-cycle data-status="noshow">상태 변경</button></div></li>
+            </ol>
+          </div>
+          <div class="panel">
+            <div class="panel-header"><div><small>매출 추이</small><h2>최근 7일</h2></div></div>
+            <div class="bar-chart" aria-label="매출 차트">
+              <div class="bar"><span style="height:42%"></span><small>월</small></div><div class="bar"><span style="height:76%"></span><small>화</small></div><div class="bar"><span style="height:55%"></span><small>수</small></div><div class="bar"><span style="height:68%"></span><small>목</small></div><div class="bar"><span style="height:84%"></span><small>금</small></div><div class="bar"><span style="height:92%"></span><small>토</small></div><div class="bar"><span style="height:30%"></span><small>일</small></div>
+            </div>
+          </div>
+        </section>
+        <section class="two-column-grid" style="margin-top:16px;">
+          <div class="panel">
+            <div class="panel-header"><div><small>다가오는 예약</small><h2>다음 일정</h2></div><a class="button secondary" href="reservations.html">전체 보기</a></div>
+            <div class="table-wrap"><table class="data-table"><thead><tr><th>시간</th><th>고객</th><th>서비스</th><th>상태</th></tr></thead><tbody><tr><td data-label="시간">16:10</td><td data-label="고객">한도윤</td><td data-label="서비스">퍼스널 컬러 상담</td><td data-label="상태"><span class="badge pending">대기</span></td></tr><tr><td data-label="시간">17:40</td><td data-label="고객">정유찬</td><td data-label="서비스">도자기 클래스</td><td data-label="상태"><span class="badge confirmed">확정</span></td></tr></tbody></table></div>
+          </div>
+          <div class="grid">
+            <aside class="panel"><div class="panel-header"><div><small>고객 메모</small><h2>확인 필요</h2></div></div><ul class="memo-list"><li class="memo-card">김하린: 밝은 톤 선호, 다음 방문 시 컬러 샘플 준비</li><li class="memo-card">오민재: 무릎 부담으로 운동 강도 조절</li></ul></aside>
+            <aside class="panel"><div class="panel-header"><div><small>빠른 실행</small><h2>자주 쓰는 작업</h2></div></div><div class="quick-actions"><button class="button secondary" data-quick-action="예약 추가" type="button">예약 추가</button><button class="button secondary" data-quick-action="고객 등록" type="button">고객 등록</button><button class="button secondary" data-quick-action="서비스 수정" type="button">서비스 수정</button><button class="button secondary" data-quick-action="메시지 보내기" type="button">메시지 보내기</button></div></aside>
+            <aside class="panel"><div class="panel-header"><div><small>알림</small><h2>발송 대기</h2></div></div><ul class="memo-list"><li class="memo-card">대기 고객 4명에게 빈 시간 안내</li><li class="memo-card">내일 오전 예약 리마인드 예약</li></ul></aside>
+          </div>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>일정</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>알림</a><a href="settings.html" data-nav>설정</a></nav>
+    <dialog class="modal" id="quickModal"><form class="modal-form" method="dialog"><div class="panel-header"><div><h2>새 예약</h2><small>데모 화면에만 표시됩니다.</small></div><button class="icon-button" type="button" data-modal-close>×</button></div><label for="quickCustomer">고객명<input class="input" id="quickCustomer" name="quickCustomer" value="이서윤" /></label><label for="quickService">서비스<input class="input" id="quickService" name="quickService" value="커스텀 클래스" /></label><menu><button class="button secondary" type="button" data-modal-close>취소</button><button class="button" value="confirm">저장</button></menu></form></dialog>
+    <script src="js/toast.js"></script><script src="js/modal.js"></script><script src="js/menu.js"></script><script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReserveFlow 서비스 관리</title>
+    <link rel="stylesheet" href="css/reset.css" /><link rel="stylesheet" href="css/common.css" /><link rel="stylesheet" href="css/layout.css" /><link rel="stylesheet" href="css/components.css" /><link rel="stylesheet" href="css/pages.css" /><link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a class="brand" href="index.html"><span class="brand-mark">R</span><div><strong>ReserveFlow</strong><small>예약 운영 콘솔</small></div></a>
+        <nav class="side-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>캘린더</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>메시지</a><a href="settings.html" data-nav>설정</a></nav>
+        <div class="sidebar-footer"><strong>라벤더 스튜디오</strong><small>서비스와 가격</small></div>
+      </aside>
+      <main class="main" data-services>
+        <header class="topbar">
+          <div class="topbar-title"><small>서비스</small><strong>가격 관리</strong></div>
+          <div class="topbar-actions"><button class="button" type="button" data-service-add>서비스 추가</button></div>
+        </header>
+        <section class="page-header">
+          <div><h1>서비스/가격 관리</h1><p>예약에 노출할 서비스와 가격을 정리합니다.</p></div>
+        </section>
+        <section class="panel service-toolbar" aria-label="서비스 카테고리">
+          <div class="segmented service-tabs">
+            <button class="active" type="button" data-service-filter="all">전체</button>
+            <button type="button" data-service-filter="beauty">뷰티</button>
+            <button type="button" data-service-filter="fitness">운동</button>
+            <button type="button" data-service-filter="class">클래스</button>
+            <button type="button" data-service-filter="consult">상담</button>
+          </div>
+        </section>
+        <section class="service-grid" data-service-cards aria-label="서비스 카드"></section>
+        <section class="panel" style="margin-top:16px;">
+          <div class="panel-header"><div><small>가격표</small><h2>전체 서비스 가격</h2></div></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>서비스명</th><th>카테고리</th><th>소요시간</th><th>가격</th><th>상태</th><th>관리</th></tr></thead>
+              <tbody data-service-table></tbody>
+            </table>
+          </div>
+          <div class="empty-state" data-service-empty>선택한 카테고리에 서비스가 없습니다.</div>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-nav"><a href="index.html" data-nav>홈</a><a href="calendar.html" data-nav>일정</a><a href="reservations.html" data-nav>예약</a><a href="customers.html" data-nav>고객</a><a href="services.html" data-nav>서비스</a><a href="messages.html" data-nav>알림</a><a href="settings.html" data-nav>설정</a></nav>
+    <dialog class="modal" id="serviceModal" aria-labelledby="serviceModalTitle">
+      <form class="modal-form" method="dialog" data-service-form>
+        <div class="panel-header"><div><h2 id="serviceModalTitle">서비스 추가</h2><small>예약 화면에 표시될 항목입니다.</small></div><button class="icon-button" type="button" data-modal-close aria-label="닫기">×</button></div>
+        <input type="hidden" name="id" />
+        <label for="serviceName">서비스명<input class="input" id="serviceName" name="name" required /></label>
+        <label for="serviceCategory">카테고리<select class="select" id="serviceCategory" name="category"><option value="beauty">뷰티</option><option value="fitness">운동</option><option value="class">클래스</option><option value="consult">상담</option></select></label>
+        <label for="serviceDuration">소요시간<input class="input" id="serviceDuration" name="duration" required placeholder="예: 60분" /></label>
+        <label for="servicePrice">가격<input class="input" id="servicePrice" name="price" required placeholder="예: 50,000원" /></label>
+        <label for="serviceStatus">상태<select class="select" id="serviceStatus" name="status"><option value="active">예약 가능</option><option value="paused">숨김</option></select></label>
+        <label for="serviceDescription">설명<textarea class="textarea" id="serviceDescription" name="description" required></textarea></label>
+        <button class="button" type="submit">저장</button>
+      </form>
+    </dialog>
+    <script src="js/toast.js"></script><script src="js/modal.js"></script><script src="js/menu.js"></script><script src="js/services.js"></script>
+  </body>
+</html>
