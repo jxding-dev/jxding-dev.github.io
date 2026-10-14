@@ -27,13 +27,14 @@
 
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
+  @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
 
   body{
     background:var(--ink);
     color:var(--ink);
     font-family:'Pretendard', sans-serif;
     -webkit-font-smoothing:antialiased;
-    min-width:360px;
+    min-width:0;
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -286,6 +287,83 @@
   }
   footer a{ border-bottom:2px solid var(--coral); }
   footer a:hover{ color:var(--blue); border-color:var(--blue); }
+
+  /* ---------- Jump nav (분류 바로가기) ---------- */
+  .jump{
+    position:sticky; top:0; z-index:20;
+    margin: 0 calc(var(--pad) * -1);
+    padding: 12px var(--pad);
+    background:var(--bg);
+    border-top: var(--bw) solid var(--ink);
+    border-bottom: var(--bw) solid var(--ink);
+  }
+  .hero{ border-bottom:none; }
+  .jump-track{
+    display:flex; gap:8px;
+    overflow-x:auto; scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .jump-track::-webkit-scrollbar{ display:none; }
+  .jump a{
+    flex-shrink:0;
+    font-family:'Space Mono', monospace;
+    font-weight:700; font-size:0.72rem;
+    letter-spacing:0.06em; text-transform:uppercase;
+    padding:7px 13px;
+    border:2px solid var(--ink); border-radius:999px;
+    background:var(--bg);
+    transition: background .15s ease, color .15s ease;
+  }
+  .jump a.on{ background:var(--ink); color:var(--bg); }
+  .group{ scroll-margin-top: 70px; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 600px){
+    :root{ --bw: 2.5px; }
+    .frame{ margin:6px; }
+    body{ -webkit-tap-highlight-color: transparent; }
+
+    header{ padding-bottom:16px; }
+    .stickerbtn{ padding:8px 13px; font-size:0.68rem; box-shadow:3px 3px 0 var(--ink); }
+
+    .hero{ padding: 20px 0 36px; }
+    .hero h1{ font-size: clamp(2.1rem, 11vw, 3rem); margin-bottom:14px; }
+    .hero h1 .hl, .hero h1 .hl2{ box-shadow:4px 4px 0 var(--ink); }
+    .hero h1 .hl2{ margin-top:12px; }
+    .hero p{ font-size:0.92rem; line-height:1.75; word-break:keep-all; }
+
+    .ribbon{ margin:30px 0 16px; font-size:0.7rem; padding:6px 14px; box-shadow:4px 4px 0 var(--coral); }
+    .group:first-of-type .ribbon{ margin-top:24px; }
+
+    /* 2열 컴팩트 카드 */
+    .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px 12px; }
+    .card{
+      min-height:0; padding:13px 12px 14px; gap:6px;
+      border-radius:9px; box-shadow:4px 4px 0 var(--ink);
+    }
+    .card:nth-child(3n+1){ --rot:-0.8deg; }
+    .card:nth-child(3n+2){ --rot:0.7deg; }
+    .card:nth-child(3n+3){ --rot:-0.4deg; }
+    .card:hover, .card:focus-visible{ box-shadow:6px 6px 0 var(--ink); }
+    .card .tag{
+      font-size:0.56rem; padding:2px 7px; border-width:1.5px;
+      max-width:calc(100% - 18px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .card .go{ font-size:0.9rem; }
+    .card h3{ font-size:0.95rem; margin-top:2px; word-break:keep-all; }
+    .card p{
+      font-size:0.74rem; line-height:1.5; word-break:keep-all;
+      display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    /* 한 개뿐인 그룹(Featured)은 가로로 꽉 채운다 */
+    .grid > .card:only-child{ grid-column: 1 / -1; }
+    .grid > .card:only-child p{ -webkit-line-clamp:2; }
+
+    footer{ flex-direction:column; gap:10px; font-size:0.72rem; }
+    footer > span:last-child{ display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+    footer > span:last-child a{ white-space:nowrap; }
+    footer .sep{ display:none; }
+  }
 </style>
 </head>
 <body>
@@ -311,7 +389,20 @@
     </p>
   </section>
 
-  <div class="group">
+  <nav class="jump" aria-label="분류 바로가기">
+    <div class="jump-track">
+      <a href="#g-featured">Featured</a>
+      <a href="#g-client">외주</a>
+      <a href="#g-apps">Apps</a>
+      <a href="#g-sites">Sites</a>
+      <a href="#g-games">Games</a>
+      <a href="#g-tools">Tools</a>
+      <a href="#g-landing">Landing</a>
+      <a href="#g-templates">Templates</a>
+    </div>
+  </nav>
+
+  <div class="group" id="g-featured">
     <span class="ribbon">Featured</span>
     <div class="grid">
 
@@ -324,7 +415,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-client">
     <span class="ribbon">Client Work · 외주</span>
     <div class="grid">
 
@@ -343,7 +434,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-apps">
     <span class="ribbon">Web Apps</span>
     <div class="grid">
 
@@ -374,7 +465,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-sites">
     <span class="ribbon">Client Sites</span>
     <div class="grid">
 
@@ -465,7 +556,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-games">
     <span class="ribbon">Interactive &amp; Games</span>
     <div class="grid">
 
@@ -490,7 +581,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-tools">
     <span class="ribbon">Personal Tools</span>
     <div class="grid">
 
@@ -509,7 +600,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-landing">
     <span class="ribbon">Landing Pages</span>
     <div class="grid">
 
@@ -558,7 +649,7 @@
     </div>
   </div>
 
-  <div class="group">
+  <div class="group" id="g-templates">
     <span class="ribbon">Templates</span>
     <div class="grid">
 
@@ -599,12 +690,42 @@
     <span>© 2026 jx3ing</span>
     <span>
       <a href="mailto:dlwlgus2209@gmail.com">dlwlgus2209@gmail.com</a>
-      &nbsp;·&nbsp;
+      <span class="sep">&nbsp;·&nbsp;</span>
       <a href="https://github.com/jxding-dev" target="_blank" rel="noopener">github.com/jxding-dev</a>
     </span>
   </footer>
 
 </div>
 </div>
+<script>
+  // 분류 칩: 지금 보고 있는 분류를 표시하고, 칩 줄을 그 위치로 맞춘다 (페이지 스크롤은 건드리지 않음)
+  (function(){
+    const track = document.querySelector('.jump-track');
+    const links = [...track.querySelectorAll('a')];
+    const byId = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const groups = [...document.querySelectorAll('.group[id]')];
+    const visible = new Set();
+    let current = null, lockUntil = 0;
+
+    function mark(a){
+      if (!a || a === current) return;
+      if (current) current.classList.remove('on');
+      a.classList.add('on'); current = a;
+      track.scrollTo({ left: a.offsetLeft - track.offsetLeft - 8, behavior: 'smooth' });
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      if (Date.now() < lockUntil) return;          // 칩을 눌러 이동하는 동안은 누른 칩 유지
+      // 감지 영역에 여러 분류가 걸리면 화면 위쪽(문서 순서상 앞)의 분류를 표시
+      const top = groups.find(g => visible.has(g));
+      mark(top && byId[top.id]);
+    }, { rootMargin: '-80px 0px -60% 0px' });
+    groups.forEach(g => io.observe(g));
+
+    // 누른 칩은 바로 표시 (페이지 끝 분류처럼 위까지 못 올라오는 경우 포함)
+    links.forEach(a => a.addEventListener('click', () => { lockUntil = Date.now() + 1200; mark(a); }));
+  })();
+</script>
 </body>
 </html>
