@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="COMMA — 하루 5분, 마음을 쉬게 합니다. 멘탈 웰빙 앱">
 <title>COMMA — 하루 5분 마음 케어</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   /* ===== Variables ===== */
   :root {
@@ -20,7 +21,7 @@
     --color-border: #e7e5e4;
     --color-subtle: #f5f5f4;
 
-    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-base: 'Pretendard Variable', Pretendard, system-ui, -apple-system, sans-serif;
 
     --radius-sm: 8px;
     --radius-md: 14px;
@@ -951,6 +952,13 @@
     .footer-top { grid-template-columns: 1fr; }
     .cta-buttons { flex-direction: column; align-items: center; }
     .store-buttons { flex-direction: column; }
+  }
+
+  /* 모바일 가독성·터치 영역 보정 */
+  @media (max-width: 768px) {
+    .footer-links { gap: 0; }
+    .footer-links a { display: inline-block; padding: 7px 0; }
+    .store-btn-sub, .footer-badge { font-size: 12px; }
   }
 </style>
 </head>

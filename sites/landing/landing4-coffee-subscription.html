@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="BREW — 매달 엄선한 스페셜티 원두를 문 앞까지. 커피 구독 서비스">
 <title>BREW — 커피 구독 서비스</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:wght@500;600&display=swap">
 <style>
   /* ===== Variables ===== */
   :root {
@@ -17,8 +20,8 @@
     --color-border: #e8e0d6;
     --color-tag-bg: #f2ede7;
 
-    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-base: 'Pretendard Variable', Pretendard, system-ui, -apple-system, sans-serif;
+    --font-serif: 'Gowun Batang', 'Cormorant Garamond', Georgia, serif;
 
     --radius-sm: 6px;
     --radius-md: 12px;
@@ -1127,6 +1130,13 @@
   clip: rect(0,0,0,0);
   white-space: nowrap;
 }
+
+  /* 모바일 가독성·터치 영역 보정 */
+  @media (max-width: 768px) {
+    .cta-input { flex: none; }
+    .footer-links { gap: 0; }
+    .footer-links a { display: inline-block; padding: 7px 0; }
+  }
 </style>
 
 <script>

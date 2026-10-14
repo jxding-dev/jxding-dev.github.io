@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="TUTOR — 1:1 전문가 과외 연결 플랫폼. 내 수준과 목표에 맞는 선생님을 찾아드립니다.">
 <title>TUTOR — 1:1 전문가 과외 플랫폼</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   /* ===== Variables ===== */
   :root {
@@ -19,7 +20,7 @@
     --color-border: #e5e7eb;
     --color-tag-bg: #f3f4f6;
 
-    --font-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-base: 'Pretendard Variable', Pretendard, system-ui, -apple-system, sans-serif;
 
     --radius-sm: 6px;
     --radius-md: 12px;
@@ -933,6 +934,14 @@
     .process-steps { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; }
     .cta-buttons { flex-direction: column; align-items: center; }
+  }
+
+  /* 모바일 가독성·터치 영역 보정 */
+  @media (max-width: 768px) {
+    .tutors-header a { display: inline-block; padding: 10px 0; }
+    .footer-links { gap: 0; }
+    .footer-links a { display: inline-block; padding: 7px 0; }
+    .tutor-badge { font-size: 12px; }
   }
 </style>
 </head>
