@@ -126,7 +126,7 @@ main {
   padding: 72px 0 28px;
   background:
     linear-gradient(90deg, rgba(23, 47, 71, 0.88) 0%, rgba(23, 47, 71, 0.62) 45%, rgba(23, 47, 71, 0.22) 100%),
-    url("../images/hero-clinic.png") center / cover no-repeat,
+    url("../images/hero-clinic.webp") center / cover no-repeat,
     linear-gradient(135deg, #193149 0%, #2e6d6a 54%, #d7e2df 100%);
 }
 
@@ -148,31 +148,31 @@ main {
 .subpage-hero.about-hero {
   background-image:
     linear-gradient(90deg, rgba(23, 47, 71, 0.86), rgba(29, 77, 82, 0.34)),
-    url("../images/about-hero.png");
+    url("../images/about-hero.webp");
 }
 
 .subpage-hero.doctors-hero {
   background-image:
     linear-gradient(90deg, rgba(23, 47, 71, 0.86), rgba(29, 77, 82, 0.34)),
-    url("../images/doctors-hero.png");
+    url("../images/doctors-hero.webp");
 }
 
 .subpage-hero.treatments-hero {
   background-image:
     linear-gradient(90deg, rgba(23, 47, 71, 0.86), rgba(29, 77, 82, 0.34)),
-    url("../images/treatments-hero.png");
+    url("../images/treatments-hero.webp");
 }
 
 .subpage-hero.reservation-hero {
   background-image:
     linear-gradient(90deg, rgba(23, 47, 71, 0.86), rgba(29, 77, 82, 0.34)),
-    url("../images/reservation-hero.png");
+    url("../images/reservation-hero.webp");
 }
 
 .subpage-hero.location-hero {
   background-image:
     linear-gradient(90deg, rgba(23, 47, 71, 0.86), rgba(29, 77, 82, 0.34)),
-    url("../images/location-hero.png");
+    url("../images/location-hero.webp");
 }
 
 .subpage-hero .section-eyebrow,
@@ -296,54 +296,54 @@ main {
 .treatment-detail-image.image-implant {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-implant.png");
+    url("../images/treatment-implant.webp");
 }
 
 .treatment-image.image-orthodontics,
 .treatment-detail-image.image-orthodontics {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-orthodontics.png");
+    url("../images/treatment-orthodontics.webp");
 }
 
 .treatment-image.image-aesthetic,
 .treatment-detail-image.image-aesthetic {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-aesthetic.png");
+    url("../images/treatment-aesthetic.webp");
 }
 
 .treatment-image.image-cavity,
 .treatment-detail-image.image-cavity {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-cavity.png");
+    url("../images/treatment-cavity.webp");
 }
 
 .treatment-detail-image.image-root-canal {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-root-canal.png");
+    url("../images/treatment-root-canal.webp");
 }
 
 .treatment-image.image-gum-care,
 .treatment-detail-image.image-gum-care {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-gum-care.png");
+    url("../images/treatment-gum-care.webp");
 }
 
 .treatment-image.image-scaling,
 .treatment-detail-image.image-scaling {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-scaling.png");
+    url("../images/treatment-scaling.webp");
 }
 
 .treatment-detail-image.image-wisdom-tooth {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.14)),
-    url("../images/treatment-wisdom-tooth.png");
+    url("../images/treatment-wisdom-tooth.webp");
 }
 
 .treatment-image[class*="image-"],
@@ -378,17 +378,17 @@ main {
 
 .doctor-photo.image-doctor-kim,
 .doctor-detail-photo.image-doctor-kim {
-  background-image: url("../images/doctor-kim-doyoon.png");
+  background-image: url("../images/doctor-kim-doyoon.webp");
 }
 
 .doctor-photo.image-doctor-lee,
 .doctor-detail-photo.image-doctor-lee {
-  background-image: url("../images/doctor-lee-seoyeon.png");
+  background-image: url("../images/doctor-lee-seoyeon.webp");
 }
 
 .doctor-photo.image-doctor-park,
 .doctor-detail-photo.image-doctor-park {
-  background-image: url("../images/doctor-park-jihoon.png");
+  background-image: url("../images/doctor-park-jihoon.webp");
 }
 
 .doctor-photo[class*="image-doctor"],
@@ -529,7 +529,7 @@ main {
   border-radius: var(--radius-small);
   background:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.1)),
-    url("../images/treatment-room.png") center / cover no-repeat;
+    url("../images/treatment-room.webp") center / cover no-repeat;
 }
 
 .form-wide {
@@ -805,7 +805,7 @@ main {
   color: var(--white);
   background:
     linear-gradient(180deg, rgba(23, 47, 71, 0.03), rgba(23, 47, 71, 0.82)),
-    url("../images/clinic-lobby.png") center / cover no-repeat;
+    url("../images/clinic-lobby.webp") center / cover no-repeat;
   box-shadow: var(--shadow-soft);
 }
 
@@ -1093,37 +1093,37 @@ main {
 .case-card:nth-child(1) .case-image.before {
   background-image:
     linear-gradient(145deg, rgba(23, 47, 71, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-cosmetic-before.png");
+    url("../images/case-cosmetic-before.webp");
 }
 
 .case-card:nth-child(1) .case-image.after {
   background-image:
     linear-gradient(145deg, rgba(184, 155, 99, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-cosmetic-after.png");
+    url("../images/case-cosmetic-after.webp");
 }
 
 .case-card:nth-child(2) .case-image.before {
   background-image:
     linear-gradient(145deg, rgba(23, 47, 71, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-whitening-before.png");
+    url("../images/case-whitening-before.webp");
 }
 
 .case-card:nth-child(2) .case-image.after {
   background-image:
     linear-gradient(145deg, rgba(184, 155, 99, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-whitening-after.png");
+    url("../images/case-whitening-after.webp");
 }
 
 .case-card:nth-child(3) .case-image.before {
   background-image:
     linear-gradient(145deg, rgba(23, 47, 71, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-resin-before.png");
+    url("../images/case-resin-before.webp");
 }
 
 .case-card:nth-child(3) .case-image.after {
   background-image:
     linear-gradient(145deg, rgba(184, 155, 99, 0.08), rgba(255, 255, 255, 0.1)),
-    url("../images/case-resin-after.png");
+    url("../images/case-resin-after.webp");
 }
 
 .case-image span {
@@ -1253,19 +1253,19 @@ main {
 .equipment-feature .image-ct {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.05), rgba(47, 119, 117, 0.08)),
-    url("../images/dental-ct-scanner.png");
+    url("../images/dental-ct-scanner.webp");
 }
 
 .equipment-feature .image-scanner {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.05), rgba(47, 119, 117, 0.08)),
-    url("../images/intraoral-scanner.png");
+    url("../images/intraoral-scanner.webp");
 }
 
 .equipment-feature .image-sterilization {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.05), rgba(47, 119, 117, 0.08)),
-    url("../images/sterilization-room.png");
+    url("../images/sterilization-room.webp");
 }
 
 .equipment-feature > div:last-child {
@@ -1299,19 +1299,19 @@ main {
   border-radius: var(--radius-small);
   background:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.1)),
-    url("../images/consultation-room.png") center / cover no-repeat;
+    url("../images/consultation-room.webp") center / cover no-repeat;
 }
 
 .about-facilities .equipment-list article:nth-child(2)::before {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.1)),
-    url("../images/intraoral-scanner.png");
+    url("../images/intraoral-scanner.webp");
 }
 
 .about-facilities .equipment-list article:nth-child(3)::before {
   background-image:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.1)),
-    url("../images/sterilization-room.png");
+    url("../images/sterilization-room.webp");
 }
 
 .review-slide span {
@@ -1609,7 +1609,7 @@ main {
   border-radius: var(--radius-medium);
   background:
     linear-gradient(135deg, rgba(23, 47, 71, 0.08), rgba(47, 119, 117, 0.1)),
-    url("../images/clinic-exterior.png") center / cover no-repeat;
+    url("../images/clinic-exterior.webp") center / cover no-repeat;
   box-shadow: var(--shadow-soft);
 }
 
@@ -1626,7 +1626,7 @@ main {
   font-weight: 800;
   background:
     linear-gradient(135deg, rgba(47, 119, 117, 0.08), rgba(184, 155, 99, 0.1)),
-    url("../images/location-map.png") center / cover no-repeat,
+    url("../images/location-map.webp") center / cover no-repeat,
     var(--secondary);
 }
 

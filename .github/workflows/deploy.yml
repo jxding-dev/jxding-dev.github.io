@@ -51,7 +51,7 @@ jobs:
           for dir in sites/*/; do
             cp -r "$dir" "_site/$(basename "$dir")"
           done
-          cp -r templates _site/templates
+          # templates/ 는 미완성이라 배포하지 않음
 
           # 빌드된 앱 → 기존 공개 경로
           cp -r apps/mockfolio/dist       _site/mockfolio
