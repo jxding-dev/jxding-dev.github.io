@@ -298,6 +298,25 @@ section{ scroll-margin-top:72px; }
 .addon-list li small{ display:block; color:var(--muted); font-size:.82rem; margin-top:2px; }
 .addon-list li b{ font-family:var(--display); white-space:nowrap; font-variant-numeric:tabular-nums; }
 
+.scope{ margin-top:56px; padding-top:44px; border-top:1px solid var(--line); }
+.scope-head{ max-width:640px; }
+.scope-head h3{ font-size:1.35rem; font-weight:800; letter-spacing:-.02em; }
+.scope-head p{ color:var(--muted); margin-top:10px; font-size:.95rem; line-height:1.7; }
+.scope-grid{ display:grid; grid-template-columns:1fr 1.25fr; gap:18px; margin-top:24px; }
+.scope-col{ border-radius:18px; padding:24px 22px; border:1px solid var(--line); }
+.scope-col.yes{ background:var(--accent-soft); border-color:transparent; }
+.scope-col.no{ background:var(--bg); }
+.scope-col h4{ font-size:1rem; font-weight:800; margin-bottom:14px; }
+.scope-col h4 span{ font-weight:600; color:var(--muted); font-size:.86rem; margin-left:4px; }
+.scope-col ul{ list-style:none; display:grid; gap:10px; }
+.scope-col li{ display:flex; gap:10px; font-size:.93rem; line-height:1.5; }
+.scope-col.yes li::before{ content:"✓"; color:var(--accent); font-weight:900; }
+.scope-col.no li{ flex-wrap:wrap; justify-content:space-between; padding-bottom:10px; border-bottom:1px dashed var(--line); }
+.scope-col.no li:last-child{ border-bottom:0; padding-bottom:0; }
+.scope-col.no li b{ font-weight:700; }
+.scope-col.no li b::before{ content:"✕"; color:#C2410C; font-weight:900; margin-right:8px; }
+.scope-col.no li span{ color:var(--muted); font-size:.86rem; }
+
 /* ════════════════════════════════════════════
    WORK
 ════════════════════════════════════════════ */
@@ -494,6 +513,7 @@ section{ scroll-margin-top:72px; }
   .step .dur{ margin-top:8px; }
   .why{ grid-template-columns:1fr 1fr; }
   .addons{ grid-template-columns:1fr; gap:22px; }
+  .scope-grid{ grid-template-columns:1fr; }
   .apply{ grid-template-columns:1fr; }
 }
 @media (max-width: 760px){
@@ -650,7 +670,7 @@ section{ scroll-margin-top:72px; }
           <li>맞춤 디자인 시안 1종</li>
           <li>모바일·태블릿·PC 반응형</li>
           <li>무료 배포 (호스팅비 0원)</li>
-          <li>신청 폼·지도·SNS 링크 연결</li>
+          <li>구글폼·지도·SNS 연결 (외부 서비스 연동)</li>
           <li>수정 2회</li>
         </ul>
         <a class="btn btn-line" data-kakao data-plan="원페이지" href="#apply">이 상품으로 상담</a>
@@ -682,7 +702,7 @@ section{ scroll-margin-top:72px; }
         <div class="meta"><span>최대 8페이지</span><span>작업 2~3주</span></div>
         <ul class="feat">
           <li>소개·활동·멤버·모집·문의 구성</li>
-          <li>공지·활동 기록을 쉽게 추가하는 구조</li>
+          <li>공지·활동 글을 파일 수정만으로 추가하는 구조</li>
           <li>모바일·태블릿·PC 반응형</li>
           <li>운영진 인수인계용 관리 가이드</li>
           <li>배포 후 2주 무상 오류 수정</li>
@@ -709,6 +729,35 @@ section{ scroll-margin-top:72px; }
         <li><div>급행 제작<small>작업 기간 절반으로 단축</small></div><b>+30%</b></li>
         <li><div>사후 수정<small>배포 이후 텍스트·이미지 교체, 1회당</small></div><b data-student="20000" data-regular="30000">20,000원</b></li>
       </ul>
+    </div>
+
+    <div class="scope rv">
+      <div class="scope-head">
+        <h3>제작 범위</h3>
+        <p>보여주는 사이트(프론트엔드)를 전문으로 만듭니다. 서버·데이터베이스가 필요한 기능은 직접 개발하지 않고, 검증된 외부 서비스로 연결해 드려요.</p>
+      </div>
+      <div class="scope-grid">
+        <div class="scope-col yes">
+          <h4>만들어 드려요</h4>
+          <ul>
+            <li>소개·포트폴리오·모집·행사 페이지</li>
+            <li>맞춤 디자인과 반응형 레이아웃</li>
+            <li>애니메이션·슬라이드·갤러리 등 화면 인터랙션</li>
+            <li>무료 배포와 도메인 연결</li>
+            <li>구글폼·노션·지도 등 외부 서비스 연결</li>
+          </ul>
+        </div>
+        <div class="scope-col no">
+          <h4>직접 개발하지 않아요 <span>→ 이렇게 대신해요</span></h4>
+          <ul>
+            <li><b>회원가입·로그인</b><span>필요 없는 구조로 설계</span></li>
+            <li><b>신청·문의 접수 저장</b><span>구글폼·네이버폼·Tally 연결</span></li>
+            <li><b>결제 기능</b><span>계좌 안내·외부 결제 링크</span></li>
+            <li><b>게시판·댓글·관리자 페이지</b><span>노션·인스타그램 연결, 파일 수정 가이드</span></li>
+            <li><b>실시간 예약·DB 연동</b><span>네이버 예약·캘린더 링크</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -799,6 +848,7 @@ section{ scroll-margin-top:72px; }
       <h2>자주 묻는 질문</h2>
     </div>
     <div class="faq rv">
+      <details><summary>회원가입·로그인·결제·게시판도 만들어 주나요?</summary><p>서버와 데이터베이스가 필요한 기능은 직접 개발하지 않아요. 대신 신청 접수는 구글폼·네이버폼, 결제는 계좌 안내나 외부 결제 링크, 공지·게시물은 노션이나 인스타그램 연결처럼 학생 단체가 이미 쓰는 검증된 서비스로 연결해 드립니다. 대부분의 학생 프로젝트는 이 방식이 더 빠르고, 유지비도 들지 않아요.</p></details>
       <details><summary>디자인을 전혀 몰라도 괜찮을까요?</summary><p>괜찮아요. 마음에 드는 사이트 몇 개만 보여주시면 방향을 잡아드리고, 시안 단계에서 실제 화면으로 보면서 결정하시면 됩니다.</p></details>
       <details><summary>수정은 몇 번까지 되나요?</summary><p>원페이지·포트폴리오는 2회, 동아리·학회·팀 사이트는 3회가 기본입니다. 한 번의 수정 요청에 여러 항목을 묶어서 주시면 1회로 계산해요. 이후 수정은 추가 옵션으로 가능합니다.</p></details>
       <details><summary>정말 유지비가 안 드나요?</summary><p>네. 정적 사이트 무료 호스팅으로 배포해서 서버 비용이 없습니다. 개인 도메인(yourname.com)을 원하시면 도메인 구입비(연 1~2만 원)만 직접 부담하시면 돼요.</p></details>
