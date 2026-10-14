@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LAST LOGIN — 마지막 접속</title>
+<meta name="description" content="2003년, 실종된 친구의 컴퓨터에 마지막으로 접속한다. 탐색형 미스터리 어드벤처 라스트 로그인. (포트폴리오용 가상 게임 홍보 사이트)">
+<meta property="og:title" content="LAST LOGIN — 마지막 접속">
+<meta property="og:description" content="실종된 친구의 컴퓨터를 열어 진실을 찾는 미스터리 어드벤처 (가상 게임 데모)">
+<!-- 교체: <meta property="og:image" content="assets/og.png">  ← I15 공유 이미지 -->
+<meta name="theme-color" content="#2b6f6a">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+<style>
+/* ════════════════════════════════════════════
+   MIRAE OS 2003 — 가상 운영체제 테마
+════════════════════════════════════════════ */
+:root{
+  --desk:#2b6f6a;
+  --desk-2:#245e5a;
+  --win:#e7e1d3;
+  --win-2:#d6cfbf;
+  --edge-l:#fffdf6;
+  --edge-d:#6d6656;
+  --ink:#16140f;
+  --muted:#6b6455;
+  --title1:#1c2f5c;
+  --title2:#5a77b0;
+  --title-off1:#7b7668;
+  --title-off2:#a7a291;
+  --sel:#1c2f5c;
+  --pink:#ff5c8a;
+  --task-h:44px;
+  --ui:'Galmuri11', 'GalmuriMono11', ui-monospace, monospace;
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+/* id 선택자에 display를 줘도 hidden 속성이 항상 이기게 */
+[hidden]{ display:none !important; }
+html,body{ height:100%; overflow:hidden; }
+body{
+  font-family:var(--ui); font-size:13px; line-height:1.55; color:var(--ink);
+  background:#000; -webkit-font-smoothing:none; font-smooth:never;
+  -webkit-tap-highlight-color:transparent; word-break:keep-all; overflow-wrap:anywhere;
+  -webkit-user-select:none; user-select:none; touch-action:manipulation;
+}
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+a{ color:inherit; }
+:focus-visible{ outline:2px dotted #000; outline-offset:-4px; }
+.sel-text{ -webkit-user-select:text; user-select:text; }
+
+/* 입체 테두리 */
+.bev{ background:var(--win); box-shadow:inset 1px 1px 0 var(--edge-l), inset -1px -1px 0 var(--edge-d), inset 2px 2px 0 #f3eee2, inset -2px -2px 0 var(--win-2), 0 0 0 1px #000; }
+.sunk{ background:#fff; box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l), inset 2px 2px 0 #9c9584; }
+.btn{
+  min-height:30px; padding:4px 16px; background:var(--win);
+  box-shadow:inset 1px 1px 0 var(--edge-l), inset -1px -1px 0 var(--edge-d), inset 2px 2px 0 #f3eee2, inset -2px -2px 0 var(--win-2), 0 0 0 1px #000;
+}
+.btn:active, .btn[aria-pressed="true"]{ box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l), 0 0 0 1px #000; padding-top:5px; padding-bottom:3px; }
+.btn:disabled{ color:#9c9584; text-shadow:1px 1px 0 #fff; cursor:default; }
+.btn.primary{ box-shadow:inset 1px 1px 0 var(--edge-l), inset -1px -1px 0 var(--edge-d), inset 2px 2px 0 #f3eee2, inset -2px -2px 0 var(--win-2), 0 0 0 2px #000; font-weight:700; }
+
+/* ════════════════════════════════════════════
+   사진·영상 자리
+════════════════════════════════════════════ */
+.ph{
+  position:relative; display:grid; place-items:center; text-align:center; overflow:hidden;
+  background:
+    conic-gradient(#cfc8b7 25%, #e3ddcf 0 50%, #cfc8b7 0 75%, #e3ddcf 0) 0 0 / 8px 8px;
+  color:var(--ink);
+}
+.ph.dark{ background:conic-gradient(#1d2430 25%, #252e3c 0 50%, #1d2430 0 75%, #252e3c 0) 0 0 / 8px 8px; color:#e7e1d3; }
+.ph > .tag{ position:relative; z-index:1; padding:8px 10px; max-width:88%; background:rgba(231,225,211,.92); box-shadow:0 0 0 1px #000, 2px 2px 0 #000; font-size:11.5px; line-height:1.5; }
+.ph.dark > .tag{ background:rgba(22,20,15,.85); box-shadow:0 0 0 1px #e7e1d3, 2px 2px 0 #e7e1d3; }
+.ph .tag b{ display:block; color:#b0003a; }
+.ph.dark .tag b{ color:var(--pink); }
+.ph > img, .ph > video, .ph > iframe{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; }
+
+/* ════════════════════════════════════════════
+   부팅 · 로그인 · 종료 화면
+════════════════════════════════════════════ */
+.screen{ position:fixed; inset:0; z-index:200; }
+.screen[hidden]{ display:none; }
+#boot{ background:#000; color:#c8c8c8; font-family:'GalmuriMono11', var(--ui); padding:clamp(18px, 4vw, 40px); }
+#boot .lines{ white-space:pre-wrap; font-size:13px; line-height:1.8; }
+#boot .lines .ok{ color:#7CFF7C; }
+#boot .lines .warn{ color:#ffd84a; }
+#boot .logo{ position:absolute; inset:0; display:grid; place-items:center; opacity:0; transition:opacity .8s; pointer-events:none; }
+#boot .logo.on{ opacity:1; }
+.big-logo{ text-align:center; }
+.big-logo b{ display:block; font-family:'Galmuri14', var(--ui); font-size:clamp(34px, 9vw, 72px); letter-spacing:.06em; color:#fff; text-shadow:3px 3px 0 var(--pink); }
+.big-logo span{ display:block; margin-top:10px; font-size:13px; letter-spacing:.3em; color:#8f8f8f; }
+.big-logo .bar{ width:180px; height:12px; margin:22px auto 0; box-shadow:0 0 0 1px #8f8f8f; padding:2px; }
+.big-logo .bar i{ display:block; height:100%; width:0; background:repeating-linear-gradient(90deg, #5a77b0 0 8px, transparent 8px 10px); animation:load 1.4s steps(18) forwards; }
+@keyframes load{ to{ width:100%; } }
+.skip{ position:absolute; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); color:#c8c8c8; font-size:12px; padding:6px 10px; box-shadow:0 0 0 1px #555; }
+.skip:hover{ background:#222; }
+
+#login{ background:linear-gradient(180deg, #1c2f5c, #2b6f6a); display:grid; place-items:center; padding:20px; color:#fff; }
+.login-box{ width:min(360px, 100%); text-align:center; }
+.avatar{ width:84px; height:84px; margin:0 auto; box-shadow:0 0 0 2px #fff, 4px 4px 0 rgba(0,0,0,.35); background:#e7e1d3; display:grid; place-items:center; }
+.avatar svg{ width:60px; height:60px; }
+.login-box h2{ margin-top:14px; font-family:'Galmuri14', var(--ui); font-size:22px; }
+.login-box .hint{ margin-top:4px; font-size:12px; color:#cfe0ff; }
+.pw{ display:flex; margin-top:18px; }
+.pw .sunk{ flex:1; height:34px; display:flex; align-items:center; padding:0 10px; color:var(--ink); font-size:16px; letter-spacing:.2em; text-align:left; }
+.pw .caret{ display:inline-block; width:2px; height:16px; background:var(--ink); margin-left:2px; animation:blink 1s steps(1) infinite; }
+@keyframes blink{ 50%{ opacity:0; } }
+.pw .btn{ min-width:86px; color:var(--ink); }
+.login-meta{ margin-top:22px; font-size:11.5px; color:rgba(255,255,255,.65); line-height:1.7; }
+
+#off{ background:#000; display:grid; place-items:center; text-align:center; color:#e88a3a; font-family:'Galmuri14', var(--ui); padding:20px; }
+#off p{ font-size:clamp(18px, 4vw, 26px); }
+#off .row{ display:flex; gap:10px; justify-content:center; margin-top:26px; flex-wrap:wrap; font-family:var(--ui); }
+#off .row .btn, #off .row a{ color:var(--ink); text-decoration:none; display:inline-flex; align-items:center; }
+
+/* ════════════════════════════════════════════
+   바탕화면
+════════════════════════════════════════════ */
+#os{ position:fixed; inset:0; }
+.desktop{
+  position:absolute; inset:0 0 var(--task-h) 0; overflow:hidden;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,.12) 1px, transparent 1.5px) 0 0 / 4px 4px,
+    linear-gradient(160deg, var(--desk), var(--desk-2));
+}
+.wallpaper{ position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:min(56vw, 760px); aspect-ratio:16/9; box-shadow:0 0 0 1px rgba(0,0,0,.4); opacity:.85; }
+.wallpaper.ph{ background:conic-gradient(#2f7a74 25%, #337f79 0 50%, #2f7a74 0 75%, #337f79 0) 0 0 / 8px 8px; }
+.wallpaper .tag{ background:rgba(22,20,15,.7); color:#e7e1d3; box-shadow:0 0 0 1px rgba(231,225,211,.6); }
+.wallpaper .tag b{ color:#ffd0dd; }
+.icons{ position:absolute; inset:12px auto 12px 12px; display:grid; grid-auto-flow:column; grid-template-rows:repeat(auto-fill, 92px); gap:6px 10px; align-content:start; z-index:1; }
+.icon{ width:86px; display:flex; flex-direction:column; align-items:center; gap:5px; padding:6px 2px; color:#fff; text-align:center; }
+.icon svg{ width:40px; height:40px; image-rendering:pixelated; filter:drop-shadow(1px 1px 0 rgba(0,0,0,.45)); }
+.icon span{ font-size:12px; line-height:1.3; padding:1px 3px; text-shadow:1px 1px 0 #000; }
+.icon:hover span{ background:rgba(28,47,92,.55); }
+.icon:focus-visible{ outline:1px dotted #fff; outline-offset:0; }
+.icon:focus-visible span{ background:var(--sel); }
+.icon .badge{ position:absolute; margin-left:30px; margin-top:-4px; min-width:16px; height:16px; padding:0 4px; background:var(--pink); color:#fff; font-size:10px; line-height:16px; box-shadow:0 0 0 1px #000; }
+.icon{ position:relative; }
+
+/* ════════════════════════════════════════════
+   창
+════════════════════════════════════════════ */
+.win{
+  position:absolute; z-index:10; display:flex; flex-direction:column;
+  width:var(--w, 520px); max-width:calc(100% - 16px); max-height:calc(100% - 16px);
+  padding:3px;
+}
+.win[hidden], .win.min{ display:none; }
+.win.pop{ animation:pop .16s steps(4); }
+@keyframes pop{ from{ transform:scale(.92); opacity:.4; } to{ transform:none; opacity:1; } }
+/* 내용이 계속 늘어나는 창은 높이를 고정해 안에서 스크롤 */
+#win-chat{ height:min(520px, calc(100% - 24px)); }
+#win-setup{ min-height:min(380px, calc(100% - 24px)); }
+.win.max{ left:0 !important; top:0 !important; width:100% !important; height:100% !important; max-width:none; max-height:none; }
+.tbar{
+  display:flex; align-items:center; gap:6px; height:26px; padding:0 3px 0 6px; flex-shrink:0;
+  background:linear-gradient(90deg, var(--title-off1), var(--title-off2)); color:#eee; cursor:default; touch-action:none;
+}
+.win.active .tbar{ background:linear-gradient(90deg, var(--title1), var(--title2)); color:#fff; }
+.tbar .ico{ width:16px; height:16px; flex-shrink:0; }
+.tbar h2{ flex:1; font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tbtn{ width:22px; height:20px; display:grid; place-items:center; color:var(--ink); background:var(--win); box-shadow:inset 1px 1px 0 var(--edge-l), inset -1px -1px 0 var(--edge-d), 0 0 0 1px #000; }
+.tbtn:active{ box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l), 0 0 0 1px #000; }
+.tbtn svg{ width:10px; height:10px; }
+.menubar{ display:flex; gap:2px; padding:2px 2px; font-size:12px; flex-shrink:0; }
+.menubar span{ padding:1px 7px; }
+.menubar span:hover{ background:var(--sel); color:#fff; }
+.wbody{ flex:1; min-height:0; overflow:auto; padding:10px; }
+.statusbar{ display:flex; gap:4px; padding-top:3px; flex-shrink:0; font-size:11.5px; }
+.statusbar span{ flex:1; padding:1px 6px; box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* 메모장 */
+.note{ white-space:pre-wrap; font-family:'GalmuriMono11', var(--ui); font-size:13px; line-height:1.75; padding:10px 12px; min-height:100%; }
+.note .hl{ background:#fff3a6; }
+.note a{ color:#1c2f5c; }
+.glitch{ color:#b0003a; animation:jit .2s steps(2) infinite; display:inline-block; }
+@keyframes jit{ 50%{ transform:translateX(1px); opacity:.6; } }
+
+/* 미디어 플레이어 */
+.player .screenbox{ aspect-ratio:16/9; box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l), 0 0 0 1px #000; }
+.controls{ display:flex; align-items:center; gap:8px; margin-top:8px; }
+.controls .btn{ min-width:38px; padding:4px 8px; display:grid; place-items:center; }
+.controls .btn svg{ width:12px; height:12px; }
+.seek{ flex:1; height:16px; padding:3px; }
+.seek i{ display:block; height:100%; width:0; background:repeating-linear-gradient(90deg, var(--title1) 0 6px, var(--title2) 6px 8px); }
+.time{ font-family:'GalmuriMono11', var(--ui); font-size:12px; min-width:92px; text-align:right; }
+
+/* 폴더 */
+.addr{ display:flex; align-items:center; gap:6px; padding:3px 4px; flex-shrink:0; font-size:12px; }
+.addr .sunk{ flex:1; padding:2px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.files{ display:grid; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr)); gap:8px; padding:10px; min-height:100%; align-content:start; }
+.file{ display:flex; flex-direction:column; align-items:center; gap:5px; padding:6px 4px; text-align:center; font-size:12px; line-height:1.35; }
+.file svg{ width:36px; height:36px; }
+.file:hover span, .file:focus-visible span{ background:var(--sel); color:#fff; }
+
+/* 프로필 */
+.profile{ display:grid; grid-template-columns:150px 1fr; gap:14px; }
+.profile .ph{ aspect-ratio:4/5; box-shadow:0 0 0 1px #000, 3px 3px 0 #000; }
+.profile dl{ display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-content:start; font-size:12.5px; }
+.profile dt{ color:var(--muted); }
+.profile .memo{ grid-column:1/-1; margin-top:8px; padding:10px 12px; background:#fff8c9; box-shadow:0 0 0 1px #000, 2px 2px 0 rgba(0,0,0,.4); font-size:13px; line-height:1.7; }
+
+/* 그림 뷰어 */
+.viewer .main{ aspect-ratio:16/9; box-shadow:0 0 0 1px #000; }
+.strip{ display:grid; grid-template-columns:repeat(6, 1fr); gap:6px; margin-top:8px; }
+.strip button{ aspect-ratio:16/10; padding:2px; }
+.strip button .ph{ width:100%; height:100%; }
+.strip button .ph > .tag{ font-size:9.5px; padding:1px 3px; box-shadow:0 0 0 1px #000; }
+.strip button[aria-current="true"]{ outline:2px solid var(--sel); outline-offset:1px; }
+.vnav{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:8px; }
+.vnav b{ font-family:'GalmuriMono11', var(--ui); font-weight:400; font-size:12px; }
+
+/* 메신저 */
+.chat{ display:flex; flex-direction:column; gap:8px; padding:12px; min-height:100%; background:#f4f1ea; }
+.msg{ max-width:82%; }
+.msg .who{ font-size:11px; color:var(--muted); margin-bottom:2px; }
+.msg p{ padding:7px 10px; background:#fff; box-shadow:0 0 0 1px #000, 2px 2px 0 rgba(0,0,0,.35); font-size:13px; line-height:1.6; }
+.msg.me{ align-self:flex-end; text-align:right; }
+.msg.me p{ background:#d9e6ff; text-align:left; }
+.msg.sys{ align-self:center; text-align:center; max-width:100%; }
+.msg.sys p{ background:none; box-shadow:none; color:var(--muted); font-size:11.5px; padding:0; }
+.typing{ align-self:flex-start; font-size:11.5px; color:var(--muted); }
+.feature{ margin-top:6px; padding:10px 12px; background:#fff; box-shadow:0 0 0 1px #000; }
+.feature b{ display:block; color:#b0003a; font-size:12px; }
+.feature ol{ margin:6px 0 0 18px; display:grid; gap:4px; font-size:12.5px; }
+.chat-input{ display:flex; gap:6px; padding-top:6px; flex-shrink:0; }
+.chat-input .sunk{ flex:1; padding:4px 8px; color:#9c9584; font-size:12px; }
+
+/* 설치 마법사 */
+.wizard{ display:grid; grid-template-columns:150px 1fr; min-height:300px; }
+.wizard .side{ background:linear-gradient(180deg, var(--title1), #2b6f6a); color:#fff; padding:14px 12px; display:flex; flex-direction:column; justify-content:space-between; }
+.wizard .side b{ font-family:'Galmuri14', var(--ui); font-size:18px; line-height:1.2; text-shadow:2px 2px 0 var(--pink); }
+.wizard .side ol{ list-style:none; display:grid; gap:4px; font-size:11.5px; }
+.wizard .side li{ opacity:.55; }
+.wizard .side li.on{ opacity:1; }
+.wizard .side li.on::before{ content:"▶ "; }
+.wizard .pane{ padding:14px 16px; display:flex; flex-direction:column; gap:10px; }
+.wizard .pane h3{ font-size:14px; }
+.wizard .pane p{ font-size:12.5px; line-height:1.7; }
+.wizard .eula{ height:110px; overflow:auto; padding:8px; font-size:11.5px; line-height:1.6; -webkit-user-select:text; user-select:text; }
+.wizard label{ display:flex; gap:8px; align-items:center; font-size:12.5px; cursor:pointer; }
+.wizard input[type="checkbox"]{ width:14px; height:14px; accent-color:var(--sel); }
+.wizard input[type="email"]{ width:100%; font:inherit; font-size:16px; padding:5px 8px; border:0; -webkit-user-select:text; user-select:text; }
+.wizard .err{ color:#b0003a; font-size:12px; min-height:18px; }
+.pbar{ height:20px; padding:3px; }
+.pbar i{ display:block; height:100%; width:0; background:repeating-linear-gradient(90deg, var(--title1) 0 10px, transparent 10px 12px); }
+.log{ height:92px; overflow:auto; padding:6px 8px; font-family:'GalmuriMono11', var(--ui); font-size:11.5px; line-height:1.6; }
+.goals{ display:grid; gap:4px; font-size:12px; }
+.goals div{ display:flex; justify-content:space-between; gap:10px; padding:3px 6px; background:#fff; box-shadow:0 0 0 1px #9c9584; }
+.goals div.done{ background:#e3f5d8; }
+.wiz-btns{ display:flex; justify-content:flex-end; gap:8px; margin-top:auto; padding-top:10px; border-top:1px solid var(--win-2); }
+
+/* 휴지통 · 시스템 정보 · 경고창 */
+.list{ width:100%; border-collapse:collapse; font-size:12.5px; background:#fff; }
+.list th{ text-align:left; font-weight:400; padding:3px 8px; background:var(--win); box-shadow:inset -1px -1px 0 var(--edge-d), inset 1px 1px 0 var(--edge-l); }
+.list td{ padding:5px 8px; }
+.list tr.row{ cursor:pointer; }
+.list tr.row:hover td, .list tr.row:focus-visible td{ background:var(--sel); color:#fff; }
+.sysinfo{ display:grid; grid-template-columns:130px 1fr; gap:16px; }
+.sysinfo .pc svg{ width:100%; height:auto; }
+.sysinfo dl{ display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:12.5px; }
+.sysinfo dt{ color:var(--muted); }
+.rating{ display:flex; gap:10px; align-items:center; margin-top:12px; font-size:11.5px; color:var(--muted); }
+.rating .ph{ width:46px; height:54px; box-shadow:0 0 0 1px #000; }
+.rating .ph > .tag{ font-size:9px; padding:1px 3px; }
+.demo{ margin-top:12px; padding:8px 10px; background:#fff8c9; box-shadow:0 0 0 1px #000; font-size:12px; line-height:1.6; }
+.alert{ display:flex; gap:14px; align-items:flex-start; padding:6px 4px; }
+.alert svg{ width:34px; height:34px; flex-shrink:0; }
+.alert p{ font-size:13px; line-height:1.7; padding-top:4px; }
+.alert-btns{ display:flex; justify-content:center; gap:8px; margin-top:12px; }
+
+/* ════════════════════════════════════════════
+   작업표시줄 · 시작 메뉴 · 알림
+════════════════════════════════════════════ */
+.taskbar{
+  position:absolute; left:0; right:0; bottom:0; height:var(--task-h); z-index:100;
+  display:flex; align-items:center; gap:6px; padding:4px 6px calc(4px + env(safe-area-inset-bottom));
+  background:var(--win); box-shadow:inset 0 1px 0 var(--edge-l), inset 0 2px 0 #f3eee2, 0 -1px 0 #000;
+}
+.start{ display:flex; align-items:center; gap:6px; height:32px; padding:0 10px 0 6px; font-family:'Galmuri14', var(--ui); font-size:14px; font-weight:700; }
+.start svg{ width:20px; height:20px; }
+.tasks{ flex:1; display:flex; gap:4px; min-width:0; overflow:hidden; }
+.task{ flex:0 1 170px; min-width:44px; height:32px; display:flex; align-items:center; gap:6px; padding:0 8px; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.task svg{ width:16px; height:16px; flex-shrink:0; }
+.task span{ overflow:hidden; text-overflow:ellipsis; }
+.tray{ display:flex; align-items:center; gap:8px; height:32px; padding:0 10px; font-size:12px; box-shadow:inset 1px 1px 0 var(--edge-d), inset -1px -1px 0 var(--edge-l); white-space:nowrap; }
+.tray svg{ width:16px; height:16px; }
+.tray button{ display:grid; place-items:center; }
+
+.startmenu{ position:absolute; left:4px; bottom:calc(var(--task-h) - 2px); z-index:120; width:250px; display:flex; padding:3px; }
+.startmenu[hidden]{ display:none; }
+.startmenu .stripe{ width:30px; background:linear-gradient(0deg, var(--title1), var(--title2)); color:#fff; writing-mode:vertical-rl; transform:rotate(180deg); padding:10px 0; font-family:'Galmuri14', var(--ui); font-size:15px; letter-spacing:.12em; text-align:right; }
+.startmenu .stripe b{ color:#ffd0dd; }
+.startmenu ul{ list-style:none; flex:1; padding:3px 0; }
+.startmenu li button, .startmenu li a{ width:100%; display:flex; align-items:center; gap:10px; padding:7px 10px; text-align:left; font-size:13px; text-decoration:none; }
+.startmenu li button:hover, .startmenu li a:hover, .startmenu li button:focus-visible, .startmenu li a:focus-visible{ background:var(--sel); color:#fff; }
+.startmenu li svg{ width:22px; height:22px; flex-shrink:0; }
+.startmenu hr{ border:0; height:2px; margin:4px 6px; box-shadow:inset 0 1px 0 var(--edge-d), inset 0 -1px 0 var(--edge-l); }
+
+.toast{ position:absolute; right:10px; bottom:calc(var(--task-h) + 10px); z-index:110; width:min(280px, calc(100% - 20px)); padding:3px; text-align:left; }
+.toast[hidden]{ display:none; }
+.toast .tbar{ height:22px; }
+.toast p{ padding:10px 10px 12px; font-size:13px; line-height:1.6; }
+.toast.pop{ animation:slideup .25s steps(5); }
+@keyframes slideup{ from{ transform:translateY(30px); opacity:0; } to{ transform:none; opacity:1; } }
+
+/* ════════════════════════════════════════════
+   모바일: 스마트폰 홈 화면처럼
+════════════════════════════════════════════ */
+@media (max-width: 760px){
+  body{ font-size:14px; }
+  :root{ --task-h:52px; }
+  .wallpaper{ width:86vw; top:auto; bottom:18px; transform:translateX(-50%); }
+  .icons{ inset:16px 12px auto 12px; grid-auto-flow:row; grid-template-rows:none; grid-template-columns:repeat(4, 1fr); gap:14px 4px; }
+  .icon{ width:auto; }
+  .icon svg{ width:46px; height:46px; }
+  .icon span{ font-size:11px; letter-spacing:-.03em; overflow-wrap:normal; white-space:nowrap; }
+  .icon .badge{ margin-left:34px; }
+  .win{ position:fixed; left:0 !important; top:0 !important; width:100% !important; height:calc(100% - var(--task-h)) !important; max-width:none; max-height:none; padding:0; padding-top:env(safe-area-inset-top); }
+  .win .tbar{ height:40px; padding:0 6px 0 10px; }
+  .win .tbar h2{ font-size:14px; }
+  .win .tbtn{ width:32px; height:30px; }
+  .win .tbtn.min, .win .tbtn.max{ display:none; }
+  .win .tbtn svg{ width:12px; height:12px; }
+  .menubar{ display:none; }
+  .profile, .sysinfo{ grid-template-columns:1fr; }
+  .profile .ph{ max-width:200px; }
+  .sysinfo .pc{ max-width:120px; }
+  .strip{ grid-template-columns:repeat(3, 1fr); }
+  .wizard{ grid-template-columns:1fr; }
+  .wizard .side{ flex-direction:row; align-items:center; gap:12px; }
+  .wizard .side ol{ display:none; }
+  .task{ display:none; }
+  .tray{ margin-left:auto; }
+  .startmenu{ width:min(300px, calc(100% - 8px)); }
+  .note{ font-size:14px; }
+  .toast{ left:10px; right:10px; width:auto; }
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ 아이콘 모음 (재사용) ════════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-txt" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M7 3h13l6 6v20H7z" fill="#fff" stroke="#000"/><path d="M20 3v6h6" fill="#ddd" stroke="#000"/><path d="M10 13h12M10 16h12M10 19h12M10 22h8" stroke="#1c2f5c"/></symbol>
+    <symbol id="i-video" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="3" y="6" width="26" height="20" fill="#2a2a2a" stroke="#000"/><path d="M5 8h2v2H5zM5 12h2v2H5zM5 16h2v2H5zM5 20h2v2H5zM25 8h2v2h-2zM25 12h2v2h-2zM25 16h2v2h-2zM25 20h2v2h-2z" fill="#e7e1d3"/><path d="M13 11v10l8-5z" fill="#ff5c8a" stroke="#000"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M3 8h10l2 3h14v16H3z" fill="#f2c94c" stroke="#000"/><path d="M3 13h26v14H3z" fill="#f8dc7a" stroke="#000"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="3" y="6" width="26" height="20" fill="#fff" stroke="#000"/><rect x="6" y="9" width="20" height="14" fill="#7fb7d9"/><path d="M6 23l7-8 5 5 3-3 5 6z" fill="#3f8a5c"/><rect x="20" y="11" width="3" height="3" fill="#ffd84a"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M4 6h20v13H12l-5 5v-5H4z" fill="#d9e6ff" stroke="#000"/><path d="M14 12h14v11h-3v4l-4-4h-7z" fill="#fff" stroke="#000"/><path d="M8 11h12M8 14h8" stroke="#1c2f5c"/></symbol>
+    <symbol id="i-setup" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M5 10l11-5 11 5v14l-11 5-11-5z" fill="#c9a26b" stroke="#000"/><path d="M5 10l11 5 11-5M16 15v14" fill="none" stroke="#000"/><rect x="18" y="3" width="11" height="11" fill="#1c2f5c" stroke="#000"/><rect x="21" y="4" width="5" height="4" fill="#e7e1d3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M8 9h16l-2 19H10z" fill="#c8c8c8" stroke="#000"/><path d="M6 6h20v3H6z" fill="#e0e0e0" stroke="#000"/><path d="M13 12v13M16 12v13M19 12v13" stroke="#777"/><path d="M11 4h6v2" fill="none" stroke="#000"/></symbol>
+    <symbol id="i-pc" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="4" y="4" width="24" height="17" fill="#e7e1d3" stroke="#000"/><rect x="7" y="7" width="18" height="11" fill="#2b6f6a"/><path d="M12 21h8v3h-8z" fill="#c9c2b2" stroke="#000"/><path d="M7 24h18v4H7z" fill="#e7e1d3" stroke="#000"/></symbol>
+    <symbol id="i-person" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M7 3h13l6 6v20H7z" fill="#fff" stroke="#000"/><circle cx="16" cy="15" r="4" fill="#5a77b0"/><path d="M10 26c1-4 3-6 6-6s5 2 6 6" fill="#5a77b0"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M16 3l14 26H2z" fill="#ffd84a" stroke="#000"/><path d="M15 11h2v10h-2zM15 23h2v2h-2z" fill="#000"/></symbol>
+    <symbol id="i-err" viewBox="0 0 32 32" shape-rendering="crispEdges"><circle cx="16" cy="16" r="13" fill="#d93b3b" stroke="#000"/><path d="M11 11l10 10M21 11L11 21" stroke="#fff" stroke-width="3"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="3" y="3" width="12" height="12" fill="#ff5c8a"/><rect x="17" y="3" width="12" height="12" fill="#5a77b0"/><rect x="3" y="17" width="12" height="12" fill="#2b6f6a"/><rect x="17" y="17" width="12" height="12" fill="#ffd84a"/></symbol>
+  </defs>
+</svg>
+
+<!-- ════════════════ 부팅 ════════════════ -->
+<section class="screen" id="boot" aria-label="부팅 화면">
+  <div class="lines" id="bootLines" aria-live="polite"></div>
+  <div class="logo" id="bootLogo">
+    <!-- 교체: I3 로고 이미지가 준비되면 아래 글자 대신 <img src="assets/logo.png" alt="LAST LOGIN"> -->
+    <div class="big-logo"><b>LAST LOGIN</b><span>마지막 접속</span><div class="bar"><i></i></div></div>
+  </div>
+  <button class="skip" id="skipBoot" type="button">건너뛰기 ▶</button>
+</section>
+
+<!-- ════════════════ 로그인 ════════════════ -->
+<section class="screen" id="login" hidden aria-label="로그인 화면">
+  <div class="login-box">
+    <div class="avatar"><svg viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="10" y="6" width="12" height="12" fill="#2a2a2a"/><rect x="11" y="9" width="10" height="9" fill="#f1c9a5"/><rect x="13" y="12" width="2" height="2" fill="#2a2a2a"/><rect x="17" y="12" width="2" height="2" fill="#2a2a2a"/><path d="M6 30c1-6 5-9 10-9s9 3 10 9z" fill="#ff5c8a"/></svg></div>
+    <h2>하은</h2>
+    <p class="hint">비밀번호 힌트: 우리가 처음 만난 날</p>
+    <div class="pw">
+      <div class="sunk" aria-label="비밀번호 입력란"><span id="pwDots"></span><span class="caret"></span></div>
+      <button class="btn" id="loginBtn" type="button" disabled>로그인</button>
+    </div>
+    <p class="login-meta">마지막 로그인: 2003-11-14 오전 03:12<br>마지막 종료: 비정상 종료</p>
+  </div>
+  <button class="skip" id="skipLogin" type="button" style="color:#fff">건너뛰기 ▶</button>
+</section>
+
+<!-- ════════════════ 종료 ════════════════ -->
+<section class="screen" id="off" hidden aria-label="종료 화면">
+  <div>
+    <p>이제 컴퓨터를 꺼도 안전합니다.</p>
+    <div class="row">
+      <button class="btn" id="rebootBtn" type="button">다시 켜기</button>
+      <a class="btn" href="../">포트폴리오로 나가기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 운영체제 ════════════════ -->
+<div id="os" hidden>
+  <div class="desktop" id="desk">
+    <!-- 교체: <img src="assets/wallpaper.jpg" alt=""> 를 .wallpaper 안에 넣고 크기를 화면 전체로 바꿔도 됨 -->
+    <div class="wallpaper ph" aria-hidden="true"><div class="tag"><b>I1 · 바탕화면 사진</b>하은이 찍은 학교 옥상 노을 사진 · 1920×1080</div></div>
+
+    <nav class="icons" aria-label="바탕화면 아이콘">
+      <button class="icon" type="button" data-open="readme"><svg><use href="#i-txt"/></svg><span>읽어주세요.txt</span></button>
+      <button class="icon" type="button" data-open="trailer"><svg><use href="#i-video"/></svg><span>트레일러.avi</span></button>
+      <button class="icon" type="button" data-open="people"><svg><use href="#i-folder"/></svg><span>사람들</span></button>
+      <button class="icon" type="button" data-open="photos"><svg><use href="#i-photo"/></svg><span>사진</span></button>
+      <button class="icon" type="button" data-open="chat"><svg><use href="#i-chat"/></svg><span>메신저</span><i class="badge" id="chatBadge">1</i></button>
+      <button class="icon" type="button" data-open="setup"><svg><use href="#i-setup"/></svg><span>사전예약.exe</span></button>
+      <button class="icon" type="button" data-open="about"><svg><use href="#i-pc"/></svg><span>내 컴퓨터</span></button>
+      <button class="icon" type="button" data-open="trash"><svg><use href="#i-trash"/></svg><span>휴지통</span></button>
+    </nav>
+
+    <!-- ── 읽어주세요.txt ── -->
+    <section class="win bev" id="win-readme" hidden role="dialog" aria-label="읽어주세요.txt" style="--w:560px" data-icon="i-txt" data-title="읽어주세요.txt - 메모장">
+      <div class="tbar"></div>
+      <div class="menubar" aria-hidden="true"><span>파일</span><span>편집</span><span>서식</span><span>도움말</span></div>
+      <div class="wbody sunk" style="padding:0"><div class="note sel-text">=== LAST LOGIN (라스트 로그인) ===
+
+2003년 11월 14일, 새벽 3시 12분.
+<span class="hl">유하은이 사라졌다.</span>
+
+남은 건 켜진 채로 발견된 하은의 컴퓨터 한 대.
+당신은 하은의 가장 친한 친구이자,
+이 컴퓨터의 비밀번호를 아는 유일한 사람이다.
+
+파일 하나, 사진 한 장, 메신저 한 줄이 모두 단서다.
+그리고 이 컴퓨터에 접속한 사람은
+당신이 처음이 아니다.
+
+----------------------------------------
+장르     탐색형 미스터리 어드벤처
+출시     2027년 겨울 (PC / iOS / Android)
+플레이   하은의 컴퓨터를 직접 조작하며 진실을 찾는다
+----------------------------------------
+
+※ 바탕화면 아이콘을 눌러 둘러보세요.
+  트레일러.avi ... 공식 트레일러
+  사람들 ......... 등장인물
+  사진 ........... 게임 화면
+  메신저 ......... 게임 특징
+  사전예약.exe ... 사전예약</div></div>
+      <div class="statusbar"><span>줄 1, 칸 1</span><span>UTF-8</span></div>
+    </section>
+
+    <!-- ── 트레일러.avi ── -->
+    <section class="win bev player" id="win-trailer" hidden role="dialog" aria-label="트레일러.avi" style="--w:660px" data-icon="i-video" data-title="트레일러.avi - 미디어 플레이어">
+      <div class="tbar"></div>
+      <div class="wbody">
+        <!-- 교체: <video src="assets/trailer.mp4" poster="assets/trailer-thumb.jpg" controls playsinline></video> 또는 유튜브 iframe -->
+        <div class="screenbox ph dark" id="trailerScreen"><div class="tag"><b>V1 · 공식 트레일러</b>1~2분 · 첫 화면은 I2 썸네일 (1280×720)</div></div>
+        <div class="controls">
+          <button class="btn" id="playBtn" type="button" aria-label="재생"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M2 1v10l9-5z"/></svg></button>
+          <button class="btn" id="stopBtn" type="button" aria-label="정지"><svg viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="2" width="8" height="8"/></svg></button>
+          <div class="seek sunk"><i id="seekFill"></i></div>
+          <span class="time" id="playTime">00:00 / 01:30</span>
+        </div>
+      </div>
+      <div class="statusbar"><span id="playState">정지됨</span><span>트레일러.avi · 영상 준비 중</span></div>
+    </section>
+
+    <!-- ── 사람들 폴더 ── -->
+    <section class="win bev" id="win-people" hidden role="dialog" aria-label="사람들 폴더" style="--w:520px" data-icon="i-folder" data-title="사람들">
+      <div class="tbar"></div>
+      <div class="addr"><span>주소</span><div class="sunk">C:\내 문서\하은\사람들</div></div>
+      <div class="wbody sunk" style="padding:0"><div class="files" id="peopleFiles"></div></div>
+      <div class="statusbar"><span>개체 4개</span><span>마지막 수정: 2003-11-14 03:09</span></div>
+    </section>
+
+    <!-- ── 프로필 ── -->
+    <section class="win bev" id="win-profile" hidden role="dialog" aria-label="프로필" style="--w:540px" data-icon="i-person" data-title="프로필">
+      <div class="tbar"></div>
+      <div class="wbody">
+        <div class="profile">
+          <div class="ph" id="profPh"><div class="tag"><b id="profAsset">I4</b><span id="profAssetDesc"></span></div></div>
+          <dl id="profDl"></dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 사진 (그림 뷰어) ── -->
+    <section class="win bev viewer" id="win-photos" hidden role="dialog" aria-label="사진" style="--w:680px" data-icon="i-photo" data-title="사진 - 그림 뷰어">
+      <div class="tbar"></div>
+      <div class="wbody">
+        <div class="main ph" id="viewMain"><div class="tag"><b id="viewAsset">I8</b><span id="viewDesc"></span></div></div>
+        <div class="vnav">
+          <button class="btn" id="viewPrev" type="button">◀ 이전</button>
+          <b id="viewName">IMG_0401.JPG</b>
+          <button class="btn" id="viewNext" type="button">다음 ▶</button>
+        </div>
+        <div class="strip" id="viewStrip"></div>
+      </div>
+    </section>
+
+    <!-- ── 메신저 ── -->
+    <section class="win bev" id="win-chat" hidden role="dialog" aria-label="메신저" style="--w:400px" data-icon="i-chat" data-title="메신저 - 민서 (오프라인)">
+      <div class="tbar"></div>
+      <div class="wbody sunk" style="padding:0"><div class="chat sel-text" id="chatLog" aria-live="polite"></div></div>
+      <div class="chat-input"><div class="sunk">상대방이 오프라인이라 보낼 수 없습니다.</div><button class="btn" type="button" disabled>보내기</button></div>
+    </section>
+
+    <!-- ── 사전예약.exe ── -->
+    <section class="win bev" id="win-setup" hidden role="dialog" aria-label="사전예약 설치 마법사" style="--w:600px" data-icon="i-setup" data-title="LAST LOGIN 사전예약 설치">
+      <div class="tbar"></div>
+      <div class="wbody" style="padding:0">
+        <div class="wizard">
+          <div class="side">
+            <b>LAST<br>LOGIN</b>
+            <ol id="wizSteps"><li>시작</li><li>사용권 계약</li><li>설치 옵션</li><li>설치 중</li><li>완료</li></ol>
+          </div>
+          <div class="pane" id="wizPane"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 내 컴퓨터 (게임 정보) ── -->
+    <section class="win bev" id="win-about" hidden role="dialog" aria-label="내 컴퓨터" style="--w:520px" data-icon="i-pc" data-title="시스템 정보">
+      <div class="tbar"></div>
+      <div class="wbody">
+        <div class="sysinfo">
+          <div class="pc"><svg viewBox="0 0 32 32"><use href="#i-pc"/></svg></div>
+          <div>
+            <dl>
+              <dt>게임</dt><dd>LAST LOGIN (라스트 로그인)</dd>
+              <dt>장르</dt><dd>탐색형 미스터리 어드벤처</dd>
+              <dt>출시</dt><dd>2027년 겨울 예정</dd>
+              <dt>플랫폼</dt><dd>PC (Steam) · iOS · Android</dd>
+              <dt>언어</dt><dd>한국어 · English · 日本語</dd>
+              <dt>플레이 시간</dt><dd>약 6~8시간 · 엔딩 4종</dd>
+            </dl>
+            <div class="rating">
+              <div class="ph" aria-hidden="true"><div class="tag"><b>I14</b>등급</div></div>
+              <span>게임물 등급 표시 자리 (등급 분류 후 교체)</span>
+            </div>
+          </div>
+        </div>
+        <p class="demo">이 사이트는 <b>포트폴리오용 가상 게임 홍보 사이트</b>예요. 게임·인물·수치는 모두 가상이고, 입력한 내용은 어디에도 전송되지 않아요. 제작 <a href="../">JXDING</a></p>
+      </div>
+    </section>
+
+    <!-- ── 휴지통 ── -->
+    <section class="win bev" id="win-trash" hidden role="dialog" aria-label="휴지통" style="--w:460px" data-icon="i-trash" data-title="휴지통">
+      <div class="tbar"></div>
+      <div class="wbody sunk" style="padding:0">
+        <table class="list">
+          <thead><tr><th>이름</th><th>원래 위치</th><th>삭제한 날짜</th></tr></thead>
+          <tbody>
+            <tr class="row" tabindex="0" data-open="truth"><td>진실.txt</td><td>C:\관리자</td><td>2003-11-14 03:11</td></tr>
+            <tr class="row" tabindex="0" data-open="corrupt"><td>하은_일기_최종.hwp</td><td>C:\내 문서\하은</td><td>2003-11-14 03:10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="statusbar"><span>개체 2개 · 0KB</span><span>삭제한 사람: 관리자</span></div>
+    </section>
+
+    <!-- ── 진실.txt ── -->
+    <section class="win bev" id="win-truth" hidden role="dialog" aria-label="진실.txt" style="--w:440px" data-icon="i-txt" data-title="진실.txt - 메모장">
+      <div class="tbar"></div>
+      <div class="wbody sunk" style="padding:0"><div class="note">그날 밤 서버실 문은 <span class="glitch">█████</span> 열려 있었다.
+하은은 <span class="glitch">██</span>를 보고 말았고,
+나는 그 기록을 지워야 했다.
+
+미안해. 하지만 너도 곧
+<span class="glitch">███████████████</span>
+
+[파일의 나머지 부분이 손상되었습니다]</div></div>
+    </section>
+
+    <!-- ── 경고창 ── -->
+    <section class="win bev" id="win-alert" hidden role="alertdialog" aria-label="오류" style="--w:380px" data-icon="i-err" data-title="오류">
+      <div class="tbar"></div>
+      <div class="wbody">
+        <div class="alert"><svg><use href="#i-err"/></svg><p id="alertText"></p></div>
+        <div class="alert-btns"><button class="btn primary" type="button" data-close>확인</button></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 알림 -->
+  <button class="toast bev" id="toast" type="button" hidden>
+    <div class="tbar"><svg class="ico"><use href="#i-chat"/></svg><h2>새 메시지</h2></div>
+    <p>민서: 너 아직 거기 있어?<br><u>메신저 열기</u></p>
+  </button>
+
+  <!-- 시작 메뉴 -->
+  <div class="startmenu bev" id="startMenu" hidden>
+    <div class="stripe">MIRAE <b>OS</b> 2003</div>
+    <ul>
+      <li><button type="button" data-open="readme"><svg><use href="#i-txt"/></svg>읽어주세요</button></li>
+      <li><button type="button" data-open="trailer"><svg><use href="#i-video"/></svg>트레일러</button></li>
+      <li><button type="button" data-open="people"><svg><use href="#i-folder"/></svg>등장인물</button></li>
+      <li><button type="button" data-open="photos"><svg><use href="#i-photo"/></svg>게임 화면</button></li>
+      <li><button type="button" data-open="chat"><svg><use href="#i-chat"/></svg>게임 특징 (메신저)</button></li>
+      <li><button type="button" data-open="setup"><svg><use href="#i-setup"/></svg>사전예약</button></li>
+      <li><button type="button" data-open="about"><svg><use href="#i-pc"/></svg>게임 정보</button></li>
+      <li><hr></li>
+      <li><a href="../"><svg><use href="#i-folder"/></svg>포트폴리오로 나가기</a></li>
+      <li><button type="button" id="shutdownBtn"><svg><use href="#i-err"/></svg>시스템 종료</button></li>
+    </ul>
+  </div>
+
+  <!-- 작업표시줄 -->
+  <footer class="taskbar">
+    <button class="start btn" id="startBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="startMenu"><svg><use href="#i-logo"/></svg>시작</button>
+    <div class="tasks" id="tasks"></div>
+    <div class="tray">
+      <button type="button" id="soundBtn" aria-label="소리 끄기"></button>
+      <span id="clock" title="2003-11-14">오전 3:12</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = () => matchMedia('(max-width: 760px)').matches;
+const store = {
+  get(k){ try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v){ try { sessionStorage.setItem(k, v); } catch (e) {} },
+};
+
+/* ══════════════ 데이터 ══════════════ */
+const PEOPLE = [
+  { file:'하은.txt', name:'유하은', asset:'I4', photo:'하은 증명사진 (밝은 표정)', rows:[['나이','19세'],['소속','한빛고 3학년 · 컴퓨터 동아리'],['상태','<b style="color:#b0003a">실종</b> (2003-11-14)'],['마지막 접속','오전 03:12']],
+    memo:'“서버실 열쇠는 내가 가지고 있어. 아무한테도 말하지 마.” — 하은의 마지막 메모' },
+  { file:'도현.txt', name:'강도현', asset:'I5', photo:'도현 증명사진 (피곤한 대학원생)', rows:[['나이','26세'],['관계','하은의 사촌오빠'],['직업','대학원생 (전산학)'],['역할','하은의 컴퓨터를 당신에게 넘겨준 사람']],
+    memo:'“열어보면 알 거야. 근데 거기 있는 걸 전부 믿지는 마.”' },
+  { file:'민서.txt', name:'최민서', asset:'I6', photo:'민서 프로필 (얼굴 대신 고양이 사진)', rows:[['나이','알 수 없음'],['관계','하은의 메신저 친구 (3년)'],['만난 적','없음'],['특이사항','03:12 대화의 마지막 상대']],
+    memo:'“3년 동안 매일 얘기했는데, 목소리는 한 번도 못 들었어.”' },
+  { file:'관리자.txt', name:'관리자', asset:'I7', photo:'프로필 없음 (검은 실루엣)', rows:[['이름','—'],['권한','모든 폴더 접근 가능'],['최근 활동','휴지통 비움 시도 (실패)'],['로그인 기록','2003-11-14 03:11']],
+    memo:'“로그인 기록이 남았습니다.”' },
+];
+const PHOTOS = [
+  { name:'IMG_0401.JPG', asset:'I8',  desc:'하은의 바탕화면 — 게임 메인 화면' },
+  { name:'IMG_0402.JPG', asset:'I9',  desc:'뒤섞인 메신저 기록 맞추기 퍼즐' },
+  { name:'IMG_0403.JPG', asset:'I10', desc:'두 사진의 다른 점 찾기 탐색' },
+  { name:'IMG_0404.JPG', asset:'I11', desc:'새벽의 학교 서버실 복도' },
+  { name:'IMG_0405.JPG', asset:'I12', desc:'손상된 파일 복구 미니게임' },
+  { name:'IMG_0406.JPG', asset:'I13', desc:'엔딩을 가르는 마지막 선택' },
+];
+const CHAT = [
+  ['sys', '2003-11-14 오전 02:58 대화 기록'],
+  ['민서', '야 너 하은이 컴퓨터 켰다며'],
+  ['나', '응. 비번 맞았어'],
+  ['민서', '하은이가 그날 새벽에 나랑 얘기하다가 갑자기 나갔어. 03:12에'],
+  ['민서', '근데 이상한 게, 그 뒤로 대화 기록 순서가 뒤죽박죽이야. 내가 안 한 말도 섞여 있고'],
+  ['나', '사진 폴더도 이상해. 같은 사진인데 열 때마다 뭔가 하나씩 달라'],
+  ['민서', '…그리고 너. 답장 신중하게 해'],
+  ['민서', '이 컴퓨터, 지금 너 말고 누가 또 보고 있을지도 몰라'],
+  ['sys', '민서님이 로그아웃했습니다.'],
+];
+const GOALS = [
+  { at:100000, label:'10만', item:'바탕화면 테마 ‘옥상’' },
+  { at:300000, label:'30만', item:'메신저 도트 이모티콘' },
+  { at:500000, label:'50만', item:'하은의 MP3 (OST 3곡)' },
+  { at:1000000, label:'100만', item:'‘진실.txt’ 선공개' },
+];
+const PRE_COUNT = 412503;   // 데모 수치
+
+/* ══════════════ 사운드 (Web Audio 합성) ══════════════ */
+let AC = null, muted = false;
+function audio(){ if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (AC && AC.state === 'suspended') AC.resume(); return AC; }
+function tone(f, d = .15, type = 'square', v = .05, delay = 0){
+  if (muted) return; const ac = audio(); if (!ac) return;
+  const t = ac.currentTime + delay, o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+  o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d + .02);
+}
+const sfx = {
+  chime(){ [523, 659, 784, 1047].forEach((f, i) => tone(f, .5, 'triangle', .07, i * .14)); },
+  ding(){ tone(1318, .12, 'sine', .08); tone(1760, .2, 'sine', .06, .1); },
+  error(){ tone(180, .25, 'square', .06); tone(140, .3, 'square', .05, .12); },
+  click(){ tone(900, .03, 'square', .02); },
+};
+const soundBtn = $('#soundBtn');
+function drawSound(){
+  soundBtn.innerHTML = muted
+    ? '<svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path d="M11 6l4 4M15 6l-4 4" stroke="#b0003a" stroke-width="1.5"/></svg>'
+    : '<svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path d="M11 5c1 1 1 5 0 6M13 3c2 2 2 8 0 10" fill="none" stroke="#000"/></svg>';
+  soundBtn.setAttribute('aria-label', muted ? '소리 켜기' : '소리 끄기');
+}
+soundBtn.addEventListener('click', () => { muted = !muted; drawSound(); });
+drawSound();
+
+/* ══════════════ 부팅 · 로그인 ══════════════ */
+const BOOT_LINES = [
+  ['MIRAE BIOS v2.03   (C) 2003 Mirae Systems', ''],
+  ['메모리 검사 ........ 512MB ', 'OK'],
+  ['하드디스크 C: ...... 40GB ', 'OK'],
+  ['마지막 종료 ........ 2003-11-14 03:12 ', 'WARN:비정상 종료'],
+  ['디스크 검사 ........ 손상된 파일 2개 발견', ''],
+  ['사용자 프로필 불러오는 중 ...', ''],
+];
+let bootTimers = [];
+function later(fn, ms){ const t = setTimeout(fn, ms); bootTimers.push(t); return t; }
+function clearTimers(){ bootTimers.forEach(clearTimeout); bootTimers = []; }
+
+function runBoot(){
+  show('boot');
+  const box = $('#bootLines'); box.textContent = '';
+  $('#bootLogo').classList.remove('on');
+  if (reduce) { toLogin(); return; }
+  BOOT_LINES.forEach(([txt, st], i) => later(() => {
+    const line = document.createElement('div');
+    line.textContent = txt;
+    if (st) {
+      const s = document.createElement('span');
+      const warn = st.startsWith('WARN:');
+      s.className = warn ? 'warn' : 'ok';
+      s.textContent = warn ? st.slice(5) : st;
+      line.appendChild(s);
+    }
+    box.appendChild(line);
+  }, 220 + i * 280));
+  later(() => { box.textContent = ''; $('#bootLogo').classList.add('on'); }, 220 + BOOT_LINES.length * 280 + 300);
+  later(toLogin, 220 + BOOT_LINES.length * 280 + 2100);
+}
+function toLogin(){
+  clearTimers();
+  show('login');
+  const dots = $('#pwDots'), btn = $('#loginBtn');
+  dots.textContent = ''; btn.disabled = true;
+  if (reduce) { dots.textContent = '••••••••'; btn.disabled = false; btn.focus(); return; }
+  for (let i = 1; i <= 8; i++) later(() => { dots.textContent = '•'.repeat(i); }, 400 + i * 130);
+  later(() => { btn.disabled = false; btn.focus(); }, 400 + 8 * 130 + 100);
+}
+function toDesktop(withSound){
+  clearTimers();
+  show('os');
+  store.set('ll-booted', '1');
+  if (withSound) sfx.chime();
+  if (!isMobile()) later(() => openWin('readme'), 300);
+  later(showToast, 9000);
+}
+function show(which){
+  $('#boot').hidden = which !== 'boot';
+  $('#login').hidden = which !== 'login';
+  $('#off').hidden = which !== 'off';
+  $('#os').hidden = which !== 'os';
+}
+$('#skipBoot').addEventListener('click', toLogin);
+$('#skipLogin').addEventListener('click', () => toDesktop(true));
+$('#loginBtn').addEventListener('click', () => toDesktop(true));
+$('#rebootBtn').addEventListener('click', () => { closeAll(); runBoot(); });
+
+/* ══════════════ 창 관리 ══════════════ */
+const desk = $('#desk'), tasks = $('#tasks');
+let zTop = 20, cascade = 0;
+const taskBtns = {};
+
+$$('.win').forEach(win => {   // 제목 표시줄 채우기
+  const bar = win.querySelector('.tbar');
+  bar.innerHTML = `<svg class="ico"><use href="#${win.dataset.icon}"/></svg><h2>${win.dataset.title}</h2>
+    <button class="tbtn min" type="button" aria-label="최소화"><svg viewBox="0 0 10 10" shape-rendering="crispEdges"><rect x="1" y="7" width="6" height="2" fill="#000"/></svg></button>
+    <button class="tbtn max" type="button" aria-label="최대화"><svg viewBox="0 0 10 10" shape-rendering="crispEdges"><rect x="1" y="1" width="8" height="8" fill="none" stroke="#000"/><rect x="1" y="1" width="8" height="2" fill="#000"/></svg></button>
+    <button class="tbtn close" type="button" aria-label="닫기"><svg viewBox="0 0 10 10" shape-rendering="crispEdges"><path d="M1 1l8 8M9 1L1 9" stroke="#000" stroke-width="1.6"/></svg></button>`;
+  const id = win.id.slice(4);
+  bar.querySelector('.min').addEventListener('click', () => minimize(id));
+  bar.querySelector('.max').addEventListener('click', () => { win.classList.toggle('max'); });
+  bar.querySelector('.close').addEventListener('click', () => closeWin(id));
+  bar.addEventListener('dblclick', e => { if (!e.target.closest('button') && !isMobile()) win.classList.toggle('max'); });
+  win.addEventListener('pointerdown', () => focusWin(id));
+  win.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeWin(id)));
+  enableDrag(win, bar);
+});
+
+function openWin(id){
+  const win = $('#win-' + id); if (!win) return;
+  closeStart();
+  if (win.hidden) {
+    win.hidden = false;
+    placeWin(win);
+    win.classList.remove('pop'); void win.offsetWidth; win.classList.add('pop');
+    addTask(id, win);
+    if (ON_OPEN[id]) ON_OPEN[id]();
+  }
+  win.classList.remove('min');
+  focusWin(id);
+}
+function placeWin(win){
+  if (isMobile()) return;
+  const dw = desk.clientWidth, dh = desk.clientHeight;
+  const w = Math.min(win.offsetWidth, dw - 16), h = Math.min(win.offsetHeight, dh - 16);
+  const n = cascade++ % 6;
+  const x = Math.round((dw - w) / 2 + (n - 2) * 26 + 40);
+  const y = Math.round((dh - h) / 2 + (n - 2) * 22);
+  win.style.left = Math.max(8, Math.min(dw - w - 8, x)) + 'px';
+  win.style.top = Math.max(8, Math.min(dh - h - 8, y)) + 'px';
+}
+function focusWin(id){
+  $$('.win').forEach(w => w.classList.toggle('active', w.id === 'win-' + id));
+  const win = $('#win-' + id); if (!win) return;
+  win.style.zIndex = ++zTop;
+  Object.entries(taskBtns).forEach(([k, b]) => b.setAttribute('aria-pressed', String(k === id)));
+}
+function topVisible(){
+  return $$('.win').filter(w => !w.hidden && !w.classList.contains('min')).sort((a, b) => (+b.style.zIndex || 0) - (+a.style.zIndex || 0))[0];
+}
+function closeWin(id){
+  const win = $('#win-' + id); if (!win) return;
+  win.hidden = true; win.classList.remove('max', 'min', 'active');
+  if (taskBtns[id]) { taskBtns[id].remove(); delete taskBtns[id]; }
+  if (ON_CLOSE[id]) ON_CLOSE[id]();
+  const t = topVisible(); if (t) focusWin(t.id.slice(4));
+}
+function closeAll(){ $$('.win').forEach(w => { if (!w.hidden) closeWin(w.id.slice(4)); }); }
+function minimize(id){
+  const win = $('#win-' + id); win.classList.add('min'); win.classList.remove('active');
+  if (taskBtns[id]) taskBtns[id].setAttribute('aria-pressed', 'false');
+  const t = topVisible(); if (t) focusWin(t.id.slice(4));
+}
+function addTask(id, win){
+  if (taskBtns[id]) return;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'task btn';
+  b.innerHTML = `<svg><use href="#${win.dataset.icon}"/></svg><span>${win.dataset.title.split(' - ')[0]}</span>`;
+  b.addEventListener('click', () => {
+    const active = win.classList.contains('active') && !win.classList.contains('min');
+    if (active) minimize(id); else { win.classList.remove('min'); focusWin(id); }
+  });
+  tasks.appendChild(b); taskBtns[id] = b;
+}
+function enableDrag(win, bar){
+  let sx, sy, ox, oy, dragging = false;
+  bar.addEventListener('pointerdown', e => {
+    if (isMobile() || e.target.closest('button') || win.classList.contains('max') || e.button !== 0) return;
+    dragging = true; sx = e.clientX; sy = e.clientY; ox = win.offsetLeft; oy = win.offsetTop;
+    bar.setPointerCapture(e.pointerId);
+  });
+  bar.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dw = desk.clientWidth, dh = desk.clientHeight;
+    const x = Math.max(-win.offsetWidth + 80, Math.min(dw - 80, ox + e.clientX - sx));
+    const y = Math.max(0, Math.min(dh - 30, oy + e.clientY - sy));
+    win.style.left = x + 'px'; win.style.top = y + 'px';
+  });
+  const end = () => { dragging = false; };
+  bar.addEventListener('pointerup', end); bar.addEventListener('pointercancel', end);
+}
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || $('#os').hidden) return;
+  if (!$('#startMenu').hidden) { closeStart(); $('#startBtn').focus(); return; }
+  const t = topVisible(); if (t) closeWin(t.id.slice(4));
+});
+window.addEventListener('resize', () => {   // 화면이 줄면 창이 밖으로 나가지 않게
+  if (isMobile()) return;
+  const dw = desk.clientWidth, dh = desk.clientHeight;
+  $$('.win').forEach(w => {
+    if (w.hidden) return;
+    w.style.left = Math.max(8, Math.min(dw - Math.min(w.offsetWidth, dw - 16) - 8, w.offsetLeft)) + 'px';
+    w.style.top = Math.max(8, Math.min(dh - 40, w.offsetTop)) + 'px';
+  });
+});
+
+/* 아이콘·메뉴에서 열기 */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-open]');
+  if (!t) return;
+  sfx.click();
+  const id = t.dataset.open;
+  if (id === 'corrupt') return alertBox('‘하은_일기_최종.hwp’ 파일이 손상되어 열 수 없습니다.\n출시일에 다시 시도하세요.');
+  openWin(id);
+});
+$$('.list tr.row').forEach(r => r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); r.click(); } }));
+
+function alertBox(text){
+  $('#alertText').textContent = text;
+  const w = $('#win-alert');
+  if (!w.hidden) closeWin('alert');
+  openWin('alert'); sfx.error();
+  w.querySelector('[data-close]').focus();
+}
+
+/* ══════════════ 시작 메뉴 · 시계 · 알림 ══════════════ */
+const startBtn = $('#startBtn'), startMenu = $('#startMenu');
+function closeStart(){ startMenu.hidden = true; startBtn.setAttribute('aria-expanded', 'false'); startBtn.setAttribute('aria-pressed', 'false'); }
+startBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const open = startMenu.hidden;
+  startMenu.hidden = !open; startBtn.setAttribute('aria-expanded', String(open)); startBtn.setAttribute('aria-pressed', String(open));
+  if (open) startMenu.querySelector('button, a').focus();
+});
+document.addEventListener('pointerdown', e => { if (!startMenu.hidden && !e.target.closest('#startMenu, #startBtn')) closeStart(); });
+$('#shutdownBtn').addEventListener('click', () => { closeStart(); closeAll(); clearTimers(); show('off'); });
+
+function tickClock(){
+  const d = new Date(), h = d.getHours(), m = String(d.getMinutes()).padStart(2, '0');
+  $('#clock').textContent = `${h < 12 ? '오전' : '오후'} ${h % 12 || 12}:${m}`;
+}
+tickClock(); setInterval(tickClock, 15000);
+
+const toast = $('#toast');
+let chatSeen = false;
+function showToast(){
+  if (chatSeen || !$('#win-chat').hidden) return;
+  toast.hidden = false; toast.classList.remove('pop'); void toast.offsetWidth; toast.classList.add('pop'); sfx.ding();
+}
+toast.addEventListener('click', () => { toast.hidden = true; openWin('chat'); });
+
+/* ══════════════ 창별 동작 ══════════════ */
+const ON_OPEN = {}, ON_CLOSE = {};
+
+/* 트레일러: 실제 영상이 없을 때는 가짜 재생 표시 */
+let playT = null, playSec = 0;
+const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+function setPlay(on){
+  clearInterval(playT); playT = null;
+  $('#playState').textContent = on ? '재생 중 (영상 자리)' : (playSec ? '일시 정지됨' : '정지됨');
+  $('#playBtn').setAttribute('aria-label', on ? '일시정지' : '재생');
+  $('#playBtn').innerHTML = on ? '<svg viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="1" width="3" height="10"/><rect x="7" y="1" width="3" height="10"/></svg>' : '<svg viewBox="0 0 12 12" fill="currentColor"><path d="M2 1v10l9-5z"/></svg>';
+  if (on) playT = setInterval(() => { playSec = (playSec + 1) % 91; drawPlay(); }, 1000);
+}
+function drawPlay(){ $('#seekFill').style.width = (playSec / 90 * 100) + '%'; $('#playTime').textContent = `${fmt(playSec)} / 01:30`; }
+$('#playBtn').addEventListener('click', () => setPlay(!playT));
+$('#stopBtn').addEventListener('click', () => { playSec = 0; drawPlay(); setPlay(false); });
+ON_CLOSE.trailer = () => { setPlay(false); };
+
+/* 사람들 폴더 · 프로필 */
+const peopleFiles = $('#peopleFiles');
+PEOPLE.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'file';
+  b.innerHTML = `<svg><use href="#i-person"/></svg><span>${p.file}</span>`;
+  b.addEventListener('click', () => openProfile(i));
+  peopleFiles.appendChild(b);
+});
+function openProfile(i){
+  const p = PEOPLE[i], win = $('#win-profile');
+  win.querySelector('.tbar h2').textContent = `${p.file} - 프로필`;
+  win.setAttribute('aria-label', p.file);
+  $('#profAsset').textContent = `${p.asset} · 인물 사진`;
+  $('#profAssetDesc').textContent = p.photo + ' · 480×600';
+  $('#profDl').innerHTML = `<dt>이름</dt><dd><b>${p.name}</b></dd>` + p.rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') + `<p class="memo">${p.memo}</p>`;
+  if (taskBtns.profile) taskBtns.profile.querySelector('span').textContent = p.file;
+  openWin('profile');
+}
+
+/* 사진 뷰어 */
+let photoIdx = 0;
+const strip = $('#viewStrip');
+PHOTOS.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'btn'; b.setAttribute('aria-label', p.name + ' 보기');
+  b.innerHTML = `<div class="ph"><div class="tag">${p.asset}</div></div>`;
+  b.addEventListener('click', () => showPhoto(i));
+  strip.appendChild(b);
+});
+function showPhoto(i){
+  photoIdx = (i + PHOTOS.length) % PHOTOS.length;
+  const p = PHOTOS[photoIdx];
+  $('#viewAsset').textContent = `${p.asset} · 게임 스크린샷`;
+  $('#viewDesc').textContent = p.desc + ' · 1920×1080';
+  $('#viewName').textContent = `${p.name}  (${photoIdx + 1}/${PHOTOS.length})`;
+  [...strip.children].forEach((b, j) => b.setAttribute('aria-current', String(j === photoIdx)));
+}
+$('#viewPrev').addEventListener('click', () => showPhoto(photoIdx - 1));
+$('#viewNext').addEventListener('click', () => showPhoto(photoIdx + 1));
+$('#win-photos').addEventListener('keydown', e => { if (e.key === 'ArrowRight') showPhoto(photoIdx + 1); if (e.key === 'ArrowLeft') showPhoto(photoIdx - 1); });
+showPhoto(0);
+
+/* 메신저: 처음 열 때 한 줄씩 */
+let chatPlayed = false;
+ON_OPEN.chat = () => {
+  chatSeen = true; toast.hidden = true;
+  const badge = $('#chatBadge'); if (badge) badge.remove();
+  if (chatPlayed) return; chatPlayed = true;
+  const log = $('#chatLog'); log.innerHTML = '';
+  const add = ([who, text]) => {
+    const d = document.createElement('div');
+    d.className = 'msg ' + (who === 'sys' ? 'sys' : who === '나' ? 'me' : '');
+    d.innerHTML = (who === 'sys' ? '' : `<div class="who">${who}</div>`) + `<p></p>`;
+    d.querySelector('p').textContent = text;
+    log.appendChild(d);
+    log.parentElement.scrollTop = log.parentElement.scrollHeight;
+  };
+  const feature = () => {
+    const f = document.createElement('div');
+    f.className = 'feature';
+    f.innerHTML = '<b>[게임 특징 요약]</b><ol><li>뒤섞인 메신저 기록을 시간 순서대로 맞추는 추리</li><li>열 때마다 달라지는 사진에서 단서 찾기</li><li>누구를 믿고 무엇을 답하느냐에 따라 엔딩 4종</li></ol>';
+    log.appendChild(f); log.parentElement.scrollTop = log.parentElement.scrollHeight;
+  };
+  if (reduce) { CHAT.forEach(add); feature(); return; }
+  let t = 200;
+  CHAT.forEach((m, i) => {
+    const typing = m[0] === '민서';
+    if (typing) later(() => { const ty = document.createElement('div'); ty.className = 'typing'; ty.id = 'typing'; ty.textContent = '민서님이 입력 중...'; log.appendChild(ty); }, t);
+    t += typing ? 650 : 450;
+    later(() => { const ty = $('#typing'); if (ty) ty.remove(); add(m); if (m[0] === '민서') sfx.ding(); }, t);
+  });
+  later(feature, t + 600);
+};
+
+/* 사전예약 설치 마법사 */
+let wizStep = 0, wizPlats = ['PC'];
+const wizPane = $('#wizPane');
+function setSteps(i){ [...$('#wizSteps').children].forEach((li, j) => li.classList.toggle('on', j === i)); }
+const won = n => n.toLocaleString('ko-KR');
+function renderWiz(){
+  setSteps(wizStep);
+  if (wizStep === 0) {
+    wizPane.innerHTML = `<h3>LAST LOGIN 사전예약 설치 마법사</h3>
+      <p>이 마법사는 <b>LAST LOGIN</b> 사전예약을 도와줍니다.<br>출시되면 가장 먼저 알려 드리고, 달성한 보상을 모두 드려요.</p>
+      <p>현재 사전예약: <b>${won(PRE_COUNT)}명</b> (데모 수치)</p>
+      <div class="goals">${GOALS.map(g => `<div class="${PRE_COUNT >= g.at ? 'done' : ''}"><span>${PRE_COUNT >= g.at ? '✔' : '□'} ${g.label}</span><span>${g.item}</span></div>`).join('')}</div>
+      <div class="wiz-btns"><button class="btn" type="button" data-close-wiz>취소</button><button class="btn primary" type="button" data-next>다음 &gt;</button></div>`;
+  } else if (wizStep === 1) {
+    wizPane.innerHTML = `<h3>사용권 계약</h3>
+      <div class="eula sunk">LAST LOGIN 사전예약 이용 안내 (데모)
+
+1. 이 사이트는 포트폴리오용 가상 게임 홍보 사이트입니다.
+2. 입력한 이메일은 어디에도 저장되거나 전송되지 않습니다.
+3. 실제 서비스라면 이 자리에 개인정보 수집·이용 동의(수집 항목, 목적, 보관 기간)를 안내해야 합니다.
+4. 이 컴퓨터의 파일은 모두 허구입니다. 아마도.</div>
+      <label><input type="checkbox" id="wizAgree"> 위 내용을 확인했고 동의합니다.</label>
+      <p class="err" id="wizErr"></p>
+      <div class="wiz-btns"><button class="btn" type="button" data-prev>&lt; 뒤로</button><button class="btn primary" type="button" data-next>다음 &gt;</button></div>`;
+  } else if (wizStep === 2) {
+    wizPane.innerHTML = `<h3>설치 옵션</h3>
+      <p>알림을 받을 플랫폼을 고르세요.</p>
+      ${['PC','iOS','Android'].map(p => `<label><input type="checkbox" name="wplat" value="${p}" ${wizPlats.includes(p) ? 'checked' : ''}> ${p === 'PC' ? 'PC (Steam 찜하기)' : p}</label>`).join('')}
+      <p>출시 알림을 받을 이메일</p>
+      <div class="sunk"><input type="email" id="wizEmail" placeholder="name@example.com" autocomplete="email" aria-label="이메일"></div>
+      <p class="err" id="wizErr"></p>
+      <div class="wiz-btns"><button class="btn" type="button" data-prev>&lt; 뒤로</button><button class="btn primary" type="button" data-next>설치</button></div>`;
+  } else if (wizStep === 3) {
+    wizPane.innerHTML = `<h3>설치 중...</h3>
+      <div class="pbar sunk"><i id="wizBar"></i></div>
+      <div class="log sunk" id="wizLog"></div>
+      <div class="wiz-btns"><button class="btn" type="button" disabled>&lt; 뒤로</button><button class="btn primary" type="button" disabled>다음 &gt;</button></div>`;
+    const lines = ['승객 명단 확인 중...', `플랫폼 등록: ${wizPlats.join(', ')}`, '보상 상자 포장 중...', '하은의 파일 복사 중... (2개 손상)', '관리자 권한 요청... 거부됨', '사전예약 기록 작성 중...'];
+    let p = 0;
+    const step = () => {
+      p += reduce ? 100 : 4 + Math.random() * 9;
+      const bar = $('#wizBar'), log = $('#wizLog'); if (!bar) return;
+      bar.style.width = Math.min(100, p) + '%';
+      const li = Math.min(lines.length, Math.floor(p / (100 / lines.length)));
+      while (log.childElementCount < li) { const d = document.createElement('div'); d.textContent = '> ' + lines[log.childElementCount]; log.appendChild(d); log.scrollTop = log.scrollHeight; }
+      if (p < 100) later(step, 160); else later(() => { wizStep = 4; renderWiz(); sfx.chime(); }, 400);
+    };
+    later(step, 200);
+  } else {
+    wizPane.innerHTML = `<h3>사전예약이 완료되었습니다</h3>
+      <p>${wizPlats.join(' · ')} 출시 알림을 신청했어요.<br><b>데모 사이트라 실제로 저장·발송되지 않아요.</b></p>
+      <p>그동안 하은의 컴퓨터를 더 둘러보세요. 휴지통이 아직 비워지지 않았어요.</p>
+      <div class="wiz-btns"><button class="btn primary" type="button" data-close-wiz>마침</button></div>`;
+  }
+}
+wizPane.addEventListener('click', e => {
+  if (e.target.closest('[data-close-wiz]')) { closeWin('setup'); return; }
+  if (e.target.closest('[data-prev]')) { wizStep--; renderWiz(); return; }
+  if (!e.target.closest('[data-next]')) return;
+  const err = $('#wizErr');
+  if (wizStep === 1 && !$('#wizAgree').checked) { err.textContent = '동의가 필요합니다.'; sfx.error(); return; }
+  if (wizStep === 2) {
+    wizPlats = $$('input[name="wplat"]:checked').map(i => i.value);
+    const email = $('#wizEmail').value.trim();
+    if (!wizPlats.length) { err.textContent = '플랫폼을 하나 이상 고르세요.'; sfx.error(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = '이메일 주소를 확인하세요.'; sfx.error(); $('#wizEmail').focus(); return; }
+  }
+  wizStep++; renderWiz();
+});
+ON_OPEN.setup = () => { wizStep = 0; renderWiz(); };
+
+/* 진실.txt: 열면 잠시 후 경고 */
+ON_OPEN.truth = () => { later(() => { if (!$('#win-truth').hidden) alertBox('관리자가 이 파일을 보고 있습니다.\n\n…농담이에요. 이어지는 이야기는 출시일에.'); }, 2600); };
+
+/* ══════════════ 시작 ══════════════ */
+if (store.get('ll-booted') === '1') { show('os'); later(showToast, 6000); }
+else runBoot();
+
+// 테스트용 훅 (화면 동작에는 영향 없음)
+window.__os = { openWin, closeWin, toDesktop, show };
+})();
+</script>
+</body>
+</html>
