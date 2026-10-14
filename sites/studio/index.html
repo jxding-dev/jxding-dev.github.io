@@ -906,7 +906,7 @@ section{ scroll-margin-top:72px; }
    예) 'https://open.kakao.com/o/sAbCdEf'
    비워두면 상담 버튼은 페이지 아래 신청서로 이동합니다.
 ══════════════════════════════════════════════ */
-const KAKAO_URL = '';
+const KAKAO_URL = 'https://open.kakao.com/o/s3XvWlSi';
 const CONTACT_EMAIL = 'dlwlgus2209@gmail.com';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1062,7 +1062,7 @@ ctaIO.observe(hero); ctaIO.observe(apply);
 (function(){
   const form = document.getElementById('form');
   const msg = document.getElementById('formMsg');
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const d = new FormData(form);
     const v = k => (d.get(k) || '').toString().trim() || '-';
@@ -1076,9 +1076,12 @@ ctaIO.observe(hero); ctaIO.observe(apply);
 · 참고 사이트: ${v('ref')}
 · 내용: ${v('msg')}`;
 
+    // 복사는 기다리지 않고 시작한다. await 뒤에 창을 열면 모바일 브라우저가 팝업으로 차단할 수 있다.
     let copied = false;
-    try { await navigator.clipboard.writeText(text); copied = true; }
-    catch (err) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).catch(() => {});
+      copied = true;
+    } else {
       const ta = document.createElement('textarea');
       ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
       document.body.appendChild(ta); ta.select();
@@ -1087,8 +1090,13 @@ ctaIO.observe(hero); ctaIO.observe(apply);
     }
 
     if (KAKAO_URL) {
-      msg.textContent = copied ? '복사됐어요! 열린 오픈채팅에 붙여넣기만 하면 돼요.' : '오픈채팅에 신청 내용을 적어 보내주세요.';
-      window.open(KAKAO_URL, '_blank', 'noopener');
+      msg.textContent = copied
+        ? '신청 내용이 복사됐어요! 오픈채팅에 붙여넣기만 하면 돼요.'
+        : '오픈채팅에 신청 내용을 적어 보내주세요.';
+      // 'noopener' 옵션을 주면 창이 열려도 null이 돌아와 차단 여부를 알 수 없으므로, 연 뒤에 opener를 끊는다
+      const win = window.open(KAKAO_URL, '_blank');
+      if (win) win.opener = null;
+      else location.href = KAKAO_URL;   // 팝업이 막히면 현재 창에서 이동
     } else {
       msg.textContent = '메일 앱으로 연결할게요.';
       location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('[쮜딩] 웹사이트 상담 신청')}&body=${encodeURIComponent(text)}`;
