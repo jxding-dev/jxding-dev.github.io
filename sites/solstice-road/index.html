@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SOLSTICE ROAD — 해가 지지 않는 마지막 여름</title>
+<meta name="description" content="고장 난 버스를 타고 무너진 대륙을 횡단하는 다섯 동료의 로드무비 RPG, 솔스티스 로드. 사전예약 진행 중. (포트폴리오용 가상 게임 홍보 사이트)">
+<meta property="og:title" content="SOLSTICE ROAD — 해가 지지 않는 마지막 여름">
+<meta property="og:description" content="로드무비 RPG 솔스티스 로드 사전예약 진행 중 (가상 게임 데모)">
+<meta property="og:type" content="website">
+<!-- 교체: <meta property="og:image" content="assets/og.jpg">  ← I30 공유 이미지 -->
+<meta name="theme-color" content="#151229">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ════════════════════════════════════════════
+   TOKENS — 노을빛 로드트립 팔레트
+════════════════════════════════════════════ */
+:root{
+  --night:#151229;
+  --night-2:#1E1838;
+  --dusk:#3A1F4F;
+  --sun:#FF8A3D;
+  --rose:#FF4F7B;
+  --gold:#FFD166;
+  --teal:#2EC4B6;
+  --cream:#FFF4E6;
+  --paper:#FBE9D2;
+  --ink:#1B1530;
+  --muted:#7A6E86;
+  --line:rgba(27,21,48,.14);
+  --pad:clamp(18px, 5vw, 72px);
+  --max:1240px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --en:'Unbounded', 'Pretendard Variable', Pretendard, sans-serif;
+  --ko:'Black Han Sans', 'Pretendard Variable', Pretendard, sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ -webkit-text-size-adjust:100%; }
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+body{
+  font-family:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+  background:var(--night); color:var(--cream);
+  line-height:1.6; word-break:keep-all; overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent;
+}
+/* 기울인 표지판 띠·해 그래픽이 화면 밖으로 삐져나가지 않게 (body에 걸면 뷰포트로 넘어가 효과가 없음) */
+main{ overflow-x:clip; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+img,video{ display:block; max-width:100%; }
+:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:8px; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+section{ position:relative; scroll-margin-top:70px; }
+
+/* 필름 그레인 */
+body::after{
+  content:""; position:fixed; inset:0; z-index:100; pointer-events:none; opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ════════════════════════════════════════════
+   PLACEHOLDER — 사진·영상이 들어갈 자리
+════════════════════════════════════════════ */
+.ph{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 12px, transparent 12px 24px),
+    linear-gradient(145deg, #2a2148, #3b2353 55%, #4a2550);
+  display:grid; place-items:center; text-align:center;
+}
+.ph.light{
+  background:
+    repeating-linear-gradient(135deg, rgba(27,21,48,.04) 0 12px, transparent 12px 24px),
+    linear-gradient(145deg, #f6dcc0, #f3c9b0);
+}
+.ph > .tag{
+  position:relative; z-index:1; display:grid; gap:6px; justify-items:center;
+  padding:12px 16px; border-radius:14px;
+  background:rgba(21,18,41,.55); border:1px dashed rgba(255,244,230,.35);
+  color:var(--cream); font-size:12.5px; line-height:1.45; max-width:86%;
+  backdrop-filter:blur(4px);
+}
+.ph.light > .tag{ background:rgba(255,244,230,.7); border-color:rgba(27,21,48,.25); color:var(--ink); }
+.ph .tag b{ font-family:var(--en); font-size:13px; letter-spacing:.04em; color:var(--gold); }
+.ph.light .tag b{ color:var(--rose); }
+.ph .tag svg{ width:22px; height:22px; opacity:.85; }
+.ph > img, .ph > video, .ph > iframe{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; }
+
+/* ════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:54px; padding:0 26px; border-radius:999px;
+  font-weight:800; font-size:16px; letter-spacing:-.01em;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .2s;
+}
+.btn svg{ width:18px; height:18px; flex-shrink:0; }
+.btn-sun{ background:linear-gradient(120deg, var(--gold), var(--sun) 45%, var(--rose)); color:#2a0f18; box-shadow:0 14px 40px -14px rgba(255,79,123,.8); }
+.btn-sun:hover{ transform:translateY(-2px); box-shadow:0 20px 50px -16px rgba(255,79,123,.9); }
+.btn-ghost{ border:1.5px solid rgba(255,244,230,.4); color:var(--cream); }
+.btn-ghost:hover{ background:rgba(255,244,230,.1); }
+.btn-ink{ background:var(--ink); color:var(--cream); }
+.btn-ink:hover{ transform:translateY(-2px); }
+
+/* ════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════ */
+.hdr{ position:fixed; inset:0 0 auto 0; z-index:60; transition:background .3s, transform .35s var(--ease), border-color .3s; border-bottom:1px solid transparent; }
+.hdr.solid{ background:rgba(21,18,41,.86); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-color:rgba(255,244,230,.08); }
+.hdr.hide{ transform:translateY(-100%); }
+.hdr-in{ height:68px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+.mark{ display:flex; align-items:center; gap:10px; font-family:var(--en); font-weight:900; font-size:15px; letter-spacing:.02em; white-space:nowrap; }
+.mark i{ flex-shrink:0; }
+.mark i{ width:22px; height:22px; border-radius:50%; background:radial-gradient(circle at 50% 70%, var(--gold), var(--sun) 50%, var(--rose)); box-shadow:0 0 18px rgba(255,138,61,.7); position:relative; overflow:hidden; }
+.mark i::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:40%; background:repeating-linear-gradient(0deg, var(--night) 0 2px, transparent 2px 4px); }
+.gnb{ display:flex; gap:28px; font-size:14px; font-weight:700; color:rgba(255,244,230,.72); }
+.gnb a{ position:relative; }
+.gnb a::after{ content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--sun); transform:scaleX(0); transition:transform .25s var(--ease); }
+.gnb a:hover, .gnb a.on{ color:var(--cream); }
+.gnb a.on::after{ transform:scaleX(1); }
+.hdr .btn{ min-height:42px; padding:0 18px; font-size:14px; }
+.menu-btn{ display:none; width:42px; height:42px; border-radius:12px; border:1px solid rgba(255,244,230,.2); place-items:center; }
+.menu-btn svg{ width:20px; height:20px; }
+.mnav{ display:none; }
+
+/* ════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════ */
+.hero{ min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; isolation:isolate; padding:120px 0 64px; }
+.hero-bg{ position:absolute; inset:0; z-index:-3; }
+.hero-bg .ph{ position:absolute; inset:0; }
+.hero-bg .ph{ place-items:start center; padding-top:88px; }
+.hero::before{ /* 노을 그라데이션 덮개 */
+  content:""; position:absolute; inset:0; z-index:-2; pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(21,18,41,.55) 0%, rgba(21,18,41,0) 30%, rgba(58,31,79,.25) 55%, rgba(21,18,41,.96) 100%),
+    radial-gradient(ellipse 80% 60% at 70% 75%, rgba(255,138,61,.35), transparent 70%);
+}
+.sun{
+  position:absolute; z-index:-1; right:clamp(-120px, -4vw, 0px); bottom:18%;
+  width:clamp(260px, 42vw, 620px); aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle at 50% 35%, #FFE7A3, var(--gold) 30%, var(--sun) 58%, var(--rose) 85%);
+  box-shadow:0 0 120px 30px rgba(255,138,61,.35);
+  -webkit-mask:linear-gradient(180deg, #000 55%, transparent 55%, transparent 60%, #000 60%, #000 66%, transparent 66%, transparent 72%, #000 72%, #000 76%, transparent 76%, transparent 83%, #000 83%, #000 86%, transparent 86%);
+          mask:linear-gradient(180deg, #000 55%, transparent 55%, transparent 60%, #000 60%, #000 66%, transparent 66%, transparent 72%, #000 72%, #000 76%, transparent 76%, transparent 83%, #000 83%, #000 86%, transparent 86%);
+  opacity:.92; transform:translateY(var(--sunY, 0px));
+}
+.hero-in{ display:grid; grid-template-columns:1.25fr .75fr; gap:40px; align-items:end; width:100%; }
+.kicker{ display:inline-flex; align-items:center; gap:10px; font-family:var(--en); font-weight:700; font-size:12px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; }
+.kicker::before{ content:""; width:28px; height:2px; background:currentColor; }
+.title{
+  margin-top:18px; font-family:var(--en); font-weight:900; text-transform:uppercase;
+  font-size:clamp(46px, 9.6vw, 148px); line-height:.86; letter-spacing:-.04em;
+}
+.title span{ display:block; }
+.title .t2{
+  background:linear-gradient(90deg, var(--gold), var(--sun) 40%, var(--rose) 80%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  padding-left:clamp(20px, 6vw, 110px);
+}
+.title-ko{ margin-top:16px; font-family:var(--ko); font-size:clamp(20px, 2.6vw, 30px); letter-spacing:.02em; color:var(--cream); }
+.lead{ margin-top:14px; max-width:540px; font-size:clamp(15px, 1.4vw, 17px); color:rgba(255,244,230,.8); line-height:1.75; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+
+/* 승차권 카드 */
+.ticket{
+  position:relative; color:var(--ink); border-radius:18px; padding:22px 22px 18px;
+  background:
+    radial-gradient(circle at 0 62%, transparent 13px, var(--cream) 14px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 62%, transparent 13px, var(--cream) 14px) right / 51% 100% no-repeat;
+  filter:drop-shadow(0 30px 50px rgba(0,0,0,.45));
+  transform:rotate(-2.5deg);
+}
+.ticket::after{ content:""; position:absolute; left:18px; right:18px; top:62%; border-top:2px dashed rgba(27,21,48,.25); }
+.ticket h3{ font-family:var(--en); font-weight:900; font-size:13px; letter-spacing:.16em; color:var(--rose); }
+.ticket .route{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:10px; font-family:var(--ko); font-size:22px; }
+.ticket .route svg{ flex:1; height:12px; color:var(--muted); }
+.ticket .cd{ display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-top:14px; margin-bottom:26px; text-align:center; }
+.ticket .cd b{ display:block; font-family:var(--en); font-size:24px; font-weight:900; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.ticket .cd span{ font-size:11px; color:var(--muted); font-weight:700; }
+.ticket .meta{ display:flex; justify-content:space-between; gap:10px; font-size:12px; color:var(--muted); font-weight:700; padding-top:14px; }
+.ticket .meta b{ color:var(--ink); }
+.ticket .btn{ width:100%; margin-top:12px; min-height:48px; }
+
+.scroll-cue{ position:absolute; left:50%; bottom:18px; transform:translateX(-50%); font-family:var(--en); font-size:10px; letter-spacing:.3em; color:rgba(255,244,230,.55); display:flex; flex-direction:column; align-items:center; gap:8px; }
+.scroll-cue i{ width:1px; height:34px; background:linear-gradient(var(--gold), transparent); animation:cue 1.8s ease-in-out infinite; }
+@keyframes cue{ 0%{ transform:scaleY(0); transform-origin:top; } 50%{ transform:scaleY(1); transform-origin:top; } 51%{ transform-origin:bottom; } 100%{ transform:scaleY(0); transform-origin:bottom; } }
+
+/* ════════════════════════════════════════════
+   SIGN TICKER (도로 표지판)
+════════════════════════════════════════════ */
+.ticker{ background:var(--gold); color:var(--ink); overflow:hidden; border-block:3px solid var(--ink); transform:rotate(-1.2deg); margin:-14px -10px 0; position:relative; z-index:3; }
+.ticker-track{ display:flex; width:max-content; animation:slide 40s linear infinite; padding:14px 0; }
+.ticker span{ display:flex; align-items:center; gap:24px; padding-right:24px; font-family:var(--en); font-weight:900; font-size:clamp(14px, 1.6vw, 20px); letter-spacing:.04em; white-space:nowrap; }
+.ticker span::after{ content:""; width:14px; height:14px; background:var(--ink); transform:rotate(45deg); }
+@keyframes slide{ to{ transform:translateX(-50%); } }
+
+/* ════════════════════════════════════════════
+   SECTION HEAD
+════════════════════════════════════════════ */
+.sec{ padding:clamp(90px, 12vw, 150px) 0; }
+.sec-head{ display:grid; grid-template-columns:auto 1fr; gap:6px 24px; align-items:end; margin-bottom:clamp(36px, 5vw, 60px); }
+.sec-no{ grid-row:span 2; font-family:var(--en); font-weight:900; font-size:clamp(56px, 9vw, 120px); line-height:.8; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1.5px currentColor; opacity:.5; }
+.sec-head h2{ font-family:var(--ko); font-weight:400; font-size:clamp(30px, 4.6vw, 58px); line-height:1.12; letter-spacing:.01em; }
+.sec-head p{ font-size:clamp(15px, 1.4vw, 17px); line-height:1.75; max-width:620px; opacity:.78; }
+
+/* ════════════════════════════════════════════
+   01 WORLD — 엽서 종이 위의 도로 지도
+════════════════════════════════════════════ */
+.world{ background:var(--cream); color:var(--ink); }
+.world::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:radial-gradient(circle at 15% 20%, rgba(255,209,102,.35), transparent 40%), radial-gradient(circle at 85% 80%, rgba(255,79,123,.15), transparent 45%); }
+.world .sec-no{ color:var(--rose); opacity:.8; }
+.story{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px, 4vw, 56px); align-items:center; margin-bottom:clamp(60px, 8vw, 100px); }
+.story .ph{ aspect-ratio:4/3; border-radius:6px; transform:rotate(1.8deg); box-shadow:0 24px 50px -20px rgba(27,21,48,.45); outline:10px solid #fff; }
+.story-txt p{ font-size:clamp(16px, 1.6vw, 19px); line-height:1.95; }
+.story-txt p + p{ margin-top:16px; }
+.story-txt em{ font-style:normal; background:linear-gradient(transparent 60%, rgba(255,209,102,.7) 60%); font-weight:700; }
+.stamp{ display:inline-block; margin-top:22px; padding:8px 14px; border:2.5px solid var(--rose); border-radius:8px; color:var(--rose); font-family:var(--en); font-weight:900; font-size:12px; letter-spacing:.14em; transform:rotate(-6deg); }
+
+.route-map{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(24px, 4vw, 48px); align-items:stretch; }
+.map{ position:relative; border-radius:22px; background:#F5DFC4; border:2px solid var(--ink); overflow:hidden; min-height:420px; }
+.map .routes{ position:absolute; inset:0; width:100%; height:100%; }
+.map .road-bg{ fill:none; stroke:rgba(27,21,48,.18); stroke-width:18; stroke-linecap:round; }
+.map .road{ fill:none; stroke:var(--ink); stroke-width:4; stroke-linecap:round; stroke-dasharray:1 0; }
+.map .road-dash{ fill:none; stroke:var(--gold); stroke-width:2.5; stroke-dasharray:10 12; stroke-linecap:round; }
+.map .grid{ stroke:rgba(27,21,48,.06); stroke-width:1; }
+.stop{
+  position:absolute; transform:translate(-50%, -50%);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.stop button{
+  width:44px; height:44px; border-radius:50%; background:var(--cream); border:3px solid var(--ink);
+  font-family:var(--en); font-weight:900; font-size:13px; color:var(--ink);
+  transition:transform .25s var(--ease), background .25s, color .25s;
+  box-shadow:0 6px 0 var(--ink);
+}
+.stop button:hover{ transform:translateY(-2px); }
+.stop button[aria-pressed="true"]{ background:var(--rose); color:var(--cream); }
+.stop span{ font-family:var(--ko); font-size:14px; white-space:nowrap; background:var(--cream); padding:2px 8px; border-radius:6px; border:1.5px solid var(--ink); }
+.map .bus{ position:absolute; z-index:2; width:34px; height:34px; transform:translate(-50%,-50%); pointer-events:none; filter:drop-shadow(0 4px 0 var(--ink)); transition:left .9s var(--ease), top .9s var(--ease); }
+.region{ display:flex; flex-direction:column; border-radius:22px; overflow:hidden; background:var(--ink); color:var(--cream); }
+.region .ph{ aspect-ratio:16/10; }
+.region-body{ padding:24px 24px 26px; flex:1; display:flex; flex-direction:column; }
+.region-body .km{ font-family:var(--en); font-weight:700; font-size:12px; letter-spacing:.18em; color:var(--gold); }
+.region-body h3{ margin-top:8px; font-family:var(--ko); font-weight:400; font-size:30px; line-height:1.2; }
+.region-body p{ margin-top:10px; font-size:15px; line-height:1.75; color:rgba(255,244,230,.78); }
+.region-body .tags{ margin-top:auto; padding-top:18px; display:flex; gap:6px; flex-wrap:wrap; }
+.region-body .tags span{ font-size:12px; font-weight:700; padding:5px 10px; border-radius:999px; background:rgba(255,244,230,.08); border:1px solid rgba(255,244,230,.16); }
+.fade{ animation:fade .45s var(--ease); }
+@keyframes fade{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+
+/* ════════════════════════════════════════════
+   02 CREW
+════════════════════════════════════════════ */
+.crew{ background:linear-gradient(180deg, var(--night), var(--dusk) 70%, var(--night)); overflow:hidden; }
+.crew .sec-no{ color:var(--gold); }
+.crew-stage{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(20px, 4vw, 56px); align-items:center; }
+.crew-art{ position:relative; aspect-ratio:3/4; max-height:78vh; }
+.crew-art .ph{ position:absolute; inset:0; border-radius:28px 28px 220px 28px; background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 12px, transparent 12px 24px),
+    linear-gradient(160deg, var(--c1, #3b2353), var(--c2, #ff4f7b)); }
+.crew-art .bigname{
+  position:absolute; left:-4%; bottom:4%; z-index:2; pointer-events:none;
+  font-family:var(--en); font-weight:900; font-size:clamp(60px, 11vw, 150px); line-height:.8; letter-spacing:-.05em;
+  color:transparent; -webkit-text-stroke:2px rgba(255,244,230,.65); text-transform:uppercase;
+}
+.crew-info .role{ font-family:var(--en); font-weight:700; font-size:12px; letter-spacing:.2em; color:var(--c2, var(--rose)); text-transform:uppercase; }
+.crew-info h3{ margin-top:10px; font-family:var(--ko); font-weight:400; font-size:clamp(42px, 6vw, 76px); line-height:1; }
+.crew-info h3 small{ font-family:var(--en); font-size:.32em; letter-spacing:.06em; margin-left:12px; opacity:.6; }
+.crew-info blockquote{ margin-top:22px; font-size:clamp(17px, 1.8vw, 21px); line-height:1.6; font-weight:700; padding-left:18px; border-left:4px solid var(--c2, var(--rose)); }
+.crew-info p{ margin-top:16px; font-size:15.5px; line-height:1.8; color:rgba(255,244,230,.78); max-width:520px; }
+.skills{ margin-top:22px; display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; max-width:520px; }
+.skills div{ padding:12px; border-radius:14px; background:rgba(255,244,230,.06); border:1px solid rgba(255,244,230,.12); }
+.skills b{ display:block; font-size:14px; }
+.skills span{ display:block; margin-top:2px; font-size:12px; color:rgba(255,244,230,.6); line-height:1.5; }
+.cv{ margin-top:16px; font-size:13px; color:rgba(255,244,230,.55); }
+.cv button{ margin-left:8px; font-size:12px; font-weight:700; padding:5px 10px; border-radius:999px; border:1px solid rgba(255,244,230,.25); }
+.roster{ margin-top:clamp(28px, 4vw, 44px); display:flex; gap:12px; overflow-x:auto; padding:6px 2px 10px; scrollbar-width:none; }
+.roster::-webkit-scrollbar{ display:none; }
+.roster button{
+  flex-shrink:0; width:96px; text-align:center; border-radius:18px; padding:8px 8px 10px;
+  background:rgba(255,244,230,.05); border:1.5px solid rgba(255,244,230,.12);
+  transition:transform .25s var(--ease), border-color .25s, background .25s;
+}
+.roster button:hover{ transform:translateY(-3px); }
+.roster button[aria-selected="true"]{ border-color:var(--gold); background:rgba(255,209,102,.12); }
+.roster .ph{ aspect-ratio:1; border-radius:12px; }
+.roster .ph > .tag{ padding:4px 6px; font-size:10px; border-radius:8px; }
+.roster .ph > .tag svg{ display:none; }
+.roster b{ display:block; margin-top:8px; font-family:var(--ko); font-weight:400; font-size:16px; }
+
+/* ════════════════════════════════════════════
+   03 SYSTEM
+════════════════════════════════════════════ */
+.system{ background:var(--paper); color:var(--ink); }
+.system .sec-no{ color:var(--sun); opacity:.9; }
+.feats{ display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(16px, 2.4vw, 28px); }
+.feat{ border-radius:24px; background:var(--cream); border:2px solid var(--ink); overflow:hidden; box-shadow:8px 8px 0 var(--ink); transition:transform .3s var(--ease), box-shadow .3s var(--ease); }
+.feat:hover{ transform:translate(-3px,-3px); box-shadow:11px 11px 0 var(--ink); }
+.feat .ph{ aspect-ratio:16/9; border-bottom:2px solid var(--ink); }
+.feat-body{ padding:22px 24px 24px; display:grid; grid-template-columns:auto 1fr; gap:4px 16px; }
+.feat-body .n{ grid-row:span 2; font-family:var(--en); font-weight:900; font-size:34px; line-height:1; color:var(--rose); }
+.feat-body h3{ font-family:var(--ko); font-weight:400; font-size:24px; line-height:1.25; }
+.feat-body p{ font-size:15px; line-height:1.75; color:#4c4160; }
+.feat:nth-child(2) .n{ color:var(--sun); } .feat:nth-child(3) .n{ color:var(--teal); } .feat:nth-child(4) .n{ color:#8d5bff; }
+
+/* ════════════════════════════════════════════
+   04 MEDIA
+════════════════════════════════════════════ */
+.media .sec-no{ color:var(--teal); }
+.trailer{ position:relative; display:block; width:100%; border-radius:26px; overflow:hidden; aspect-ratio:21/9; border:1px solid rgba(255,244,230,.12); }
+.trailer .ph{ position:absolute; inset:0; place-items:start start; padding:clamp(14px, 2.4vw, 26px); }
+.trailer .ph > .tag{ text-align:left; justify-items:start; }
+.trailer .play{
+  position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:clamp(72px, 9vw, 104px); aspect-ratio:1; border-radius:50%; display:grid; place-items:center;
+  background:linear-gradient(135deg, var(--gold), var(--rose)); color:#2a0f18;
+  box-shadow:0 0 0 12px rgba(255,138,61,.18), 0 20px 50px -10px rgba(255,79,123,.7);
+  transition:transform .3s var(--ease);
+}
+.trailer:hover .play{ transform:translate(-50%,-50%) scale(1.08); }
+.trailer .play svg{ width:34%; height:34%; margin-left:6%; }
+.trailer .cap{ position:absolute; z-index:2; left:clamp(16px, 3vw, 32px); bottom:clamp(14px, 2.6vw, 28px); text-align:left; }
+.trailer .cap b{ display:block; font-family:var(--en); font-weight:900; font-size:clamp(16px, 2.2vw, 26px); }
+.trailer .cap span{ font-size:13px; opacity:.75; }
+.shots{ margin-top:18px; display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+.shot{ position:relative; border-radius:6px; overflow:hidden; aspect-ratio:16/9; padding:7px; background:var(--cream); transition:transform .3s var(--ease); }
+.shot:nth-child(odd){ transform:rotate(-1deg); } .shot:nth-child(even){ transform:rotate(1deg); }
+.shot:hover{ transform:rotate(0) scale(1.03); z-index:2; }
+.shot .ph{ width:100%; height:100%; border-radius:2px; }
+.shot::after{ /* 우표 테두리 */
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(circle, transparent 3px, var(--night) 3.5px) -5px -5px / 12px 12px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  padding:3px;
+}
+
+/* ════════════════════════════════════════════
+   05 PRE-REGISTER
+════════════════════════════════════════════ */
+.pre{ background:linear-gradient(160deg, var(--rose), var(--sun) 50%, var(--gold)); color:var(--ink); overflow:hidden; }
+.pre::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.25;
+  background:repeating-linear-gradient(0deg, rgba(27,21,48,.35) 0 2px, transparent 2px 9px); -webkit-mask:linear-gradient(180deg, transparent 40%, #000); mask:linear-gradient(180deg, transparent 40%, #000); }
+.pre .sec-no{ color:var(--ink); }
+.pre .sec-head p{ opacity:.85; }
+.goal{ background:rgba(255,244,230,.92); border:2px solid var(--ink); border-radius:24px; padding:clamp(20px, 3vw, 32px); box-shadow:8px 8px 0 var(--ink); }
+.goal-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+.goal-top b{ font-family:var(--en); font-weight:900; font-size:clamp(28px, 4vw, 44px); letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.goal-top span{ font-size:13px; font-weight:700; color:var(--muted); }
+.bar{ position:relative; height:16px; margin:22px 0 8px; border-radius:999px; background:rgba(27,21,48,.12); border:2px solid var(--ink); overflow:hidden; }
+.bar i{ position:absolute; inset:0 auto 0 0; width:0; background:repeating-linear-gradient(135deg, var(--rose) 0 10px, var(--sun) 10px 20px); transition:width 1.6s var(--ease); }
+.rewards{ display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-top:20px; }
+.reward{ text-align:center; position:relative; }
+.reward .ph{ aspect-ratio:1; border-radius:16px; border:2px solid var(--ink); }
+.reward .ph > .tag{ font-size:11px; padding:6px 8px; }
+.reward .ph > .tag svg{ display:none; }
+.reward b{ display:block; margin-top:10px; font-family:var(--en); font-weight:900; font-size:15px; }
+.reward span{ display:block; font-size:13px; font-weight:700; color:#4c4160; }
+.reward.done .ph::after{ content:"달성"; position:absolute; z-index:2; top:8px; right:8px; font-size:11px; font-weight:800; padding:3px 8px; border-radius:999px; background:var(--ink); color:var(--gold); }
+
+.join{ margin-top:clamp(22px, 3vw, 32px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px, 2.4vw, 28px); align-items:stretch; }
+.join-card{ background:var(--ink); color:var(--cream); border-radius:24px; padding:clamp(22px, 3vw, 34px); }
+.join-card h3{ font-family:var(--ko); font-weight:400; font-size:28px; }
+.join-card > p{ margin-top:6px; font-size:14px; color:rgba(255,244,230,.65); }
+.stores{ display:grid; gap:10px; margin-top:20px; }
+.store{ display:flex; align-items:center; gap:14px; padding:14px 16px; border-radius:16px; background:rgba(255,244,230,.06); border:1px solid rgba(255,244,230,.14); transition:background .2s; }
+.store:hover{ background:rgba(255,244,230,.12); }
+.store svg{ width:26px; height:26px; flex-shrink:0; }
+.store b{ display:block; font-size:15px; }
+.store span{ font-size:12px; color:rgba(255,244,230,.55); }
+.store em{ margin-left:auto; font-style:normal; font-size:11px; font-weight:800; padding:4px 8px; border-radius:999px; background:rgba(255,209,102,.15); color:var(--gold); }
+.form .plat{ display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+.form .plat label{ position:relative; cursor:pointer; }
+.form .plat input{ position:absolute; opacity:0; pointer-events:none; }
+.form .plat span{ display:inline-block; padding:9px 14px; border-radius:999px; border:1.5px solid rgba(255,244,230,.25); font-size:14px; font-weight:700; transition:all .2s; }
+.form .plat input:checked + span{ background:var(--gold); color:var(--ink); border-color:var(--gold); }
+.form .plat input:focus-visible + span{ outline:3px solid var(--gold); outline-offset:2px; }
+.form .field{ margin-top:14px; }
+.form input[type="email"]{ width:100%; font:inherit; font-size:16px; padding:14px 16px; border-radius:14px; border:1.5px solid rgba(255,244,230,.2); background:rgba(255,244,230,.06); color:var(--cream); }
+.form input[type="email"]::placeholder{ color:rgba(255,244,230,.4); }
+.form input[type="email"]:focus{ outline:none; border-color:var(--gold); }
+.agree{ display:flex; gap:10px; align-items:flex-start; margin-top:12px; font-size:13px; color:rgba(255,244,230,.7); line-height:1.5; cursor:pointer; }
+.agree input{ margin-top:3px; width:16px; height:16px; accent-color:var(--rose); }
+.form .btn{ width:100%; margin-top:16px; }
+.form-msg{ min-height:22px; margin-top:10px; font-size:13.5px; font-weight:700; color:var(--gold); text-align:center; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+.foot{ background:#0e0b1d; color:rgba(255,244,230,.55); padding:48px 0 calc(48px + env(safe-area-inset-bottom)); font-size:13px; }
+.foot-in{ display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; }
+.foot .mark{ color:var(--cream); }
+.foot p{ margin-top:12px; line-height:1.8; }
+.socials{ display:flex; gap:8px; }
+.socials a{ width:40px; height:40px; border-radius:12px; display:grid; place-items:center; border:1px solid rgba(255,244,230,.15); }
+.socials a:hover{ background:rgba(255,244,230,.08); color:var(--cream); }
+.socials svg{ width:18px; height:18px; }
+.rating{ display:flex; gap:10px; align-items:center; margin-top:18px; }
+.rating .ph{ width:44px; height:52px; border-radius:6px; }
+.rating .ph > .tag{ padding:2px 4px; font-size:9px; border-radius:4px; }
+.rating .ph > .tag svg{ display:none; }
+.demo-note{ margin-top:18px; padding:10px 14px; border-radius:10px; border:1px dashed rgba(255,244,230,.25); color:rgba(255,244,230,.7); }
+.demo-note a{ text-decoration:underline; text-underline-offset:3px; }
+
+/* ════════════════════════════════════════════
+   MODAL / LIGHTBOX
+════════════════════════════════════════════ */
+.modal{ position:fixed; inset:0; z-index:90; display:grid; place-items:center; padding:20px; background:rgba(10,8,22,.86); backdrop-filter:blur(8px); }
+.modal[hidden]{ display:none; }
+.modal-box{ position:relative; width:min(1100px, 100%); }
+.modal-box .ph{ aspect-ratio:16/9; border-radius:18px; }
+.modal-close{ position:absolute; top:-52px; right:0; width:42px; height:42px; border-radius:12px; border:1px solid rgba(255,244,230,.25); display:grid; place-items:center; }
+.modal-close svg{ width:20px; height:20px; }
+.modal-nav{ position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:rgba(21,18,41,.7); border:1px solid rgba(255,244,230,.25); display:grid; place-items:center; }
+.modal-nav.prev{ left:10px; } .modal-nav.next{ right:10px; }
+.modal-nav svg{ width:20px; height:20px; }
+.modal-cap{ margin-top:12px; text-align:center; font-size:13px; color:rgba(255,244,230,.7); }
+
+/* ════════════════════════════════════════════
+   REVEAL
+════════════════════════════════════════════ */
+.rv{ opacity:0; transform:translateY(30px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+.rv.in{ opacity:1; transform:none; }
+.rv-d1{ transition-delay:.1s; } .rv-d2{ transition-delay:.2s; } .rv-d3{ transition-delay:.3s; }
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important; }
+  .rv{ opacity:1; transform:none; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 1024px){
+  .hero-in{ grid-template-columns:1fr; }
+  .ticket{ max-width:420px; transform:rotate(-1.5deg); }
+  .story, .route-map, .crew-stage, .join{ grid-template-columns:1fr; }
+  .crew-art{ max-width:520px; width:100%; margin:0 auto; max-height:none; }
+  .map{ min-height:360px; }
+}
+@media (max-width: 860px){
+  .gnb{ display:none; }
+  .menu-btn{ display:grid; }
+  .mnav{ display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:0 var(--pad) 16px; }
+  .mnav[hidden]{ display:none; }
+  .mnav a{ padding:12px 14px; border-radius:12px; background:rgba(255,244,230,.07); font-weight:700; font-size:15px; }
+}
+@media (max-width: 760px){
+  .hdr .btn .long{ display:none; }
+  .hero{ padding-top:158px; }
+  .sun{ right:-28%; bottom:auto; top:12%; width:72vw; opacity:.38; }
+  .hero-bg .ph{ place-items:start end; padding:76px 12px 0; }
+  .hero-bg .ph > .tag{ font-size:10.5px; padding:6px 9px; max-width:58%; text-align:right; justify-items:end; }
+  .hero-bg .ph > .tag svg{ display:none; }
+  .hero-cta .btn{ flex:1 1 calc(50% - 6px); padding:0 14px; }
+  .sec-head{ grid-template-columns:1fr; }
+  .sec-no{ grid-row:auto; font-size:56px; }
+  .feats{ grid-template-columns:1fr; }
+  .shots{ grid-template-columns:1fr 1fr; gap:10px; }
+  .trailer{ aspect-ratio:16/10; }
+  .rewards{ grid-template-columns:1fr 1fr; }
+  .skills{ grid-template-columns:1fr; }
+  .foot-in{ grid-template-columns:1fr; }
+  .map{ min-height:320px; }
+  .stop span{ font-size:12px; }
+  .stop button{ width:38px; height:38px; font-size:12px; }
+  .scroll-cue{ display:none; }
+}
+@media (max-width: 400px){
+  .hdr .mark{ font-size:12.5px; gap:8px; }
+  .hdr .btn{ padding:0 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="mark" href="#top" aria-label="솔스티스 로드 홈"><i></i>SOLSTICE ROAD</a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <a href="#world">세계관</a>
+      <a href="#crew">동료</a>
+      <a href="#system">시스템</a>
+      <a href="#media">미디어</a>
+      <a href="#pre">사전예약</a>
+    </nav>
+    <div style="display:flex; gap:8px; align-items:center">
+      <a class="btn btn-sun" href="#pre"><span>사전예약<span class="long"> 하기</span></span></a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="모바일 메뉴" hidden>
+    <a href="#world">세계관</a><a href="#crew">동료</a><a href="#system">시스템</a><a href="#media">미디어</a><a href="#pre">사전예약</a><a href="../">← 포트폴리오</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <!-- 교체 예시:
+      <video src="assets/hero-loop.mp4" poster="assets/key-visual.jpg" autoplay muted loop playsinline></video>
+      모바일 세로 영상이 있으면 <source media="(max-width:760px)" ...> 로 V1m 사용 -->
+    <div class="ph" data-asset="V1">
+      <div class="tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg>
+        <b>V1 · 히어로 배경 루프 영상</b>버스가 노을 속 도로를 달리는 장면 · 10~15초 무음 루프
+      </div>
+    </div>
+  </div>
+  <div class="sun" id="sun" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div>
+      <p class="kicker rv">2027 · Road Movie RPG</p>
+      <!-- I1 로고가 준비되면 아래 글자 제목 대신 <img src="assets/logo.png" alt="SOLSTICE ROAD"> 로 교체 -->
+      <h1 class="title rv rv-d1"><span>Solstice</span><span class="t2">Road</span></h1>
+      <p class="title-ko rv rv-d1">솔스티스 로드 — 해가 지지 않는 마지막 여름</p>
+      <p class="lead rv rv-d2">세상이 멈춘 날, 해도 멈췄다. 고장 난 이층버스 한 대와 다섯 명의 동료. 노을이 끝나는 곳에 무엇이 있는지 확인하러, 우리는 브레이크 없이 달린다.</p>
+      <div class="hero-cta rv rv-d3">
+        <a class="btn btn-sun" href="#pre">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          사전예약 하기
+        </a>
+        <button class="btn btn-ghost" type="button" data-trailer>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          트레일러 보기
+        </button>
+      </div>
+    </div>
+
+    <aside class="ticket rv rv-d2" aria-label="출시 카운트다운">
+      <h3>ONE-WAY TICKET · 편도 승차권</h3>
+      <div class="route"><span>오늘</span>
+        <svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6h108" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5"/><path d="M108 1l8 5-8 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>출발일</span></div>
+      <div class="cd" id="countdown" aria-live="off">
+        <div><b data-u="d">--</b><span>일</span></div>
+        <div><b data-u="h">--</b><span>시간</span></div>
+        <div><b data-u="m">--</b><span>분</span></div>
+        <div><b data-u="s">--</b><span>초</span></div>
+      </div>
+      <div class="meta"><span>출발 <b>2027. 3. 21</b></span><span>플랫폼 <b>PC · iOS · Android</b></span></div>
+      <a class="btn btn-ink" href="#pre">승차권 예약하기</a>
+    </aside>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><i></i>SCROLL</div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>SUMMER NEVER ENDS</span><span>KM 0000 → ∞</span><span>NO BRAKES, ONLY FRIENDS</span><span>2027.03.21 DEPARTURE</span><span>ROAD MOVIE RPG</span>
+    <span>SUMMER NEVER ENDS</span><span>KM 0000 → ∞</span><span>NO BRAKES, ONLY FRIENDS</span><span>2027.03.21 DEPARTURE</span><span>ROAD MOVIE RPG</span>
+  </div>
+</div>
+
+<!-- ══════════════ 01 WORLD ══════════════ -->
+<section class="sec world" id="world">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-no">01</span>
+      <h2>멈춘 해 아래,<br>끝나지 않는 여름</h2>
+      <p>‘하지(夏至)’의 정오에 모든 시계가 멈췄다. 해는 지평선 위에 걸린 채 움직이지 않고, 대륙은 조각나 떠다닌다.</p>
+    </div>
+
+    <div class="story">
+      <div class="ph light rv" data-asset="I2">
+        <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg><b>I2 · 키비주얼 일러스트</b>다섯 동료와 버스, 멈춘 노을 · 가로형</div>
+      </div>
+      <div class="story-txt rv rv-d1">
+        <p>시간이 멈춘 세계에서 유일하게 움직이는 건 <em>낡은 이층버스 ‘선라이너’</em>뿐. 엔진이 돌면 그 주변만 시간이 흐른다.</p>
+        <p>운전대를 잡은 건 열아홉 살 하루. 그리고 우연히 같은 버스에 오른 네 명의 동료. 이들은 해가 걸린 서쪽 끝, <em>‘노을 끝’</em>까지 가면 멈춘 시간을 되돌릴 수 있다는 소문 하나만 믿고 출발한다.</p>
+        <span class="stamp">KM 0000 · DEPARTED</span>
+      </div>
+    </div>
+
+    <div class="route-map">
+      <div class="map rv" id="map">
+        <svg class="routes" viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
+          <g class="grid">
+            <path d="M0 70h600M0 140h600M0 210h600M0 280h600M0 350h600M100 0v420M200 0v420M300 0v420M400 0v420M500 0v420"/>
+          </g>
+          <path class="road-bg" d="M60 360 C 140 300, 120 220, 200 210 S 330 260, 360 180 S 420 70, 520 80"/>
+          <path class="road" id="road" d="M60 360 C 140 300, 120 220, 200 210 S 330 260, 360 180 S 420 70, 520 80"/>
+          <path class="road-dash" d="M60 360 C 140 300, 120 220, 200 210 S 330 260, 360 180 S 420 70, 520 80"/>
+        </svg>
+        <svg class="bus" id="bus" viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="9" width="32" height="20" rx="5" fill="#FF4F7B" stroke="#1B1530" stroke-width="3"/><rect x="8" y="13" width="7" height="6" rx="1" fill="#FFF4E6"/><rect x="17" y="13" width="7" height="6" rx="1" fill="#FFF4E6"/><rect x="26" y="13" width="6" height="6" rx="1" fill="#FFF4E6"/><circle cx="12" cy="30" r="4" fill="#1B1530"/><circle cx="29" cy="30" r="4" fill="#1B1530"/></svg>
+        <!-- 정류장은 스크립트가 길 위에 배치 -->
+      </div>
+      <article class="region rv rv-d1" aria-live="polite">
+        <div class="ph" id="regionPh" data-asset="I3">
+          <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg><b id="regionAsset">I3 · 지역 이미지</b><span id="regionAssetDesc">유리 사막 풍경</span></div>
+        </div>
+        <div class="region-body" id="regionBody">
+          <span class="km" id="regionKm">KM 0120</span>
+          <h3 id="regionName">유리 사막</h3>
+          <p id="regionDesc"></p>
+          <div class="tags" id="regionTags"></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 02 CREW ══════════════ -->
+<section class="sec crew" id="crew">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-no">02</span>
+      <h2>같은 버스에 탄<br>다섯 명의 동료</h2>
+      <p>각자 다른 이유로 버스에 올랐다. 누구와 어떤 대화를 나누느냐에 따라 여행의 끝이 달라진다.</p>
+    </div>
+
+    <div class="crew-stage" id="crewStage">
+      <div class="crew-art rv">
+        <div class="ph" id="crewPh" data-asset="I8">
+          <div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><b id="crewAsset">I8 · 캐릭터 전신 일러스트</b><span id="crewAssetDesc">하루 · 투명 배경</span></div>
+        </div>
+        <span class="bigname" id="crewBig" aria-hidden="true">HARU</span>
+      </div>
+      <div class="crew-info rv rv-d1" aria-live="polite">
+        <p class="role" id="crewRole">Driver · Leader</p>
+        <h3 id="crewName">하루<small>HARU</small></h3>
+        <blockquote id="crewQuote"></blockquote>
+        <p id="crewDesc"></p>
+        <div class="skills" id="crewSkills"></div>
+        <p class="cv">CV <b id="crewCv">미정</b><button type="button" id="voiceBtn">목소리 듣기 (준비 중)</button></p>
+      </div>
+    </div>
+
+    <div class="roster" role="tablist" aria-label="동료 선택" id="roster"></div>
+  </div>
+</section>
+
+<!-- ══════════════ 03 SYSTEM ══════════════ -->
+<section class="sec system" id="system">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-no">03</span>
+      <h2>달리는 집,<br>달리는 전장</h2>
+      <p>버스는 이동 수단이자 기지이고, 전투의 무대다. 여행이 길어질수록 버스도, 동료와의 관계도 깊어진다.</p>
+    </div>
+    <div class="feats">
+      <article class="feat rv">
+        <div class="ph" data-asset="V3"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg><b>V3 · 시스템 영상</b>버스 개조 화면 · 6~10초 무음 루프</div></div>
+        <div class="feat-body"><span class="n">01</span><h3>선라이너 개조</h3><p>엔진·좌석·라디오·지붕 정원까지. 개조한 부품에 따라 버스의 속도, 전투 능력, 동료들의 기분이 달라진다.</p></div>
+      </article>
+      <article class="feat rv rv-d1">
+        <div class="ph" data-asset="V4"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg><b>V4 · 시스템 영상</b>달리는 버스 위 전투 · 6~10초 무음 루프</div></div>
+        <div class="feat-body"><span class="n">02</span><h3>로드 배틀</h3><p>멈추면 시간에 잡아먹힌다. 달리는 버스 지붕 위에서 실시간으로 진형을 바꾸며 싸우는 액션 전투.</p></div>
+      </article>
+      <article class="feat rv">
+        <div class="ph" data-asset="V5"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg><b>V5 · 시스템 영상</b>해의 각도가 바뀌며 지형이 변하는 장면</div></div>
+        <div class="feat-body"><span class="n">03</span><h3>해의 각도</h3><p>시간 대신 ‘해의 각도’가 흐른다. 각도를 돌리면 그림자가 다리가 되고, 사막이 바다로 바뀐다.</p></div>
+      </article>
+      <article class="feat rv rv-d1">
+        <div class="ph" data-asset="V6"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg><b>V6 · 시스템 영상</b>모닥불 대화·선택지 장면</div></div>
+        <div class="feat-body"><span class="n">04</span><h3>모닥불 대화</h3><p>밤이 오지 않는 세계의 ‘쉬는 시간’. 동료와 나눈 대화와 선택이 쌓여 서로 다른 일곱 개의 엔딩으로 이어진다.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 04 MEDIA ══════════════ -->
+<section class="sec media" id="media">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-no">04</span>
+      <h2>여행 기록</h2>
+      <p>트레일러와 게임 화면. 사진을 누르면 크게 볼 수 있어요.</p>
+    </div>
+    <button class="trailer rv" type="button" data-trailer aria-label="메인 트레일러 재생">
+      <div class="ph" data-asset="I18"><div class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg><b>I18 · 트레일러 썸네일</b>트레일러 대표 장면 · 21:9</div></div>
+      <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg></span>
+      <span class="cap"><b>OFFICIAL TRAILER</b><span>V2 · 메인 트레일러 (1~2분)</span></span>
+    </button>
+    <div class="shots" id="shots"></div>
+  </div>
+</section>
+
+<!-- ══════════════ 05 PRE-REGISTER ══════════════ -->
+<section class="sec pre" id="pre">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-no">05</span>
+      <h2>함께 탈 사람,<br>지금 예약 중</h2>
+      <p>사전예약 인원이 목표에 도달할 때마다 모든 승객에게 보상을 드려요.</p>
+    </div>
+
+    <div class="goal rv">
+      <div class="goal-top"><b id="preCount">0명</b><span>현재 사전예약 (데모 수치)</span></div>
+      <div class="bar" role="progressbar" aria-label="사전예약 달성률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barFill"></i></div>
+      <div class="rewards" id="rewards"></div>
+    </div>
+
+    <div class="join">
+      <div class="join-card rv">
+        <h3>스토어에서 사전등록</h3>
+        <p>출시되면 바로 알림을 받고 보상이 자동으로 지급돼요.</p>
+        <div class="stores">
+          <!-- 교체: 실제 스토어 링크와 공식 배지 이미지 -->
+          <a class="store" href="#pre" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.2.7c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.4-.9-2.4-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg><div><b>App Store</b><span>iOS 사전주문</span></div><em>준비 중</em></a>
+          <a class="store" href="#pre" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.3.3-.4.7-.4 1.2v17c0 .5.1.9.4 1.2l9.4-9.7zM14.3 13.3l2.6 2.7-11 6.3c-.4.2-.8.3-1.1.2zM17.9 9.3l-2.9 2.8 2.9 2.9 3.3-1.9c.9-.5.9-1.4 0-1.9zM4.8 1.5c.3-.1.7 0 1.1.2l11 6.3-2.6 2.7z"/></svg><div><b>Google Play</b><span>Android 사전등록</span></div><em>준비 중</em></a>
+          <a class="store" href="#pre" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-10 9.4l5.4 2.2a2.8 2.8 0 0 1 1.6-.5l2.4-3.5A3.9 3.9 0 1 1 15.3 13l-3.5 2.5a2.9 2.9 0 0 1-5.7.6L2.3 14.6A10 10 0 1 0 12 2zm-4.2 15.2-1.2-.5a2.2 2.2 0 1 0 1.2-2.9l1.3.5a1.6 1.6 0 1 1-1.3 2.9zm7.6-6.2a2.6 2.6 0 1 0-2.6-2.6 2.6 2.6 0 0 0 2.6 2.6z"/></svg><div><b>Steam</b><span>PC 찜하기</span></div><em>준비 중</em></a>
+        </div>
+      </div>
+
+      <form class="join-card form rv rv-d1" id="preForm" novalidate>
+        <h3>이메일로 출발 알림 받기</h3>
+        <p>플랫폼을 고르고 이메일을 남겨 주세요.</p>
+        <div class="plat" role="group" aria-label="플랫폼 선택">
+          <label><input type="checkbox" name="plat" value="iOS" checked><span>iOS</span></label>
+          <label><input type="checkbox" name="plat" value="Android"><span>Android</span></label>
+          <label><input type="checkbox" name="plat" value="PC"><span>PC</span></label>
+        </div>
+        <div class="field"><input type="email" id="email" name="email" placeholder="이메일 주소" autocomplete="email" aria-label="이메일 주소"></div>
+        <label class="agree"><input type="checkbox" id="agree"><span>[필수] 출시 알림 발송을 위한 이메일 수집에 동의합니다. (데모 사이트라 실제로 저장·발송되지 않아요)</span></label>
+        <button class="btn btn-sun" type="submit">사전예약 완료하기</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <span class="mark"><i></i>SOLSTICE ROAD</span>
+      <p>© 2026 Solstice Road. All rights reserved.<br>이용약관 · 개인정보처리방침 · 고객센터</p>
+      <div class="rating">
+        <div class="ph" data-asset="I29"><div class="tag"><b style="font-size:9px">I29</b>등급</div></div>
+        <span>게임물 등급 표시 자리 (등급 분류 후 교체)</span>
+      </div>
+      <p class="demo-note">이 사이트는 <b>포트폴리오용 가상 게임 홍보 사이트</b>예요. 게임·인물·수치는 모두 가상이며, 신청 내용은 어디에도 전송되지 않아요. 제작 <a href="../">JXDING</a></p>
+    </div>
+    <div class="socials">
+      <a href="#top" aria-label="YouTube (준비 중)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg></a>
+      <a href="#top" aria-label="X (준비 중)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.9 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+      <a href="#top" aria-label="Instagram (준비 중)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a href="#top" aria-label="Discord (준비 중)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.4 18.4 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9 -.3 13.6.2 18.1a19.9 19.9 0 0 0 6 3l1.3-2.1a12.9 12.9 0 0 1-2-1l.5-.4a14.2 14.2 0 0 0 12.1 0l.5.4a12.9 12.9 0 0 1-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.9-9.8-3.6-13.7zM8.5 15.3c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4zm7 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- 트레일러 / 스크린샷 모달 -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="미디어 보기">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" type="button" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <!-- 교체: 트레일러는 <iframe src="https://www.youtube.com/embed/영상ID?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+    <div class="ph" id="modalPh"><div class="tag"><b id="modalAsset">V2</b><span id="modalDesc"></span></div></div>
+    <button class="modal-nav prev" id="modalPrev" type="button" aria-label="이전" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="modal-nav next" id="modalNext" type="button" aria-label="다음" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <p class="modal-cap" id="modalCap"></p>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IMG_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>';
+
+/* ══════════════ 데이터 ══════════════ */
+const REGIONS = [
+  { km:'KM 0120', name:'유리 사막', asset:'I3', desc:'멈춘 햇빛에 모래가 녹아 유리가 된 사막. 발밑에 비친 하늘 때문에 위아래를 헷갈리기 쉽다. 여행의 첫 번째 시험.', tags:['튜토리얼 지역','유리 폭풍','신기루 상인'] },
+  { km:'KM 0485', name:'잠긴 항구', asset:'I4', desc:'파도가 높이 솟은 채 굳어 버린 항구 도시. 얼어붙은 파도 사이로 난 골목을 버스로 지나가야 한다.', tags:['멈춘 파도','등대지기 퀘스트','미오 합류'] },
+  { km:'KM 1030', name:'네온 고속도로', asset:'I5', desc:'영원한 해질녘 속에서 꺼지지 않는 간판들. 버려진 차들이 스스로 달리는 무법 고속도로.', tags:['카 체이스','라디오 방송국','세라 합류'] },
+  { km:'KM 1660', name:'하얀 숲', asset:'I6', desc:'그림자가 사라져 온통 하얗게 빛나는 숲. 해의 각도를 돌려 그림자를 만들어야 길이 보인다.', tags:['해의 각도 퍼즐','그림자 다리','도윤의 과거'] },
+  { km:'KM ????', name:'노을 끝', asset:'I7', desc:'해가 걸린 서쪽 끝. 시간을 되돌릴 수 있다는 소문의 장소. 그곳에 무엇이 있는지는 아무도 돌아와 말하지 않았다.', tags:['최종 지역','일곱 개의 엔딩','???'] },
+];
+const STOPS = [ [.10,.86], [.33,.5], [.58,.48], [.74,.30], [.87,.19] ];   // 지도 위 상대 위치
+
+const CREW = [
+  { id:'haru', name:'하루', en:'HARU', role:'Driver · Leader', c1:'#3b2353', c2:'#FF4F7B', art:'I8', face:'I13',
+    quote:'“브레이크는 고장 났어. 그러니까 계속 가는 거야.”',
+    desc:'선라이너를 운전하는 열아홉 살. 멈춘 세계에서 마지막으로 남은 가족을 찾기 위해 핸들을 잡았다. 무모하지만 누구보다 동료를 먼저 챙긴다.',
+    skills:[['급발진','적진을 뚫고 돌진'],['하이빔','적을 잠시 기절'],['풀 스로틀','버스 전체 속도 증가']] },
+  { id:'mio', name:'미오', en:'MIO', role:'Mechanic · Tank', c1:'#1f3a4a', c2:'#2EC4B6', art:'I9', face:'I14',
+    quote:'“고칠 수 없는 건 없어. 아직 안 고쳐본 것뿐이지.”',
+    desc:'잠긴 항구의 정비공. 커다란 렌치 하나로 버스도, 동료도, 적의 장갑도 고친다(부순다). 말수는 적지만 손은 빠르다.',
+    skills:[['렌치 스윙','넓은 범위 공격'],['응급 수리','버스 내구도 회복'],['철벽 장갑','동료 피해 감소']] },
+  { id:'sera', name:'세라', en:'SERA', role:'Radio DJ · Support', c1:'#4a1f4a', c2:'#FF8A3D', art:'I10', face:'I15',
+    quote:'“여기는 해가 지지 않는 라디오, 오늘도 신청곡 받아요!”',
+    desc:'네온 고속도로의 해적 라디오 DJ. 음파로 동료를 치유하고 적을 교란한다. 그녀가 고른 노래에 따라 전투 분위기가 바뀐다.',
+    skills:[['신청곡','동료 공격력 증가'],['피드백','적 행동 방해'],['앙코르','쓰러진 동료 부활']] },
+  { id:'doyun', name:'도윤', en:'DOYUN', role:'Cartographer · Sniper', c1:'#1e2b4f', c2:'#8d5bff', art:'I11', face:'I16',
+    quote:'“지도에 없는 길은, 내가 그리면 그만이야.”',
+    desc:'세상이 멈추기 전부터 지도를 그리던 지도 제작자. 멀리 보는 눈으로 길을 찾고, 같은 눈으로 적을 조준한다. 하얀 숲에 얽힌 비밀이 있다.',
+    skills:[['측량 사격','약점 정밀 타격'],['경로 탐색','숨겨진 길 발견'],['조감도','전장 전체 표시']] },
+  { id:'qb', name:'큐비', en:'QB-7', role:'Guide Robot · ???', c1:'#3a3320', c2:'#FFD166', art:'I12', face:'I17',
+    quote:'“안내 방송: 이 버스는… 어디로 가는 버스입니까?”',
+    desc:'버스 맨 뒷좌석에서 잠들어 있던 옛 관광 안내 로봇. 기억 대부분이 지워졌지만, 노을 끝으로 가는 길만은 정확히 기억한다.',
+    skills:[['안내 방송','동료 전원 버프'],['기억 조각','랜덤 고대 기술'],['재부팅','1회 부활']] },
+];
+const SHOTS = [
+  { id:'I19', desc:'유리 사막을 달리는 선라이너' },
+  { id:'I20', desc:'버스 지붕 위 로드 배틀' },
+  { id:'I21', desc:'버스 개조 화면 (UI)' },
+  { id:'I22', desc:'네온 고속도로 카 체이스' },
+  { id:'I23', desc:'모닥불 대화 장면' },
+  { id:'I24', desc:'하얀 숲, 해의 각도 퍼즐' },
+];
+const GOAL = { count: 623000, max: 1000000 };   // 데모 수치
+const REWARDS = [
+  { at:100000, id:'I25', name:'10만', item:'버스 스킨 ‘레몬 소다’' },
+  { at:300000, id:'I26', name:'30만', item:'하루 의상 ‘여름 방학’' },
+  { at:500000, id:'I27', name:'50만', item:'라디오 테마곡 3종' },
+  { at:1000000, id:'I28', name:'100만', item:'큐비 한정 색상 ‘골드’' },
+];
+const LAUNCH = new Date('2027-03-21T10:00:00+09:00');
+
+/* ══════════════ 헤더 ══════════════ */
+const hdr = $('#hdr'), menuBtn = $('#menuBtn'), mnav = $('#mnav');
+let lastY = 0;
+function onScroll(){
+  const y = window.scrollY;
+  hdr.classList.toggle('solid', y > 30);
+  hdr.classList.toggle('hide', y > 300 && y > lastY + 4 && mnav.hidden);
+  if (y < lastY - 4 || y < 300) hdr.classList.remove('hide');
+  lastY = y;
+  if (!reduce) document.getElementById('sun').style.setProperty('--sunY', Math.min(y * .25, 260) + 'px');
+}
+window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+function setMenu(open){
+  mnav.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  hdr.classList.toggle('solid', open || window.scrollY > 30);
+}
+menuBtn.addEventListener('click', () => setMenu(mnav.hidden));
+mnav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+
+/* 현재 섹션 메뉴 표시 */
+const navLinks = [...document.querySelectorAll('.gnb a')];
+const navIO = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+}), { rootMargin:'-45% 0px -50% 0px' });
+['world','crew','system','media','pre'].forEach(id => navIO.observe(document.getElementById(id)));
+
+/* ══════════════ 카운트다운 ══════════════ */
+const cdEls = {}; document.querySelectorAll('#countdown b').forEach(b => cdEls[b.dataset.u] = b);
+function tickCountdown(){
+  let ms = LAUNCH - Date.now();
+  if (ms <= 0) { document.getElementById('countdown').innerHTML = '<div style="grid-column:1/-1"><b>NOW BOARDING</b><span>지금 플레이하세요</span></div>'; return false; }
+  const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+  const h = Math.floor(ms / 36e5); ms -= h * 36e5;
+  const m = Math.floor(ms / 6e4); ms -= m * 6e4;
+  const s = Math.floor(ms / 1e3);
+  cdEls.d.textContent = d; cdEls.h.textContent = String(h).padStart(2,'0');
+  cdEls.m.textContent = String(m).padStart(2,'0'); cdEls.s.textContent = String(s).padStart(2,'0');
+  return true;
+}
+if (tickCountdown()) setInterval(tickCountdown, 1000);
+
+/* ══════════════ 지도 · 지역 ══════════════ */
+const map = $('#map'), bus = $('#bus');
+let regionIdx = 0;
+const stopBtns = STOPS.map(([x, y], i) => {
+  const el = document.createElement('div');
+  el.className = 'stop'; el.style.left = (x * 100) + '%'; el.style.top = (y * 100) + '%';
+  el.innerHTML = `<button type="button" aria-pressed="false" aria-label="${REGIONS[i].name}">${String(i + 1).padStart(2,'0')}</button><span>${REGIONS[i].name}</span>`;
+  el.querySelector('button').addEventListener('click', () => showRegion(i, true));
+  map.appendChild(el);
+  return el.querySelector('button');
+});
+function showRegion(i, user){
+  regionIdx = i;
+  const r = REGIONS[i];
+  stopBtns.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+  const [x, y] = STOPS[i];
+  bus.style.left = (x * 100) + '%'; bus.style.top = (y * 100 - 9) + '%';
+  $('#regionKm').textContent = r.km; $('#regionName').textContent = r.name; $('#regionDesc').textContent = r.desc;
+  $('#regionTags').innerHTML = r.tags.map(t => `<span>${t}</span>`).join('');
+  $('#regionPh').dataset.asset = r.asset;
+  $('#regionAsset').textContent = `${r.asset} · 지역 이미지`; $('#regionAssetDesc').textContent = r.name + ' 풍경';
+  if (user) { const b = $('#regionBody'); b.classList.remove('fade'); void b.offsetWidth; b.classList.add('fade'); }
+}
+showRegion(0, false);
+
+/* 스크롤에 따라 도로가 그려짐 */
+const road = $('#road');
+const roadLen = road.getTotalLength();
+road.style.strokeDasharray = roadLen; road.style.strokeDashoffset = roadLen;
+function drawRoad(){
+  const r = map.getBoundingClientRect(), vh = window.innerHeight;
+  const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * .55 + r.height * .5)));
+  road.style.strokeDashoffset = reduce ? 0 : roadLen * (1 - p);
+}
+window.addEventListener('scroll', drawRoad, { passive:true }); window.addEventListener('resize', drawRoad); drawRoad();
+
+/* ══════════════ 동료 ══════════════ */
+const roster = $('#roster');
+CREW.forEach((c, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'tab-' + c.id;
+  b.setAttribute('aria-selected', 'false'); b.setAttribute('aria-controls', 'crewStage');
+  b.innerHTML = `<div class="ph" data-asset="${c.face}"><div class="tag"><b>${c.face}</b>얼굴</div></div><b>${c.name}</b>`;
+  b.addEventListener('click', () => showCrew(i, true));
+  b.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    const n = (i + (e.key === 'ArrowRight' ? 1 : CREW.length - 1)) % CREW.length;
+    showCrew(n, true); roster.children[n].focus();
+  });
+  roster.appendChild(b);
+});
+function showCrew(i, user){
+  const c = CREW[i];
+  [...roster.children].forEach((b, j) => { b.setAttribute('aria-selected', String(j === i)); b.tabIndex = j === i ? 0 : -1; });
+  const stage = $('#crewStage');
+  stage.style.setProperty('--c1', c.c1); stage.style.setProperty('--c2', c.c2);
+  $('#crewPh').dataset.asset = c.art;
+  $('#crewAsset').textContent = `${c.art} · 캐릭터 전신 일러스트`; $('#crewAssetDesc').textContent = `${c.name} · 투명 배경 PNG`;
+  $('#crewBig').textContent = c.en;
+  $('#crewRole').textContent = c.role;
+  $('#crewName').innerHTML = `${c.name}<small>${c.en}</small>`;
+  $('#crewQuote').textContent = c.quote; $('#crewDesc').textContent = c.desc;
+  $('#crewSkills').innerHTML = c.skills.map(([n, d]) => `<div><b>${n}</b><span>${d}</span></div>`).join('');
+  if (user) ['.crew-art', '.crew-info'].forEach(s => { const el = $(s); el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade'); });
+}
+showCrew(0, false);
+$('#voiceBtn').addEventListener('click', e => { e.currentTarget.textContent = '음성 파일 준비 중이에요 (A1~A5)'; });
+
+/* ══════════════ 미디어 · 모달 ══════════════ */
+const shotsEl = $('#shots');
+SHOTS.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'shot rv' + (i % 3 ? ' rv-d' + (i % 3) : '');
+  b.setAttribute('aria-label', `스크린샷 크게 보기: ${s.desc}`);
+  b.innerHTML = `<div class="ph" data-asset="${s.id}"><div class="tag">${IMG_ICON}<b>${s.id} · 스크린샷</b>${s.desc}</div></div>`;
+  b.addEventListener('click', () => openModal('shot', i));
+  shotsEl.appendChild(b);
+});
+const modal = $('#modal'); let modalKind = null, modalIdx = 0, lastFocus = null;
+function renderModal(){
+  if (modalKind === 'trailer') {
+    $('#modalAsset').textContent = 'V2 · 메인 트레일러';
+    $('#modalDesc').textContent = '유튜브 임베드 또는 mp4 (1~2분)';
+    $('#modalCap').textContent = 'OFFICIAL TRAILER';
+  } else {
+    const s = SHOTS[modalIdx];
+    $('#modalAsset').textContent = `${s.id} · 스크린샷`;
+    $('#modalDesc').textContent = s.desc;
+    $('#modalCap').textContent = `${modalIdx + 1} / ${SHOTS.length} — ${s.desc}`;
+  }
+  $('#modalPrev').hidden = $('#modalNext').hidden = modalKind !== 'shot';
+}
+function openModal(kind, i = 0){
+  lastFocus = document.activeElement; modalKind = kind; modalIdx = i;
+  renderModal(); modal.hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#modalClose').focus();
+}
+function closeModal(){ modal.hidden = true; document.documentElement.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+function stepModal(d){ if (modalKind !== 'shot') return; modalIdx = (modalIdx + d + SHOTS.length) % SHOTS.length; renderModal(); }
+document.querySelectorAll('[data-trailer]').forEach(b => b.addEventListener('click', () => openModal('trailer')));
+$('#modalClose').addEventListener('click', closeModal);
+$('#modalPrev').addEventListener('click', () => stepModal(-1));
+$('#modalNext').addEventListener('click', () => stepModal(1));
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (modal.hidden) return;
+  if (e.key === 'Escape') closeModal();
+  else if (e.key === 'ArrowRight') stepModal(1);
+  else if (e.key === 'ArrowLeft') stepModal(-1);
+  else if (e.key === 'Tab') {   // 모달 안에서만 포커스 이동
+    const f = [...modal.querySelectorAll('button:not([hidden])')];
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* ══════════════ 사전예약 ══════════════ */
+const rewardsEl = $('#rewards');
+REWARDS.forEach(r => {
+  const d = document.createElement('div');
+  d.className = 'reward' + (GOAL.count >= r.at ? ' done' : '');
+  d.innerHTML = `<div class="ph light" data-asset="${r.id}"><div class="tag"><b>${r.id}</b>보상 이미지</div></div><b>${r.name}</b><span>${r.item}</span>`;
+  rewardsEl.appendChild(d);
+});
+let goalShown = false;
+new IntersectionObserver((es, io) => es.forEach(e => {
+  if (!e.isIntersecting || goalShown) return;
+  goalShown = true; io.disconnect();
+  const pct = Math.round(GOAL.count / GOAL.max * 100);
+  $('#barFill').style.width = pct + '%'; $('#bar').setAttribute('aria-valuenow', pct);
+  const el = $('#preCount'), t0 = performance.now(), dur = reduce ? 0 : 1600;
+  (function step(t){
+    const p = dur ? Math.min(1, (t - t0) / dur) : 1, k = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(GOAL.count * k).toLocaleString('ko-KR') + '명';
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}), { threshold:.4 }).observe($('.goal'));
+
+$('#preForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const msg = $('#formMsg'), email = $('#email').value.trim();
+  const plats = [...document.querySelectorAll('input[name="plat"]:checked')].map(i => i.value);
+  if (!plats.length) { msg.textContent = '플랫폼을 하나 이상 골라 주세요.'; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = '이메일 주소를 확인해 주세요.'; $('#email').focus(); return; }
+  if (!$('#agree').checked) { msg.textContent = '이메일 수집 동의가 필요해요.'; return; }
+  msg.textContent = `승차권 예약 완료! (${plats.join(' · ')}) — 데모라 실제로 저장되지는 않아요.`;
+  e.target.reset();
+});
+document.querySelectorAll('.store[aria-disabled="true"]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); const em = a.querySelector('em'); em.textContent = '출시 전이에요';
+}));
+
+/* ══════════════ 스크롤 등장 ══════════════ */
+const rvEls = document.querySelectorAll('.rv');
+if (reduce) rvEls.forEach(el => el.classList.add('in'));
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+  rvEls.forEach(el => io.observe(el));
+}
+})();
+</script>
+</body>
+</html>
