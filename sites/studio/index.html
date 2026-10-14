@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>쮜딩 JXDING — 대학생 웹사이트 제작</title>
+<meta name="description" content="취업 포트폴리오, 동아리·학회 홈페이지, 졸업전시·창업 랜딩까지. 기획부터 디자인·개발·배포를 한 사람이 책임지는 웹사이트 제작. 대학생 30% 할인.">
+<meta property="og:title" content="쮜딩 JXDING — 대학생 웹사이트 제작">
+<meta property="og:description" content="포트폴리오 사이트 학생가 49만 원부터. 모바일 완벽 대응 · 호스팅비 0원 · 소스코드 제공.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E0F13">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+<style>
+/* ════════════════════════════════════════════
+   TOKENS
+════════════════════════════════════════════ */
+:root{
+  --bg:#F6F5F1;
+  --paper:#FFFFFF;
+  --ink:#0F1014;
+  --ink-2:#2A2C33;
+  --muted:#636672;
+  --line:#E4E2DB;
+  --dark:#0E0F13;
+  --dark-2:#17181E;
+  --accent:#3D5AFE;
+  --accent-soft:#E9EDFF;
+  --lime:#C8FF3E;
+  --radius:18px;
+  --pad: clamp(18px, 5vw, 64px);
+  --max: 1180px;
+  --ease: cubic-bezier(.22,1,.36,1);
+  --display: 'Space Grotesk', 'Pretendard Variable', Pretendard, sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ -webkit-text-size-adjust:100%; }
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+body{
+  font-family:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+  background:var(--bg); color:var(--ink);
+  line-height:1.6; letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:break-word;
+  -webkit-tap-highlight-color:transparent;
+}
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+img{ display:block; max-width:100%; }
+:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius:6px; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+section{ scroll-margin-top:72px; }
+
+/* ════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  height:54px; padding:0 26px; border-radius:999px;
+  font-weight:700; font-size:1rem; white-space:nowrap;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .2s;
+}
+.btn svg{ width:18px; height:18px; transition:transform .25s var(--ease); }
+.btn:hover svg{ transform:translateX(3px); }
+.btn-kakao{ background:#FEE500; color:#191600; box-shadow:0 10px 30px -10px rgba(254,229,0,.6); }
+.btn-kakao:hover{ transform:translateY(-2px); box-shadow:0 16px 36px -12px rgba(254,229,0,.75); }
+.btn-ghost{ border:1.5px solid rgba(255,255,255,.28); color:#fff; }
+.btn-ghost:hover{ background:rgba(255,255,255,.08); }
+.btn-dark{ background:var(--ink); color:#fff; }
+.btn-dark:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(15,16,20,.6); }
+.btn-line{ border:1.5px solid var(--ink); }
+.btn-line:hover{ background:var(--ink); color:#fff; }
+
+/* ════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════ */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:50;
+  transition:background .3s, border-color .3s, backdrop-filter .3s;
+  border-bottom:1px solid transparent;
+}
+.nav.solid{
+  background:rgba(14,15,19,.82);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-color:rgba(255,255,255,.08);
+}
+.nav-in{ height:68px; display:flex; align-items:center; justify-content:space-between; gap:20px; color:#fff; }
+.logo{ display:flex; align-items:baseline; gap:8px; }
+.logo b{ font-family:var(--display); font-size:1.3rem; letter-spacing:-.02em; }
+.logo b i{ font-style:normal; color:var(--lime); }
+.logo span{ font-size:.82rem; color:rgba(255,255,255,.6); font-weight:600; }
+.nav-links{ display:flex; gap:28px; font-size:.92rem; font-weight:600; color:rgba(255,255,255,.72); }
+.nav-links a:hover{ color:#fff; }
+.nav .btn{ height:42px; padding:0 18px; font-size:.9rem; }
+
+/* ════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════ */
+.hero{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:var(--dark); color:#fff;
+  padding:150px 0 90px;
+  min-height:min(100svh, 920px);
+  display:flex; align-items:center;
+}
+.hero::before{ /* fine grid */
+  content:""; position:absolute; inset:0; z-index:-2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%);
+}
+.blob{
+  position:absolute; z-index:-1; border-radius:50%; filter:blur(70px); opacity:.55;
+  animation:drift 18s ease-in-out infinite alternate;
+}
+.blob.b1{ width:520px; height:520px; background:#3D5AFE; top:-140px; right:-120px; }
+.blob.b2{ width:380px; height:380px; background:#7C4DFF; bottom:-160px; left:-120px; animation-delay:-6s; opacity:.4; }
+.blob.b3{ width:220px; height:220px; background:var(--lime); top:46%; right:24%; opacity:.18; animation-delay:-11s; }
+@keyframes drift{
+  0%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(-40px,30px) scale(1.08); }
+  100%{ transform:translate(30px,-20px) scale(.95); }
+}
+.spot{ /* cursor glow (desktop) */
+  position:absolute; z-index:-1; width:420px; height:420px; border-radius:50%;
+  background:radial-gradient(circle, rgba(200,255,62,.13), transparent 65%);
+  transform:translate(-50%,-50%); pointer-events:none; opacity:0; transition:opacity .4s;
+}
+.hero:hover .spot{ opacity:1; }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:7px 14px 7px 8px; border-radius:999px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+  font-size:.84rem; font-weight:600; color:rgba(255,255,255,.85);
+}
+.eyebrow em{
+  font-style:normal; font-weight:800; font-size:.74rem;
+  background:var(--lime); color:#111; padding:3px 9px; border-radius:999px;
+}
+.hero h1{
+  margin:26px 0 22px;
+  font-size:clamp(2.35rem, 6.4vw, 5.2rem);
+  line-height:1.12; font-weight:800; letter-spacing:-0.035em;
+}
+.rotator{
+  display:inline-grid; vertical-align:bottom;
+  height:1.15em; overflow:hidden;
+}
+.rotator span{
+  grid-area:1/1; color:var(--lime);
+  transform:translateY(110%); opacity:0;
+  transition:transform .6s var(--ease), opacity .6s var(--ease);
+  white-space:nowrap;
+}
+.rotator span.in{ transform:translateY(0); opacity:1; }
+.rotator span.out{ transform:translateY(-110%); opacity:0; }
+.hero-sub{ max-width:600px; font-size:clamp(1rem, 1.6vw, 1.18rem); color:rgba(255,255,255,.72); line-height:1.75; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:36px; }
+.hero-points{
+  display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:42px;
+  font-size:.9rem; color:rgba(255,255,255,.7); font-weight:500;
+}
+.hero-points li{ list-style:none; display:flex; align-items:center; gap:8px; }
+.hero-points li::before{
+  content:""; width:18px; height:18px; border-radius:50%; flex-shrink:0;
+  background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat;
+}
+
+/* ════════════════════════════════════════════
+   MARQUEE
+════════════════════════════════════════════ */
+.marquee{
+  background:var(--lime); color:#111; overflow:hidden;
+  border-block:1px solid #111; padding:15px 0;
+  font-family:var(--display); font-weight:700; font-size:1.05rem; letter-spacing:.01em;
+}
+.marquee-track{ display:flex; width:max-content; animation:slide 38s linear infinite; }
+.marquee-track span{ display:flex; align-items:center; gap:22px; padding-right:22px; white-space:nowrap; }
+.marquee-track span::after{ content:"✦"; font-size:.8em; }
+@keyframes slide{ to{ transform:translateX(-50%); } }
+
+/* ════════════════════════════════════════════
+   SECTION HEAD
+════════════════════════════════════════════ */
+.sec{ padding:clamp(80px, 11vw, 140px) 0; }
+.sec-head{ max-width:720px; margin-bottom:clamp(38px, 5vw, 60px); }
+.kicker{
+  font-family:var(--display); font-weight:700; font-size:.82rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+  display:flex; align-items:center; gap:10px; margin-bottom:16px;
+}
+.kicker::before{ content:""; width:22px; height:2px; background:currentColor; }
+.sec-head h2{ font-size:clamp(1.85rem, 4vw, 3rem); line-height:1.22; letter-spacing:-0.03em; font-weight:800; }
+.sec-head p{ margin-top:16px; color:var(--muted); font-size:1.05rem; line-height:1.75; }
+
+/* ════════════════════════════════════════════
+   FOR WHO
+════════════════════════════════════════════ */
+.who{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+.who-card{
+  position:relative; overflow:hidden;
+  background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+  padding:28px 24px 26px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .3s;
+}
+.who-card:hover{ transform:translateY(-6px); box-shadow:0 24px 50px -28px rgba(15,16,20,.35); border-color:transparent; }
+.who-ico{
+  width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
+  background:var(--accent-soft); color:var(--accent); margin-bottom:22px;
+}
+.who-ico svg{ width:24px; height:24px; }
+.who-card h3{ font-size:1.12rem; font-weight:800; letter-spacing:-.02em; margin-bottom:8px; }
+.who-card p{ font-size:.93rem; color:var(--muted); line-height:1.65; }
+.who-card .tag{
+  display:inline-block; margin-top:18px; font-size:.78rem; font-weight:700;
+  color:var(--ink-2); background:var(--bg); padding:5px 10px; border-radius:8px;
+}
+
+/* ════════════════════════════════════════════
+   PRICING
+════════════════════════════════════════════ */
+.price-sec{ background:var(--paper); border-block:1px solid var(--line); }
+.price-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:40px; }
+.price-top .sec-head{ margin-bottom:0; }
+.toggle{
+  display:inline-flex; padding:5px; border-radius:999px; background:var(--bg); border:1px solid var(--line);
+  position:relative;
+}
+.toggle button{
+  position:relative; z-index:1; height:42px; padding:0 20px; border-radius:999px;
+  font-weight:700; font-size:.92rem; color:var(--muted); transition:color .25s;
+}
+.toggle button[aria-pressed="true"]{ color:#fff; }
+.toggle .pill{
+  position:absolute; top:5px; bottom:5px; left:5px; border-radius:999px; background:var(--ink);
+  transition:transform .35s var(--ease), width .35s var(--ease);
+}
+.toggle .save{ font-size:.72rem; color:var(--lime); background:#111; padding:2px 7px; border-radius:999px; margin-left:6px; }
+.toggle button[aria-pressed="true"] .save{ background:var(--lime); color:#111; }
+
+.plans{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; align-items:stretch; }
+.plan{
+  position:relative; display:flex; flex-direction:column;
+  border:1px solid var(--line); border-radius:22px; padding:30px 26px 28px; background:var(--bg);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.plan:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -36px rgba(15,16,20,.4); }
+.plan.best{ background:var(--dark); color:#fff; border-color:var(--dark); }
+.plan .badge{
+  position:absolute; top:-13px; left:26px;
+  background:var(--lime); color:#111; font-weight:800; font-size:.76rem;
+  padding:5px 12px; border-radius:999px; letter-spacing:.02em;
+}
+.plan h3{ font-size:1.22rem; font-weight:800; letter-spacing:-.02em; }
+.plan .for{ font-size:.9rem; color:var(--muted); margin-top:6px; min-height:2.9em; }
+.plan.best .for{ color:rgba(255,255,255,.6); }
+.amount{ margin:24px 0 4px; display:flex; align-items:baseline; gap:6px; }
+.amount strong{ font-family:var(--display); font-size:2.6rem; letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums; }
+.amount span{ font-weight:700; color:var(--muted); }
+.plan.best .amount span{ color:rgba(255,255,255,.6); }
+.was{ font-size:.88rem; color:var(--muted); min-height:1.4em; }
+.was s{ margin-right:6px; }
+.was b{ color:var(--accent); }
+.plan.best .was{ color:rgba(255,255,255,.55); }
+.plan.best .was b{ color:var(--lime); }
+.meta{ display:flex; gap:8px; flex-wrap:wrap; margin:20px 0 22px; }
+.meta span{ font-size:.8rem; font-weight:700; padding:6px 10px; border-radius:8px; background:var(--paper); border:1px solid var(--line); }
+.plan.best .meta span{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.12); }
+.feat{ list-style:none; display:grid; gap:11px; font-size:.94rem; margin-bottom:28px; flex:1; }
+.feat li{ display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
+.feat li::before{
+  content:""; flex-shrink:0; width:18px; height:18px; margin-top:2px; border-radius:50%;
+  background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/10px no-repeat;
+}
+.plan.best .feat li::before{ background-color:var(--lime); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E"); }
+.plan .btn{ width:100%; }
+.plan.best .btn-line{ border-color:#fff; color:#fff; }
+.plan.best .btn-line:hover{ background:#fff; color:#111; }
+
+.price-note{ margin-top:22px; font-size:.88rem; color:var(--muted); line-height:1.7; }
+.price-note b{ color:var(--ink); }
+
+.addons{ margin-top:56px; display:grid; grid-template-columns:1fr 1.25fr; gap:40px; align-items:start; }
+.addons h3{ font-size:1.35rem; font-weight:800; letter-spacing:-.02em; }
+.addons > div > p{ color:var(--muted); margin-top:10px; font-size:.95rem; }
+.addon-list{ list-style:none; border-top:1px solid var(--line); }
+.addon-list li{
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:16px 2px; border-bottom:1px solid var(--line); font-size:.96rem;
+}
+.addon-list li small{ display:block; color:var(--muted); font-size:.82rem; margin-top:2px; }
+.addon-list li b{ font-family:var(--display); white-space:nowrap; font-variant-numeric:tabular-nums; }
+
+/* ════════════════════════════════════════════
+   WORK
+════════════════════════════════════════════ */
+.works{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+.work{ display:block; }
+.work .shot{
+  position:relative; aspect-ratio:16/10; overflow:hidden; border-radius:16px;
+  background:#e9e7e0; border:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(0,0,0,.02);
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.work:hover .shot{ transform:translateY(-6px); box-shadow:0 30px 60px -34px rgba(15,16,20,.45); }
+.shot .bar{
+  position:absolute; inset:0 0 auto 0; height:26px; z-index:2;
+  background:rgba(250,249,246,.96); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:5px; padding:0 10px;
+}
+.shot .bar i{ width:8px; height:8px; border-radius:50%; background:#d9d6cd; }
+.shot .bar u{
+  margin-left:8px; text-decoration:none; font-size:.66rem; color:var(--muted);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.shot iframe{
+  position:absolute; top:26px; left:0; border:0;
+  width:1440px; height:900px; transform-origin:0 0;
+  pointer-events:none; background:#fff;
+}
+.shot .loading{
+  position:absolute; inset:26px 0 0; display:grid; place-items:center;
+  font-size:.8rem; color:var(--muted); font-weight:600;
+}
+.shot::after{ /* hover overlay */
+  content:"사이트 열기 ↗"; position:absolute; inset:0; z-index:3;
+  display:grid; place-items:center; color:#fff; font-weight:800; font-size:1rem;
+  background:rgba(15,16,20,.55); opacity:0; transition:opacity .3s;
+}
+.work:hover .shot::after{ opacity:1; }
+.work-info{ display:flex; justify-content:space-between; gap:12px; margin-top:16px; align-items:flex-start; }
+.work-info h3{ font-size:1.06rem; font-weight:800; letter-spacing:-.02em; }
+.work-info p{ font-size:.88rem; color:var(--muted); margin-top:3px; line-height:1.55; }
+.work-info .type{
+  flex-shrink:0; font-size:.74rem; font-weight:800; padding:5px 9px; border-radius:8px;
+  background:var(--accent-soft); color:var(--accent);
+}
+.work-info .type.client{ background:#111; color:var(--lime); }
+.more-work{ margin-top:40px; display:flex; justify-content:center; }
+
+/* ════════════════════════════════════════════
+   PROCESS
+════════════════════════════════════════════ */
+.process-sec{ background:var(--dark); color:#fff; overflow:hidden; }
+.process-sec .kicker{ color:var(--lime); }
+.process-sec .sec-head p{ color:rgba(255,255,255,.62); }
+.steps{ list-style:none; display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; position:relative; counter-reset:step; }
+.steps::before{
+  content:""; position:absolute; top:27px; left:28px; right:28px; height:2px;
+  background:linear-gradient(90deg, var(--lime) var(--prog, 0%), rgba(255,255,255,.12) var(--prog, 0%));
+}
+.step{ position:relative; }
+.step .num{
+  width:56px; height:56px; border-radius:50%;
+  display:grid; place-items:center; position:relative; z-index:1;
+  background:var(--dark-2); border:1.5px solid rgba(255,255,255,.18);
+  font-family:var(--display); font-weight:700; font-size:1.05rem;
+  transition:background .4s, color .4s, border-color .4s;
+}
+.step.on .num{ background:var(--lime); color:#111; border-color:var(--lime); }
+.step h3{ margin-top:22px; font-size:1.08rem; font-weight:800; }
+.step p{ margin-top:8px; font-size:.9rem; color:rgba(255,255,255,.62); line-height:1.65; }
+.step .dur{ display:inline-block; margin-top:12px; font-size:.76rem; font-weight:700; color:var(--lime); }
+
+/* ════════════════════════════════════════════
+   WHY
+════════════════════════════════════════════ */
+.why{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.why-item{ background:var(--paper); padding:32px 28px; }
+.why-item b{ display:block; font-family:var(--display); font-size:2.2rem; letter-spacing:-.03em; line-height:1; color:var(--accent); }
+.why-item h3{ margin-top:16px; font-size:1.08rem; font-weight:800; }
+.why-item p{ margin-top:8px; font-size:.93rem; color:var(--muted); line-height:1.65; }
+
+/* ════════════════════════════════════════════
+   FAQ
+════════════════════════════════════════════ */
+.faq{ max-width:860px; }
+.faq details{ border-bottom:1px solid var(--line); }
+.faq summary{
+  list-style:none; cursor:pointer; padding:24px 44px 24px 0; position:relative;
+  font-size:1.06rem; font-weight:700; letter-spacing:-.01em;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::after{
+  content:""; position:absolute; right:6px; top:50%; width:14px; height:14px; margin-top:-7px;
+  background:linear-gradient(var(--ink),var(--ink)) center/14px 2px no-repeat,
+             linear-gradient(var(--ink),var(--ink)) center/2px 14px no-repeat;
+  transition:transform .3s var(--ease);
+}
+.faq details[open] summary::after{ transform:rotate(45deg); }
+.faq details p{ padding:0 44px 24px 0; color:var(--muted); line-height:1.8; font-size:.97rem; }
+
+/* ════════════════════════════════════════════
+   APPLY
+════════════════════════════════════════════ */
+.apply-sec{ background:var(--dark); color:#fff; position:relative; overflow:hidden; isolation:isolate; }
+.apply-sec .blob.b1{ top:auto; bottom:-220px; right:-160px; opacity:.4; }
+.apply{ display:grid; grid-template-columns:1fr 1.1fr; gap:clamp(32px, 6vw, 80px); align-items:start; }
+.apply h2{ font-size:clamp(2rem, 4.6vw, 3.4rem); line-height:1.15; letter-spacing:-.035em; font-weight:800; }
+.apply h2 em{ font-style:normal; color:var(--lime); }
+.apply-lead{ margin-top:18px; color:rgba(255,255,255,.7); line-height:1.75; }
+.apply-steps{ list-style:none; margin-top:30px; display:grid; gap:12px; }
+.apply-steps li{ display:flex; gap:12px; align-items:center; color:rgba(255,255,255,.85); font-weight:600; }
+.apply-steps li span{
+  width:28px; height:28px; border-radius:50%; display:grid; place-items:center; flex-shrink:0;
+  background:rgba(255,255,255,.1); font-family:var(--display); font-size:.85rem;
+}
+.form{
+  background:var(--paper); color:var(--ink);
+  border-radius:24px; padding:clamp(22px, 3.4vw, 36px);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.6);
+}
+.form h3{ font-size:1.2rem; font-weight:800; }
+.form > p{ font-size:.9rem; color:var(--muted); margin-top:6px; }
+.fields{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px; }
+.field{ display:grid; gap:7px; }
+.field.full{ grid-column:1/-1; }
+.field label{ font-size:.84rem; font-weight:700; color:var(--ink-2); }
+.field input, .field select, .field textarea{
+  width:100%; font:inherit; font-size:16px; /* iOS 확대 방지 */
+  padding:13px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--bg); color:var(--ink);
+  transition:border-color .2s, background .2s;
+}
+.field textarea{ min-height:110px; resize:vertical; }
+.field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--accent); background:#fff; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chips label{ cursor:pointer; position:relative; }
+.chips input{ position:absolute; opacity:0; pointer-events:none; }
+.chips span{
+  display:inline-block; padding:9px 14px; border-radius:999px; border:1.5px solid var(--line);
+  font-size:.88rem; font-weight:700; background:var(--bg); transition:all .2s;
+}
+.chips input:checked + span{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.chips input:focus-visible + span{ outline:3px solid var(--accent); outline-offset:2px; }
+.form-actions{ display:grid; gap:10px; margin-top:22px; }
+.form-actions .btn{ width:100%; white-space:normal; text-align:center; line-height:1.3; }
+.apply > *{ min-width:0; }
+.form-msg{ font-size:.86rem; color:var(--accent); min-height:1.3em; text-align:center; font-weight:600; }
+
+/* ════════════════════════════════════════════
+   FOOTER / MOBILE CTA
+════════════════════════════════════════════ */
+.foot{ background:var(--dark); color:rgba(255,255,255,.55); border-top:1px solid rgba(255,255,255,.08); padding:34px 0 40px; font-size:.86rem; }
+.foot-in{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.foot a{ color:rgba(255,255,255,.8); }
+.foot a:hover{ color:#fff; }
+.foot-links{ display:flex; gap:18px; flex-wrap:wrap; }
+
+.mcta{
+  position:fixed; z-index:60; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom));
+  display:none; gap:8px;
+  transform:translateY(140%); transition:transform .45s var(--ease);
+}
+.mcta.show{ transform:translateY(0); }
+.mcta .btn{ flex:1; height:52px; box-shadow:0 14px 34px -12px rgba(0,0,0,.45); }
+.mcta .btn-dark{ flex:.7; }
+
+/* ════════════════════════════════════════════
+   REVEAL
+════════════════════════════════════════════ */
+.rv{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.rv.in{ opacity:1; transform:none; }
+.rv-d1{ transition-delay:.08s; } .rv-d2{ transition-delay:.16s; } .rv-d3{ transition-delay:.24s; }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important; }
+  .rv{ opacity:1; transform:none; }
+  .rotator span{ transform:none; opacity:0; }
+  .rotator span.in{ opacity:1; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 1024px){
+  .who{ grid-template-columns:repeat(2, 1fr); }
+  .plans{ grid-template-columns:1fr; max-width:520px; margin:0 auto; }
+  .plan .for{ min-height:0; }
+  .works{ grid-template-columns:repeat(2, 1fr); }
+  .steps{ grid-template-columns:1fr; gap:0; }
+  .steps::before{ top:28px; bottom:28px; left:27px; right:auto; width:2px; height:auto;
+    background:linear-gradient(180deg, var(--lime) var(--prog, 0%), rgba(255,255,255,.12) var(--prog, 0%)); }
+  .step{ display:grid; grid-template-columns:56px 1fr; column-gap:20px; padding-bottom:30px; }
+  .step:last-child{ padding-bottom:0; }
+  .step h3{ margin-top:14px; }
+  .step p, .step .dur{ grid-column:2; }
+  .step .dur{ margin-top:8px; }
+  .why{ grid-template-columns:1fr 1fr; }
+  .addons{ grid-template-columns:1fr; gap:22px; }
+  .apply{ grid-template-columns:1fr; }
+}
+@media (max-width: 760px){
+  .nav-links{ display:none; }
+  .nav .btn span.long{ display:none; }
+  .hero{ padding:118px 0 70px; min-height:auto; }
+  .hero-cta .btn{ flex:1 1 100%; }
+  .hero-points{ gap:10px 16px; font-size:.86rem; }
+  .blob.b1{ width:360px; height:360px; }
+  .price-top{ flex-direction:column; align-items:flex-start; }
+  .toggle{ width:100%; }
+  .toggle button{ flex:1; padding:0 10px; }
+  .works{ grid-template-columns:1fr; gap:30px; }
+  .why{ grid-template-columns:1fr; }
+  .fields{ grid-template-columns:1fr; }
+  .mcta{ display:flex; }
+  .foot{ padding-bottom:110px; }
+  .who{ grid-template-columns:1fr; }
+  .who-card{ padding:22px 20px; display:grid; grid-template-columns:48px 1fr; column-gap:16px; }
+  .who-ico{ margin-bottom:0; grid-row:span 3; }
+  .who-card .tag{ margin-top:12px; justify-self:start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo" aria-label="쮜딩 JXDING 홈"><b>JXDING<i>.</i></b><span>쮜딩</span></a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="#service">서비스</a>
+      <a href="#price">가격</a>
+      <a href="#work">작업물</a>
+      <a href="#process">진행 과정</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-kakao" data-kakao href="#apply">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
+      <span>상담<span class="long">하기</span></span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <span class="spot" id="spot"></span>
+  <div class="wrap">
+    <span class="eyebrow rv"><em>대학생 30% 할인</em>기획 · 디자인 · 개발 · 배포까지 한 번에</span>
+    <h1 class="rv rv-d1">
+      당신의 <span class="rotator" id="rotator" aria-live="polite">
+        <span class="in">취업 포트폴리오</span>
+        <span>동아리 홈페이지</span>
+        <span>졸업전시 페이지</span>
+        <span>창업팀 랜딩</span>
+        <span>학회 행사 페이지</span>
+      </span><br>
+      링크 하나로 끝내세요.
+    </h1>
+    <p class="hero-sub rv rv-d2">
+      템플릿 짜깁기가 아니라 처음부터 직접 설계하고 코딩합니다.
+      면접관이 폰으로 열어도 완벽하게, 유지비는 0원으로.
+    </p>
+    <div class="hero-cta rv rv-d3">
+      <a class="btn btn-kakao" data-kakao href="#apply">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
+        카카오톡으로 무료 상담
+      </a>
+      <a class="btn btn-ghost" href="#price">
+        가격 먼저 보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <ul class="hero-points rv rv-d3">
+      <li>모바일·태블릿 완벽 대응</li>
+      <li>호스팅비 0원</li>
+      <li>수정 2회 기본 포함</li>
+      <li>소스코드 전달</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>PORTFOLIO</span><span>동아리 · 학회</span><span>졸업전시</span><span>창업 랜딩</span><span>RESPONSIVE</span><span>모집 페이지</span><span>행사 · 컨퍼런스</span><span>크리에이터 사이트</span>
+    <span>PORTFOLIO</span><span>동아리 · 학회</span><span>졸업전시</span><span>창업 랜딩</span><span>RESPONSIVE</span><span>모집 페이지</span><span>행사 · 컨퍼런스</span><span>크리에이터 사이트</span>
+  </div>
+</div>
+
+<!-- ══ FOR WHO ══ -->
+<section class="sec" id="service">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker">Service</p>
+      <h2>이런 분들이<br>가장 많이 찾습니다</h2>
+      <p>대학 생활에서 웹사이트가 필요한 순간은 생각보다 많아요. 목적에 맞는 구조부터 같이 잡아드립니다.</p>
+    </div>
+    <div class="who">
+      <article class="who-card rv">
+        <div class="who-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+        <h3>취업·대학원 준비생</h3>
+        <p>이력서에 붙일 포트폴리오 링크. 프로젝트를 케이스 스터디로 정리해 드려요.</p>
+        <span class="tag">포트폴리오 사이트</span>
+      </article>
+      <article class="who-card rv rv-d1">
+        <div class="who-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>동아리·학회 운영진</h3>
+        <p>매 학기 쓰는 소개·모집 페이지. 다음 운영진도 쉽게 고칠 수 있게 만들어요.</p>
+        <span class="tag">동아리·학회 사이트</span>
+      </article>
+      <article class="who-card rv rv-d2">
+        <div class="who-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+        <h3>졸업전시·공모전 팀</h3>
+        <p>작품과 팀원을 한 페이지에. 전시장 QR로 바로 연결되는 모바일 우선 설계.</p>
+        <span class="tag">원페이지</span>
+      </article>
+      <article class="who-card rv rv-d3">
+        <div class="who-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></div>
+        <h3>창업동아리·예비창업팀</h3>
+        <p>지원사업 제출용, 사전 신청 받는 서비스 소개 페이지를 빠르게.</p>
+        <span class="tag">원페이지 · 팀 사이트</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="sec price-sec" id="price">
+  <div class="wrap">
+    <div class="price-top">
+      <div class="sec-head rv">
+        <p class="kicker">Pricing</p>
+        <h2>정가는 투명하게,<br>학생에게는 30% 할인</h2>
+      </div>
+      <div class="toggle rv" role="group" aria-label="가격 기준 선택" id="toggle">
+        <span class="pill" id="pill"></span>
+        <button type="button" aria-pressed="true" data-mode="student">학생가<span class="save">-30%</span></button>
+        <button type="button" aria-pressed="false" data-mode="regular">일반가</button>
+      </div>
+    </div>
+
+    <div class="plans">
+      <article class="plan rv">
+        <h3>원페이지</h3>
+        <p class="for">모집 공고 · 졸업전시 · 행사 · 창업 랜딩</p>
+        <div class="amount"><strong data-student="270000" data-regular="390000">270,000</strong><span>원</span></div>
+        <p class="was" data-was="390000">&nbsp;</p>
+        <div class="meta"><span>1페이지 (섹션 최대 7개)</span><span>작업 5~7일</span></div>
+        <ul class="feat">
+          <li>맞춤 디자인 시안 1종</li>
+          <li>모바일·태블릿·PC 반응형</li>
+          <li>무료 배포 (호스팅비 0원)</li>
+          <li>신청 폼·지도·SNS 링크 연결</li>
+          <li>수정 2회</li>
+        </ul>
+        <a class="btn btn-line" data-kakao data-plan="원페이지" href="#apply">이 상품으로 상담</a>
+      </article>
+
+      <article class="plan best rv rv-d1">
+        <span class="badge">가장 많이 찾는</span>
+        <h3>포트폴리오 사이트</h3>
+        <p class="for">취업·인턴·대학원 준비, 디자인·개발·건축 전공</p>
+        <div class="amount"><strong data-student="490000" data-regular="690000">490,000</strong><span>원</span></div>
+        <p class="was" data-was="690000">&nbsp;</p>
+        <div class="meta"><span>최대 5페이지</span><span>작업 1~2주</span></div>
+        <ul class="feat">
+          <li>프로젝트 케이스 스터디 구성</li>
+          <li>퍼스널 브랜딩 톤 설계</li>
+          <li>모바일·태블릿·PC 반응형</li>
+          <li>이력서용 PDF 링크·검색 노출 설정</li>
+          <li>직접 수정하는 법 안내 문서</li>
+          <li>수정 2회</li>
+        </ul>
+        <a class="btn btn-kakao" data-kakao data-plan="포트폴리오 사이트" href="#apply">이 상품으로 상담</a>
+      </article>
+
+      <article class="plan rv rv-d2">
+        <h3>동아리·학회·팀 사이트</h3>
+        <p class="for">동아리·학회 · 창업팀 · 연구실 · 소모임</p>
+        <div class="amount"><strong data-student="890000" data-regular="1290000">890,000</strong><span>원</span></div>
+        <p class="was" data-was="1290000">&nbsp;</p>
+        <div class="meta"><span>최대 8페이지</span><span>작업 2~3주</span></div>
+        <ul class="feat">
+          <li>소개·활동·멤버·모집·문의 구성</li>
+          <li>공지·활동 기록을 쉽게 추가하는 구조</li>
+          <li>모바일·태블릿·PC 반응형</li>
+          <li>운영진 인수인계용 관리 가이드</li>
+          <li>배포 후 2주 무상 오류 수정</li>
+          <li>수정 3회</li>
+        </ul>
+        <a class="btn btn-line" data-kakao data-plan="동아리·학회·팀 사이트" href="#apply">이 상품으로 상담</a>
+      </article>
+    </div>
+
+    <p class="price-note rv">
+      <b>학생 할인 조건</b> — 재학·휴학생 본인 또는 학생 단체(동아리·학회·학생 창업팀) 의뢰. 상담 시 학생증이나 재학증명서로 확인합니다.<br>
+      결제는 <b>착수금 50% · 완료 후 잔금 50%</b>. 표시 가격은 부가세 포함 금액이며, 요구사항에 따라 견적이 달라질 수 있어요.
+    </p>
+
+    <div class="addons">
+      <div class="rv">
+        <h3>추가 옵션</h3>
+        <p>필요한 것만 더하세요. <span id="addonBasis">학생가 기준</span>입니다.</p>
+      </div>
+      <ul class="addon-list rv rv-d1">
+        <li><div>페이지 추가<small>상품 기본 페이지 수 초과 시, 1페이지당</small></div><b data-student="50000" data-regular="70000">50,000원</b></li>
+        <li><div>개인 도메인 연결<small>yourname.com 형태 · 도메인 구입비(연 1~2만 원) 별도</small></div><b data-student="30000" data-regular="40000">30,000원</b></li>
+        <li><div>영문 버전<small>번역문 제공 시 · 기본 가격의 40%</small></div><b>+40%</b></li>
+        <li><div>급행 제작<small>작업 기간 절반으로 단축</small></div><b>+30%</b></li>
+        <li><div>사후 수정<small>배포 이후 텍스트·이미지 교체, 1회당</small></div><b data-student="20000" data-regular="30000">20,000원</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORK ══ -->
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker">Selected Work</p>
+      <h2>말보다 결과물로<br>보여드릴게요</h2>
+      <p>아래 화면은 캡처가 아니라 실제 사이트를 그대로 띄운 미리보기예요. 눌러서 직접 써 보세요.</p>
+    </div>
+    <div class="works">
+      <a class="work rv" href="https://koronri.github.io/xox-reine-site/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>koronri.github.io/xox-reine-site</u></div><span class="loading">불러오는 중…</span><iframe data-src="https://koronri.github.io/xox-reine-site/" title="XoX UTAU 사이트 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>XoX — UTAU 01</h3><p>일러스트레이터 의뢰 · 보이스뱅크 소개, 한국어/일본어</p></div><span class="type client">외주</span></div>
+      </a>
+      <a class="work rv rv-d1" href="https://koronri.github.io/koronri/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>koronri.github.io/koronri</u></div><span class="loading">불러오는 중…</span><iframe data-src="https://koronri.github.io/koronri/" title="ころんり 커미션 사이트 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>ころんり Studio</h3><p>크리에이터 의뢰 · 커미션 공지와 신청 안내</p></div><span class="type client">외주</span></div>
+      </a>
+      <a class="work rv rv-d2" href="../portfolio/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>jxding-dev.github.io/portfolio</u></div><span class="loading">불러오는 중…</span><iframe data-src="../portfolio/" title="개인 포트폴리오 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>개인 포트폴리오</h3><p>게임·주문 시스템·쇼핑몰 프로젝트를 케이스로 정리</p></div><span class="type">포트폴리오</span></div>
+      </a>
+      <a class="work rv" href="../conf-devwave/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>jxding-dev.github.io/conf-devwave</u></div><span class="loading">불러오는 중…</span><iframe data-src="../conf-devwave/" title="개발자 컨퍼런스 사이트 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>SEOUL DEV WAVE</h3><p>트랙·세션·연사를 담은 컨퍼런스 사이트</p></div><span class="type">학회·행사</span></div>
+      </a>
+      <a class="work rv rv-d1" href="../class-notion/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>jxding-dev.github.io/class-notion</u></div><span class="loading">불러오는 중…</span><iframe data-src="../class-notion/" title="모집 페이지 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>노션 자동화 클래스</h3><p>커리큘럼·강사·FAQ·신청까지 담은 모집 페이지</p></div><span class="type">모집 페이지</span></div>
+      </a>
+      <a class="work rv rv-d2" href="../mockfolio/" target="_blank" rel="noopener">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><u>jxding-dev.github.io/mockfolio</u></div><span class="loading">불러오는 중…</span><iframe data-src="../mockfolio/" title="Mockfolio 미리보기" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="work-info"><div><h3>Mockfolio</h3><p>포트폴리오 목업을 만드는 웹앱 · 기획부터 개발까지</p></div><span class="type">웹앱</span></div>
+      </a>
+    </div>
+    <div class="more-work rv">
+      <a class="btn btn-line" href="../" target="_blank" rel="noopener">전체 작업 38개 보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="sec process-sec" id="process">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker">Process</p>
+      <h2>상담부터 배포까지,<br>어디까지 왔는지 항상 보이게</h2>
+      <p>중간에 연락이 끊기거나 결과물이 갑자기 나오는 일 없이, 단계마다 확인받고 넘어갑니다.</p>
+    </div>
+    <ol class="steps" id="steps">
+      <li class="step rv"><span class="num">01</span><h3>무료 상담</h3><p>목적·일정·예산과 참고 사이트를 듣고 구성과 견적을 정리해 드려요.</p><span class="dur">당일~1일</span></li>
+      <li class="step rv rv-d1"><span class="num">02</span><h3>기획·계약</h3><p>페이지 구조와 들어갈 내용을 확정하고 착수금 50%로 시작해요.</p><span class="dur">1~2일</span></li>
+      <li class="step rv rv-d2"><span class="num">03</span><h3>디자인 시안</h3><p>실제 화면으로 시안을 보여드리고 방향을 함께 다듬어요.</p><span class="dur">2~5일</span></li>
+      <li class="step rv rv-d3"><span class="num">04</span><h3>개발·수정</h3><p>링크로 진행 상황을 실시간 확인. 기본 수정 횟수 안에서 반영해요.</p><span class="dur">3~10일</span></li>
+      <li class="step rv"><span class="num">05</span><h3>배포·인계</h3><p>잔금 확인 후 배포하고, 소스코드와 수정 가이드를 전달해요.</p><span class="dur">1일</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ WHY ══ -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker">Why JXDING</p>
+      <h2>학생 예산에 맞추되,<br>결과물은 타협하지 않습니다</h2>
+    </div>
+    <div class="why rv">
+      <div class="why-item"><b>0원</b><h3>호스팅 유지비</h3><p>정적 사이트 무료 호스팅으로 배포해서 매달 나가는 서버 비용이 없어요.</p></div>
+      <div class="why-item"><b>100%</b><h3>직접 코딩</h3><p>노코드 빌더나 템플릿이 아니라 처음부터 짠 코드. 느려지지 않고 원하는 대로 바꿀 수 있어요.</p></div>
+      <div class="why-item"><b>1:1</b><h3>한 사람이 끝까지</h3><p>기획·디자인·개발을 한 사람이 맡아서 말이 전달 과정에서 바뀌지 않아요.</p></div>
+      <div class="why-item"><b>360px~</b><h3>작은 폰까지 반응형</h3><p>면접관도 동기도 링크는 폰으로 열어요. 작은 화면부터 기준으로 설계합니다.</p></div>
+      <div class="why-item"><b>소스</b><h3>코드 소유권 전달</h3><p>완성된 코드는 의뢰인 것. 나중에 다른 사람에게 맡겨도 문제없어요.</p></div>
+      <div class="why-item"><b>38+</b><h3>제작 경험</h3><p>병원·카페·부동산·행사·크리에이터 외주까지 다양한 업종을 만들어 왔어요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker">FAQ</p>
+      <h2>자주 묻는 질문</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>디자인을 전혀 몰라도 괜찮을까요?</summary><p>괜찮아요. 마음에 드는 사이트 몇 개만 보여주시면 방향을 잡아드리고, 시안 단계에서 실제 화면으로 보면서 결정하시면 됩니다.</p></details>
+      <details><summary>수정은 몇 번까지 되나요?</summary><p>원페이지·포트폴리오는 2회, 동아리·학회·팀 사이트는 3회가 기본입니다. 한 번의 수정 요청에 여러 항목을 묶어서 주시면 1회로 계산해요. 이후 수정은 추가 옵션으로 가능합니다.</p></details>
+      <details><summary>정말 유지비가 안 드나요?</summary><p>네. 정적 사이트 무료 호스팅으로 배포해서 서버 비용이 없습니다. 개인 도메인(yourname.com)을 원하시면 도메인 구입비(연 1~2만 원)만 직접 부담하시면 돼요.</p></details>
+      <details><summary>나중에 제가 직접 내용을 바꿀 수 있나요?</summary><p>포트폴리오와 팀 사이트에는 텍스트·이미지를 직접 바꾸는 방법을 정리한 가이드를 드려요. 코딩을 몰라도 따라 할 수 있게 만들고, 어려우면 사후 수정 옵션으로 맡기셔도 됩니다.</p></details>
+      <details><summary>학생 할인은 어떻게 확인하나요?</summary><p>상담 중에 학생증이나 재학증명서를 보여주시면 됩니다(개인정보는 가리셔도 돼요). 동아리·학회·학생 창업팀은 대표자 한 명만 확인하면 됩니다.</p></details>
+      <details><summary>결제와 환불은 어떻게 되나요?</summary><p>착수금 50%로 시작하고, 완성본 확인 후 잔금 50%를 받습니다. 디자인 시안 전 취소는 착수금 전액, 시안 이후 개발 전 취소는 착수금의 50%를 환불해 드려요.</p></details>
+      <details><summary>급하게 필요한데 가능할까요?</summary><p>일정이 비어 있으면 급행(+30%)으로 기간을 절반으로 줄일 수 있어요. 마감일을 상담 때 먼저 알려주세요.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPLY ══ -->
+<section class="sec apply-sec" id="apply">
+  <span class="blob b1"></span>
+  <div class="wrap apply">
+    <div class="rv">
+      <p class="kicker" style="color:var(--lime)">Contact</p>
+      <h2>필요한 건<br><em>링크 하나</em>예요.</h2>
+      <p class="apply-lead">아래 신청서를 채우고 버튼을 누르면 내용이 복사되고 카카오톡 오픈채팅이 열려요. 붙여넣기만 하면 상담이 시작됩니다.</p>
+      <ol class="apply-steps">
+        <li><span>1</span>신청서 작성 (1분)</li>
+        <li><span>2</span>복사된 내용을 오픈채팅에 붙여넣기</li>
+        <li><span>3</span>보통 하루 안에 구성·견적 답변</li>
+      </ol>
+    </div>
+
+    <form class="form rv rv-d1" id="form" novalidate>
+      <h3>상담 신청서</h3>
+      <p>모르는 칸은 비워두셔도 괜찮아요.</p>
+      <div class="fields">
+        <div class="field full">
+          <label>어떤 사이트가 필요하세요?</label>
+          <div class="chips" role="radiogroup" aria-label="상품 선택">
+            <label><input type="radio" name="plan" value="포트폴리오 사이트" checked><span>포트폴리오</span></label>
+            <label><input type="radio" name="plan" value="원페이지"><span>원페이지</span></label>
+            <label><input type="radio" name="plan" value="동아리·학회·팀 사이트"><span>동아리·학회·팀</span></label>
+            <label><input type="radio" name="plan" value="아직 모르겠어요"><span>잘 모르겠어요</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-name">이름 또는 단체명</label>
+          <input id="f-name" name="name" autocomplete="name" placeholder="홍길동 / OO대 OO동아리">
+        </div>
+        <div class="field">
+          <label for="f-student">학생 여부</label>
+          <select id="f-student" name="student">
+            <option>재학·휴학생 (학생 할인)</option>
+            <option>학생 단체 (학생 할인)</option>
+            <option>일반</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-date">희망 완료일</label>
+          <input id="f-date" name="date" placeholder="예) 11월 말 / 지원 마감 12/5">
+        </div>
+        <div class="field">
+          <label for="f-budget">생각한 예산</label>
+          <input id="f-budget" name="budget" placeholder="예) 50만 원 안쪽">
+        </div>
+        <div class="field full">
+          <label for="f-ref">참고하고 싶은 사이트</label>
+          <input id="f-ref" name="ref" inputmode="url" placeholder="링크를 붙여넣어 주세요 (여러 개 가능)">
+        </div>
+        <div class="field full">
+          <label for="f-msg">하고 싶은 이야기</label>
+          <textarea id="f-msg" name="msg" placeholder="용도, 넣고 싶은 내용, 걱정되는 점 등 자유롭게"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-kakao" type="submit">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
+          신청서 복사하고 오픈채팅 열기
+        </button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>© 2026 쮜딩 JXDING · 웹사이트 기획·디자인·개발</span>
+    <span class="foot-links">
+      <a href="mailto:dlwlgus2209@gmail.com">dlwlgus2209@gmail.com</a>
+      <a href="../" target="_blank" rel="noopener">전체 작업물</a>
+      <a href="https://github.com/jxding-dev" target="_blank" rel="noopener">GitHub</a>
+    </span>
+  </div>
+</footer>
+
+<!-- 모바일 하단 고정 CTA -->
+<div class="mcta" id="mcta">
+  <a class="btn btn-dark" href="#price">가격 보기</a>
+  <a class="btn btn-kakao" data-kakao href="#apply">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
+    무료 상담
+  </a>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   설정 — 카카오톡 오픈채팅 링크를 여기에 넣으세요
+   예) 'https://open.kakao.com/o/sAbCdEf'
+   비워두면 상담 버튼은 페이지 아래 신청서로 이동합니다.
+══════════════════════════════════════════════ */
+const KAKAO_URL = '';
+const CONTACT_EMAIL = 'dlwlgus2209@gmail.com';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── 상담 버튼: 상품 버튼은 신청서의 상품을 미리 선택하고 신청서로 이동 ── */
+document.querySelectorAll('[data-kakao]').forEach(a => {
+  const plan = a.dataset.plan;
+  if (plan) {
+    a.setAttribute('href', '#apply');
+    a.addEventListener('click', () => {
+      const r = document.querySelector(`input[name="plan"][value="${plan}"]`);
+      if (r) r.checked = true;
+    });
+  } else if (KAKAO_URL) {
+    a.href = KAKAO_URL; a.target = '_blank'; a.rel = 'noopener';
+  }
+});
+
+/* ── 네비게이션 배경 ── */
+const nav = document.getElementById('nav');
+const mcta = document.getElementById('mcta');
+const hero = document.getElementById('hero');
+const apply = document.getElementById('apply');
+let heroOut = false, applyIn = false;
+function onScroll(){ nav.classList.toggle('solid', window.scrollY > 20); }
+window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+/* 모바일 하단 CTA: 히어로를 지나면 보이고, 신청서 영역에서는 숨김 */
+const ctaIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.target === hero) heroOut = !e.isIntersecting;
+    if (e.target === apply) applyIn = e.isIntersecting;
+  });
+  mcta.classList.toggle('show', heroOut && !applyIn);
+}, { threshold:0 });
+ctaIO.observe(hero); ctaIO.observe(apply);
+
+/* ── 히어로 단어 회전 ── */
+(function(){
+  const words = [...document.querySelectorAll('#rotator span')];
+  if (reduce || words.length < 2) return;
+  let i = 0;
+  setInterval(() => {
+    const cur = words[i], next = words[(i + 1) % words.length];
+    cur.classList.remove('in'); cur.classList.add('out');
+    next.classList.remove('out'); next.classList.add('in');
+    setTimeout(() => cur.classList.remove('out'), 650);
+    i = (i + 1) % words.length;
+  }, 2400);
+})();
+
+/* ── 커서 따라오는 빛 (마우스 기기만) ── */
+(function(){
+  if (reduce || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const spot = document.getElementById('spot');
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    spot.style.left = (e.clientX - r.left) + 'px';
+    spot.style.top  = (e.clientY - r.top) + 'px';
+  });
+})();
+
+/* ── 스크롤 등장 ── */
+(function(){
+  const els = document.querySelectorAll('.rv');
+  if (reduce) { els.forEach(el => el.classList.add('in')); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── 가격 토글 (학생가 / 일반가) ── */
+(function(){
+  const toggle = document.getElementById('toggle');
+  const pill = document.getElementById('pill');
+  const btns = [...toggle.querySelectorAll('button')];
+  const won = n => n.toLocaleString('ko-KR');
+
+  function placePill(btn){
+    pill.style.width = btn.offsetWidth + 'px';
+    pill.style.transform = `translateX(${btn.offsetLeft - 5}px)`;
+  }
+  function countTo(el, to){
+    const from = parseInt(el.textContent.replace(/\D/g,''), 10) || 0;
+    if (reduce || from === to) { el.textContent = won(to); return; }
+    const t0 = performance.now(), dur = 500;
+    (function tick(t){
+      const p = Math.min(1, (t - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+      el.textContent = won(Math.round(from + (to - from) * k));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  function setMode(mode){
+    btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    placePill(btns.find(b => b.dataset.mode === mode));
+    document.querySelectorAll('.amount strong').forEach(el => countTo(el, +el.dataset[mode]));
+    document.querySelectorAll('.was').forEach(el => {
+      const reg = +el.dataset.was, stu = +el.closest('.plan').querySelector('.amount strong').dataset.student;
+      el.innerHTML = mode === 'student'
+        ? `<s>${won(reg)}원</s><b>${won(reg - stu)}원 할인</b>`
+        : '학생이라면 30% 할인 적용';
+    });
+    document.querySelectorAll('.addon-list b[data-student]').forEach(el => { el.textContent = won(+el.dataset[mode]) + '원'; });
+    document.getElementById('addonBasis').textContent = mode === 'student' ? '학생가 기준' : '일반가 기준';
+  }
+  btns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  window.addEventListener('resize', () => placePill(btns.find(b => b.getAttribute('aria-pressed') === 'true')));
+  setMode('student');
+})();
+
+/* ── 진행 과정: 스크롤에 따라 단계가 켜짐 ── */
+(function(){
+  const list = document.getElementById('steps');
+  const steps = [...list.querySelectorAll('.step')];
+  function update(){
+    const vh = window.innerHeight;
+    let lit = 0;
+    steps.forEach((s, i) => {
+      const on = s.getBoundingClientRect().top < vh * 0.72;
+      s.classList.toggle('on', on);
+      if (on) lit = i + 1;
+    });
+    const pct = steps.length > 1 ? Math.max(0, (lit - 1) / (steps.length - 1)) * 100 : 0;
+    list.style.setProperty('--prog', pct + '%');
+  }
+  window.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ── 작업물 실시간 미리보기: 보일 때만 불러오고 카드 폭에 맞춰 축소 ── */
+(function(){
+  const shots = [...document.querySelectorAll('.shot')];
+  const fit = shot => {
+    const f = shot.querySelector('iframe');
+    f.style.transform = `scale(${shot.clientWidth / 1440})`;
+  };
+  const ro = new ResizeObserver(entries => entries.forEach(e => fit(e.target)));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const f = e.target.querySelector('iframe');
+      f.addEventListener('load', () => { const l = e.target.querySelector('.loading'); if (l) l.remove(); }, { once:true });
+      f.src = f.dataset.src;
+      io.unobserve(e.target);
+    });
+  }, { rootMargin:'200px 0px' });
+  shots.forEach(s => { fit(s); ro.observe(s); io.observe(s); });
+})();
+
+/* ── 신청서: 내용을 정리해 복사하고 오픈채팅(없으면 메일) 열기 ── */
+(function(){
+  const form = document.getElementById('form');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const v = k => (d.get(k) || '').toString().trim() || '-';
+    const text =
+`[쮜딩 웹사이트 상담 신청]
+· 상품: ${v('plan')}
+· 이름/단체: ${v('name')}
+· 구분: ${v('student')}
+· 희망 완료일: ${v('date')}
+· 예산: ${v('budget')}
+· 참고 사이트: ${v('ref')}
+· 내용: ${v('msg')}`;
+
+    let copied = false;
+    try { await navigator.clipboard.writeText(text); copied = true; }
+    catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { copied = document.execCommand('copy'); } catch (_) {}
+      ta.remove();
+    }
+
+    if (KAKAO_URL) {
+      msg.textContent = copied ? '복사됐어요! 열린 오픈채팅에 붙여넣기만 하면 돼요.' : '오픈채팅에 신청 내용을 적어 보내주세요.';
+      window.open(KAKAO_URL, '_blank', 'noopener');
+    } else {
+      msg.textContent = '메일 앱으로 연결할게요.';
+      location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('[쮜딩] 웹사이트 상담 신청')}&body=${encodeURIComponent(text)}`;
+    }
+  });
+})();
+</script>
+</body>
+</html>
